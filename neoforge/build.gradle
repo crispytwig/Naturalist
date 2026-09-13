@@ -1,129 +1,51 @@
 plugins {
-    id "com.gradleup.shadow" version "8.3.11"
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+    id 'multiloader-loader'
+    id 'naturalist-publish'
+    id 'net.neoforged.moddev'
 }
 
-architectury {
-    platformSetupLoomIde()
-    neoForge()
-}
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
+neoForge {
+    version = neo_version
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
     runs {
+        configureEach {
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})"
+        }
         client {
             client()
-            ideConfigGenerated true
-            runDir "run"
+            gameDirectory = project.file('run')
         }
         server {
             server()
-            ideConfigGenerated true
-            runDir "run"
+            gameDirectory = project.file('run/server')
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
 }
 
-sourceSets.main.resources { srcDir "src/generated/resources" }
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-sourceSets.main.java.exclude "com/crispytwig/naturalist/datagen/**"
-
-configurations {
-    common
-    shadowBundle
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentNeoForge.extendsFrom common
-}
+sourceSets.main.java.exclude 'com/crispytwig/naturalist/datagen/**'
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${project.neo_version}"
+    compileOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
+    runtimeOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
 
-
-    modCompileOnly("dev.lambdaurora.lambdynamiclights:lambdynamiclights-api:${project.lambdynamiclights}") {
-        attributes {
-            attribute(Attribute.of("net.minecraft.mappings", String), "mojmap")
-        }
-    }
-
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowBundle project(path: ":common", configuration: "transformProductionNeoForge")
-
-    modCompileOnly "maven.modrinth:justenoughbreeding:${project.jeb_neoforge}"
-    modLocalRuntime "maven.modrinth:justenoughbreeding:${project.jeb_neoforge}"
-
-    modCompileOnly "maven.modrinth:emi:${project.emi_neoforge}"
-    modLocalRuntime "maven.modrinth:emi:${project.emi_neoforge}"
-
-    modLocalRuntime "maven.modrinth:field-guide:${project.field_guide_neoforge}"
-
-    modLocalRuntime "maven.modrinth:immersive-overlays:${project.immersive_overlays}-neoforge"
-
-    localRuntime "maven.modrinth:not-enough-animations:${project.nea_neoforge}"
-
-    modLocalRuntime "maven.modrinth:zrAMu1nt:${project.personality}"
-    modLocalRuntime "maven.modrinth:blueprint:${project.blueprint}"
-    modLocalRuntime "maven.modrinth:bad-mobs:${project.badmobs}"
-
-    modLocalRuntime "maven.modrinth:scorched-guns-neoforged:${project.scorched_guns}"
-    modLocalRuntime "maven.modrinth:curios:${project.curios}"
-    modLocalRuntime "maven.modrinth:geckolib:${project.geckolib}"
-    modLocalRuntime "curse.maven:framework-549225:${project.framework}"
-}
-
-processResources {
-    def expandProps = [
-            "mod_version"            : project.mod_version,
-            "mod_id"                 : project.mod_id,
-            "mod_name"               : project.mod_name,
-            "mod_license"            : project.mod_license,
-            "mod_description"        : project.mod_description,
-            "mod_authors"            : project.mod_authors,
-            "minecraft_version_range": project.minecraft_version_range,
-            "neo_version"            : project.neo_version,
-            "loader_version_range"   : project.loader_version_range
-    ]
-
-    filesMatching("META-INF/neoforge.mods.toml") {
-        expand expandProps
-    }
-    inputs.properties(expandProps)
-}
-
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = "dev-shadow"
-}
-
-remapJar {
-    input.set shadowJar.archiveFile
-    archiveClassifier = null
-}
-
-jar {
-    archiveClassifier = "dev"
+    runtimeOnly "maven.modrinth:immersive-overlays:${immersive_overlays}-neoforge"
 }
 
 publishMods {
-    file = remapJar.archiveFile
-    type = STABLE
-    version = "${project.mod_version}+${project.minecraft_version}-neoforge"
-    changelog = rootProject.file("CHANGELOG.md").text
-    modLoaders.add("neoforge")
-    displayName = "${project.mod_name} ${project.mod_version} (NeoForge ${project.minecraft_version})"
-
-    curseforge {
-        projectId = project.curseforge
-        accessToken = providers.gradleProperty("curseforgeToken").orElse(providers.environmentVariable("CURSEFORGE_TOKEN"))
-        minecraftVersions.add(project.minecraft_version)
-        clientRequired = true
-        serverRequired = true
-    }
-
-    modrinth {
-        projectId = project.modrinth
-        accessToken = providers.gradleProperty("modrinthToken").orElse(providers.environmentVariable("MODRINTH_TOKEN"))
-        minecraftVersions.add(project.minecraft_version)
-    }
+    file = jar.archiveFile
+    version = "${mod_version}+${minecraft_version}-neoforge"
+    modLoaders.add('neoforge')
+    displayName = "${mod_name} ${mod_version} (NeoForge ${minecraft_version})"
 }
+
+applyLoaderAttribute('neoforge', ['apiElements', 'runtimeElements', 'sourcesElements'], ['jarJar'])

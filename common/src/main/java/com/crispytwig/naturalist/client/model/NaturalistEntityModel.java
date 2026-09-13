@@ -1,27 +1,28 @@
 package com.crispytwig.naturalist.client.model;
 
-import com.crispytwig.naturalist.server.entity.base.MultipartMob;
-import com.crispytwig.naturalist.server.entity.util.SmoothAnimationState;
+import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
+import com.crispytwig.naturalist.world.entity.MultipartMob;
+import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
+import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.animation.KeyframeAnimations;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.animation.KeyframeAnimation;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import org.joml.Vector3f;
-import org.jspecify.annotations.NonNull;
 
-import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 
-public abstract class NaturalistEntityModel<E extends Entity> extends HierarchicalModel<E> {
-    private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
+public abstract class NaturalistEntityModel<E extends Entity> extends EntityModel<NaturalistRenderState<E>> {
+    private static final String DEFAULT_ROOT_PART_NAME = "root";
     private static final double GAIT_FACTOR = 0.65D;
     private static final double LIMB_SWING_PER_SPEED = 8.64D;
     protected static final float IDLE_FADE_SCALE = 2.5F;
@@ -29,51 +30,62 @@ public abstract class NaturalistEntityModel<E extends Entity> extends Hierarchic
     public static final double SMALL_SWIMMER_LIMB_SWING = 0.25D;
     public static final double LARGE_SWIMMER_LIMB_SWING = 0.5D;
 
-    private final Map<String, Optional<ModelPart>> partsByName = new HashMap<>();
-    private ModelPart[] allParts;
+    private final Map<AnimationDefinition, KeyframeAnimation> bakedAnimations = new IdentityHashMap<>();
+    private ModelPart animationRoot;
+    private NaturalistRenderState<E> renderState;
 
-    public NaturalistEntityModel() {
-        super();
+    protected NaturalistEntityModel(ModelPart root) {
+        super(root);
     }
 
-    public NaturalistEntityModel(Function<ResourceLocation, RenderType> renderType) {
-        super(renderType);
+    protected NaturalistEntityModel(ModelPart root, Function<Identifier, RenderType> renderType) {
+        super(root, renderType);
     }
 
     protected String getRootPartName() {
-        return "root";
+        return DEFAULT_ROOT_PART_NAME;
+    }
+
+    private ModelPart animationRoot() {
+        if (this.animationRoot == null) {
+            String name = this.getRootPartName();
+            ModelPart found = name.equals(DEFAULT_ROOT_PART_NAME)
+                    ? (this.root.hasChild(name) ? this.root.getChild(name) : null)
+                    : this.root.createPartLookup().apply(name);
+            this.animationRoot = found != null ? found : this.root;
+        }
+        return this.animationRoot;
+    }
+
+    protected KeyframeAnimation bakedAnimation(AnimationDefinition definition) {
+        return this.bakedAnimations.computeIfAbsent(definition, def -> {
+            ModelPart animRoot = this.animationRoot();
+            String name = this.getRootPartName();
+            ModelPart bakeRoot = name.equals(DEFAULT_ROOT_PART_NAME) ? animRoot : new ModelPart(List.of(), Map.of(name, animRoot));
+            Function<String, ModelPart> lookup = bakeRoot.createPartLookup();
+            Map<String, List<AnimationChannel>> present = new LinkedHashMap<>();
+            def.boneAnimations().forEach((bone, channels) -> {
+                if (lookup.apply(bone) != null) {
+                    present.put(bone, channels);
+                }
+            });
+            AnimationDefinition filtered = present.size() == def.boneAnimations().size()
+                    ? def
+                    : new AnimationDefinition(def.lengthInSeconds(), def.looping(), present);
+            return filtered.bake(bakeRoot);
+        });
     }
 
     @Override
-    public @NonNull Optional<ModelPart> getAnyDescendantWithName(String name) {
-        Optional<ModelPart> cached = this.partsByName.get(name);
-        if (cached != null) {
-            return cached;
-        }
-        Optional<ModelPart> resolved = this.root().getAllParts()
-                .filter(part -> part.hasChild(name))
-                .findFirst()
-                .map(part -> part.getChild(name));
-        if (resolved.isEmpty() && name.equals(this.getRootPartName())) {
-            resolved = Optional.of(this.root());
-        }
-        this.partsByName.put(name, resolved);
-        return resolved;
+    public final void setupAnim(NaturalistRenderState<E> state) {
+        super.setupAnim(state);
+        this.renderState = state;
+        this.setupAnimations(state.entity, state.walkAnimationPos, state.walkAnimationSpeed, state.ageInTicks, state.partialTick, state.yRot, state.xRot);
+        this.renderState = null;
     }
 
-    protected void resetPose() {
-        if (this.allParts == null) {
-            this.allParts = this.root().getAllParts().toArray(ModelPart[]::new);
-        }
-        for (ModelPart part : this.allParts) {
-            part.resetPose();
-        }
-    }
-
-    @Override
-    public final void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.resetPose();
-        this.setupAnimations(entity, limbSwing, limbSwingAmount, ageInTicks, ageInTicks - entity.tickCount, netHeadYaw, headPitch);
+    protected NaturalistRenderState<E> renderState() {
+        return this.renderState;
     }
 
     protected abstract void setupAnimations(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float partialTick, float netHeadYaw, float headPitch);
@@ -119,14 +131,14 @@ public abstract class NaturalistEntityModel<E extends Entity> extends Hierarchic
             return;
         }
         state.updateTime(ageInTicks, speed);
-        KeyframeAnimations.animate(this, definition, state.getAccumulatedTime(), factor, ANIMATION_VECTOR_CACHE);
+        this.bakedAnimation(definition).apply(state.getAccumulatedTime(), factor);
     }
 
     protected void animateUnblended(SmoothAnimationState state, AnimationDefinition definition, float ageInTicks) {
         if (state.isStarted()) {
             state.updateTime(ageInTicks, 1.0F);
         }
-        KeyframeAnimations.animate(this, definition, state.getAccumulatedTime(), 1.0F, ANIMATION_VECTOR_CACHE);
+        this.bakedAnimation(definition).apply(state.getAccumulatedTime(), 1.0F);
     }
 
     protected void animateIdleSmooth(SmoothAnimationState state, AnimationDefinition definition, float ageInTicks, float partialTick, float limbSwingAmount) {
@@ -139,6 +151,6 @@ public abstract class NaturalistEntityModel<E extends Entity> extends Hierarchic
             return;
         }
         state.updateTime(ageInTicks, speed);
-        KeyframeAnimations.animate(this, definition, state.getAccumulatedTime(), factor, ANIMATION_VECTOR_CACHE);
+        this.bakedAnimation(definition).apply(state.getAccumulatedTime(), factor);
     }
 }

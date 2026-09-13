@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:crab_meat"
-  },
+  "ingredient": "naturalist:crab_meat",
   "result": {
     "id": "naturalist:cooked_crab_meat"
   },

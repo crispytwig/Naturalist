@@ -1,8 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "naturalist:anglerfish"
-  },
+  "ingredient": "naturalist:anglerfish",
   "result": {
     "id": "naturalist:cooked_anglerfish"
   },

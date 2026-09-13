@@ -1,6 +1,5 @@
 {
   "ambientocclusion": false,
-  "render_type": "cutout",
   "textures": {
     "particle": "naturalist:block/snail_eggs",
     "texture": "naturalist:block/snail_eggs"

@@ -7,12 +7,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "naturalist:glow_goop"
-    },
-    "A": {
-      "item": "minecraft:arrow"
-    }
+    "#": "naturalist:glow_goop",
+    "A": "minecraft:arrow"
   },
   "result": {
     "id": "minecraft:spectral_arrow",

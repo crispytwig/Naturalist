@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:shellstone"
-  },
+  "ingredient": "naturalist:shellstone",
   "result": {
     "id": "naturalist:smooth_shellstone"
   },

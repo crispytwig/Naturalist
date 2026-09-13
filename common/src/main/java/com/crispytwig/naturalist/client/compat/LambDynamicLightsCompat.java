@@ -4,9 +4,6 @@ import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
 import dev.lambdaurora.lambdynlights.api.DynamicLightsContext;
 import dev.lambdaurora.lambdynlights.api.DynamicLightsInitializer;
-import dev.lambdaurora.lambdynlights.api.item.ItemLightSourceManager;
-import net.minecraft.resources.ResourceLocation;
-import org.jspecify.annotations.NonNull;
 
 public class LambDynamicLightsCompat implements DynamicLightsInitializer {
     @Override
@@ -20,8 +17,4 @@ public class LambDynamicLightsCompat implements DynamicLightsInitializer {
                         )
                 );
     }
-
-    @SuppressWarnings("removal")
-    @Override
-    public void onInitializeDynamicLights(@NonNull ItemLightSourceManager itemLightSourceManager) {}
 }

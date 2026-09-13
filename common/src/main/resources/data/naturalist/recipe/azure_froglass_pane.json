@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "naturalist:azure_froglass"
-    }
+    "#": "naturalist:azure_froglass"
   },
   "pattern": [
     "###",

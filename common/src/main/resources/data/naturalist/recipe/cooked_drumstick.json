@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:drumstick"
-  },
+  "ingredient": "naturalist:drumstick",
   "result": {
     "id": "naturalist:cooked_drumstick"
   },

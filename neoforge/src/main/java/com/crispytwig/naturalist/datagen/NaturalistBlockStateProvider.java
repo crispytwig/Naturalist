@@ -2,11 +2,11 @@ package com.crispytwig.naturalist.datagen;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.server.block.GlowGoopBlock;
+import com.crispytwig.naturalist.world.level.block.GlowGoopBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.*;
@@ -46,7 +46,7 @@ public class NaturalistBlockStateProvider extends BlockStateProvider {
 
     private void stoneFamily(Block block, StairBlock stairs, SlabBlock slab, WallBlock wall) {
         String baseName = name(block);
-        ResourceLocation texture = modLoc("block/" + baseName);
+        Identifier texture = modLoc("block/" + baseName);
 
         ModelFile cubeModel = models().cubeAll(baseName, texture);
         simpleBlock(block, cubeModel);
@@ -77,8 +77,8 @@ public class NaturalistBlockStateProvider extends BlockStateProvider {
 
     private void translucentPane(IronBarsBlock block, String glassName) {
         String n = name(block);
-        ResourceLocation pane = modLoc("block/" + glassName);
-        ResourceLocation edge = modLoc("block/" + n + "_top");
+        Identifier pane = modLoc("block/" + glassName);
+        Identifier edge = modLoc("block/" + n + "_top");
 
         ModelFile post = models().withExistingParent(n + "_post", mcLoc("block/template_glass_pane_post"))
                 .texture("pane", pane).texture("edge", edge).renderType("translucent");

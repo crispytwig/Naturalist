@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.compat;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.entity.mob.Firefly;
+import com.crispytwig.naturalist.world.entity.animal.firefly.Firefly;
 import dev.lambdaurora.lambdynlights.api.entity.luminance.EntityLuminance;
 import dev.lambdaurora.lambdynlights.api.item.ItemLightSourceManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.Range;
 import org.jspecify.annotations.NonNull;

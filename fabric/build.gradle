@@ -1,122 +1,51 @@
 plugins {
-    id "com.gradleup.shadow" version "8.3.11"
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-}
-
-architectury {
-    platformSetupLoomIde()
-    fabric()
-}
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    runs {
-        client {
-            client()
-            ideConfigGenerated true
-            runDir "run"
-        }
-        server {
-            server()
-            ideConfigGenerated true
-            runDir "run"
-        }
-    }
-}
-
-configurations {
-    common
-    shadowBundle
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
-}
-
-configurations.configureEach {
-    resolutionStrategy.force "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    id 'multiloader-loader'
+    id 'naturalist-publish'
+    id 'net.fabricmc.fabric-loom'
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
+    localRuntime "dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${lambdynamiclights}"
 
-    modCompileOnly("dev.lambdaurora.lambdynamiclights:lambdynamiclights-api:${project.lambdynamiclights}")
-    modLocalRuntime("dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${project.lambdynamiclights}")
+    compileOnly "maven.modrinth:field-guide:${field_guide_fabric}"
+    localRuntime "maven.modrinth:field-guide:${field_guide_fabric}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowBundle project(path: ":common", configuration: "transformProductionFabric")
-
-    modCompileOnly "maven.modrinth:justenoughbreeding:${project.jeb_fabric}"
-    modLocalRuntime "maven.modrinth:justenoughbreeding:${project.jeb_fabric}"
-
-    modCompileOnly "maven.modrinth:emi:${project.emi_fabric}"
-    modLocalRuntime "maven.modrinth:emi:${project.emi_fabric}"
-
-    modLocalRuntime "maven.modrinth:field-guide:${project.field_guide_fabric}"
-
-    modLocalRuntime "maven.modrinth:immersive-overlays:${project.immersive_overlays}-fabric"
-
-    modLocalRuntime "maven.modrinth:not-enough-animations:${project.nea_fabric}"
+    localRuntime "maven.modrinth:immersive-overlays:${immersive_overlays}-fabric"
+    localRuntime "maven.modrinth:not-enough-animations:${nea_fabric}"
 }
 
-processResources {
-    def expandProps = [
-            "version"                : project.mod_version,
-            "mod_id"                 : project.mod_id,
-            "mod_name"               : project.mod_name,
-            "mod_license"            : project.mod_license,
-            "mod_description"        : project.mod_description,
-            "mod_authors"            : project.mod_authors,
-            "minecraft_version"      : project.minecraft_version,
-            "fabric_loader_version"  : project.fabric_loader_version,
-            "fabric_api_version"     : project.fabric_api_version
-    ]
-
-    filesMatching("fabric.mod.json") {
-        expand expandProps
+loom {
+    def aw = project(':common').file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
     }
-    inputs.properties(expandProps)
-}
-
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = "dev-shadow"
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-remapJar {
-    input.set shadowJar.archiveFile
-    archiveClassifier = null
-}
-
-jar {
-    archiveClassifier = "dev"
+    runs {
+        client {
+            client()
+            setConfigName('Fabric Client')
+            ideConfigGenerated(true)
+            runDir('run')
+        }
+        server {
+            server()
+            setConfigName('Fabric Server')
+            ideConfigGenerated(true)
+            runDir('run')
+        }
+    }
 }
 
 publishMods {
-    file = remapJar.archiveFile
-    type = STABLE
-    version = "${project.mod_version}+${project.minecraft_version}-fabric"
-    changelog = rootProject.file("CHANGELOG.md").text
-    modLoaders.add("fabric")
-    displayName = "${project.mod_name} ${project.mod_version} (Fabric ${project.minecraft_version})"
-
-    curseforge {
-        projectId = project.curseforge
-        accessToken = providers.gradleProperty("curseforgeToken").orElse(providers.environmentVariable("CURSEFORGE_TOKEN"))
-        minecraftVersions.add(project.minecraft_version)
-        clientRequired = true
-        serverRequired = true
-        requires("fabric-api")
-    }
-
-    modrinth {
-        projectId = project.modrinth
-        accessToken = providers.gradleProperty("modrinthToken").orElse(providers.environmentVariable("MODRINTH_TOKEN"))
-        minecraftVersions.add(project.minecraft_version)
-        requires("fabric-api")
-    }
+    file = jar.archiveFile
+    version = "${mod_version}+${minecraft_version}-fabric"
+    modLoaders.add('fabric')
+    displayName = "${mod_name} ${mod_version} (Fabric ${minecraft_version})"
+    curseforge { requires('fabric-api') }
+    modrinth { requires('fabric-api') }
 }
+
+applyLoaderAttribute('fabric', ['apiElements', 'runtimeElements', 'sourcesElements', 'includeInternal', 'modCompileClasspath'])

@@ -3,29 +3,87 @@ package com.crispytwig.naturalist;
 import com.mojang.logging.LogUtils;
 import com.crispytwig.naturalist.compat.fieldguide.FieldGuidePlugin;
 import com.crispytwig.naturalist.platform.Services;
-import com.crispytwig.naturalist.registry.*;
-import com.crispytwig.naturalist.server.entity.base.NaturalistAnimal;
-import com.crispytwig.naturalist.server.entity.mob.*;
-import com.crispytwig.naturalist.server.item.CaughtMobItem;
+import com.crispytwig.naturalist.registry.NaturalistBlockEntities;
+import com.crispytwig.naturalist.registry.NaturalistCreativeTab;
+import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
+import com.crispytwig.naturalist.registry.NaturalistFeatures;
+import com.crispytwig.naturalist.registry.NaturalistMenus;
+import com.crispytwig.naturalist.registry.NaturalistMobEffects;
+import com.crispytwig.naturalist.registry.NaturalistMobVariants;
+import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
+import com.crispytwig.naturalist.registry.NaturalistPotions;
+import com.crispytwig.naturalist.registry.NaturalistRecipes;
+import com.crispytwig.naturalist.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
+import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
+import com.crispytwig.naturalist.world.entity.animal.alligator.Alligator;
+import com.crispytwig.naturalist.world.entity.animal.fish.Anglerfish;
+import com.crispytwig.naturalist.world.entity.animal.ant.Ant;
+import com.crispytwig.naturalist.world.entity.animal.fish.Bass;
+import com.crispytwig.naturalist.world.entity.animal.bear.Bear;
+import com.crispytwig.naturalist.world.entity.animal.bird.Bird;
+import com.crispytwig.naturalist.world.entity.animal.bear.BlackBear;
+import com.crispytwig.naturalist.world.entity.animal.fish.Blobfish;
+import com.crispytwig.naturalist.world.entity.animal.boar.Boar;
+import com.crispytwig.naturalist.world.entity.animal.butterfly.Butterfly;
+import com.crispytwig.naturalist.world.entity.animal.capybara.Capybara;
+import com.crispytwig.naturalist.world.entity.animal.butterfly.Caterpillar;
+import com.crispytwig.naturalist.world.entity.animal.fish.Catfish;
+import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
+import com.crispytwig.naturalist.world.entity.animal.crab.Crab;
+import com.crispytwig.naturalist.world.entity.animal.deer.Deer;
+import com.crispytwig.naturalist.world.entity.animal.scorpion.DesertScorpion;
+import com.crispytwig.naturalist.world.entity.animal.dragonfly.Dragonfly;
+import com.crispytwig.naturalist.world.entity.animal.duck.Duck;
+import com.crispytwig.naturalist.world.entity.animal.elephant.Elephant;
+import com.crispytwig.naturalist.world.entity.animal.firefly.Firefly;
+import com.crispytwig.naturalist.world.entity.animal.giantisopod.GiantIsopod;
+import com.crispytwig.naturalist.world.entity.animal.giraffe.Giraffe;
+import com.crispytwig.naturalist.world.entity.animal.greatwhiteshark.GreatWhiteShark;
+import com.crispytwig.naturalist.world.entity.animal.hedgehog.Hedgehog;
+import com.crispytwig.naturalist.world.entity.animal.hippo.Hippo;
+import com.crispytwig.naturalist.world.entity.animal.jellyfish.Jellyfish;
+import com.crispytwig.naturalist.world.entity.animal.scorpion.JungleScorpion;
+import com.crispytwig.naturalist.world.entity.animal.komododragon.KomodoDragon;
+import com.crispytwig.naturalist.world.entity.animal.lion.Lion;
+import com.crispytwig.naturalist.world.entity.animal.lizard.Lizard;
+import com.crispytwig.naturalist.world.entity.animal.lizard.LizardTail;
+import com.crispytwig.naturalist.world.entity.animal.elephant.Mammoth;
+import com.crispytwig.naturalist.world.entity.animal.mole.Mole;
+import com.crispytwig.naturalist.world.entity.animal.ostrich.Ostrich;
+import com.crispytwig.naturalist.world.entity.animal.fish.Piranha;
+import com.crispytwig.naturalist.world.entity.animal.rat.Rat;
+import com.crispytwig.naturalist.world.entity.animal.fish.Ray;
+import com.crispytwig.naturalist.world.entity.animal.rhino.Rhino;
+import com.crispytwig.naturalist.world.entity.animal.scorpion.Scorpion;
+import com.crispytwig.naturalist.world.entity.animal.snail.Snail;
+import com.crispytwig.naturalist.world.entity.animal.snake.Snake;
+import com.crispytwig.naturalist.world.entity.animal.starfish.Starfish;
+import com.crispytwig.naturalist.world.entity.animal.tiger.Tiger;
+import com.crispytwig.naturalist.world.entity.animal.tortoise.Tortoise;
+import com.crispytwig.naturalist.world.entity.animal.turkey.Turkey;
+import com.crispytwig.naturalist.world.entity.animal.vulture.Vulture;
+import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.world.entity.animal.equine.Zebra;
+import com.crispytwig.naturalist.world.item.CaughtMobItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.core.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.animal.fish.WaterAnimal;
 import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,8 +105,8 @@ public final class Naturalist {
     private Naturalist() {
     }
 
-    public static ResourceLocation location(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    public static Identifier location(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static void bootstrap() {
@@ -208,7 +266,7 @@ public final class Naturalist {
     }
 
     public static void registerDispenserBehaviors() {
-        DispenserBlock.registerBehavior(NaturalistRegistry.DUCK_EGG.get(), new ProjectileDispenseBehavior(NaturalistRegistry.DUCK_EGG.get()));
+        DispenserBlock.registerProjectileBehavior(NaturalistRegistry.DUCK_EGG.get());
 
         DispenseItemBehavior bucketDispenseBehavior = new DefaultDispenseItemBehavior() {
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
@@ -240,7 +298,7 @@ public final class Naturalist {
                 ServerLevel serverLevel = source.level();
 
                 EntityType<Snail> entityType = NaturalistEntityTypes.SNAIL.get();
-                if (entityType.spawn(serverLevel, blockPos, MobSpawnType.DISPENSER) != null) {
+                if (entityType.spawn(serverLevel, blockPos, EntitySpawnReason.DISPENSER) != null) {
                     stack.shrink(1);
                 }
                 return stack;
@@ -254,7 +312,7 @@ public final class Naturalist {
                 ServerLevel serverLevel = source.level();
 
                 EntityType<Butterfly> entityType = NaturalistEntityTypes.BUTTERFLY.get();
-                if (entityType.spawn(serverLevel, blockPos, MobSpawnType.DISPENSER) != null) {
+                if (entityType.spawn(serverLevel, blockPos, EntitySpawnReason.DISPENSER) != null) {
                     stack.shrink(1);
                 }
                 return stack;

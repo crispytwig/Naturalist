@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:blue\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/giant_isopod_bucket/blue"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:1}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/giant_isopod_bucket/blue"
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/giant_isopod_bucket"
+      }
+    }
+  }
+}

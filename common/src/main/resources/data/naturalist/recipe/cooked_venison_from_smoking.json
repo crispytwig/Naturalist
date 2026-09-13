@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "naturalist:venison"
-  },
+  "ingredient": "naturalist:venison",
   "result": {
     "id": "naturalist:cooked_venison"
   },

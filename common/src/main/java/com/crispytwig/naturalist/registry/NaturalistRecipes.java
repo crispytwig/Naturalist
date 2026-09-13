@@ -1,12 +1,12 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.recipe.BugNetInteractionRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
+import com.crispytwig.naturalist.world.item.crafting.BugNetInteractionRecipe;
 
 public class NaturalistRecipes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, Naturalist.MOD_ID);
@@ -20,6 +20,6 @@ public class NaturalistRecipes {
                 }
             });
 
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> BUG_NET_SERIALIZER = RECIPE_SERIALIZERS.register("net",
-            BugNetInteractionRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BugNetInteractionRecipe>> BUG_NET_SERIALIZER = RECIPE_SERIALIZERS.register("net",
+            () -> BugNetInteractionRecipe.SERIALIZER);
 }

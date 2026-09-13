@@ -1,0 +1,126 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:blue_morpho\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/blue_morpho"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:3}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/blue_morpho"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Variant:\"naturalist:clouded_yellow\"}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/variant/clouded_yellow"
+        },
+        "on_false": {
+          "type": "minecraft:condition",
+          "property": "minecraft:component",
+          "predicate": "minecraft:custom_data",
+          "value": "{Variant:1}",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/variant/clouded_yellow"
+          },
+          "on_false": {
+            "type": "minecraft:condition",
+            "property": "minecraft:component",
+            "predicate": "minecraft:custom_data",
+            "value": "{Variant:\"naturalist:jade_green_swallowtail\"}",
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "naturalist:item/variant/jade_green_swallowtail"
+            },
+            "on_false": {
+              "type": "minecraft:condition",
+              "property": "minecraft:component",
+              "predicate": "minecraft:custom_data",
+              "value": "{Variant:4}",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "naturalist:item/variant/jade_green_swallowtail"
+              },
+              "on_false": {
+                "type": "minecraft:condition",
+                "property": "minecraft:component",
+                "predicate": "minecraft:custom_data",
+                "value": "{Variant:\"naturalist:purple_emperor\"}",
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "naturalist:item/variant/purple_emperor"
+                },
+                "on_false": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:component",
+                  "predicate": "minecraft:custom_data",
+                  "value": "{Variant:5}",
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "naturalist:item/variant/purple_emperor"
+                  },
+                  "on_false": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:component",
+                    "predicate": "minecraft:custom_data",
+                    "value": "{Variant:\"naturalist:red_admiral\"}",
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "naturalist:item/variant/red_admiral"
+                    },
+                    "on_false": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:component",
+                      "predicate": "minecraft:custom_data",
+                      "value": "{Variant:6}",
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "naturalist:item/variant/red_admiral"
+                      },
+                      "on_false": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:component",
+                        "predicate": "minecraft:custom_data",
+                        "value": "{Variant:\"naturalist:swallowtail\"}",
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "naturalist:item/variant/swallowtail"
+                        },
+                        "on_false": {
+                          "type": "minecraft:condition",
+                          "property": "minecraft:component",
+                          "predicate": "minecraft:custom_data",
+                          "value": "{Variant:2}",
+                          "on_true": {
+                            "type": "minecraft:model",
+                            "model": "naturalist:item/variant/swallowtail"
+                          },
+                          "on_false": {
+                            "type": "minecraft:model",
+                            "model": "naturalist:item/butterfly"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

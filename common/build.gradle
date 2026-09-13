@@ -1,20 +1,37 @@
-architectury {
-    common rootProject.enabled_platforms.split(",")
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev'
 }
 
-loom {
-    accessWidenerPath = file("src/main/resources/naturalist.accesswidener")
+neoForge {
+    neoFormVersion = neo_form_version
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
-    modCompileOnly "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    compileOnly('net.fabricmc:sponge-mixin:0.17.3+mixin.0.8.7')
+    compileOnly(annotationProcessor('io.github.llamalad7:mixinextras-common:0.5.3'))
 
-
-    modCompileOnly("dev.lambdaurora.lambdynamiclights:lambdynamiclights-api:${project.lambdynamiclights}")
-
-    modCompileOnly "maven.modrinth:field-guide:${project.field_guide_fabric}"
-
-    compileOnly "org.jetbrains:annotations:24.1.0"
-    compileOnly "org.jspecify:jspecify:1.0.0"
+    compileOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
 }
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+applyLoaderAttribute('common', ['apiElements', 'runtimeElements', 'sourcesElements'])

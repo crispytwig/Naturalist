@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.datagen;
 
+import com.crispytwig.naturalist.tags.NaturalistBlockTags;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.registry.NaturalistTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -21,54 +21,54 @@ public class NaturalistBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
-        tag(NaturalistTags.BlockTags.FIREFLIES_SPAWNABLE_ON)
+        tag(NaturalistBlockTags.FIREFLIES_SPAWNABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.MUD)
                 .addTag(BlockTags.LEAVES);
 
-        tag(NaturalistTags.BlockTags.DRAGONFLIES_SPAWNABLE_ON)
+        tag(NaturalistBlockTags.DRAGONFLIES_SPAWNABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.MUD)
                 .addTag(BlockTags.LEAVES)
                 .addTag(BlockTags.FLOWERS)
                 .add(Blocks.SHORT_GRASS);
 
-        tag(NaturalistTags.BlockTags.BUTTERFLIES_SPAWNABLE_ON)
+        tag(NaturalistBlockTags.BUTTERFLIES_SPAWNABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.MUD)
                 .addTag(BlockTags.LEAVES)
                 .addTag(BlockTags.FLOWERS)
                 .add(Blocks.SHORT_GRASS);
 
-        tag(NaturalistTags.BlockTags.VULTURES_SPAWNABLE_ON)
+        tag(NaturalistBlockTags.VULTURES_SPAWNABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.AIR)
                 .addTag(BlockTags.LEAVES)
                 .addTag(BlockTags.SAND);
 
-        tag(NaturalistTags.BlockTags.DUCKS_SPAWNABLE_ON)
+        tag(NaturalistBlockTags.DUCKS_SPAWNABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.MUD, Blocks.DIRT, Blocks.WATER);
 
-        tag(NaturalistTags.BlockTags.RHINO_CHARGE_BREAKABLE)
+        tag(NaturalistBlockTags.RHINO_CHARGE_BREAKABLE)
                 .addTag(BlockTags.CROPS)
                 .addTag(BlockTags.FLOWERS)
                 .add(Blocks.SHORT_GRASS, Blocks.FERN, Blocks.TALL_GRASS, Blocks.LARGE_FERN);
 
-        tag(NaturalistTags.BlockTags.VULTURE_PERCH_BLOCKS)
+        tag(NaturalistBlockTags.VULTURE_PERCH_BLOCKS)
                 .add(Blocks.CACTUS)
                 .addTag(BlockTags.LEAVES);
 
-        tag(NaturalistTags.BlockTags.CATTAIL_PLACEABLE)
+        tag(NaturalistBlockTags.CATTAIL_PLACEABLE)
                 .add(Blocks.MUD, Blocks.DIRT, Blocks.GRASS_BLOCK);
 
-        tag(NaturalistTags.BlockTags.ALLIGATOR_EGG_LAYABLE_ON)
+        tag(NaturalistBlockTags.ALLIGATOR_EGG_LAYABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.MUD);
 
-        tag(NaturalistTags.BlockTags.TORTOISE_EGG_LAYABLE_ON)
+        tag(NaturalistBlockTags.TORTOISE_EGG_LAYABLE_ON)
                 .add(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.MUD);
 
-        tag(NaturalistTags.BlockTags.MOTHS_ATTRACTED_TO)
+        tag(NaturalistBlockTags.MOTHS_ATTRACTED_TO)
                 .add(Blocks.TORCH, Blocks.GLOWSTONE, Blocks.SEA_LANTERN, Blocks.JACK_O_LANTERN,
                         Blocks.BEACON, Blocks.END_ROD, Blocks.SHROOMLIGHT, Blocks.CAMPFIRE,
                         Blocks.SOUL_CAMPFIRE, Blocks.LANTERN, Blocks.SOUL_LANTERN);
 
-        tag(NaturalistTags.BlockTags.SHELLSTONE)
+        tag(NaturalistBlockTags.SHELLSTONE)
                 .add(NaturalistRegistry.SHELLSTONE.get())
                 .add(NaturalistRegistry.SHELLSTONE_STAIRS.get())
                 .add(NaturalistRegistry.SHELLSTONE_SLAB.get())

@@ -1,0 +1,46 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:mobula_ray\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/ray_bucket/mobula_ray"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:1}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/ray_bucket/mobula_ray"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Variant:\"naturalist:stingray\"}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/variant/ray_bucket/stingray"
+        },
+        "on_false": {
+          "type": "minecraft:condition",
+          "property": "minecraft:component",
+          "predicate": "minecraft:custom_data",
+          "value": "{Variant:2}",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/variant/ray_bucket/stingray"
+          },
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/ray_bucket"
+          }
+        }
+      }
+    }
+  }
+}

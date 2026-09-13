@@ -5,10 +5,7 @@ import com.crispytwig.naturalist.neoforge.config.NeoForgeNaturalistConfig;
 import com.crispytwig.naturalist.neoforge.platform.NeoForgeRegistrationProvider;
 import com.crispytwig.naturalist.neoforge.registry.NaturalistBiomeModifiers;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackLocationInfo;
-import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.EntityType;
@@ -19,7 +16,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,10 +25,6 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
 
 @Mod(Naturalist.MOD_ID)
 public class NaturalistNeoForge {
@@ -50,7 +42,7 @@ public class NaturalistNeoForge {
 
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
 
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             NaturalistNeoForgeClient.init(modEventBus, modContainer);
         }
     }
@@ -77,28 +69,13 @@ public class NaturalistNeoForge {
     }
 
     private void addPackFinders(AddPackFindersEvent event) {
-        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-            Path resourcePath = ModList.get().getModFiles().stream()
-                    .map(info -> info.getFile().findResource("resourcepacks/custom_spawn_eggs"))
-                    .filter(Files::exists)
-                    .findFirst()
-                    .orElse(null);
-            if (resourcePath == null) return;
-            event.addRepositorySource(consumer -> {
-                PackLocationInfo info = new PackLocationInfo(
-                        "naturalist:custom_spawn_eggs",
-                        Component.literal("Naturalist 1.21.5+ Spawn Eggs"),
-                        PackSource.BUILT_IN,
-                        Optional.empty()
-                );
-                Pack pack = Pack.readMetaAndCreate(
-                        info,
-                        new PathPackResources.PathResourcesSupplier(resourcePath),
-                        PackType.CLIENT_RESOURCES,
-                        new PackSelectionConfig(false, Pack.Position.TOP, false)
-                );
-                if (pack != null) consumer.accept(pack);
-            });
-        }
+        event.addPackFinders(
+                Naturalist.location("resourcepacks/custom_spawn_eggs"),
+                PackType.CLIENT_RESOURCES,
+                Component.literal("Naturalist 1.21.5+ Spawn Eggs"),
+                PackSource.BUILT_IN,
+                false,
+                Pack.Position.TOP
+        );
     }
 }

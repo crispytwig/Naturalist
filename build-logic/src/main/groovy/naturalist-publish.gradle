@@ -1,0 +1,22 @@
+plugins {
+    id 'me.modmuss50.mod-publish-plugin'
+}
+
+publishMods {
+    type = STABLE
+    changelog = rootProject.file('CHANGELOG.md').text
+
+    curseforge {
+        projectId = project.curseforge
+        accessToken = providers.gradleProperty('curseforgeToken').orElse(providers.environmentVariable('CURSEFORGE_TOKEN'))
+        minecraftVersions.add(project.minecraft_version)
+        clientRequired = true
+        serverRequired = true
+    }
+
+    modrinth {
+        projectId = project.modrinth
+        accessToken = providers.gradleProperty('modrinthToken').orElse(providers.environmentVariable('MODRINTH_TOKEN'))
+        minecraftVersions.add(project.minecraft_version)
+    }
+}

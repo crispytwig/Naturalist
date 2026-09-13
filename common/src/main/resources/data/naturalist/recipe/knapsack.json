@@ -5,9 +5,7 @@
     " H "
   ],
   "key": {
-    "H": {
-      "item": "naturalist:hide"
-    }
+    "H": "naturalist:hide"
   },
   "result": {
     "id": "naturalist:knapsack"

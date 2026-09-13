@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "naturalist:duck"
-  },
+  "ingredient": "naturalist:duck",
   "result": {
     "id": "naturalist:cooked_duck"
   },

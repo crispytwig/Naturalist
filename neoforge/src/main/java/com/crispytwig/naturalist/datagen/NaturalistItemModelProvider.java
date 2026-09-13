@@ -3,7 +3,7 @@ package com.crispytwig.naturalist.datagen;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -114,7 +114,7 @@ public class NaturalistItemModelProvider extends ItemModelProvider {
 
         for (int i = 0; i < variants.length; i++) {
             builder.override()
-                    .predicate(ResourceLocation.withDefaultNamespace("variant"), i / 7.0f)
+                    .predicate(Identifier.withDefaultNamespace("variant"), i / 7.0f)
                     .model(variantModels[i])
                     .end();
         }
@@ -136,7 +136,7 @@ public class NaturalistItemModelProvider extends ItemModelProvider {
 
         for (int i = 0; i < colors.length; i++) {
             builder.override()
-                    .predicate(ResourceLocation.withDefaultNamespace("color"), i / 15.0f)
+                    .predicate(Identifier.withDefaultNamespace("color"), i / 15.0f)
                     .model(colorModels[i])
                     .end();
         }

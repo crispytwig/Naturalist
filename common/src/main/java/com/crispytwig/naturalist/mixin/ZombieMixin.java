@@ -1,11 +1,11 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.ai.goal.AttackEggGoal;
+import com.crispytwig.naturalist.world.entity.ai.goal.AttackEggGoal;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;

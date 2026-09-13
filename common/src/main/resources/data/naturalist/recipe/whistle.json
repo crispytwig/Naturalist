@@ -5,12 +5,8 @@
     " S "
   ],
   "key": {
-    "C": {
-      "item": "minecraft:copper_ingot"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "C": "minecraft:copper_ingot",
+    "S": "minecraft:string"
   },
   "result": {
     "id": "naturalist:whistle"

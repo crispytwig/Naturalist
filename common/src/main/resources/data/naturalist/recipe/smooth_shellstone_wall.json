@@ -5,9 +5,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "naturalist:smooth_shellstone"
-    }
+    "#": "naturalist:smooth_shellstone"
   },
   "result": {
     "id": "naturalist:smooth_shellstone_wall",

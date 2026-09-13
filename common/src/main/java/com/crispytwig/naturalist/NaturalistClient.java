@@ -1,38 +1,155 @@
 package com.crispytwig.naturalist;
 
-import com.crispytwig.naturalist.client.model.*;
-
-import com.crispytwig.naturalist.client.gui.screens.ElephantInventoryScreen;
-import com.crispytwig.naturalist.client.renderer.*;
+import com.crispytwig.naturalist.client.model.animal.alligator.AlligatorBabyModel;
+import com.crispytwig.naturalist.client.model.animal.alligator.AlligatorModel;
+import com.crispytwig.naturalist.client.model.animal.fish.AnglerfishModel;
+import com.crispytwig.naturalist.client.model.animal.ant.AntModel;
+import com.crispytwig.naturalist.client.model.animal.fish.BassModel;
+import com.crispytwig.naturalist.client.model.animal.bear.BearBabyModel;
+import com.crispytwig.naturalist.client.model.animal.bear.BearModel;
+import com.crispytwig.naturalist.client.model.animal.bird.BirdBabyModel;
+import com.crispytwig.naturalist.client.model.animal.bird.BirdModel;
+import com.crispytwig.naturalist.client.model.animal.bear.BlackBearBabyModel;
+import com.crispytwig.naturalist.client.model.animal.bear.BlackBearModel;
+import com.crispytwig.naturalist.client.model.animal.fish.BlobfishGrayModel;
+import com.crispytwig.naturalist.client.model.animal.fish.BlobfishPinkModel;
+import com.crispytwig.naturalist.client.model.animal.boar.BoarBabyModel;
+import com.crispytwig.naturalist.client.model.animal.boar.BoarModel;
+import com.crispytwig.naturalist.client.model.animal.butterfly.ButterflyModel;
+import com.crispytwig.naturalist.client.model.animal.capybara.CapybaraBabyModel;
+import com.crispytwig.naturalist.client.model.animal.capybara.CapybaraModel;
+import com.crispytwig.naturalist.client.model.animal.butterfly.CaterpillarModel;
+import com.crispytwig.naturalist.client.model.animal.fish.CatfishModel;
+import com.crispytwig.naturalist.client.model.animal.clam.ClamModel;
+import com.crispytwig.naturalist.client.model.animal.crab.CrabBabyModel;
+import com.crispytwig.naturalist.client.model.animal.crab.CrabModel;
+import com.crispytwig.naturalist.client.model.animal.deer.DeerBabyModel;
+import com.crispytwig.naturalist.client.model.animal.deer.DeerModel;
+import com.crispytwig.naturalist.client.model.animal.scorpion.DesertScorpionModel;
+import com.crispytwig.naturalist.client.model.animal.mole.DirtTrailModel;
+import com.crispytwig.naturalist.client.model.animal.dragonfly.DragonflyModel;
+import com.crispytwig.naturalist.client.model.animal.duck.DuckBabyModel;
+import com.crispytwig.naturalist.client.model.animal.duck.DuckModel;
+import com.crispytwig.naturalist.client.model.animal.elephant.ElephantBabyModel;
+import com.crispytwig.naturalist.client.model.animal.elephant.ElephantModel;
+import com.crispytwig.naturalist.client.model.animal.firefly.FireflyBabyModel;
+import com.crispytwig.naturalist.client.model.animal.firefly.FireflyModel;
+import com.crispytwig.naturalist.client.model.animal.giantisopod.GiantIsopodModel;
+import com.crispytwig.naturalist.client.model.animal.giraffe.GiraffeBabyModel;
+import com.crispytwig.naturalist.client.model.animal.giraffe.GiraffeModel;
+import com.crispytwig.naturalist.client.model.animal.greatwhiteshark.GreatWhiteSharkModel;
+import com.crispytwig.naturalist.client.model.animal.hedgehog.HedgehogModel;
+import com.crispytwig.naturalist.client.model.animal.hippo.HippoBabyModel;
+import com.crispytwig.naturalist.client.model.animal.hippo.HippoModel;
+import com.crispytwig.naturalist.client.model.animal.jellyfish.JellyfishModel;
+import com.crispytwig.naturalist.client.model.animal.scorpion.JungleScorpionModel;
+import com.crispytwig.naturalist.client.model.animal.komododragon.KomodoDragonModel;
+import com.crispytwig.naturalist.client.model.animal.fish.LargeBassModel;
+import com.crispytwig.naturalist.client.model.animal.lion.LionBabyModel;
+import com.crispytwig.naturalist.client.model.animal.lion.LionModel;
+import com.crispytwig.naturalist.client.model.animal.lizard.LizardModel;
+import com.crispytwig.naturalist.client.model.animal.lizard.LizardTailModel;
+import com.crispytwig.naturalist.client.model.animal.elephant.MammothBabyModel;
+import com.crispytwig.naturalist.client.model.animal.elephant.MammothModel;
+import com.crispytwig.naturalist.client.model.animal.fish.MediumBassModel;
+import com.crispytwig.naturalist.client.model.animal.mole.MoleModel;
+import com.crispytwig.naturalist.client.model.animal.ostrich.OstrichBabyModel;
+import com.crispytwig.naturalist.client.model.animal.ostrich.OstrichModel;
+import com.crispytwig.naturalist.client.model.animal.fish.PiranhaModel;
+import com.crispytwig.naturalist.client.model.animal.rat.RatModel;
+import com.crispytwig.naturalist.client.model.animal.fish.RayModel;
+import com.crispytwig.naturalist.client.model.animal.rhino.RhinoModel;
+import com.crispytwig.naturalist.client.model.animal.snail.SnailModel;
+import com.crispytwig.naturalist.client.model.animal.snake.SnakeModel;
+import com.crispytwig.naturalist.client.model.animal.starfish.StarfishModel;
+import com.crispytwig.naturalist.client.model.animal.tiger.TigerBabyModel;
+import com.crispytwig.naturalist.client.model.animal.tiger.TigerModel;
+import com.crispytwig.naturalist.client.model.animal.tortoise.TortoiseBabyModel;
+import com.crispytwig.naturalist.client.model.animal.tortoise.TortoiseModel;
+import com.crispytwig.naturalist.client.model.animal.turkey.TurkeyModel;
+import com.crispytwig.naturalist.client.model.animal.vulture.VultureBabyModel;
+import com.crispytwig.naturalist.client.model.animal.vulture.VultureModel;
+import com.crispytwig.naturalist.client.model.animal.whale.WhaleBabyModel;
+import com.crispytwig.naturalist.client.model.animal.whale.WhaleModel;
+import com.crispytwig.naturalist.client.model.animal.equine.ZebraBabyModel;
+import com.crispytwig.naturalist.client.model.animal.equine.ZebraModel;
+import com.crispytwig.naturalist.client.gui.screens.inventory.ElephantInventoryScreen;
+import com.crispytwig.naturalist.client.renderer.entity.AlligatorRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.AnglerfishRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.AntRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BassRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BearRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BirdRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BlackBearRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BlobfishRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.BoarRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.ButterflyRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.CapybaraRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.CarriedFoodRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.CaterpillarRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.CatfishRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.ClamRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.CrabRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.DeerRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.DesertScorpionRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.DirtTrailRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.DragonflyRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.DuckRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.ElephantRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.FireflyRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.GiantIsopodRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.GiraffeRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.GreatWhiteSharkRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.HedgehogRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.HippoRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.JellyfishRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.JungleScorpionRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.KomodoDragonRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.LionRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.LizardRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.LizardTailRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.MammothRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.MoleRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.OstrichRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.PiranhaRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.RatRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.RayRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.RhinoRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.SnailRenderer;
+import com.crispytwig.naturalist.client.renderer.blockentity.SnailShellRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.SnakeRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.StarfishRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.TigerRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.TortoiseRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.TurkeyRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.VultureRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.WhaleRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.ZebraRenderer;
 import com.crispytwig.naturalist.registry.NaturalistBlockEntities;
 import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
 import com.crispytwig.naturalist.registry.NaturalistMenus;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.server.item.KnapsackItem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import java.util.function.Supplier;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import com.crispytwig.naturalist.client.renderer.item.properties.conditional.KnapsackFilled;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-@Environment(EnvType.CLIENT)
+import java.util.function.Supplier;
+
 public final class NaturalistClient {
     private NaturalistClient() {
     }
@@ -188,23 +305,19 @@ public final class NaturalistClient {
 
     @FunctionalInterface
     public interface BlockEntityRendererRegistrar {
-        <T extends BlockEntity> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T> provider);
+        <T extends BlockEntity, S extends BlockEntityRenderState> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T, S> provider);
     }
 
     public static void registerBlockEntityRenderers(BlockEntityRendererRegistrar r) {
         r.register(NaturalistBlockEntities.SNAIL_SHELL.get(), SnailShellRenderer::new);
     }
 
-    public static void registerItemProperties() {
-        ClampedItemPropertyFunction color = (stack, level, entity, seed) -> {
-            CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
-            return customData != null ? customData.getUnsafe().getInt("Color") / 15.0f : 0.0f;
-        };
-        ItemProperties.register(NaturalistRegistry.SNAIL.get(), ResourceLocation.withDefaultNamespace("color"), color);
-        ItemProperties.register(NaturalistRegistry.SNAIL_SHELL.get(), ResourceLocation.withDefaultNamespace("color"), color);
+    @FunctionalInterface
+    public interface ConditionalItemModelPropertyRegistrar {
+        void register(Identifier id, MapCodec<? extends ConditionalItemModelProperty> codec);
+    }
 
-        ItemProperties.register(NaturalistRegistry.KNAPSACK.get(),
-                Naturalist.location("filled"),
-                (stack, level, entity, seed) -> KnapsackItem.isFilled(stack) ? 1.0f : 0.0f);
+    public static void registerConditionalItemModelProperties(ConditionalItemModelPropertyRegistrar r) {
+        r.register(KnapsackFilled.ID, KnapsackFilled.MAP_CODEC);
     }
 }

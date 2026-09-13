@@ -6,12 +6,8 @@
     "#SS"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:bamboo"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "#": "minecraft:bamboo",
+    "S": "minecraft:string"
   },
   "result": {
     "id": "naturalist:capture_net"

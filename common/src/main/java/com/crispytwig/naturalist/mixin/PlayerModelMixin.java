@@ -1,21 +1,18 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.base.IKMount;
+import com.crispytwig.naturalist.accessor.ExtendedLivingRenderState;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.client.model.player.PlayerModel;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerModel.class)
-public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T> {
+public abstract class PlayerModelMixin extends HumanoidModel<AvatarRenderState> {
     @Unique
     private static final float naturalist$waistY = 12.0F;
     @Unique
@@ -23,36 +20,15 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
     @Unique
     private static final float naturalist$rollSign = -1.0F;
 
-    @Shadow @Final public ModelPart jacket;
-    @Shadow @Final public ModelPart leftSleeve;
-    @Shadow @Final public ModelPart rightSleeve;
-
-    @Unique
-    private boolean naturalist$leanApplied;
-
     public PlayerModelMixin() {
         super(null);
     }
 
-    @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("HEAD"))
-    private void naturalist$resetLean(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
-        if (naturalist$leanApplied || naturalist$leanMount(entity) != null) {
-            this.head.resetPose();
-            this.body.resetPose();
-            this.leftArm.resetPose();
-            this.rightArm.resetPose();
-            this.naturalist$leanApplied = false;
-        }
-    }
-
-    @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("RETURN"))
-    private void naturalist$counterLean(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
-        IKMount mount = naturalist$leanMount(entity);
-        if (mount == null) {
-            return;
-        }
-        float pitch = mount.getRenderPitch() * naturalist$pitchSign;
-        float roll = mount.getRenderRoll() * naturalist$rollSign;
+    @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)V", at = @At("RETURN"))
+    private void naturalist$counterLean(AvatarRenderState state, CallbackInfo ci) {
+        ExtendedLivingRenderState extra = (ExtendedLivingRenderState) state;
+        float pitch = extra.naturalist$leanPitch() * naturalist$pitchSign;
+        float roll = extra.naturalist$leanRoll() * naturalist$rollSign;
         if (pitch == 0.0F && roll == 0.0F) {
             return;
         }
@@ -62,19 +38,6 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
         naturalist$rotateWaist(this.body, pitch, roll, cosP, sinP, cosR, sinR);
         naturalist$rotateWaist(this.leftArm, pitch, roll, cosP, sinP, cosR, sinR);
         naturalist$rotateWaist(this.rightArm, pitch, roll, cosP, sinP, cosR, sinR);
-        this.hat.copyFrom(this.head);
-        this.jacket.copyFrom(this.body);
-        this.leftSleeve.copyFrom(this.leftArm);
-        this.rightSleeve.copyFrom(this.rightArm);
-        this.naturalist$leanApplied = true;
-    }
-
-    @Unique
-    private static IKMount naturalist$leanMount(LivingEntity entity) {
-        if (entity instanceof Player && entity.getVehicle() instanceof IKMount mount) {
-            return mount;
-        }
-        return null;
     }
 
     @Unique

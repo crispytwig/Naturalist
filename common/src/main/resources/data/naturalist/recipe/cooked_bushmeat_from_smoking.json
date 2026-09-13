@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "naturalist:bushmeat"
-  },
+  "ingredient": "naturalist:bushmeat",
   "result": {
     "id": "naturalist:cooked_bushmeat"
   },

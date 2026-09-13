@@ -6,9 +6,7 @@
       "conditions": {
         "items": [
           {
-            "tags": [
-              "naturalist:eggs"
-            ]
+            "items": "#naturalist:eggs"
           }
         ]
       }

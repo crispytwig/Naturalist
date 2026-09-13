@@ -24,7 +24,7 @@ public abstract class PlayerMixin {
     @Inject(method = "aiStep", at = @At("TAIL"))
     private void naturalist$dropShoulderParrotsWhenCrouching(CallbackInfo ci) {
         Player self = (Player) (Object) this;
-        if (!self.level().isClientSide && self.isCrouching()) {
+        if (!self.level().isClientSide() && self.isCrouching()) {
             this.removeEntitiesOnShoulder();
         }
     }

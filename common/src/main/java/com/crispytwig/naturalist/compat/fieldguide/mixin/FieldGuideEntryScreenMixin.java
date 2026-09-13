@@ -1,15 +1,15 @@
 package com.crispytwig.naturalist.compat.fieldguide.mixin;
 
-import com.crispytwig.naturalist.server.entity.base.Catchable;
-import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
-import com.crispytwig.naturalist.server.entity.variant.MobVariant;
+import com.crispytwig.naturalist.world.entity.Catchable;
+import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import com.evandev.fieldguide.client.gui.screens.FieldGuideEntryScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.Bucketable;
+import net.minecraft.world.entity.Bucketable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import org.spongepowered.asm.mixin.Final;
@@ -37,7 +37,7 @@ public class FieldGuideEntryScreenMixin {
 
     @Shadow
     @Final
-    private List<ResourceLocation> spawnBiomes;
+    private List<Identifier> spawnBiomes;
 
     @Inject(method = "setupDropWidget", at = @At("HEAD"))
     private void naturalist$showCatchItems(boolean unlocked, CallbackInfo ci) {
@@ -74,7 +74,7 @@ public class FieldGuideEntryScreenMixin {
 
         var variantBiomes = holder.get().value().biomes();
         if (variantBiomes.isPresent()) {
-            List<ResourceLocation> biomes = naturalist$resolveBiomes(variantBiomes.get());
+            List<Identifier> biomes = naturalist$resolveBiomes(variantBiomes.get());
             if (!biomes.isEmpty()) {
                 this.spawnBiomes.clear();
                 this.spawnBiomes.addAll(biomes);
@@ -82,10 +82,10 @@ public class FieldGuideEntryScreenMixin {
             return;
         }
 
-        var registry = this.renderedEntity.level().registryAccess().registry(animal.getVariantRegistryKey());
+        var registry = this.renderedEntity.level().registryAccess().lookup(animal.getVariantRegistryKey());
         if (registry.isEmpty()) return;
 
-        Set<ResourceLocation> claimed = new HashSet<>();
+        Set<Identifier> claimed = new HashSet<>();
         for (MobVariant variant : registry.get()) {
             variant.biomes().ifPresent(biomes -> claimed.addAll(naturalist$resolveBiomes(biomes)));
         }
@@ -93,11 +93,11 @@ public class FieldGuideEntryScreenMixin {
     }
 
     @Unique
-    private static List<ResourceLocation> naturalist$resolveBiomes(HolderSet<Biome> biomes) {
+    private static List<Identifier> naturalist$resolveBiomes(HolderSet<Biome> biomes) {
         return biomes.stream()
                 .map(Holder::unwrapKey)
                 .filter(Optional::isPresent)
-                .map(key -> key.get().location())
+                .map(key -> key.get().identifier())
                 .distinct()
                 .toList();
     }

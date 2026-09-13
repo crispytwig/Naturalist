@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:anglerfish"
-  },
+  "ingredient": "naturalist:anglerfish",
   "result": {
     "id": "naturalist:cooked_anglerfish"
   },

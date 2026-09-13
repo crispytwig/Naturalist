@@ -1,8 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "naturalist:mammoth_meat"
-  },
+  "ingredient": "naturalist:mammoth_meat",
   "result": {
     "id": "naturalist:cooked_mammoth_meat"
   },

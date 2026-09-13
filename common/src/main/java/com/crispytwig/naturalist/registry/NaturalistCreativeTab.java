@@ -1,11 +1,10 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.block.SnailShellBlock;
-import com.crispytwig.naturalist.server.entity.mob.Snail;
+import com.crispytwig.naturalist.world.level.block.SnailShellBlock;
+import com.crispytwig.naturalist.world.entity.animal.snail.Snail;
 import net.minecraft.world.item.DyeColor;
-import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
-import com.crispytwig.naturalist.server.item.NaturalistBucketItem;
+import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
+import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 
 public class NaturalistCreativeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =

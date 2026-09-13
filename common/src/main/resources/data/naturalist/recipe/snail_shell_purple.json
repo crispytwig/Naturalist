@@ -2,14 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    { "item": "naturalist:snail_shell" },
-    { "item": "minecraft:purple_dye" }
+    "naturalist:snail_shell",
+    "minecraft:purple_dye"
   ],
   "result": {
     "id": "naturalist:snail_shell",
     "count": 1,
     "components": {
-      "minecraft:custom_data": { "Color": 10 }
+      "minecraft:custom_data": {
+        "Color": 10
+      }
     }
   }
 }

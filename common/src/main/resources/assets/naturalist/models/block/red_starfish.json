@@ -1,6 +1,5 @@
 {
   "ambientocclusion": false,
-  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "naturalist:block/red_starfish",
     "texture": "naturalist:block/red_starfish"

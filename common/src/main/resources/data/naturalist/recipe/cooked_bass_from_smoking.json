@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "naturalist:bass"
-  },
+  "ingredient": "naturalist:bass",
   "result": {
     "id": "naturalist:cooked_bass"
   },

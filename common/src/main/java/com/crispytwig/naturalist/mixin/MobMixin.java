@@ -2,17 +2,18 @@ package com.crispytwig.naturalist.mixin;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.NaturalistConfig;
-import com.crispytwig.naturalist.server.entity.mob.Firefly;
+import com.crispytwig.naturalist.world.entity.animal.firefly.Firefly;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,35 +27,35 @@ import java.util.Set;
 @Mixin(Mob.class)
 public abstract class MobMixin extends LivingEntity {
     @Unique
-    private static final ResourceLocation naturalist$BABY_HEALTH_ID = ResourceLocation.fromNamespaceAndPath("naturalist", "baby_health");
+    private static final Identifier naturalist$babyHealthId = Identifier.fromNamespaceAndPath("naturalist", "baby_health");
     @Unique
-    private static final double naturalist$BABY_HEALTH_SCALE = 1.70D;
+    private static final double naturalist$babyHealthScale = 1.70D;
     @Unique
-    private static final double naturalist$BABY_HEALTH_MAX_RATIO = 0.75D;
+    private static final double naturalist$babyHealthMaxRatio = 0.75D;
     @Unique
-    private static final double naturalist$BABY_HEALTH_STEP = 2.0D;
+    private static final double naturalist$babyHealthStep = 2.0D;
     @Unique
-    private static final double naturalist$BABY_HEALTH_EPSILON = 1.0E-4D;
+    private static final double naturalist$babyHealthEpsilon = 1.0E-4D;
 
     @Unique
-    private static final Set<String> naturalist$EXCLUDED = Set.of("carried_food", "dirt_trail", "duck_egg", "lizard_tail");
+    private static final Set<String> naturalist$excluded = Set.of("carried_food", "dirt_trail", "duck_egg", "lizard_tail");
 
     @Unique
     private Boolean naturalist$wasBaby;
 
     @Unique
     private boolean naturalist$isNaturalistMob() {
-        ResourceLocation key = BuiltInRegistries.ENTITY_TYPE.getKey(this.getType());
-        return key.getNamespace().equals(Naturalist.MOD_ID) && !naturalist$EXCLUDED.contains(key.getPath());
+        Identifier key = BuiltInRegistries.ENTITY_TYPE.getKey(this.getType());
+        return key.getNamespace().equals(Naturalist.MOD_ID) && !naturalist$excluded.contains(key.getPath());
     }
 
     @Unique
     private static double naturalist$babyMaxHealth(double adultMax) {
-        double raw = Math.min(naturalist$BABY_HEALTH_SCALE * Math.sqrt(adultMax), adultMax * naturalist$BABY_HEALTH_MAX_RATIO);
-        double stepped = Math.round(raw / naturalist$BABY_HEALTH_STEP) * naturalist$BABY_HEALTH_STEP;
-        double ceiling = Math.max(naturalist$BABY_HEALTH_STEP,
-                Math.floor((adultMax - naturalist$BABY_HEALTH_EPSILON) / naturalist$BABY_HEALTH_STEP) * naturalist$BABY_HEALTH_STEP);
-        return Math.clamp(stepped, naturalist$BABY_HEALTH_STEP, ceiling);
+        double raw = Math.min(naturalist$babyHealthScale * Math.sqrt(adultMax), adultMax * naturalist$babyHealthMaxRatio);
+        double stepped = Math.round(raw / naturalist$babyHealthStep) * naturalist$babyHealthStep;
+        double ceiling = Math.max(naturalist$babyHealthStep,
+                Math.floor((adultMax - naturalist$babyHealthEpsilon) / naturalist$babyHealthStep) * naturalist$babyHealthStep);
+        return Math.clamp(stepped, naturalist$babyHealthStep, ceiling);
     }
 
     protected MobMixin(EntityType<? extends LivingEntity> entityType, Level level) {
@@ -63,7 +64,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "aiStep", at = @At("TAIL"))
     private void naturalist$updateBabyHealth(CallbackInfo ci) {
-        if (this.level().isClientSide || !this.naturalist$isNaturalistMob()) {
+        if (this.level().isClientSide() || !this.naturalist$isNaturalistMob()) {
             return;
         }
 
@@ -78,24 +79,24 @@ public abstract class MobMixin extends LivingEntity {
             return;
         }
 
-        AttributeModifier existing = maxHealth.getModifier(naturalist$BABY_HEALTH_ID);
+        AttributeModifier existing = maxHealth.getModifier(naturalist$babyHealthId);
         if (this.isBaby()) {
             double adultMax = existing == null ? this.getMaxHealth() : this.getMaxHealth() / (1.0D + existing.amount());
             if (adultMax <= 0.0D) {
                 return;
             }
             double amount = naturalist$babyMaxHealth(adultMax) / adultMax - 1.0D;
-            if (existing != null && Math.abs(existing.amount() - amount) < naturalist$BABY_HEALTH_EPSILON) {
+            if (existing != null && Math.abs(existing.amount() - amount) < naturalist$babyHealthEpsilon) {
                 return;
             }
             if (existing != null) {
-                maxHealth.removeModifier(naturalist$BABY_HEALTH_ID);
+                maxHealth.removeModifier(naturalist$babyHealthId);
             }
-            maxHealth.addTransientModifier(new AttributeModifier(naturalist$BABY_HEALTH_ID, amount, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+            maxHealth.addTransientModifier(new AttributeModifier(naturalist$babyHealthId, amount, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
             this.setHealth(Math.min(this.getHealth(), this.getMaxHealth()));
         } else if (existing != null) {
             float healthFraction = this.getMaxHealth() > 0.0F ? this.getHealth() / this.getMaxHealth() : 1.0F;
-            maxHealth.removeModifier(naturalist$BABY_HEALTH_ID);
+            maxHealth.removeModifier(naturalist$babyHealthId);
             this.setHealth(this.getMaxHealth() * healthFraction);
         }
     }
@@ -109,8 +110,8 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "doHurtTarget", at = @At("HEAD"))
     @SuppressWarnings("unused")
-    private void naturalist$onDoHurtTarget(Entity target, CallbackInfoReturnable<Boolean> cir) {
-        if (BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.FROG))
+    private void naturalist$onDoHurtTarget(ServerLevel level, Entity target, CallbackInfoReturnable<Boolean> cir) {
+        if (BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.FROG))
                 && target instanceof Firefly) {
             this.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60));
         }

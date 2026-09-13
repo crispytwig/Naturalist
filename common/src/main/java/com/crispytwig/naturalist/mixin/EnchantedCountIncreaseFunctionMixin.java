@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.mob.Hedgehog;
+import com.crispytwig.naturalist.world.entity.animal.hedgehog.Hedgehog;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -21,7 +21,7 @@ public class EnchantedCountIncreaseFunctionMixin {
     @ModifyVariable(method = "run(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/storage/loot/LootContext;)Lnet/minecraft/world/item/ItemStack;",
             at = @At("STORE"), ordinal = 0)
     private int naturalist$addHedgehogLooting(int level, ItemStack stack, LootContext context) {
-        if (this.enchantment.is(Enchantments.LOOTING) && context.getParamOrNull(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof Hedgehog hedgehog) {
+        if (this.enchantment.is(Enchantments.LOOTING) && context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof Hedgehog hedgehog) {
             level += hedgehog.getThrowEnchantmentLevel(Enchantments.LOOTING);
         }
         return level;

@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.mob.Giraffe;
+import com.crispytwig.naturalist.world.entity.animal.giraffe.Giraffe;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.Level;

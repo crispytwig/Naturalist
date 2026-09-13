@@ -4,9 +4,7 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "naturalist:shellstone"
-    }
+    "#": "naturalist:shellstone"
   },
   "result": {
     "id": "naturalist:shellstone_slab",

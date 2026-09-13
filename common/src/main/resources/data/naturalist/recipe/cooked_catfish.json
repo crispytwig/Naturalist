@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:catfish"
-  },
+  "ingredient": "naturalist:catfish",
   "result": {
     "id": "naturalist:cooked_catfish"
   },

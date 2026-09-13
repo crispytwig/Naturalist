@@ -1,8 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "naturalist:crab_meat"
-  },
+  "ingredient": "naturalist:crab_meat",
   "result": {
     "id": "naturalist:cooked_crab_meat"
   },

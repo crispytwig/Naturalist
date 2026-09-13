@@ -1,8 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "minecraft:glow_berries"
-  },
+  "ingredient": "minecraft:glow_berries",
   "result": {
     "id": "naturalist:glow_goop"
   },

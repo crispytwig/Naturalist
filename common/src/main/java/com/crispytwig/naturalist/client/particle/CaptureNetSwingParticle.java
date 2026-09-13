@@ -3,17 +3,16 @@ package com.crispytwig.naturalist.client.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
-import org.jspecify.annotations.NonNull;
+import net.minecraft.util.RandomSource;
 
-public class CaptureNetSwingParticle extends TextureSheetParticle {
+public class CaptureNetSwingParticle extends SingleQuadParticle {
     private final SpriteSet sprites;
 
     protected CaptureNetSwingParticle(ClientLevel level, double x, double y, double z, SpriteSet sprites) {
-        super(level, x, y, z, 0.0, 0.0, 0.0);
+        super(level, x, y, z, 0.0, 0.0, 0.0, sprites.first());
         this.sprites = sprites;
         this.lifetime = 4;
         this.quadSize = 0.8F;
@@ -27,12 +26,12 @@ public class CaptureNetSwingParticle extends TextureSheetParticle {
     }
 
     @Override
-    public @NonNull ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    protected SingleQuadParticle.Layer getLayer() {
+        return SingleQuadParticle.Layer.TRANSLUCENT;
     }
 
     @Override
-    public int getLightColor(float partialTick) {
+    public int getLightCoords(float partialTick) {
         return 15728880;
     }
 
@@ -50,7 +49,7 @@ public class CaptureNetSwingParticle extends TextureSheetParticle {
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
             return new CaptureNetSwingParticle(level, x, y, z, this.sprites);
         }
     }

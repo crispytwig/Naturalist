@@ -1,0 +1,156 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Color:15}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/snail_shell/black"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Color:14}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/snail_shell/red"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Color:13}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/snail_shell/green"
+        },
+        "on_false": {
+          "type": "minecraft:condition",
+          "property": "minecraft:component",
+          "predicate": "minecraft:custom_data",
+          "value": "{Color:12}",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/snail_shell/brown"
+          },
+          "on_false": {
+            "type": "minecraft:condition",
+            "property": "minecraft:component",
+            "predicate": "minecraft:custom_data",
+            "value": "{Color:11}",
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "naturalist:item/snail_shell/blue"
+            },
+            "on_false": {
+              "type": "minecraft:condition",
+              "property": "minecraft:component",
+              "predicate": "minecraft:custom_data",
+              "value": "{Color:10}",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "naturalist:item/snail_shell/purple"
+              },
+              "on_false": {
+                "type": "minecraft:condition",
+                "property": "minecraft:component",
+                "predicate": "minecraft:custom_data",
+                "value": "{Color:9}",
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "naturalist:item/snail_shell/cyan"
+                },
+                "on_false": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:component",
+                  "predicate": "minecraft:custom_data",
+                  "value": "{Color:8}",
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "naturalist:item/snail_shell/light_gray"
+                  },
+                  "on_false": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:component",
+                    "predicate": "minecraft:custom_data",
+                    "value": "{Color:7}",
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "naturalist:item/snail_shell/gray"
+                    },
+                    "on_false": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:component",
+                      "predicate": "minecraft:custom_data",
+                      "value": "{Color:6}",
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "naturalist:item/snail_shell/pink"
+                      },
+                      "on_false": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:component",
+                        "predicate": "minecraft:custom_data",
+                        "value": "{Color:5}",
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "naturalist:item/snail_shell/lime"
+                        },
+                        "on_false": {
+                          "type": "minecraft:condition",
+                          "property": "minecraft:component",
+                          "predicate": "minecraft:custom_data",
+                          "value": "{Color:4}",
+                          "on_true": {
+                            "type": "minecraft:model",
+                            "model": "naturalist:item/snail_shell/yellow"
+                          },
+                          "on_false": {
+                            "type": "minecraft:condition",
+                            "property": "minecraft:component",
+                            "predicate": "minecraft:custom_data",
+                            "value": "{Color:3}",
+                            "on_true": {
+                              "type": "minecraft:model",
+                              "model": "naturalist:item/snail_shell/light_blue"
+                            },
+                            "on_false": {
+                              "type": "minecraft:condition",
+                              "property": "minecraft:component",
+                              "predicate": "minecraft:custom_data",
+                              "value": "{Color:2}",
+                              "on_true": {
+                                "type": "minecraft:model",
+                                "model": "naturalist:item/snail_shell/magenta"
+                              },
+                              "on_false": {
+                                "type": "minecraft:condition",
+                                "property": "minecraft:component",
+                                "predicate": "minecraft:custom_data",
+                                "value": "{Color:1}",
+                                "on_true": {
+                                  "type": "minecraft:model",
+                                  "model": "naturalist:item/snail_shell/orange"
+                                },
+                                "on_false": {
+                                  "type": "minecraft:model",
+                                  "model": "naturalist:item/snail_shell/white"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

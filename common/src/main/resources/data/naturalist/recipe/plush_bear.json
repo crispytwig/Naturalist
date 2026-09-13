@@ -6,12 +6,8 @@
     " F "
   ],
   "key": {
-    "F": {
-      "item": "minecraft:string"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
+    "F": "minecraft:string",
+    "W": "#minecraft:wool"
   },
   "result": {
     "id": "naturalist:plush_bear"

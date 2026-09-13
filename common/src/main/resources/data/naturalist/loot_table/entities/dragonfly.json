@@ -8,7 +8,7 @@
           "condition": "minecraft:damage_source_properties",
           "predicate": {
             "source_entity": {
-              "type": "minecraft:frog"
+              "minecraft:entity_type": "minecraft:frog"
             }
           }
         }
@@ -21,7 +21,7 @@
               "condition": "minecraft:entity_properties",
               "entity": "this",
               "predicate": {
-                "nbt": "{Variant:0}"
+                "minecraft:nbt": "{Variant:\"naturalist:blue\"}"
               }
             }
           ],
@@ -34,7 +34,7 @@
               "condition": "minecraft:entity_properties",
               "entity": "this",
               "predicate": {
-                "nbt": "{Variant:1}"
+                "minecraft:nbt": "{Variant:\"naturalist:green\"}"
               }
             }
           ],
@@ -47,7 +47,7 @@
               "condition": "minecraft:entity_properties",
               "entity": "this",
               "predicate": {
-                "nbt": "{Variant:2}"
+                "minecraft:nbt": "{Variant:\"naturalist:red\"}"
               }
             }
           ],

@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.datagen;
 
+import com.crispytwig.naturalist.tags.NaturalistItemTags;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.registry.NaturalistTags;
-import com.crispytwig.naturalist.server.block.ChrysalisBlock;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import com.crispytwig.naturalist.world.level.block.ChrysalisBlock;
+import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -63,7 +63,7 @@ public class NaturalistBlockLootProvider extends BlockLootSubProvider {
                                         .apply(CopyBlockState.copyState(NaturalistRegistry.CHRYSALIS_BLOCK.get()).copy(ChrysalisBlock.AGE))
                                         .when(AnyOfCondition.anyOf(
                                                 hasSilkTouch(),
-                                                MatchTool.toolMatches(ItemPredicate.Builder.item().of(NaturalistTags.ItemTags.SHEARS))
+                                                MatchTool.toolMatches(ItemPredicate.Builder.item().of(NaturalistItemTags.SHEARS))
                                         ))
                         ))
         ));

@@ -1,0 +1,66 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:blue\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/starfish_bucket/blue"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:2}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/starfish_bucket/blue"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Variant:\"naturalist:purple\"}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/variant/starfish_bucket/purple"
+        },
+        "on_false": {
+          "type": "minecraft:condition",
+          "property": "minecraft:component",
+          "predicate": "minecraft:custom_data",
+          "value": "{Variant:1}",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/variant/starfish_bucket/purple"
+          },
+          "on_false": {
+            "type": "minecraft:condition",
+            "property": "minecraft:component",
+            "predicate": "minecraft:custom_data",
+            "value": "{Variant:\"naturalist:red\"}",
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "naturalist:item/variant/starfish_bucket/red"
+            },
+            "on_false": {
+              "type": "minecraft:condition",
+              "property": "minecraft:component",
+              "predicate": "minecraft:custom_data",
+              "value": "{Variant:3}",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "naturalist:item/variant/starfish_bucket/red"
+              },
+              "on_false": {
+                "type": "minecraft:model",
+                "model": "naturalist:item/starfish_bucket"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

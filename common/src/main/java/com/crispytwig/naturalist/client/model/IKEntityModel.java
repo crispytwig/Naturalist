@@ -1,12 +1,16 @@
 package com.crispytwig.naturalist.client.model;
 
-import com.crispytwig.naturalist.server.entity.util.TerrainLegSolver;
+import com.crispytwig.naturalist.world.entity.TerrainLegSolver;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class IKEntityModel<E extends LivingEntity> extends NaturalistEntityModel<E> {
     private ModelPart[] legPartsCache;
+
+    protected IKEntityModel(ModelPart root) {
+        super(root);
+    }
 
     protected abstract TerrainLegSolver getLegSolver(E entity);
 

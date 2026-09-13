@@ -1,5 +1,13 @@
 {
   "asset_id": "naturalist:bear_necessities",
   "height": 4,
-  "width": 4
+  "width": 4,
+  "title": {
+    "color": "yellow",
+    "translate": "painting.naturalist.bear_necessities.title"
+  },
+  "author": {
+    "color": "gray",
+    "translate": "painting.naturalist.bear_necessities.author"
+  }
 }

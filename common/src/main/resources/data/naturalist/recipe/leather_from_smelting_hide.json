@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "naturalist:hide"
-  },
+  "ingredient": "naturalist:hide",
   "result": {
     "id": "minecraft:leather"
   },

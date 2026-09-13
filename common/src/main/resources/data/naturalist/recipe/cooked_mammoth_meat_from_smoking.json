@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "naturalist:mammoth_meat"
-  },
+  "ingredient": "naturalist:mammoth_meat",
   "result": {
     "id": "naturalist:cooked_mammoth_meat"
   },

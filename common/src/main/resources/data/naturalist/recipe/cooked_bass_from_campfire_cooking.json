@@ -1,8 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "naturalist:bass"
-  },
+  "ingredient": "naturalist:bass",
   "result": {
     "id": "naturalist:cooked_bass"
   },

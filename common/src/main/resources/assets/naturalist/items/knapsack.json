@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "naturalist:knapsack_filled",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/knapsack_filled"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/knapsack"
+    }
+  }
+}

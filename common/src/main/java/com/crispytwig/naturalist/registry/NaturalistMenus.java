@@ -3,10 +3,10 @@ package com.crispytwig.naturalist.registry;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
-import com.crispytwig.naturalist.server.inventory.ElephantInventoryMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
+import com.crispytwig.naturalist.world.inventory.ElephantInventoryMenu;
 
 @SuppressWarnings("unused")
 public class NaturalistMenus {

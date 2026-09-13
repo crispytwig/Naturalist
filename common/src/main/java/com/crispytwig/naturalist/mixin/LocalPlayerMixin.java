@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.util.ParrotFlight;
-import net.minecraft.client.player.Input;
+import com.crispytwig.naturalist.world.entity.ParrotFlight;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,12 +19,12 @@ public abstract class LocalPlayerMixin {
     private static final double naturalist$ascendMax = 0.22D;
 
     @Shadow
-    public Input input;
+    public ClientInput input;
 
     @Inject(method = "aiStep", at = @At("TAIL"))
     private void naturalist$parrotAscend(CallbackInfo ci) {
         LocalPlayer self = (LocalPlayer) (Object) this;
-        if (!this.input.jumping || self.onGround() || self.getAbilities().flying || !ParrotFlight.canAscend(self)) {
+        if (!this.input.keyPresses.jump() || self.onGround() || self.getAbilities().flying || !ParrotFlight.canAscend(self)) {
             return;
         }
         Vec3 movement = self.getDeltaMovement();
