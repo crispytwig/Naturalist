@@ -5,7 +5,6 @@ import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.Nullable;
@@ -48,8 +47,8 @@ public final class NaturalistSpawns {
         c.accept(NaturalistBiomeTags.HAS_ELEPHANT, NaturalistBiomeTags.BLACKLIST_ELEPHANT, MobCategory.CREATURE, NaturalistEntityTypes.ELEPHANT.get(), 5, 1, 3);
         c.accept(NaturalistBiomeTags.HAS_FINCH, NaturalistBiomeTags.BLACKLIST_FINCH, MobCategory.CREATURE, NaturalistEntityTypes.BIRD.get(), 10, 3, 4);
         c.accept(NaturalistBiomeTags.HAS_FIREFLY, NaturalistBiomeTags.BLACKLIST_FIREFLY, MobCategory.AMBIENT, NaturalistEntityTypes.FIREFLY.get(), 10, 2, 4);
-        c.accept(BiomeTags.IS_FOREST, NaturalistBiomeTags.BLACKLIST_FOREST_FOXES, MobCategory.CREATURE, EntityTypes.FOX, 10, 1, 2);
-        c.accept(BiomeTags.IS_FOREST, NaturalistBiomeTags.BLACKLIST_FOREST_RABBITS, MobCategory.CREATURE, EntityTypes.RABBIT, 10, 2, 3);
+        c.accept(BiomeTags.IS_FOREST, NaturalistBiomeTags.BLACKLIST_FOREST_FOXES, MobCategory.CREATURE, EntityType.FOX, 10, 1, 2);
+        c.accept(BiomeTags.IS_FOREST, NaturalistBiomeTags.BLACKLIST_FOREST_RABBITS, MobCategory.CREATURE, EntityType.RABBIT, 10, 2, 3);
         c.accept(NaturalistBiomeTags.HAS_GIANT_ISOPOD, NaturalistBiomeTags.BLACKLIST_GIANT_ISOPOD, MobCategory.WATER_AMBIENT, NaturalistEntityTypes.GIANT_ISOPOD.get(), 8, 1, 2);
         c.accept(NaturalistBiomeTags.HAS_HEDGEHOG, NaturalistBiomeTags.BLACKLIST_HEDGEHOG, MobCategory.CREATURE, NaturalistEntityTypes.HEDGEHOG.get(), 10, 1, 3);
         c.accept(NaturalistBiomeTags.HAS_JELLYFISH, NaturalistBiomeTags.BLACKLIST_JELLYFISH, MobCategory.WATER_AMBIENT, NaturalistEntityTypes.JELLYFISH.get(), 10, 1, 3);

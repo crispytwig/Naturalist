@@ -9,7 +9,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -111,7 +110,7 @@ public abstract class MobMixin extends LivingEntity {
     @Inject(method = "doHurtTarget", at = @At("HEAD"))
     @SuppressWarnings("unused")
     private void naturalist$onDoHurtTarget(ServerLevel level, Entity target, CallbackInfoReturnable<Boolean> cir) {
-        if (BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.FROG))
+        if (BuiltInRegistries.ENTITY_TYPE.getKey(this.getType()).equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.FROG))
                 && target instanceof Firefly) {
             this.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60));
         }

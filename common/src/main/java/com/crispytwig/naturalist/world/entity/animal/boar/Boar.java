@@ -181,7 +181,7 @@ public class Boar extends NaturalistAnimal implements NeutralMob, DataDrivenVari
     public void thunderHit(@NotNull ServerLevel level, @NotNull LightningBolt lightning) {
         super.thunderHit(level, lightning);
         if (level.getDifficulty() != Difficulty.PEACEFUL) {
-            Zoglin zoglin = EntityTypes.ZOGLIN.create(level, EntitySpawnReason.CONVERSION);
+            Zoglin zoglin = EntityType.ZOGLIN.create(level, EntitySpawnReason.CONVERSION);
             assert zoglin != null;
             zoglin.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
             zoglin.setNoAi(this.isNoAi());

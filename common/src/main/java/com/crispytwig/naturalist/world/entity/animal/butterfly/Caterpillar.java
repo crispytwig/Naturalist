@@ -1,5 +1,6 @@
 package com.crispytwig.naturalist.world.entity.animal.butterfly;
 
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -25,7 +26,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.BlockItemTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -149,7 +149,7 @@ public class Caterpillar extends ClimbingAnimal implements Catchable, DataDriven
 
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return this.isBaby() && stack.is(BlockItemTags.FLOWERS.item());
+        return this.isBaby() && stack.is(ItemTags.FLOWERS);
     }
 
     @Nullable

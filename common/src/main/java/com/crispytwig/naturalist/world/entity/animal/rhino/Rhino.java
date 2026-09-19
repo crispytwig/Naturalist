@@ -192,8 +192,8 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
     }
 
     @Override
-    public void knockback(double strength, double x, double z, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
-        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z, source, damage, comesFromEffect);
+    public void knockback(double strength, double x, double z) {
+        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
     }
 
     @Override
-    protected void blockedByItem(@NotNull LivingEntity defender, @NotNull DamageSource source, float damage) {
+    protected void blockedByItem(@NotNull LivingEntity defender) {
         this.stunnedTick = 60;
         this.resetChargeCooldownTicks();
         this.getNavigation().stop();
@@ -421,7 +421,7 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
                     livingEntity.hurtServer(serverLevel, damageSource, damage);
                     float speed = Mth.clamp(this.mob.getSpeed() * 1.65f, 0.2f, 3.0f);
                     float shieldBlockModifier = NaturalistAnimal.isBlockedByItem(livingEntity, damageSource, 1.0F) ? 0.5f : 1.0f;
-                    livingEntity.knockback(shieldBlockModifier * speed * 2.0D, this.chargeDirection.x(), this.chargeDirection.z(), damageSource, damage);
+                    livingEntity.knockback(shieldBlockModifier * speed * 2.0D, this.chargeDirection.x(), this.chargeDirection.z());
                     double knockbackResistance = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().add(0.0, 0.4f * knockbackResistance, 0.0));
                     this.mob.swing(InteractionHand.MAIN_HAND);

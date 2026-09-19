@@ -97,7 +97,7 @@ public class Bird extends ShoulderRidingEntity implements DyeableAnimal, Followi
 
     public Bird(@NotNull EntityType<? extends ShoulderRidingEntity> entityType, @NotNull Level level) {
         super(entityType, level);
-        this.moveControl = new FlyingMoveControl<>(this, 10, false);
+        this.moveControl = new FlyingMoveControl(this, 10, false);
         this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
         this.setPathfindingMalus(PathType.FIRE, -1.0F);
         this.setPathfindingMalus(PathType.COCOA, -1.0F);
@@ -201,7 +201,7 @@ public class Bird extends ShoulderRidingEntity implements DyeableAnimal, Followi
     }
 
     @Override
-    protected boolean canBeABaby() {
+    public boolean isBaby() {
         return false;
     }
     //endregion

@@ -92,8 +92,8 @@ public class LizardTail extends Mob implements DataDrivenVariantAnimal {
 
     //region Behavior
     @Override
-    public void knockback(double power, double xd, double zd, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
-        super.knockback(power * 1.5D, xd, zd, source, damage, comesFromEffect);
+    public void knockback(double power, double xd, double zd) {
+        super.knockback(power * 1.5D, xd, zd);
     }
 
     @Override

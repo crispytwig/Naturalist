@@ -36,7 +36,7 @@ public class SeatedRiderLayer<T extends Mob, M extends EntityModel<? super Natur
         EntityRenderState riderState = dispatcher.extractEntity(player, state.partialTick);
         riderState.lightCoords = lightCoords;
         EntityRenderer<?, ? super EntityRenderState> renderer = dispatcher.getRenderer(riderState);
-        CameraRenderState camera = minecraft.gameRenderer.gameRenderState().levelRenderState.cameraRenderState;
+        CameraRenderState camera = minecraft.gameRenderer.getGameRenderState().levelRenderState.cameraRenderState;
 
         poseStack.pushPose();
         seatedModel.translateToSeat(poseStack);

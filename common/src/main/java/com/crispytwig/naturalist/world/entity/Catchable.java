@@ -3,7 +3,7 @@ package com.crispytwig.naturalist.world.entity;
 import com.crispytwig.naturalist.world.item.ItemHelper;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.world.item.BugNetItem;
-import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;

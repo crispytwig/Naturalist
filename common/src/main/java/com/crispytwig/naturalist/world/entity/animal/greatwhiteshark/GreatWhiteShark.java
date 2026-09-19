@@ -124,7 +124,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
 
     public GreatWhiteShark(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new SmoothSwimmingMoveControl<>(this, 85, 10, 0.1F, 0.5F, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.1F, 0.5F, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
         this.setPathfindingMalus(PathType.WATER, 0.0F);
         this.parts = new MobPart[PART_Z.length];

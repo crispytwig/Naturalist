@@ -4,7 +4,7 @@ import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Bucketable;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 
