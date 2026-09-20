@@ -5,6 +5,7 @@ import com.crispytwig.naturalist.Naturalist;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
@@ -466,7 +467,7 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .add(Biomes.DEEP_LUKEWARM_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_TURKEY)
-                .add(Biomes.FOREST).add(Biomes.FLOWER_FOREST)
+                .add(Biomes.FOREST).add(Biomes.FLOWER_FOREST).add(Biomes.DAPPLED_FOREST)
                 .add(Biomes.TAIGA).add(Biomes.OLD_GROWTH_PINE_TAIGA).add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
                 .add(Biomes.GROVE)
                 .addOptional(bop("fir_clearing")).addOptional(bop("lavender_field"))
@@ -667,14 +668,15 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_ALLIGATOR);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_BASS);
         tag(NaturalistBiomeTags.BLACKLIST_BEAR)
-                .addOptionalTag(Tags.Biomes.IS_HOT).addOptionalTag(ATMOSPHERIC_IS_RAINFOREST);
+                .addOptionalTag(Tags.Biomes.IS_HOT).addOptionalTag(ATMOSPHERIC_IS_RAINFOREST)
+                .add(Biomes.DAPPLED_FOREST);
         tag(NaturalistBiomeTags.BLACKLIST_BLACK_BEAR)
                 .addOptionalTag(Tags.Biomes.IS_HOT).addOptionalTag(ATMOSPHERIC_IS_RAINFOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_BLUEJAY);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_BOAR);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_BUTTERFLY);
+        coldBlacklist(NaturalistBiomeTags.BLACKLIST_BUTTERFLY).add(Biomes.DAPPLED_FOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CANARY);
-        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CARDINAL);
+        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CARDINAL).add(Biomes.DAPPLED_FOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CATFISH);
         coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_CLAM);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_CORAL_SNAKE);
@@ -685,7 +687,7 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_DRAGONFLY);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_DUCK);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_ELEPHANT);
-        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FINCH);
+        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FINCH).add(Biomes.DAPPLED_FOREST);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_FIREFLY);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FOREST_FOXES);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FOREST_RABBITS);
@@ -699,10 +701,10 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_GIRAFFE);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_HIPPO);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_LION);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_LIZARD);
+        coldBlacklist(NaturalistBiomeTags.BLACKLIST_LIZARD).add(Biomes.DAPPLED_FOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_MAMMOTH);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_MOLE);
-        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_RAT);
+        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_RAT).add(Biomes.DAPPLED_FOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_TIGER);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_KOMODO_DRAGON);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_OSTRICH);
@@ -711,9 +713,9 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_HEDGEHOG);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_RATTLESNAKE);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_RHINO);
-        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_ROBIN);
+        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_ROBIN).add(Biomes.DAPPLED_FOREST);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_SNAIL);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_SNAKE);
+        coldBlacklist(NaturalistBiomeTags.BLACKLIST_SNAKE).add(Biomes.DAPPLED_FOREST);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_SPARROW);
         coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_STARFISH);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_TORTOISE);
@@ -722,8 +724,8 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         tag(NaturalistBiomeTags.BLACKLIST_WHALE).add(Biomes.FROZEN_OCEAN, Biomes.DEEP_FROZEN_OCEAN);
     }
 
-    private void coldBlacklist(TagKey<Biome> tag) {
-        tag(tag).addOptionalTag(Tags.Biomes.IS_ICY).addOptionalTag(Tags.Biomes.IS_SNOWY);
+    private TagAppender<Biome> coldBlacklist(TagKey<Biome> tag) {
+        return tag(tag).addOptionalTag(Tags.Biomes.IS_ICY).addOptionalTag(Tags.Biomes.IS_SNOWY);
     }
 
     private void coldMarineBlacklist(TagKey<Biome> tag) {
@@ -731,8 +733,8 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .add(Biomes.FROZEN_OCEAN).add(Biomes.DEEP_FROZEN_OCEAN);
     }
 
-    private void emptyBlacklist(TagKey<Biome> tag) {
-        tag(tag);
+    private TagAppender<Biome> emptyBlacklist(TagKey<Biome> tag) {
+        return tag(tag);
     }
 
     private static TagKey<Biome> biomeTag(String id) {
