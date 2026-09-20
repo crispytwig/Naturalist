@@ -269,7 +269,7 @@ public class Crab extends TamableAnimal implements HidingAnimal, FollowingPet, C
 
     public static boolean checkCrabSpawnRules(EntityType<Crab> type, LevelAccessor level, EntitySpawnReason spawnType, BlockPos pos, RandomSource random) {
         BlockState below = level.getBlockState(pos.below());
-        boolean validGround = below.is(BlockTags.SAND) || below.is(BlockTags.DIRT) || below.is(Blocks.GRAVEL) || below.is(Blocks.STONE);
+        boolean validGround = below.is(BlockTags.SAND) || below.is(BlockTags.SUBSTRATE_OVERWORLD) || below.is(Blocks.GRAVEL) || below.is(Blocks.STONE);
         return validGround && isBrightEnoughToSpawn(level, pos);
     }
 

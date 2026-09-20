@@ -223,7 +223,7 @@ public class Alligator extends NaturalistAnimal implements EggLayingAnimal, Hunt
 
     //region Spawning
     public static boolean checkAlligatorSpawnRules(EntityType<? extends Alligator> type, ServerLevelAccessor level, EntitySpawnReason spawnType, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(BlockTags.DIRT) && level.getRawBrightness(pos, 0) > 8;
+        return level.getBlockState(pos.below()).is(BlockTags.SUBSTRATE_OVERWORLD) && level.getRawBrightness(pos, 0) > 8;
     }
 
     @Override

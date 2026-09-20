@@ -216,7 +216,7 @@ public class Snake extends TamableClimbingAnimal implements SleepingAnimal, Neut
 
     //region Spawning
     public static boolean checkSnakeSpawnRules(EntityType<Snake> entityType, LevelAccessor level, EntitySpawnReason type, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(BlockTags.DIRT) && isBrightEnoughToSpawn(level, pos);
+        return level.getBlockState(pos.below()).is(BlockTags.SUBSTRATE_OVERWORLD) && isBrightEnoughToSpawn(level, pos);
     }
 
     @Override
