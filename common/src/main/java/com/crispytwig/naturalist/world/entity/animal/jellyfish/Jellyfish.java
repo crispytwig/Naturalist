@@ -247,4 +247,9 @@ public class Jellyfish extends AbstractFish implements DataDrivenVariantAnimal {
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

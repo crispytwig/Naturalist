@@ -239,4 +239,9 @@ public class Piranha extends AbstractSchoolingFish implements DataDrivenVariantA
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

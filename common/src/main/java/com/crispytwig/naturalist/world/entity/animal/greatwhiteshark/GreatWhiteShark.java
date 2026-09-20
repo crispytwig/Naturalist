@@ -13,6 +13,7 @@ import com.crispytwig.naturalist.world.entity.MobPart;
 import com.crispytwig.naturalist.world.level.MultipartLevel;
 import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -228,6 +229,11 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
     @SuppressWarnings("unused")
     public static boolean checkGreatWhiteSharkSpawnRules(EntityType<GreatWhiteShark> entityType, LevelAccessor level, EntitySpawnReason spawnType, BlockPos pos, RandomSource random) {
         return level.getFluidState(pos).is(FluidTags.WATER) && level.getFluidState(pos.above()).is(FluidTags.WATER);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(@NotNull LevelReader level) {
+        return level.isUnobstructed(this);
     }
 
     @Override

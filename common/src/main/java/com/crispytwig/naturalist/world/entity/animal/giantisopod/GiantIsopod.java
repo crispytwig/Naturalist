@@ -12,6 +12,7 @@ import com.crispytwig.naturalist.world.entity.VariantBucketable;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -182,6 +183,11 @@ public class GiantIsopod extends Animal implements HidingAnimal, VariantBucketab
         return pos.getY() < level.getLevel().getSeaLevel()
                 && level.getFluidState(pos).is(FluidTags.WATER)
                 && level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(@NotNull LevelReader level) {
+        return level.isUnobstructed(this);
     }
 
     @Nullable
@@ -360,4 +366,9 @@ public class GiantIsopod extends Animal implements HidingAnimal, VariantBucketab
         this.idleAnimationState.animateWhen(!posing && !swimming && !moving, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }
