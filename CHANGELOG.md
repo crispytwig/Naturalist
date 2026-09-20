@@ -1,1 +1,1 @@
-- Ported to 26.2.
+- Fixed Dirt tags to use substrate tags instead. Animals should now spawn properly. Thank you to Discord users `kitty cat`, `brizzy`, and `Pluey` for reporting this!

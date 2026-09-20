@@ -52,7 +52,7 @@ public class Mammoth extends Elephant {
     //region Spawning
     public static boolean checkMammothSpawnRules(EntityType<? extends Animal> entityType, LevelAccessor level, EntitySpawnReason spawnType, BlockPos pos, RandomSource random) {
         BlockState state = level.getBlockState(pos.below());
-        return (state.is(BlockTags.DIRT) || state.is(BlockTags.SNOW) || state.is(BlockTags.ICE)) && isBrightEnoughToSpawn(level, pos);
+        return (state.is(BlockTags.SUBSTRATE_OVERWORLD) || state.is(BlockTags.SNOW) || state.is(BlockTags.ICE)) && isBrightEnoughToSpawn(level, pos);
     }
 
     @Nullable
