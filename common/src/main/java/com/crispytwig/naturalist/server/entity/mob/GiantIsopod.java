@@ -55,6 +55,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -178,6 +179,11 @@ public class GiantIsopod extends Animal implements HidingAnimal, VariantBucketab
         return pos.getY() < level.getLevel().getSeaLevel()
                 && level.getFluidState(pos).is(FluidTags.WATER)
                 && level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(@NotNull LevelReader level) {
+        return level.isUnobstructed(this);
     }
 
     @Nullable

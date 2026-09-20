@@ -9,3 +9,6 @@
   | Jellyfish  | Piranha      | Rat             |
   | Ray        | Snail        | Starfish        |
 
+- Untamed Wolves now attack Deer.
+- Fish and Meat tags are fixed - Ocelots, Cats, Wolves, and Piglins should now eat Naturalist food items. 
+- Whales, Great White Sharks, and Giant Isopods now spawn naturally.
