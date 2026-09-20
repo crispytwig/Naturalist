@@ -255,4 +255,9 @@ public class Blobfish extends AbstractFish implements DataDrivenVariantAnimal {
         this.swimAnimationState.animateWhen(!idle, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

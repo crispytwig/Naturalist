@@ -250,4 +250,9 @@ public class Ray extends AbstractFish implements DataDrivenVariantAnimal {
         this.idleAnimationState.animateWhen(!inWater, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

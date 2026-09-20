@@ -581,4 +581,9 @@ public class Snail extends NaturalistAnimal implements Catchable, HidingAnimal, 
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

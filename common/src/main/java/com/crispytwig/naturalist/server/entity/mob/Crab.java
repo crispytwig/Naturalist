@@ -647,4 +647,9 @@ public class Crab extends TamableAnimal implements HidingAnimal, FollowingPet, C
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

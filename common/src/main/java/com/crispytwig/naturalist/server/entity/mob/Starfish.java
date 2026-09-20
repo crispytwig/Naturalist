@@ -193,4 +193,9 @@ public class Starfish extends WaterAnimal implements VariantBucketable {
         this.idleAnimationState.animateWhen(true, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

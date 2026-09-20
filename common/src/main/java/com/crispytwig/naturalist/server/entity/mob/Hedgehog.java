@@ -649,4 +649,9 @@ public class Hedgehog extends TamableAnimal implements DyeableAnimal, FollowingP
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

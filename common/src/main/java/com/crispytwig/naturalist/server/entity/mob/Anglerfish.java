@@ -302,4 +302,9 @@ public class Anglerfish extends AbstractFish implements HuntingAnimal, DataDrive
         this.swimAnimationState.animateWhen(inWater && !hasTarget, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

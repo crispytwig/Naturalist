@@ -454,4 +454,9 @@ public class Butterfly extends NaturalistAnimal implements FlyingAnimal, Catchab
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

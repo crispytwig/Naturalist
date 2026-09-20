@@ -343,4 +343,9 @@ public class GiantIsopod extends Animal implements HidingAnimal, VariantBucketab
         this.idleAnimationState.animateWhen(!posing && !swimming && !moving, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

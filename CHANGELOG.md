@@ -1,16 +1,11 @@
-- Removed particle rendering mixins.
-- Added config for Glow Goop tooltips.
-- Fixed Mixin conflict-related crashes with Scorched Guns.
-- Fixed Field Guide variants showing mystery variants, crashing, etc.
-- A majority of mobs have had their stats `(health, damage, etc.)` drastically improved. They should now be more consistent with similar Vanilla/modded mobs, and things like Butterflies should no longer be hard to kill.
-- Mob removal configs should actually prevent spawning now.
-    - Caterpillars follow the Butterfly removal config.
-    - Spawns no longer even attempt if mobs are disabled - so they should not take up the mob cap.
-- Filled out as many block/item tags as I was aware of `(please let me know if you have any other suggestions)`
-- Bass now have attack damage properties, so them attacking things should no longer crash you.
-- Fixed the Alligator Field Guide compat being vague and saying "them" instead of "Player".
-- Tigers no longer hunt in packs, and spawn in groups of 1 instead of 1-2.
-    - Tiger variant spawning should be fixed, and biomes have been adjusted.
-- Lions now spawn in groups of 3-5 instead of 1-3. The first 2 are guaranteed to be adults, and the final 3 can spawn as entirely babies or a mixture of adults and babies.
-    - 1 Lion is always maneless, and prides now follow maneless Lions instead of maned.
-- Komodo Dragons now spawn in Jungles and Sparse Jungles.
+- The following mobs can not move through Nether Portals on their own, and must be captured with a Capture Net or bucketed and brought through manually. `This is being done to prevent mass lag from smaller entities jumping in and out of portals. Despite some of these not moving much, I just went ahead and removed it from all smaller entities as a safety net.`
+
+  |            |              |                 |
+  |------------|--------------|-----------------|
+  | Anglerfish | Ant          | Bass            |
+  | Blobfish   | Butterfly    | Caterpillar     |
+  | Catfish    | Crab         | Desert Scorpion |
+  | Duck       | Giant Isopod | Hedgehog        |
+  | Jellyfish  | Piranha      | Rat             |
+  | Ray        | Snail        | Starfish        |
+

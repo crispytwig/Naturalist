@@ -545,4 +545,9 @@ public class Ant extends TamableClimbingAnimal implements NeutralMob, Catchable,
         this.idleAnimationState.animateWhen(!moving, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }
