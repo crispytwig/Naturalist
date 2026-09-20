@@ -561,7 +561,7 @@
   "naturalist.subtitles.entity.zebra.hurt": "Zebra hurts",
   "naturalist.subtitles.entity.zebra.jump": "Zebra jumps",
 
-  "tag.item.minecraft.is_meat": "Meat",
+  "tag.item.minecraft.meat": "Meat",
   "tag.item.naturalist.alligator_food_items": "Alligator Food",
   "tag.item.naturalist.bear_furs": "Bear Furs",
   "tag.item.naturalist.bear_tempt_items": "Bear Tempt Items",
