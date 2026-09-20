@@ -86,8 +86,7 @@ public class Blobfish extends AbstractFish implements DataDrivenVariantAnimal {
     }
 
     public static boolean checkBlobfishSpawnRules(EntityType<? extends WaterAnimal> type, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(type, level, reason, pos, random)
-                || (pos.getY() <= level.getLevel().getSeaLevel() - 33 && level.getFluidState(pos).is(FluidTags.WATER));
+        return pos.getY() <= level.getLevel().getSeaLevel() - 33 && level.getFluidState(pos).is(FluidTags.WATER);
     }
 
     @Override
