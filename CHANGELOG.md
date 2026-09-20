@@ -1,1 +1,3 @@
 - Ported to 26.3.
+  - Resources and data are now located under the `generated/` path.
+- Black Bears, Boars, Deer, Fireflies, Moles, Snails, and Turkeys spawn in Dappled Forests.
