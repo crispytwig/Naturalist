@@ -20,13 +20,14 @@
     "feed_bear": {
       "trigger": "minecraft:thrown_item_picked_up_by_entity",
       "conditions": {
+        "player": [],
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "minecraft:entity_type": "naturalist:bear",
-              "minecraft:flags": {
+              "type": "naturalist:bear",
+              "flags": {
                 "is_baby": false
               }
             }

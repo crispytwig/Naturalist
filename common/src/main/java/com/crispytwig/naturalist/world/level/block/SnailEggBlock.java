@@ -11,7 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -68,7 +68,7 @@ public class SnailEggBlock extends Block {
 
     @Override
     protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Entity entity, @NotNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-        if (entity.getType().equals(EntityTypes.FALLING_BLOCK)) {
+        if (entity.getType().equals(EntityType.FALLING_BLOCK)) {
             this.destroyBlock(level, pos);
         }
 

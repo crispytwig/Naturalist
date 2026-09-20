@@ -12,6 +12,7 @@ import com.crispytwig.naturalist.world.entity.VariantBucketable;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -50,7 +51,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.Bucketable;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -286,8 +287,8 @@ public class GiantIsopod extends Animal implements HidingAnimal, VariantBucketab
     }
 
     @Override
-    public void knockback(double strength, double x, double z, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
-        super.knockback(this.canHide() ? strength * 0.25D : strength, x, z, source, damage, comesFromEffect);
+    public void knockback(double strength, double x, double z) {
+        super.knockback(this.canHide() ? strength * 0.25D : strength, x, z);
     }
 
     @Override

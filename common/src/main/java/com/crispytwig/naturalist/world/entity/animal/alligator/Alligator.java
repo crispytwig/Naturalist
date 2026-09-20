@@ -308,8 +308,8 @@ public class Alligator extends NaturalistAnimal implements EggLayingAnimal, Hunt
     }
 
     @Override
-    public void knockback(double strength, double x, double z, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
-        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z, source, damage, comesFromEffect);
+    public void knockback(double strength, double x, double z) {
+        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z);
     }
 
     @Override

@@ -275,11 +275,11 @@ public class Tortoise extends TamableAnimal implements HidingAnimal, EggLayingAn
     }
 
     @Override
-    public void knockback(double strength, double x, double z, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
+    public void knockback(double strength, double x, double z) {
         if (this.isBaby()) {
-            super.knockback(strength / Math.max(1.0 - this.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0.01), x, z, source, damage, comesFromEffect);
+            super.knockback(strength / Math.max(1.0 - this.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE), 0.01), x, z);
         } else {
-            super.knockback(this.isInSittingPose() || this.canHide() ? strength / 4 : strength, x, z, source, damage, comesFromEffect);
+            super.knockback(this.isInSittingPose() || this.canHide() ? strength / 4 : strength, x, z);
         }
     }
 

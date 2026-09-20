@@ -24,7 +24,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
@@ -238,7 +237,7 @@ public class Butterfly extends NaturalistAnimal implements Catchable, DataDriven
 
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return stack.is(BlockItemTags.FLOWERS.item());
+        return stack.is(ItemTags.FLOWERS);
     }
 
     @Override
@@ -247,7 +246,7 @@ public class Butterfly extends NaturalistAnimal implements Catchable, DataDriven
     }
 
     @Override
-    protected boolean canBeABaby() {
+    public boolean isBaby() {
         return false;
     }
     //endregion
@@ -256,7 +255,7 @@ public class Butterfly extends NaturalistAnimal implements Catchable, DataDriven
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, stack -> stack.is(BlockItemTags.FLOWERS.item()), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, stack -> stack.is(ItemTags.FLOWERS), false));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(4, new ButterflyGrowCropGoal(this, 1.0D, 16, 4));
         this.goalSelector.addGoal(5, new ButterflyPollinateGoal(this, 1.0D, 16, 4));

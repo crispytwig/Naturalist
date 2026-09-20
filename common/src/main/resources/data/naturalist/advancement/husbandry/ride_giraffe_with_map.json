@@ -25,15 +25,15 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "minecraft:equipment": {
+              "equipment": {
                 "mainhand": {
                   "items": [
                     "minecraft:filled_map"
                   ]
                 }
               },
-              "minecraft:vehicle": {
-                "minecraft:entity_type": "naturalist:giraffe"
+              "vehicle": {
+                "type": "naturalist:giraffe"
               }
             }
           }
@@ -48,15 +48,15 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "minecraft:equipment": {
+              "equipment": {
                 "offhand": {
                   "items": [
                     "minecraft:filled_map"
                   ]
                 }
               },
-              "minecraft:vehicle": {
-                "minecraft:entity_type": "naturalist:giraffe"
+              "vehicle": {
+                "type": "naturalist:giraffe"
               }
             }
           }

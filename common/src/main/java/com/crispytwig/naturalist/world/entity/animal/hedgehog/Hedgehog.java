@@ -432,7 +432,7 @@ public class Hedgehog extends TamableAnimal implements DyeableAnimal, FollowingP
                         if (target.hurtServer(serverLevel, spikeSource, spikeDamage)) {
                             int punch = this.getThrowEnchantmentLevel(Enchantments.PUNCH);
                             if (punch > 0) {
-                                target.knockback(punch * 0.6, -motion.x, -motion.z, spikeSource, spikeDamage);
+                                target.knockback(punch * 0.6, -motion.x, -motion.z);
                             }
                             if (flaming) {
                                 target.igniteForSeconds(5.0F);

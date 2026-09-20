@@ -82,7 +82,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
 
     public Vulture(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new FlyingMoveControl<>(this, 20, true);
+        this.moveControl = new FlyingMoveControl(this, 20, true);
         this.setCanPickUpLoot(true);
         this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
@@ -230,7 +230,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
         float damage = (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         if (shouldHurt == target.hurtServer(level, damageSource, damage)) {
             if (knockback > 0.0f && target instanceof LivingEntity) {
-                ((LivingEntity)target).knockback(knockback * 0.5f, Mth.sin(this.getYRot() * Mth.DEG_TO_RAD), -Mth.cos(this.getYRot() * Mth.DEG_TO_RAD), damageSource, damage);
+                ((LivingEntity)target).knockback(knockback * 0.5f, Mth.sin(this.getYRot() * Mth.DEG_TO_RAD), -Mth.cos(this.getYRot() * Mth.DEG_TO_RAD));
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0.6, 1.0, 0.6));
             }
             this.setLastHurtMob(target);

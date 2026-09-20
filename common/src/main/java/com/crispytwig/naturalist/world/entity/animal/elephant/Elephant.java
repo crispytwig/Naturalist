@@ -280,8 +280,8 @@ public class Elephant extends TamableAnimal implements NeutralMob, IKMount, Data
     }
 
     @Override
-    public void knockback(double strength, double x, double z, @NotNull DamageSource source, float damage, boolean comesFromEffect) {
-        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z, source, damage, comesFromEffect);
+    public void knockback(double strength, double x, double z) {
+        super.knockback(NaturalistAnimal.babyKnockbackStrength(this, strength), x, z);
     }
 
     @Override
@@ -297,7 +297,7 @@ public class Elephant extends TamableAnimal implements NeutralMob, IKMount, Data
         if (shouldHurt && target instanceof LivingEntity livingEntity) {
             Vec3 knockbackDirection = new Vec3(this.blockPosition().getX() - target.getX(), 0.0, this.blockPosition().getZ() - target.getZ()).normalize();
             float shieldBlockModifier = NaturalistAnimal.isBlockedByItem(livingEntity, damageSource, Math.max(damage, 1.0F)) ? 0.5f : 1.0f;
-            livingEntity.knockback(shieldBlockModifier * 3.0D, knockbackDirection.x(), knockbackDirection.z(), damageSource, damage);
+            livingEntity.knockback(shieldBlockModifier * 3.0D, knockbackDirection.x(), knockbackDirection.z());
             double knockbackResistance = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
             livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().add(0.0, 0.5f * knockbackResistance, 0.0));
         }
