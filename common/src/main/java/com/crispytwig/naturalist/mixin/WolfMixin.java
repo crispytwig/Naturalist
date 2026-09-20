@@ -2,6 +2,7 @@ package com.crispytwig.naturalist.mixin;
 
 import com.crispytwig.naturalist.world.entity.ai.goal.WolfDigOutMoleGoal;
 import com.crispytwig.naturalist.world.entity.WolfMoleDigging;
+import com.crispytwig.naturalist.world.entity.animal.deer.Deer;
 import com.crispytwig.naturalist.world.entity.animal.mole.Mole;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
@@ -33,6 +34,7 @@ public abstract class WolfMixin extends TamableAnimal implements WolfMoleDigging
     private void naturalist$registerGoals(CallbackInfo ci) {
         this.goalSelector.addGoal(3, new WolfDigOutMoleGoal((Wolf) (Object) this));
         this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Mole.class, false, null));
+        this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Deer.class, false, null));
     }
 
     @Inject(at = @At("HEAD"), method = "handleEntityEvent", cancellable = true)

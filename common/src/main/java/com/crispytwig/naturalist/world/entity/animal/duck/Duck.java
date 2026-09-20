@@ -417,4 +417,8 @@ public class Duck extends TamableAnimal implements DyeableAnimal, FollowingPet, 
     }
     //endregion
 
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

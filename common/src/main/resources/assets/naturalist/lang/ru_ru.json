@@ -561,7 +561,7 @@
   "naturalist.subtitles.entity.zebra.hurt": "Зебра ранена",
   "naturalist.subtitles.entity.zebra.jump": "Зебра прыгает",
 
-  "tag.item.minecraft.is_meat": "Мясо",
+  "tag.item.minecraft.meat": "Мясо",
   "tag.item.naturalist.alligator_food_items": "Корм аллигатора",
   "tag.item.naturalist.bear_furs": "Мех медведя",
   "tag.item.naturalist.bear_tempt_items": "Предметы приманки медведей",
