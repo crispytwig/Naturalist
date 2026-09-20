@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": "naturalist:hide",
-  "result": {
-    "id": "minecraft:leather"
-  },
-  "experience": 0.1,
-  "cookingtime": 200
-}

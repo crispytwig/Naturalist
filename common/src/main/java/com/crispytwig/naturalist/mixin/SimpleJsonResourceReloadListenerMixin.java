@@ -18,16 +18,25 @@ public abstract class SimpleJsonResourceReloadListenerMixin {
     private static final String naturalist$tacticalFishingFile = "advancement/husbandry/tactical_fishing.json";
 
     @ModifyExpressionValue(
-            method = {
-                    "scanDirectory(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/resources/FileToIdConverter;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/util/Map;)V",
-                    "scanDirectoryWithModifier"
-            },
-            at = {
-                    @At(value = "INVOKE", target = "Lnet/minecraft/util/StrictJsonParser;parse(Ljava/io/Reader;)Lcom/google/gson/JsonElement;"),
-                    @At(value = "INVOKE", target = "Lcom/google/gson/JsonParser;parseReader(Ljava/io/Reader;)Lcom/google/gson/JsonElement;")
-            }
+            method = "scanDirectory",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/StrictJsonParser;parse(Ljava/io/Reader;)Lcom/google/gson/JsonElement;"),
+            require = 0
     )
-    private static JsonElement naturalist$addFishBucketsToTacticalFishing(JsonElement element, @Local(ordinal = 0) Identifier location) {
+    private static JsonElement naturalist$addFishBucketsFromScanDirectory(JsonElement element, @Local(ordinal = 0) Identifier location) {
+        return naturalist$addFishBucketsToTacticalFishing(element, location);
+    }
+
+    @ModifyExpressionValue(
+            method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Ljava/util/Map;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/StrictJsonParser;parse(Ljava/io/Reader;)Lcom/google/gson/JsonElement;"),
+            require = 0
+    )
+    private JsonElement naturalist$addFishBucketsFromPrepare(JsonElement element, @Local(ordinal = 0) Identifier location) {
+        return naturalist$addFishBucketsToTacticalFishing(element, location);
+    }
+
+    @Unique
+    private static JsonElement naturalist$addFishBucketsToTacticalFishing(JsonElement element, Identifier location) {
         if (!"minecraft".equals(location.getNamespace()) || !naturalist$tacticalFishingFile.equals(location.getPath())) {
             return element;
         }

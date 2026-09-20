@@ -22,6 +22,18 @@ neoForge {
             server()
             gameDirectory = project.file('run/server')
         }
+        clientData {
+            clientData()
+            gameDirectory = project.file('run/data')
+            programArguments.addAll '--mod', mod_id,
+                    '--output', rootProject.file('common/src/generated/resources').absolutePath
+        }
+        serverData {
+            serverData()
+            gameDirectory = project.file('run/data')
+            programArguments.addAll '--mod', mod_id,
+                    '--output', rootProject.file('common/src/generated/resources').absolutePath
+        }
     }
     mods {
         "${mod_id}" {
@@ -32,13 +44,11 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-sourceSets.main.java.exclude 'com/crispytwig/naturalist/datagen/**'
+sourceSets.main.java.exclude 'com/crispytwig/naturalist/datagen/NaturalistBlockStateProvider.java'
+sourceSets.main.java.exclude 'com/crispytwig/naturalist/datagen/NaturalistItemModelProvider.java'
 
 dependencies {
     compileOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
-    runtimeOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
-
-    runtimeOnly "maven.modrinth:immersive-overlays:${immersive_overlays}-neoforge"
 }
 
 publishMods {

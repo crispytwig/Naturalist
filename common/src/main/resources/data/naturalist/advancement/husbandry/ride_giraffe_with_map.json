@@ -20,47 +20,43 @@
     "holding_map_mainhand": {
       "trigger": "minecraft:tick",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:equipment": {
-                "mainhand": {
-                  "items": [
-                    "minecraft:filled_map"
-                  ]
-                }
-              },
-              "minecraft:vehicle": {
-                "minecraft:entity_type": "naturalist:giraffe"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "items": [
+                  "minecraft:filled_map"
+                ]
               }
+            },
+            "minecraft:vehicle": {
+              "minecraft:entity_type": "naturalist:giraffe"
             }
           }
-        ]
+        }
       }
     },
     "holding_map_offhand": {
       "trigger": "minecraft:tick",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:equipment": {
-                "offhand": {
-                  "items": [
-                    "minecraft:filled_map"
-                  ]
-                }
-              },
-              "minecraft:vehicle": {
-                "minecraft:entity_type": "naturalist:giraffe"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "offhand": {
+                "items": [
+                  "minecraft:filled_map"
+                ]
               }
+            },
+            "minecraft:vehicle": {
+              "minecraft:entity_type": "naturalist:giraffe"
             }
           }
-        ]
+        }
       }
     }
   },

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "naturalist:smooth_shellstone",
+  "result": {
+    "id": "naturalist:smooth_shellstone_wall"
+  }
+}

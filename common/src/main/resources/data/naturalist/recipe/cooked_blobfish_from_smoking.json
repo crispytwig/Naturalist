@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": "naturalist:blobfish",
-  "result": {
-    "id": "naturalist:cooked_blobfish"
-  },
-  "experience": 0.35,
-  "cookingtime": 100
-}

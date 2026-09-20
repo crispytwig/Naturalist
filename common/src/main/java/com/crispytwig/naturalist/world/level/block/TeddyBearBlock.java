@@ -15,17 +15,11 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class TeddyBearBlock extends HorizontalDirectionalBlock {
-    public static final MapCodec<TeddyBearBlock> CODEC = simpleCodec(TeddyBearBlock::new);
     private static final VoxelShape X_AXIS_AABB = Block.box(3, 0, 2, 13, 15, 14);
     private static final VoxelShape Z_AXIS_AABB = Block.box(2, 0, 3, 14, 15, 13);
 
     public TeddyBearBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected @NotNull MapCodec<TeddyBearBlock> codec() {
-        return CODEC;
     }
 
     @Override

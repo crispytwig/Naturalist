@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_venison"
+        "recipes": "naturalist:cooked_venison"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

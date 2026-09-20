@@ -20,18 +20,16 @@
     "feed_bear": {
       "trigger": "minecraft:thrown_item_picked_up_by_entity",
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "naturalist:bear",
-              "minecraft:flags": {
-                "is_baby": false
-              }
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "naturalist:bear",
+            "minecraft:flags": {
+              "is_baby": false
             }
           }
-        ],
+        },
         "item": {
           "items": [
             "minecraft:honeycomb"

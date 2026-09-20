@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "naturalist:blue_starfish"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "naturalist:blocks/blue_starfish"
+}

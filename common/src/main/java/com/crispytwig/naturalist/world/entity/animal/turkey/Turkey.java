@@ -203,7 +203,7 @@ public class Turkey extends Animal implements DataDrivenVariantAnimal {
     private void setupAnimationStates() {
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
 
-        if (this.swinging && this.peckAnimTicks <= 0) {
+        if (this.isSwinging() && this.peckAnimTicks <= 0) {
             this.peckAnimTicks = PECK_ANIM_TICKS;
         } else if (this.peckAnimTicks > 0) {
             this.peckAnimTicks--;

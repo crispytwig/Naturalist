@@ -34,9 +34,9 @@ public class ClamItemLayer extends RenderLayer<NaturalistRenderState<Clam>, Natu
 
         poseStack.translate(0.0F, 0.6F + Mth.sin(state.ageInTicks * 0.1F) * 0.2F, 0.0F);
 
-        poseStack.mulPose(poseStack.last().pose().getNormalizedRotation(this.scratchRotation).conjugate());
-        poseStack.mulPose(Minecraft.getInstance().gameRenderer.gameRenderState().levelRenderState.cameraRenderState.orientation);
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+        poseStack.rotate(poseStack.last().pose().getNormalizedRotation(this.scratchRotation).conjugate());
+        poseStack.rotate(Minecraft.getInstance().gameRenderer.gameRenderState().levelRenderState.cameraRenderState.orientation);
+        poseStack.rotateDegrees(Axis.YP, 180.0F);
 
         state.heldItem.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();

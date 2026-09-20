@@ -26,7 +26,11 @@
           ]
         },
         "entity": {
-          "minecraft:entity_type": "naturalist:hippo"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "naturalist:hippo"
+          }
         }
       }
     }

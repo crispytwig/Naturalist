@@ -42,16 +42,16 @@ public class DirtTrailRenderer extends EntityRenderer<DirtTrail, NaturalistRende
         DirtTrail entity = state.entity;
         poseStack.pushPose();
         poseStack.translate(0.0D, -(entity.getId() % 3) * 0.0625D, 0.0D);
-        poseStack.mulPose(Axis.YP.rotationDegrees((entity.getId() * 61) % 360));
+        poseStack.rotateDegrees(Axis.YP, (entity.getId() * 61) % 360);
         if (entity.isSmall()) {
             poseStack.scale(0.6F, 0.6F, 0.6F);
         }
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+        poseStack.rotateDegrees(Axis.YP, 180.0F);
         poseStack.translate(0.0F, 0.01F, 0.0F);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.5F, 0.0F);
         submitNodeCollector.submitModel(this.model, state, poseStack, this.model.renderType(TEXTURE),
-                state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+                state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();
         super.submit(state, poseStack, submitNodeCollector, camera);
     }

@@ -19,3 +19,4 @@ classes/
 *.launch
 /src/generated/resources/.cache
 /tools
+/common/src/generated/resources/.cache

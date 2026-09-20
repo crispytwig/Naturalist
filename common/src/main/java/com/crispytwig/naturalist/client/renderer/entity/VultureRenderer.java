@@ -40,7 +40,7 @@ public class VultureRenderer extends NaturalistMobRenderer<Vulture> {
             }
             poseStack.pushPose();
             vultureModel.translateToHeldItem(poseStack);
-            poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+            poseStack.rotateDegrees(Axis.XP, -90.0F);
             state.heldItem.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();
         }

@@ -13,7 +13,10 @@ public class ItemHelper {
 
         if (entity instanceof Player player) {
             if (!player.getInventory().add(stack)) {
-                player.drop(stack, true, false);
+                ItemEntity dropped = player.createItemStackToDrop(stack, true, false);
+                if (dropped != null) {
+                    level.addFreshEntity(dropped);
+                }
             }
         } else {
             ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 0.5, entity.getZ(), stack);

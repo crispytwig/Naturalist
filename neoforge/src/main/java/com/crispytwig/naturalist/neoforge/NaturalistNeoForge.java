@@ -22,9 +22,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
-import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import com.crispytwig.naturalist.datagen.NaturalistDataGenerators;
 
 @Mod(Naturalist.MOD_ID)
 public class NaturalistNeoForge {
@@ -39,8 +39,8 @@ public class NaturalistNeoForge {
         modEventBus.addListener(this::createAttributes);
         modEventBus.addListener(this::registerSpawnPlacements);
         modEventBus.addListener(this::addPackFinders);
-
-        NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
+        modEventBus.addListener(NaturalistDataGenerators::gatherClientData);
+        modEventBus.addListener(NaturalistDataGenerators::gatherServerData);
 
         if (FMLEnvironment.getDist() == Dist.CLIENT) {
             NaturalistNeoForgeClient.init(modEventBus, modContainer);
@@ -62,10 +62,6 @@ public class NaturalistNeoForge {
                 event.register(type, placementType, heightmap, predicate, RegisterSpawnPlacementsEvent.Operation.AND);
             }
         });
-    }
-
-    private void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
-        Naturalist.registerPotionMixes((input, ingredient, output) -> event.getBuilder().addMix(input, ingredient, output));
     }
 
     private void addPackFinders(AddPackFindersEvent event) {

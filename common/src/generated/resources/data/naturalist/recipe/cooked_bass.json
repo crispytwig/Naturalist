@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": "naturalist:bass",
+  "result": {
+    "id": "naturalist:cooked_bass"
+  }
+}

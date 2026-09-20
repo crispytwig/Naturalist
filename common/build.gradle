@@ -29,9 +29,11 @@ configurations {
     }
 }
 
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
-    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+    sourceSets.main.resources.srcDirs.each { commonResources it }
 }
 
 applyLoaderAttribute('common', ['apiElements', 'runtimeElements', 'sourcesElements'])

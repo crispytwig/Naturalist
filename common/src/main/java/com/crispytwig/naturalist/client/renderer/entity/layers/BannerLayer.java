@@ -105,16 +105,16 @@ public class BannerLayer<T extends Elephant> extends RenderLayer<NaturalistRende
         for (int side = 1; side >= -1; side -= 2) {
             poseStack.pushPose();
             poseStack.translate(side * this.offsetX / 16.0F, this.offsetY / 16.0F, this.offsetZ / 16.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F * side));
+            poseStack.rotateDegrees(Axis.YP, -90.0F * side);
             poseStack.scale(this.scale, this.scale, this.scale);
             FlagModel sideFlag = side > 0 ? this.flag : this.mirroredFlag;
             submitNodeCollector.submitModel(side > 0 ? this.bar : this.mirroredBar, Unit.INSTANCE, poseStack,
-                    lightCoords, OverlayTexture.NO_OVERLAY, -1, Sheets.BANNER_BASE, this.sprites, state.outlineColor, null);
+                    lightCoords, OverlayTexture.NO_OVERLAY, -1, Sheets.BANNER_BASE, this.sprites, state.outlineColor);
             FlagPose flagPose = new FlagPose(Math.min(sway - side * tilt, 0.0F), side * lift);
             submitNodeCollector.submitModel(sideFlag, flagPose, poseStack,
-                    lightCoords, OverlayTexture.NO_OVERLAY, -1, Sheets.BANNER_BASE, this.sprites, state.outlineColor, null);
+                    lightCoords, OverlayTexture.NO_OVERLAY, -1, Sheets.BANNER_BASE, this.sprites, state.outlineColor);
             BannerRenderer.submitPatterns(this.sprites, poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY,
-                    sideFlag, flagPose, true, color, patterns, null);
+                    sideFlag, flagPose, true, color, patterns);
             poseStack.popPose();
         }
         poseStack.popPose();

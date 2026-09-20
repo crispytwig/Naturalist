@@ -74,7 +74,7 @@ Catchable {
         tag.getBoolean("Silent").ifPresent(mob::setSilent);
         tag.getBoolean("NoGravity").ifPresent(mob::setNoGravity);
         tag.getBoolean("Glowing").ifPresent(mob::setGlowingTag);
-        tag.getBoolean("Invulnerable").ifPresent(mob::setInvulnerable);
+        tag.getBoolean("Invulnerable").ifPresent(mob::setPermanentlyInvulnerable);
         tag.getFloat("Health").ifPresent(mob::setHealth);
     }
 

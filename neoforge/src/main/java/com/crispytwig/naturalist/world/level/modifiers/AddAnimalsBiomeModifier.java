@@ -5,6 +5,7 @@ import com.crispytwig.naturalist.NaturalistConfig;
 import com.crispytwig.naturalist.neoforge.registry.NaturalistBiomeModifiers;
 import com.crispytwig.naturalist.world.level.NaturalistSpawns;
 import net.minecraft.core.Holder;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.neoforged.neoforge.common.world.BiomeModifier;
@@ -20,7 +21,7 @@ public class AddAnimalsBiomeModifier implements BiomeModifier {
                     return;
                 }
                 if (biome.is(hasTag) && (blacklistTag == null || !biome.is(blacklistTag))) {
-                    builder.getMobSpawnSettings().addSpawn(category, weight, new MobSpawnSettings.SpawnerData(entityType, min, max));
+                    builder.getMobSpawnSettings().addSpawn(entityType, category, weight, UniformInt.of(min, max));
                 }
             });
         }

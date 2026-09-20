@@ -54,6 +54,7 @@ import com.crispytwig.naturalist.world.entity.AnimationSoundPlayer;
 import com.crispytwig.naturalist.world.entity.AnimationSoundTrack;
 import com.crispytwig.naturalist.world.entity.FishSwimTilt;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Anglerfish extends AbstractFish implements HuntingAnimal, DataDrivenVariantAnimal {
@@ -246,7 +247,7 @@ public class Anglerfish extends AbstractFish implements HuntingAnimal, DataDrive
                 double reach = this.mob.getBbWidth() * 2.0F * this.mob.getBbWidth() * 2.0F + target.getBbWidth();
                 if (this.isTimeToAttack() && this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ()) <= reach) {
                     this.resetAttackCooldown();
-                    this.mob.swing(InteractionHand.MAIN_HAND);
+                    this.mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                     this.mob.doHurtTarget(getServerLevel(this.mob), target);
                 }
             }
@@ -298,7 +299,7 @@ public class Anglerfish extends AbstractFish implements HuntingAnimal, DataDrive
     private void setupAnimationStates() {
         boolean inWater = this.isInWater();
         boolean hasTarget = this.hasSwimTarget();
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
         this.flopAnimationState.animateWhen(!inWater, this.tickCount);
         this.swimFastAnimationState.animateWhen(inWater && hasTarget, this.tickCount);
         this.swimAnimationState.animateWhen(inWater && !hasTarget, this.tickCount);

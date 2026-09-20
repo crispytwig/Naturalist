@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.server.level.ServerPlayer;
 
 @SuppressWarnings("unused")
 public class TortoiseEggBlock extends TurtleEggBlock {
@@ -127,7 +128,7 @@ public class TortoiseEggBlock extends TurtleEggBlock {
     }
 
     @Override
-    public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack stack) {
+    public void playerDestroy(@NotNull ServerLevel level, @NotNull ServerPlayer player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack stack) {
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
 
         if (!level.isClientSide() && stack.getItem() == Items.COMMAND_BLOCK) {

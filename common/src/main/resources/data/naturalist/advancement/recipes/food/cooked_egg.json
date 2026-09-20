@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_egg"
+        "recipes": "naturalist:cooked_egg"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

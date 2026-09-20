@@ -16,6 +16,6 @@ public class RayRenderer extends NaturalistMobRenderer<Ray> {
     @Override
     protected void setupRotations(NaturalistRenderState<Ray> state, PoseStack poseStack, float bodyRot, float entityScale) {
         super.setupRotations(state, poseStack, bodyRot, entityScale);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-state.entity.swimTilt.getTilt(state.partialTick)));
+        poseStack.rotateDegrees(Axis.ZP, -state.entity.swimTilt.getTilt(state.partialTick));
     }
 }

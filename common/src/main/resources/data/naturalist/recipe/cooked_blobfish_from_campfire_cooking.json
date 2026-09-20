@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": "naturalist:blobfish",
-  "result": {
-    "id": "naturalist:cooked_blobfish"
-  },
-  "experience": 0.35,
-  "cookingtime": 600
-}

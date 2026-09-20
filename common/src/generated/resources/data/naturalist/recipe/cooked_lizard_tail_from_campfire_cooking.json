@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": "naturalist:lizard_tail",
+  "result": {
+    "id": "naturalist:cooked_lizard_tail"
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": "naturalist:piranha",
-  "result": {
-    "id": "naturalist:cooked_piranha"
-  },
-  "experience": 0.35,
-  "cookingtime": 600
-}

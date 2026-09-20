@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:shears",
-    {
-      "id": "#c:tools/shear",
-      "required": false
-    }
-  ]
-}

@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.compat.fieldguide.mixin;
 
 import com.evandev.fieldguide.client.gui.util.IconCacheManager;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.ProjectionMatrixBuffer;

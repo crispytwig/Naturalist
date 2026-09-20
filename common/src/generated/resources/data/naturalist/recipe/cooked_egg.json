@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": "#c:eggs",
+  "result": {
+    "id": "naturalist:cooked_egg"
+  }
+}

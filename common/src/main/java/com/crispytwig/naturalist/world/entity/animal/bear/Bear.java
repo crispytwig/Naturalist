@@ -83,6 +83,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, DyeableAnimal, FollowingPet, HuntingAnimal, NocturnalHostile, DataDrivenVariantAnimal {
@@ -802,7 +803,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
             BeehiveBlock.dropHoneycomb(level, ItemStack.EMPTY, state, level.getBlockEntity(blockPos), bear, blockPos);
             bear.playSound(SoundEvents.BEEHIVE_SHEAR, 1.0F, 1.0F);
             bear.level().setBlock(blockPos, state.setValue(BeehiveBlock.HONEY_LEVEL, 0), 2);
-            bear.swing(InteractionHand.MAIN_HAND);
+            bear.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
         }
 
         private void pickSweetBerries(@NotNull BlockState state) {
@@ -811,7 +812,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
             Block.popResource(bear.level(), this.blockPos, new ItemStack(Items.SWEET_BERRIES, berryAmount));
             bear.playSound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);
             bear.level().setBlock(this.blockPos, state.setValue(SweetBerryBushBlock.AGE, 1), 2);
-            bear.swing(InteractionHand.MAIN_HAND);
+            bear.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
         }
 
         @Override
@@ -1009,7 +1010,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
         this.sniffAnimationState.animateWhen(this.isSniffing() && !posing, this.tickCount);
         this.eatAnimationState.animateWhen(this.isEating(), this.tickCount);
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.walkAnimationState.animateWhen(!posing && moving && !this.isSprinting(), this.tickCount);
         this.runAnimationState.animateWhen(!posing && moving && this.isSprinting(), this.tickCount);
@@ -1017,14 +1018,15 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
     }
 
     @Override
-    public void swing(@NotNull InteractionHand hand, boolean updateSelf) {
-        super.swing(hand, updateSelf);
+    public boolean swing(@NotNull InteractionHand hand, @NotNull SwingAnimation animation, boolean sendToSwingingEntity) {
+        boolean swung = super.swing(hand, animation, sendToSwingingEntity);
         if (!this.level().isClientSide()) {
             SoundEvent attackSound = this.getAttackSound();
             if (attackSound != null) {
                 this.playSound(attackSound, 1.0F, 1.0F);
             }
         }
+        return swung;
     }
     //endregion
 }

@@ -556,7 +556,7 @@ public class Snake extends TamableClimbingAnimal implements SleepingAnimal, Neut
         } else if (!this.isSleeping() && this.random.nextInt(1000) < this.ambientSoundTime) {
             this.tongueTicks = 15;
         }
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
         this.tongueAnimationState.animateWhen(this.tongueTicks > 0, this.tickCount);
         this.rattleAnimationState.animateWhen(this.canRattle() && !this.isSleeping(), this.tickCount);
         this.sleepAnimationState.animateWhen(sleeping, this.tickCount);

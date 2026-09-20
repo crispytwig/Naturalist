@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_anglerfish"
+        "recipes": "naturalist:cooked_anglerfish"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -37,6 +37,7 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
+import net.minecraft.world.item.component.SwingAnimation;
 
 public class KnapsackItem extends Item {
     public KnapsackItem(Properties properties) {
@@ -92,7 +93,7 @@ public class KnapsackItem extends Item {
         BugNetItem.swing(player.level(), player);
         BugNetItem.playCaughtEffects(player.level(), mob);
         mob.discard();
-        player.swing(hand);
+        player.swing(hand, SwingAnimation.DEFAULT, false);
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(), NaturalistSoundEvents.KNAPSACK_PICKUP.get(), SoundSource.NEUTRAL, 0.6F, 1.0F);
 
         if (stack.getCount() <= 1) {

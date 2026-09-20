@@ -14,7 +14,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "naturalist:spectral_arrow_from_glow_goop"
+        "recipes": "naturalist:spectral_arrow_from_glow_goop"
       }
     }
   },

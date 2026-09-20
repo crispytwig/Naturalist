@@ -63,6 +63,7 @@ import org.jetbrains.annotations.Nullable;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 
 import java.util.*;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
@@ -439,7 +440,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
         protected void checkAndPerformAttack(@NotNull LivingEntity enemy) {
             if (this.mob.isWithinMeleeAttackRange(enemy) && this.isTimeToAttack()) {
                 this.resetAttackCooldown();
-                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                 if (!(enemy instanceof Player)) {
                     this.mob.doHurtTarget(getServerLevel(this.mob), enemy);
                 }

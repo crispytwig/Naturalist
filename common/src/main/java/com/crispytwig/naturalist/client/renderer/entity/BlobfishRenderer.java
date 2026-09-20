@@ -44,6 +44,6 @@ public class BlobfishRenderer extends NaturalistMobRenderer<Blobfish> {
     @Override
     protected void setupRotations(NaturalistRenderState<Blobfish> state, PoseStack poseStack, float bodyRot, float entityScale) {
         super.setupRotations(state, poseStack, bodyRot, entityScale);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-state.entity.swimTilt.getTilt(state.partialTick)));
+        poseStack.rotateDegrees(Axis.ZP, -state.entity.swimTilt.getTilt(state.partialTick));
     }
 }

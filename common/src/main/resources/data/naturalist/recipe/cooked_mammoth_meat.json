@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": "naturalist:mammoth_meat",
-  "result": {
-    "id": "naturalist:cooked_mammoth_meat"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
-}

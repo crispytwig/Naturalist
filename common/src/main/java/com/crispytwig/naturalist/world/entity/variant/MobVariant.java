@@ -3,7 +3,7 @@ package com.crispytwig.naturalist.world.entity.variant;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.codec.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
@@ -17,7 +17,7 @@ public final class MobVariant {
     public static final Codec<MobVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Identifier.CODEC.fieldOf("texture").forGetter(variant -> variant.texture),
             Identifier.CODEC.optionalFieldOf("baby_texture").forGetter(variant -> variant.babyTexture),
-            RegistryCodecs.homogeneousList(Registries.BIOME).optionalFieldOf("biomes").forGetter(MobVariant::biomes),
+            RegistryCodecs.holderSet(Registries.BIOME).optionalFieldOf("biomes").forGetter(MobVariant::biomes),
             ExtraCodecs.NON_NEGATIVE_INT.optionalFieldOf("weight", 1).forGetter(MobVariant::weight),
             Codec.INT.optionalFieldOf("priority", 0).forGetter(MobVariant::priority),
             ComponentSerialization.CODEC.optionalFieldOf("tooltip").forGetter(MobVariant::tooltip),

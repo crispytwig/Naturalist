@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:beach",
+    "minecraft:stony_shore",
+    {
+      "id": "#c:is_beach",
+      "required": false
+    }
+  ]
+}

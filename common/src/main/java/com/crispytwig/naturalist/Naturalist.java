@@ -142,11 +142,6 @@ public final class Naturalist {
         <T extends Mob> void register(EntityType<T> type, SpawnPlacementType placementType, Heightmap.Types heightmap, SpawnPlacements.SpawnPredicate<T> predicate);
     }
 
-    @FunctionalInterface
-    public interface BrewingRegistrar {
-        void addMix(Holder<Potion> input, Item ingredient, Holder<Potion> output);
-    }
-
     public static void createAttributes(AttributeRegistrar r) {
         r.register(NaturalistEntityTypes.SNAIL.get(), Snail.createAttributes());
         r.register(NaturalistEntityTypes.BEAR.get(), Bear.createAttributes());
@@ -252,17 +247,6 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.TURKEY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.CAPYBARA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.HEDGEHOG.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
-    }
-
-    public static void registerPotionMixes(BrewingRegistrar r) {
-        r.addMix(Potions.AWKWARD, NaturalistRegistry.ANTLER.get(), potion(NaturalistPotions.FOREST_DASHER));
-        r.addMix(potion(NaturalistPotions.FOREST_DASHER), Items.REDSTONE, potion(NaturalistPotions.LONG_FOREST_DASHER));
-        r.addMix(potion(NaturalistPotions.FOREST_DASHER), Items.GLOWSTONE_DUST, potion(NaturalistPotions.STRONG_FOREST_DASHER));
-        r.addMix(Potions.AWKWARD, NaturalistRegistry.SCORPION_POISON_GLAND.get(), potion(NaturalistPotions.ANTIVENOM));
-    }
-
-    private static Holder<Potion> potion(Supplier<Potion> potion) {
-        return BuiltInRegistries.POTION.wrapAsHolder(potion.get());
     }
 
     public static void registerDispenserBehaviors() {

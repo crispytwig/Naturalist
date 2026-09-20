@@ -3,6 +3,7 @@ package com.crispytwig.naturalist.world.level.levelgen.feature;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.world.level.block.AntHillBlock;
 import com.crispytwig.naturalist.world.level.block.entity.AntHillBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -11,9 +12,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,7 +23,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class AntHillFeature extends Feature<NoneFeatureConfiguration> {
+public class AntHillFeature implements Feature {
+    public static final MapCodec<AntHillFeature> SMALL_CODEC = MapCodec.unit(() -> new AntHillFeature(false));
+    public static final MapCodec<AntHillFeature> BIG_CODEC = MapCodec.unit(() -> new AntHillFeature(true));
+
     private static final BlockPos[] SMALL_LAYOUT = {
             new BlockPos(0, 0, -1), new BlockPos(-1, 0, 0), new BlockPos(0, 0, 0), new BlockPos(1, 0, 0), new BlockPos(-1, 0, 1), new BlockPos(0, 0, 1),
             new BlockPos(-1, 1, 0), new BlockPos(0, 1, 0), new BlockPos(0, 1, 1),
@@ -39,15 +42,16 @@ public class AntHillFeature extends Feature<NoneFeatureConfiguration> {
     private final boolean big;
 
     public AntHillFeature(boolean big) {
-        super(NoneFeatureConfiguration.CODEC);
         this.big = big;
     }
 
     @Override
-    public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos origin = context.origin();
-        RandomSource random = context.random();
+    public @NotNull MapCodec<AntHillFeature> codec() {
+        return this.big ? BIG_CODEC : SMALL_CODEC;
+    }
+
+    @Override
+    public boolean place(@NotNull WorldGenLevel level, @NotNull ChunkGenerator chunkGenerator, @NotNull RandomSource random, @NotNull BlockPos origin) {
         if (!level.getBlockState(origin.below()).is(BlockTags.SUBSTRATE_OVERWORLD)) {
             return false;
         }

@@ -69,6 +69,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
+import net.minecraft.world.item.component.SwingAnimation;
 
 public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnimal, DataDrivenVariantAnimal {
     //region Data
@@ -331,7 +332,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
         boolean inWater = this.isInWater();
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
         boolean aggressive = this.isAggressive();
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
         this.flopAnimationState.animateWhen(!inWater, this.tickCount);
         this.swimFastAnimationState.animateWhen(inWater && moving && aggressive, this.tickCount);
         this.swimAnimationState.animateWhen(inWater && moving && !aggressive, this.tickCount);
@@ -500,7 +501,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
                 this.shark.getNavigation().moveTo(target, 2.25);
             }
             if (this.attackCooldown <= 0 && this.shark.isWithinMeleeAttackRange(target) && this.shark.getSensing().hasLineOfSight(target) && this.shark.isFacing(target)) {
-                this.shark.swing(InteractionHand.MAIN_HAND);
+                this.shark.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                 this.shark.doHurtTarget(getServerLevel(this.shark), target);
                 this.attackCooldown = ATTACK_COOLDOWN;
                 this.startRetreat(target);

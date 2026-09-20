@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_lizard_tail"
+        "recipes": "naturalist:cooked_lizard_tail"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

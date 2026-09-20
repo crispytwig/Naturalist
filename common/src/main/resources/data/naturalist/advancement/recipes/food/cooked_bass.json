@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_bass"
+        "recipes": "naturalist:cooked_bass"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

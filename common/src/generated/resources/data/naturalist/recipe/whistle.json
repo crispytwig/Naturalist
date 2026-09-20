@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    " C ",
+    " S "
+  ],
+  "result": {
+    "id": "naturalist:whistle"
+  }
+}

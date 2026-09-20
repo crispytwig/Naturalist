@@ -47,7 +47,7 @@ public class BlackBearRenderer extends NaturalistMobRenderer<BlackBear> {
             }
             poseStack.pushPose();
             bearModel.translateToRightArm(poseStack);
-            poseStack.mulPose(Axis.XP.rotationDegrees(-22.5F));
+            poseStack.rotateDegrees(Axis.XP, -22.5F);
             poseStack.translate(0.0F, -7 / 16F, 0.0F);
             state.heldItem.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();

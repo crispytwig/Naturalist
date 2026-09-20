@@ -12,9 +12,8 @@ dependencies {
     localRuntime "dev.lambdaurora.lambdynamiclights:lambdynamiclights-runtime:${lambdynamiclights}"
 
     compileOnly "maven.modrinth:field-guide:${field_guide_fabric}"
-    localRuntime "maven.modrinth:field-guide:${field_guide_fabric}"
 
-    localRuntime "maven.modrinth:immersive-overlays:${immersive_overlays}-fabric"
+    localRuntime "maven.modrinth:immersive-overlays:${immersive_overlays_fabric}"
     localRuntime "maven.modrinth:not-enough-animations:${nea_fabric}"
 }
 

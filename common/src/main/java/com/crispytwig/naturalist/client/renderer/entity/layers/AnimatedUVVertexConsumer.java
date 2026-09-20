@@ -39,6 +39,12 @@ public class AnimatedUVVertexConsumer implements VertexConsumer {
     }
 
     @Override
+    public @NonNull VertexConsumer setUv3(float u, float v) {
+        delegate.setUv3(u, v);
+        return this;
+    }
+
+    @Override
     public @NonNull VertexConsumer setUv1(int u, int v) {
         delegate.setUv1(u, v);
         return this;

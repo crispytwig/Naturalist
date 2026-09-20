@@ -416,7 +416,7 @@ public class Alligator extends NaturalistAnimal implements EggLayingAnimal, Hunt
     private void setupAnimationStates() {
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
         boolean inWater = this.isInWater();
-        this.biteAnimationState.animateWhen(this.swinging, this.tickCount);
+        this.biteAnimationState.animateWhen(this.isSwinging(), this.tickCount);
         this.swimAnimationState.animateWhen(inWater, this.tickCount);
         this.walkAnimationState.animateWhen(moving && !inWater, this.tickCount);
         this.idleAnimationState.animateWhen(!moving && !inWater, this.tickCount);

@@ -61,6 +61,7 @@ import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Elephant extends TamableAnimal implements NeutralMob, IKMount, DataDrivenVariantAnimal {
@@ -600,7 +601,7 @@ public class Elephant extends TamableAnimal implements NeutralMob, IKMount, Data
         protected void checkAndPerformAttack(@NotNull LivingEntity target) {
             if (this.mob.distanceToSqr(target) <= Mth.square(this.mob.getBbWidth()) && this.isTimeToAttack()) {
                 this.resetAttackCooldown();
-                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                 this.mob.doHurtTarget(getServerLevel(this.mob), target);
             }
         }
@@ -611,7 +612,7 @@ public class Elephant extends TamableAnimal implements NeutralMob, IKMount, Data
     private void setupAnimationStates() {
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
 
-        if (this.swinging && this.swingAnimTicks <= 0) {
+        if (this.isSwinging() && this.swingAnimTicks <= 0) {
             this.swingAnimTicks = SWING_ANIM_TICKS;
         } else if (this.swingAnimTicks > 0) {
             this.swingAnimTicks--;

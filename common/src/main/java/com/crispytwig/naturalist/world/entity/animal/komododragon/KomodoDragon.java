@@ -330,7 +330,7 @@ public class KomodoDragon extends Animal implements SleepingAnimal, DataDrivenVa
     private void setupAnimationStates() {
         boolean sleeping = this.isSleeping();
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
-        if (this.swinging && this.biteAnimTicks <= 0) {
+        if (this.isSwinging() && this.biteAnimTicks <= 0) {
             this.biteAnimTicks = BITE_ANIM_TICKS;
         } else if (this.biteAnimTicks > 0) {
             this.biteAnimTicks--;

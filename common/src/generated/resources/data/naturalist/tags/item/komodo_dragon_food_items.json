@@ -1,0 +1,17 @@
+{
+  "values": [
+    "#c:foods/raw_meat",
+    "#c:foods/cooked_meat",
+    "naturalist:venison",
+    "naturalist:cooked_venison",
+    "naturalist:bushmeat",
+    "naturalist:cooked_bushmeat",
+    "naturalist:duck",
+    "naturalist:cooked_duck",
+    "naturalist:drumstick",
+    "naturalist:cooked_drumstick",
+    "naturalist:morsel",
+    "naturalist:mammoth_meat",
+    "naturalist:cooked_mammoth_meat"
+  ]
+}

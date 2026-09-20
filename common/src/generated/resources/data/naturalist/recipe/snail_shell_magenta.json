@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "naturalist:snail_shell",
+    "minecraft:magenta_dye"
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "Color": 2
+      }
+    },
+    "id": "naturalist:snail_shell"
+  }
+}

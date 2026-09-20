@@ -45,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import net.minecraft.util.Prediction;
 
 @SuppressWarnings("unused")
 public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
@@ -266,7 +267,7 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
                 player -> !player.isCreative() && !player.isSpectator());
         for (Player target : targets) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 2.2D, 0.0D));
-            target.hurtMarked = true;
+            target.syncVelocity = true;
         }
     }
 
@@ -298,7 +299,7 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
                 this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 this.setHasTreasure(false);
                 if (!player.addItem(treasure)) {
-                    player.drop(treasure, false);
+                    player.drop(treasure, false, Prediction.SERVER_ONLY);
                 }
                 this.closeShell();
             }

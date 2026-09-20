@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public class StarfishBlock extends MultifaceSpreadeableBlock {
-    public static final MapCodec<StarfishBlock> CODEC = simpleCodec(StarfishBlock::new);
     public static final BooleanProperty WATERLOGGED = MultifaceSpreadeableBlock.WATERLOGGED;
 
     private final MultifaceSpreader spreader = new MultifaceSpreader(this);
@@ -20,11 +19,6 @@ public class StarfishBlock extends MultifaceSpreadeableBlock {
     public StarfishBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
-    }
-
-    @Override
-    public @NotNull MapCodec<StarfishBlock> codec() {
-        return CODEC;
     }
 
     @Override

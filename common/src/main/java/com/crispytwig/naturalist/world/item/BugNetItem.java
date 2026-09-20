@@ -20,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import net.minecraft.world.item.component.SwingAnimation;
 
 public class BugNetItem extends Item {
     public BugNetItem(Properties properties) {
@@ -49,7 +50,7 @@ public class BugNetItem extends Item {
     @Override
     public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand usedHand) {
         swing(level, player);
-        player.swing(usedHand);
+        player.swing(usedHand, SwingAnimation.DEFAULT, false);
         return InteractionResult.SUCCESS;
     }
 

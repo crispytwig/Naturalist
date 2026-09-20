@@ -101,13 +101,6 @@ public abstract class MobMixin extends LivingEntity {
         }
     }
 
-    @Inject(method = "aiStep", at = @At("HEAD"))
-    private void naturalist$clearSwingLatch(CallbackInfo ci) {
-        if (this.naturalist$isNaturalistMob()) {
-            this.updateSwingTime();
-        }
-    }
-
     @Inject(method = "doHurtTarget", at = @At("HEAD"))
     @SuppressWarnings("unused")
     private void naturalist$onDoHurtTarget(ServerLevel level, Entity target, CallbackInfoReturnable<Boolean> cir) {

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": "naturalist:crab_meat",
-  "result": {
-    "id": "naturalist:cooked_crab_meat"
-  },
-  "experience": 0.35,
-  "cookingtime": 200
-}

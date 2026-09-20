@@ -46,6 +46,6 @@ public class DyeLayer<T extends LivingEntity & DyeableAnimal, M extends EntityMo
             return;
         }
         submitNodeCollector.order(1).submitModel(this.getParentModel(), state, poseStack, RenderTypes.entityCutout(this.getDyeTexture(entity, color)),
-                lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
+                lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor);
     }
 }

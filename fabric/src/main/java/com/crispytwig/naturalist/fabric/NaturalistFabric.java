@@ -9,7 +9,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
@@ -29,9 +28,6 @@ public class NaturalistFabric implements ModInitializer {
         Naturalist.registerSpawnPlacements(SpawnPlacements::register);
 
         Naturalist.registerDispenserBehaviors();
-
-        FabricPotionBrewingBuilder.BUILD.register(builder ->
-                Naturalist.registerPotionMixes(builder::addMix));
 
         registerBiomeSpawns();
         registerBiomeFeatures();

@@ -51,6 +51,7 @@ import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
@@ -202,14 +203,14 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
     }
 
     @Override
-    protected void blockedByItem(@NotNull LivingEntity defender, @NotNull DamageSource source, float damage) {
+    protected void blockedByItem(@NotNull LivingEntity defender, @NotNull DamageSource source, float damage, boolean fullyBlocked) {
         this.stunnedTick = 60;
         this.resetChargeCooldownTicks();
         this.getNavigation().stop();
         this.playSound(SoundEvents.RAVAGER_STUNNED, 1.0f, 1.0f);
         this.level().broadcastEntityEvent(this, (byte)39);
         defender.push(this);
-        defender.hurtMarked = true;
+        defender.syncVelocity = true;
     }
 
     @Override
@@ -378,8 +379,6 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
         public void stop() {
             this.mob.resetChargeCooldownTicks();
             this.mob.getNavigation().stop();
-
-            this.mob.swinging = false;
         }
 
         @Override
@@ -424,7 +423,7 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
                     livingEntity.knockback(shieldBlockModifier * speed * 2.0D, this.chargeDirection.x(), this.chargeDirection.z(), damageSource, damage);
                     double knockbackResistance = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().add(0.0, 0.4f * knockbackResistance, 0.0));
-                    this.mob.swing(InteractionHand.MAIN_HAND);
+                    this.mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                     if (livingEntity.equals(this.mob.getTarget())) {
                         this.stop();
                     }
@@ -477,7 +476,6 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
         @Override
         public void stop() {
             super.stop();
-            this.mob.swinging = false;
         }
     }
     //endregion
@@ -499,7 +497,7 @@ public class Rhino extends NaturalistAnimal implements DataDrivenVariantAnimal {
         this.stunnedAnimationState.animateWhen(stunned, this.tickCount);
         this.footAnimationState.animateWhen(stomping, this.tickCount);
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.walkAnimationState.animateWhen(!stunned && moving && !this.isSprinting(), this.tickCount);
         this.runAnimationState.animateWhen(!stunned && moving && this.isSprinting(), this.tickCount);

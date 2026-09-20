@@ -229,7 +229,7 @@ public class Catfish extends AbstractFish implements HuntingAnimal, DataDrivenVa
         boolean inWater = this.isInWater();
         this.flopAnimationState.animateWhen(!inWater, this.tickCount);
         this.swimAnimationState.animateWhen(inWater, this.tickCount);
-        this.biteAnimationState.animateWhen(this.swinging, this.tickCount);
+        this.biteAnimationState.animateWhen(this.isSwinging(), this.tickCount);
     }
     //endregion
 

@@ -65,6 +65,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
+import net.minecraft.util.Prediction;
 
 @SuppressWarnings("unused")
 public class Hedgehog extends TamableAnimal implements DyeableAnimal, FollowingPet, HidingAnimal, Catchable, DataDrivenVariantAnimal {
@@ -517,7 +518,7 @@ public class Hedgehog extends TamableAnimal implements DyeableAnimal, FollowingP
             ItemStack stack = this.getCaughtItemStack();
             this.saveToHandTag(stack);
             if (!thrower.getInventory().add(stack)) {
-                thrower.drop(stack, false);
+                thrower.drop(stack, false, Prediction.SERVER_ONLY);
             }
             this.playSound(SoundEvents.ITEM_PICKUP, 0.3F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
             this.discard();

@@ -186,7 +186,7 @@ public abstract class Scorpion extends Animal implements NocturnalHostile {
     private void setupAnimationStates() {
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.walkAnimationState.animateWhen(moving && !this.isAggressive(), this.tickCount);
         this.runAnimationState.animateWhen(moving && this.isAggressive(), this.tickCount);

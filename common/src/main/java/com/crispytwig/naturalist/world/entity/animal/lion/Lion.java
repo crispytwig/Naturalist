@@ -539,7 +539,7 @@ public class Lion extends TamableAnimal implements SleepingAnimal, FollowingPet,
         this.sleepAnimationState.animateWhen(sleeping && !altSleep, this.tickCount);
         this.sleep2AnimationState.animateWhen(sleeping && altSleep, this.tickCount);
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.runAnimationState.animateWhen(!posing && moving && this.isSprinting(), this.tickCount);
         this.preyAnimationState.animateWhen(!posing && moving && !this.isSprinting() && this.isCrouching(), this.tickCount);

@@ -759,7 +759,7 @@ public class Ostrich extends TamableAnimal implements EggLayingAnimal, HidingAni
         boolean running = moving && (this.isSprinting() || this.isVehicle());
         boolean burying = !flapping && !sitting && !moving && this.canHide();
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.flapAnimationState.animateWhen(flapping, this.tickCount);
         this.sitAnimationState.animateWhen(sitting, this.tickCount);

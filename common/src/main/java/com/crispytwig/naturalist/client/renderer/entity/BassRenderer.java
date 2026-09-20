@@ -40,6 +40,6 @@ public class BassRenderer extends NaturalistMobRenderer<Bass> {
     @Override
     protected void setupRotations(NaturalistRenderState<Bass> state, PoseStack poseStack, float bodyRot, float entityScale) {
         super.setupRotations(state, poseStack, bodyRot, entityScale);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-state.entity.swimTilt.getTilt(state.partialTick)));
+        poseStack.rotateDegrees(Axis.ZP, -state.entity.swimTilt.getTilt(state.partialTick));
     }
 }

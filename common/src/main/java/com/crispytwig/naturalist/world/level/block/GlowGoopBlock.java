@@ -31,6 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.function.ToIntFunction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 
 @SuppressWarnings("unused")
 public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
@@ -60,7 +62,7 @@ public class GlowGoopBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
+    public void playerDestroy(@NotNull ServerLevel level, @NotNull ServerPlayer player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         this.decreaseGoop(level, pos, state);
     }

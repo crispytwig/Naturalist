@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": "naturalist:piranha",
-  "result": {
-    "id": "naturalist:cooked_piranha"
-  },
-  "experience": 0.35,
-  "cookingtime": 100
-}

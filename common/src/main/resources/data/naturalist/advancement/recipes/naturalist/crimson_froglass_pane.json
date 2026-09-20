@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:crimson_froglass_pane"
+        "recipes": "naturalist:crimson_froglass_pane"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

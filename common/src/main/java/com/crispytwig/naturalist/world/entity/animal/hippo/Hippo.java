@@ -61,6 +61,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.EnumSet;
 import java.util.List;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVariantAnimal {
@@ -273,7 +274,7 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
                 if (!this.level().isClientSide()) {
                     this.eatingTicks = 10;
                     this.setItemSlot(EquipmentSlot.MAINHAND, itemStack.copy());
-                    this.swing(InteractionHand.MAIN_HAND);
+                    this.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                     float yRot = (this.getYRot() + 90) * Mth.DEG_TO_RAD;
                     ((ServerLevel)level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.MELON.defaultBlockState()), this.getX() + Math.cos(yRot), this.getY() + 0.6, this.getZ() + Math.sin(yRot), 100, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
                     ((ServerLevel)level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, Items.MELON_SLICE), this.getX() + Math.cos(yRot), this.getY() + 0.6, this.getZ() + Math.sin(yRot), 100, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
@@ -452,7 +453,7 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
         protected void checkAndPerformAttack(Entity enemy, double distToEnemySqr) {
             if (distToEnemySqr <= this.getAttackReachSqr(enemy) && this.ticksUntilNextAttack <= 0) {
                 this.resetAttackCooldown();
-                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
                 this.mob.doHurtTarget(getServerLevel(this.mob), enemy);
             }
         }
@@ -485,7 +486,7 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
         this.sitAnimationState.animateWhen(posing && baby, this.tickCount);
         this.sleepAnimationState.animateWhen(posing && !baby, this.tickCount);
 
-        if (this.swinging && this.biteAnimTicks <= 0) {
+        if (this.isSwinging() && this.biteAnimTicks <= 0) {
             this.biteAnimTicks = BITE_ANIM_TICKS;
         } else if (this.biteAnimTicks > 0) {
             this.biteAnimTicks--;

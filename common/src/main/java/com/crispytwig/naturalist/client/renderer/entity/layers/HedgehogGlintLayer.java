@@ -20,7 +20,7 @@ public class HedgehogGlintLayer extends RenderLayer<NaturalistRenderState<Hedgeh
         if (state.isInvisible || !state.entity.hasThrowEnchantments()) {
             return;
         }
-        submitNodeCollector.order(2).submitModel(this.getParentModel(), state, poseStack, RenderTypes.entityGlint(),
-                lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        submitNodeCollector.order(2).submitModel(this.getParentModel(), state, poseStack, RenderTypes.patternedShieldGlint(),
+                lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
     }
 }

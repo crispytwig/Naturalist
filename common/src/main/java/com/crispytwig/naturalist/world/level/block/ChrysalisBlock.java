@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public class ChrysalisBlock extends HorizontalDirectionalBlock {
-    public static final MapCodec<ChrysalisBlock> CODEC = simpleCodec(ChrysalisBlock::new);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     protected static final VoxelShape[] EAST_AABB = new VoxelShape[]{Block.box(11.0D, 7.0D, 6.0D, 15.0D, 12.0D, 10.0D), Block.box(9.0D, 5.0D, 5.0D, 15.0D, 12.0D, 11.0D), Block.box(7.0D, 3.0D, 4.0D, 15.0D, 12.0D, 12.0D), Block.box(7.0D, 3.0D, 4.0D, 15.0D, 12.0D, 12.0D)};
     protected static final VoxelShape[] WEST_AABB = new VoxelShape[]{Block.box(1.0D, 7.0D, 6.0D, 5.0D, 12.0D, 10.0D), Block.box(1.0D, 5.0D, 5.0D, 7.0D, 12.0D, 11.0D), Block.box(1.0D, 3.0D, 4.0D, 9.0D, 12.0D, 12.0D), Block.box(1.0D, 3.0D, 4.0D, 9.0D, 12.0D, 12.0D)};
@@ -41,11 +40,6 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
     public ChrysalisBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 0));
-    }
-
-    @Override
-    protected @NotNull MapCodec<ChrysalisBlock> codec() {
-        return CODEC;
     }
 
     @Override

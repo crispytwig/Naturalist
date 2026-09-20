@@ -230,7 +230,7 @@ public class Piranha extends AbstractSchoolingFish implements DataDrivenVariantA
 
     private void setupAnimationStates() {
         boolean inWater = this.isInWater();
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
         this.flopAnimationState.animateWhen(!inWater, this.tickCount);
         this.swimAnimationState.animateWhen(inWater, this.tickCount);
     }

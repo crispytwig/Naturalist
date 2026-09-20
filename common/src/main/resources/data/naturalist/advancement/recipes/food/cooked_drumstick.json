@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:cooked_drumstick"
+        "recipes": "naturalist:cooked_drumstick"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

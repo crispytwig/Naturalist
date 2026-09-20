@@ -313,7 +313,7 @@ public class Boar extends NaturalistAnimal implements NeutralMob, DataDrivenVari
     private void setupAnimationStates() {
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
 
-        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.swinging), this.tickCount);
+        this.attackAnimationState.animateWhen(this.attackAnimTimer.tick(this.isSwinging()), this.tickCount);
 
         this.walkAnimationState.animateWhen(moving && !this.isSprinting(), this.tickCount);
         this.runAnimationState.animateWhen(moving && this.isSprinting(), this.tickCount);

@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:damage_source_properties",
+        "predicate": {
+          "source_entity": {
+            "minecraft:entity_type": "minecraft:frog"
+          }
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:nbt": "{Variant:\"naturalist:blue\"}"
+            }
+          },
+          "name": "naturalist:azure_froglass"
+        },
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:nbt": "{Variant:\"naturalist:green\"}"
+            }
+          },
+          "name": "naturalist:verdant_froglass"
+        },
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:nbt": "{Variant:\"naturalist:red\"}"
+            }
+          },
+          "name": "naturalist:crimson_froglass"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "naturalist:entities/dragonfly"
+}

@@ -14,7 +14,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "naturalist:shellstone_slab"
+        "recipes": "naturalist:shellstone_slab"
       }
     }
   },

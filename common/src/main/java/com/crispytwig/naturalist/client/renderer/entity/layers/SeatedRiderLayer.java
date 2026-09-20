@@ -40,9 +40,9 @@ public class SeatedRiderLayer<T extends Mob, M extends EntityModel<? super Natur
 
         poseStack.pushPose();
         seatedModel.translateToSeat(poseStack);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-seatedModel.seatZRot() * 0.1F * Mth.RAD_TO_DEG));
+        poseStack.rotateDegrees(Axis.ZP, -seatedModel.seatZRot() * 0.1F * Mth.RAD_TO_DEG);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(Mth.rotLerp(state.partialTick, entity.yBodyRotO, entity.yBodyRot) - 180.0F));
+        poseStack.rotateDegrees(Axis.YP, Mth.rotLerp(state.partialTick, entity.yBodyRotO, entity.yBodyRot) - 180.0F);
         poseStack.translate(0.0F, -seatedModel.seatHeight(), 0.0F);
         renderer.submit(riderState, poseStack, submitNodeCollector, camera);
         poseStack.popPose();

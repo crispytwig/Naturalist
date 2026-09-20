@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "naturalist:glow_goop"
+        "recipes": "naturalist:glow_goop"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

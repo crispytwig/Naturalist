@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": "naturalist:anglerfish",
-  "result": {
-    "id": "naturalist:cooked_anglerfish"
-  },
-  "experience": 0.35,
-  "cookingtime": 600
-}

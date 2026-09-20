@@ -12,32 +12,55 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.resources.ResourceKey;
 
 public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
-    private static final Identifier ATMOSPHERIC_IS_RAINFOREST = Identifier.fromNamespaceAndPath("atmospheric", "is_rainforest");
-    private static final Identifier ATMOSPHERIC_KOUSA_JUNGLE = Identifier.fromNamespaceAndPath("atmospheric", "kousa_jungle");
+    private static final TagKey<Biome> ATMOSPHERIC_IS_RAINFOREST = TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("atmospheric", "is_rainforest"));
+    private static final ResourceKey<Biome> ATMOSPHERIC_KOUSA_JUNGLE = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("atmospheric", "kousa_jungle"));
 
-    private static Identifier bop(String name) {
-        return Identifier.fromNamespaceAndPath("biomesoplenty", name);
+    private static ResourceKey<Biome> bop(String name) {
+        return ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("biomesoplenty", name));
     }
 
-    private static Identifier terralith(String name) {
-        return Identifier.fromNamespaceAndPath("terralith", name);
+    private static ResourceKey<Biome> terralith(String name) {
+        return ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("terralith", name));
     }
 
-    public NaturalistBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.BIOME, lookupProvider, Naturalist.MOD_ID, existingFileHelper);
+    public NaturalistBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, Registries.BIOME, lookupProvider);
     }
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
+        tag(biomeTag("naturalist:variant/tiger/black_panther"))
+                .add(Biomes.SWAMP).add(Biomes.MANGROVE_SWAMP).add(Biomes.DARK_FOREST)
+                .addOptionalTag(Tags.Biomes.IS_SWAMP)
+                .addOptional(bop("bayou"))
+                .addOptional(terralith("orchid_swamp"));
+
+        tag(biomeTag("naturalist:variant/tiger/leopard"))
+                .add(Biomes.SPARSE_JUNGLE)
+                .addTag(BiomeTags.IS_MOUNTAIN).addTag(BiomeTags.IS_BADLANDS)
+                .add(Biomes.DESERT)
+                .addOptional(bop("rainforest"))
+                .addOptional(terralith("cloud_forest"));
+
+        tag(biomeTag("naturalist:variant/tiger/white_tiger"))
+                .add(Biomes.BAMBOO_JUNGLE).add(Biomes.CHERRY_GROVE)
+                .add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE)
+                .addOptional(bop("snowblossom_grove")).addOptional(bop("snowy_maple_woods"))
+                .addOptional(terralith("wintry_forest"));
+
+        tag(biomeTag("naturalist:variant/tortoise/black"))
+                .addTag(BiomeTags.IS_JUNGLE)
+                .add(Biomes.DARK_FOREST);
+
         tag(NaturalistBiomeTags.HAS_ANT_HILL)
-                .addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_SAVANNA);
+                .addOptionalTag(BiomeTags.IS_JUNGLE).addOptionalTag(BiomeTags.IS_SAVANNA);
 
         tag(NaturalistBiomeTags.HAS_ALLIGATOR)
                 .add(Biomes.SWAMP).add(Biomes.MANGROVE_SWAMP).add(Biomes.RIVER)
@@ -309,33 +332,33 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .addOptional(terralith("wintry_forest"));
 
         tag(NaturalistBiomeTags.HAS_GIANT_ISOPOD)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_JELLYFISH)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_ANGLERFISH)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_RAY)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_BLOBFISH)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_WHALE)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_PIRANHA)
-                .addTag(BiomeTags.IS_JUNGLE)
-                .add(Biomes.LUSH_CAVES)
-                .addOptionalTag(Tags.Biomes.IS_JUNGLE);
+                .addOptionalTag(BiomeTags.IS_JUNGLE)
+                .addOptionalTag(Tags.Biomes.IS_JUNGLE)
+                .add(Biomes.LUSH_CAVES);
 
         tag(NaturalistBiomeTags.HAS_GIRAFFE)
                 .addTag(BiomeTags.IS_SAVANNA)
@@ -409,11 +432,16 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .addOptional(bop("seasonal_forest")).addOptional(bop("woodland"));
 
         tag(NaturalistBiomeTags.HAS_TIGER)
-                .addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_MOUNTAIN).addTag(BiomeTags.IS_SAVANNA)
-                .add(Biomes.MANGROVE_SWAMP).add(Biomes.DESERT).add(Biomes.CHERRY_GROVE)
+                .addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_MOUNTAIN).addTag(BiomeTags.IS_BADLANDS)
+                .add(Biomes.SWAMP).add(Biomes.MANGROVE_SWAMP).add(Biomes.DARK_FOREST)
+                .add(Biomes.DESERT).add(Biomes.CHERRY_GROVE)
+                .add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE)
+                .addOptionalTag(Tags.Biomes.IS_JUNGLE).addOptionalTag(Tags.Biomes.IS_SWAMP)
                 .addOptional(bop("rainforest")).addOptional(bop("mystic_grove"))
-                .addOptional(bop("lush_desert")).addOptional(bop("crag"))
-                .addOptional(bop("bayou"));
+                .addOptional(bop("bayou"))
+                .addOptional(bop("snowblossom_grove")).addOptional(bop("snowy_maple_woods"))
+                .addOptional(terralith("cloud_forest")).addOptional(terralith("orchid_swamp"))
+                .addOptional(terralith("wintry_forest"));
 
         tag(NaturalistBiomeTags.HAS_KOMODO_DRAGON)
                 .addTag(BiomeTags.IS_BADLANDS).addTag(BiomeTags.IS_SAVANNA)
@@ -586,11 +614,11 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .addOptional(terralith("shrubland"));
 
         tag(NaturalistBiomeTags.HAS_STARFISH)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_CLAM)
-                .addTag(BiomeTags.IS_OCEAN)
+                .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
 
         tag(NaturalistBiomeTags.HAS_TORTOISE)
@@ -648,7 +676,7 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CANARY);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CARDINAL);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_CATFISH);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_CLAM);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_CLAM);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_CORAL_SNAKE);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_CRAB);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_DEER);
@@ -661,12 +689,12 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_FIREFLY);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FOREST_FOXES);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_FOREST_RABBITS);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_GIANT_ISOPOD);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_GIANT_ISOPOD);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_GREAT_WHITE_SHARK);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_JELLYFISH);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_ANGLERFISH);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_RAY);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_BLOBFISH);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_JELLYFISH);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_ANGLERFISH);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_RAY);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_BLOBFISH);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_PIRANHA);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_GIRAFFE);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_HIPPO);
@@ -687,7 +715,7 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_SNAIL);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_SNAKE);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_SPARROW);
-        coldBlacklist(NaturalistBiomeTags.BLACKLIST_STARFISH);
+        coldMarineBlacklist(NaturalistBiomeTags.BLACKLIST_STARFISH);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_TORTOISE);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_VULTURE);
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_ZEBRA);
@@ -698,7 +726,16 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         tag(tag).addOptionalTag(Tags.Biomes.IS_ICY).addOptionalTag(Tags.Biomes.IS_SNOWY);
     }
 
+    private void coldMarineBlacklist(TagKey<Biome> tag) {
+        tag(tag).addOptionalTag(Tags.Biomes.IS_ICY).addOptionalTag(Tags.Biomes.IS_SNOWY)
+                .add(Biomes.FROZEN_OCEAN).add(Biomes.DEEP_FROZEN_OCEAN);
+    }
+
     private void emptyBlacklist(TagKey<Biome> tag) {
         tag(tag);
+    }
+
+    private static TagKey<Biome> biomeTag(String id) {
+        return TagKey.create(Registries.BIOME, Identifier.parse(id));
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "H": "naturalist:hide"
+  },
+  "pattern": [
+    "H H",
+    " H "
+  ],
+  "result": {
+    "id": "naturalist:knapsack"
+  }
+}

@@ -85,6 +85,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
 public class Crab extends TamableAnimal implements HidingAnimal, FollowingPet, Catchable, DataDrivenVariantAnimal {
@@ -419,7 +420,7 @@ public class Crab extends TamableAnimal implements HidingAnimal, FollowingPet, C
     public boolean doHurtTarget(@NotNull ServerLevel level, @NotNull Entity target) {
         boolean hurt = super.doHurtTarget(level, target);
         if (hurt) {
-            this.swing(InteractionHand.MAIN_HAND);
+            this.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
             this.playSound(NaturalistSoundEvents.CRAB_PINCER.get(), 1.0F, 1.0F);
             ItemStack weapon = this.getMainHandItem();
             if (!weapon.isEmpty() && weapon.isDamageableItem()) {
@@ -492,7 +493,7 @@ public class Crab extends TamableAnimal implements HidingAnimal, FollowingPet, C
         this.walkAnimationState.animateWhen(!posing && moving, this.tickCount);
         this.idleAnimationState.animateWhen(!posing && !moving, this.tickCount);
 
-        if (this.swinging && this.swingAnimTicks <= 0) {
+        if (this.isSwinging() && this.swingAnimTicks <= 0) {
             this.swingAnimTicks = SWING_ANIM_TICKS;
         } else if (this.swingAnimTicks > 0) {
             this.swingAnimTicks--;

@@ -85,9 +85,9 @@ public class SnailShellRenderer implements BlockEntityRenderer<SnailShellBlockEn
         }
         poseStack.pushPose();
         poseStack.translate(0.5D, 0.5D, 0.5D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(-state.rotationDegrees));
+        poseStack.rotateDegrees(Axis.YP, -state.rotationDegrees);
         poseStack.translate(0.0D, -0.28125D, 0.15625D);
-        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+        poseStack.rotateDegrees(Axis.XP, 90.0F);
         poseStack.translate(-0.5D, -0.21875D, -0.65625D);
         state.shell.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
         poseStack.popPose();

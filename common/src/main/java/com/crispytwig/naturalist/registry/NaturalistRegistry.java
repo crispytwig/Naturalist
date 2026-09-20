@@ -118,7 +118,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> MUSIC_DISC_WILD_ONES = registerItem("music_disc_wild_ones", new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(WILD_ONES_SONG));
     public static final ResourceKey<JukeboxSong> DEATH_BY_HOGS_SONG = ResourceKey.create(Registries.JUKEBOX_SONG, Naturalist.location("death_by_hogs"));
     public static final DeferredHolder<Item, Item> MUSIC_DISC_DEATH_BY_HOGS = registerItem("music_disc_death_by_hogs", new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(DEATH_BY_HOGS_SONG));
-    public static final DeferredHolder<Block, ChrysalisBlock> CHRYSALIS_BLOCK = registerBlockOnly("chrysalis", ChrysalisBlock::new, () -> BlockBehaviour.Properties.of().randomTicks().strength(0.2F, 3.0F).sound(SoundType.GRASS).noOcclusion().noCollision().pushReaction(PushReaction.DESTROY));
+    public static final DeferredHolder<Block, ChrysalisBlock> CHRYSALIS_BLOCK = registerBlockOnly("chrysalis", ChrysalisBlock::new, () -> BlockBehaviour.Properties.of().randomTicks().strength(0.2F, 3.0F).sound(SoundType.GRASS).noOcclusion().noCollision().pushReaction(PushReaction.POPPED));
     public static final DeferredHolder<Item, BlockItem> CHRYSALIS = registerItem("chrysalis", props -> new BlockItem(CHRYSALIS_BLOCK.get(), props), new Item.Properties().stacksTo(1).useBlockDescriptionPrefix());
     public static final DeferredHolder<Item, CaughtMobItem> CATERPILLAR = registerItem("caterpillar", props -> new CaughtMobItem(NaturalistEntityTypes.CATERPILLAR, () -> Fluids.EMPTY, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, CaughtMobWithVariantsItem> BUTTERFLY = registerItem("butterfly", props -> new CaughtMobWithVariantsItem(NaturalistEntityTypes.BUTTERFLY, () -> Fluids.EMPTY, NaturalistSoundEvents.BIRD_FLY, "tooltip.naturalist.", Butterfly.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
@@ -129,7 +129,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> SCORPION_POISON_GLAND = registerItem("scorpion_poison_gland", new Item.Properties());
     public static final DeferredHolder<Item, QueenAntItem> QUEEN_ANT = registerItem("queen_ant", QueenAntItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Block, AntHillBlock> ANT_HILL = registerBlock("ant_hill", AntHillBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F, 0.2F).sound(SoundType.ROOTED_DIRT).randomTicks());
-    public static final DeferredHolder<Block, SnailShellBlock> SNAIL_SHELL_BLOCK = registerBlockOnly("snail_shell", SnailShellBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.CORAL_BLOCK).noOcclusion().pushReaction(PushReaction.DESTROY));
+    public static final DeferredHolder<Block, SnailShellBlock> SNAIL_SHELL_BLOCK = registerBlockOnly("snail_shell", SnailShellBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.CORAL_BLOCK).noOcclusion().pushReaction(PushReaction.POPPED));
     public static final DeferredHolder<Item, BlockItem> SNAIL_SHELL = registerItem("snail_shell", props -> new BlockItem(SNAIL_SHELL_BLOCK.get(), props), new Item.Properties().useBlockDescriptionPrefix().component(DataComponents.CUSTOM_DATA, SnailShellBlock.colorData(DyeColor.BROWN)));
     public static final DeferredHolder<Item, SnailItem> SNAIL = registerItem("snail", props -> new SnailItem(NaturalistEntityTypes.SNAIL, () -> Fluids.EMPTY, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> STARFISH_BUCKET = registerItem("starfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.STARFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, false, "color.minecraft.", Starfish.VARIANT_NAMES), new Item.Properties().stacksTo(1));
@@ -255,6 +255,6 @@ public class NaturalistRegistry {
     }
 
     private static DeferredHolder<Block, StarfishBlock> registerStarfishBlock(String name) {
-        return registerBlock(name, StarfishBlock::new, () -> BlockBehaviour.Properties.of().noCollision().instabreak().sound(SoundType.WET_GRASS).noOcclusion().pushReaction(PushReaction.DESTROY));
+        return registerBlock(name, StarfishBlock::new, () -> BlockBehaviour.Properties.of().noCollision().instabreak().sound(SoundType.WET_GRASS).noOcclusion().pushReaction(PushReaction.POPPED));
     }
 }

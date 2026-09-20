@@ -27,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.server.level.ServerLevel;
 
 public abstract class NaturalistAnimal extends Animal {
     protected NaturalistAnimal(EntityType<? extends Animal> entityType, Level level) {
@@ -69,7 +70,10 @@ public abstract class NaturalistAnimal extends Animal {
             if (!area.contains(player.getX(), player.getY(), player.getZ()) || !player.canBeSeenByAnyone() || !selector.test(player)) {
                 continue;
             }
-            double visibilityDistance = Math.max(range * player.getVisibilityPercent(mob), 2.0D);
+            double visibility = mob.level() instanceof ServerLevel serverLevel
+                    ? player.getVisibilityPercent(serverLevel, mob)
+                    : 1.0D;
+            double visibilityDistance = Math.max(range * visibility, 2.0D);
             if (mob.distanceToSqr(player.getX(), player.getY(), player.getZ()) <= visibilityDistance * visibilityDistance && mob.hasLineOfSight(player)) {
                 return player;
             }

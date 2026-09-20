@@ -225,7 +225,7 @@ public class Dragonfly extends PathfinderMob implements DataDrivenVariantAnimal 
                     (int)(this.getZ() + this.random.nextInt(7) - this.random.nextInt(7))
             ));
             assert randomPos != null;
-            this.targetPosition = new BlockPos(new Vec3i((int)randomPos.x, (int)randomPos.y, (int)randomPos.z));
+            this.targetPosition = BlockPos.containing(randomPos);
             this.setHoverTicks(15);
         }
         if (this.targetPosition != null && this.getHoverTicks() <= 0) {

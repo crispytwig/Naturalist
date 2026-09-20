@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:cod",
+    "minecraft:cooked_cod",
+    "minecraft:salmon",
+    "minecraft:cooked_salmon",
+    "minecraft:tropical_fish",
+    "naturalist:catfish",
+    "naturalist:cooked_catfish",
+    "naturalist:bass",
+    "naturalist:cooked_bass"
+  ]
+}

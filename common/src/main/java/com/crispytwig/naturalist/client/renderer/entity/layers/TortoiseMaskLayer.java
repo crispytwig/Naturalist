@@ -39,6 +39,6 @@ public class TortoiseMaskLayer<M extends EntityModel<? super NaturalistRenderSta
             return;
         }
         submitNodeCollector.order(1).submitModel(this.getParentModel(), state, poseStack, RenderTypes.entityCutout(skin),
-                lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
+                lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor);
     }
 }
