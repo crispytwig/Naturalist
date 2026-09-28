@@ -4,6 +4,7 @@ import com.crispytwig.naturalist.world.entity.ai.goal.WolfDigOutMoleGoal;
 import com.crispytwig.naturalist.world.entity.WolfMoleDigging;
 import com.crispytwig.naturalist.world.entity.animal.deer.Deer;
 import com.crispytwig.naturalist.world.entity.animal.mole.Mole;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
@@ -29,9 +30,12 @@ public abstract class WolfMixin extends TamableAnimal implements WolfMoleDigging
         super(entityType, level);
     }
 
-    @Inject(at = @At("TAIL"), method = "registerGoals")
+    @Inject(at = @At("TAIL"), method = "<init>")
     @SuppressWarnings("unused")
-    private void naturalist$registerGoals(CallbackInfo ci) {
+    private void naturalist$registerGoals(EntityType<? extends Wolf> entityType, Level level, CallbackInfo ci) {
+        if (!(level instanceof ServerLevel)) {
+            return;
+        }
         this.goalSelector.addGoal(3, new WolfDigOutMoleGoal((Wolf) (Object) this));
         this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Mole.class, false, null));
         this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Deer.class, false, null));

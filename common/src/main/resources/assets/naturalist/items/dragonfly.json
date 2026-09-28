@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:green\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/dragonfly_green"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:\"naturalist:red\"}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/dragonfly_red"
+      },
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/dragonfly"
+      }
+    }
+  }
+}

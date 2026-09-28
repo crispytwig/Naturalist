@@ -109,6 +109,11 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("item.naturalist.canary_spawn_egg", "Canary Spawn Egg");
         add("item.naturalist.cardinal_spawn_egg", "Cardinal Spawn Egg");
         add("item.naturalist.caterpillar", "Caterpillar");
+        add("item.naturalist.dragonfly", "Dragonfly");
+        add("item.naturalist.firefly", "Firefly");
+        add("item.naturalist.bee", "Bee");
+        add("item.naturalist.silverfish", "Silverfish");
+        add("item.naturalist.endermite", "Endermite");
         add("item.naturalist.caterpillar_spawn_egg", "Caterpillar Spawn Egg");
         add("item.naturalist.catfish", "Raw Catfish");
         add("item.naturalist.catfish_bucket", "Bucket of Catfish");
