@@ -1,7 +1,10 @@
 package com.crispytwig.naturalist.world.item;
 
 import com.crispytwig.naturalist.world.item.crafting.BugNetInteractionRecipe;
+import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
+import com.crispytwig.naturalist.registry.NaturalistRegistry;
+import net.minecraft.world.entity.Mob;
 import com.crispytwig.naturalist.registry.NaturalistRecipes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -59,6 +62,13 @@ public class BugNetItem extends Item {
     public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack stack, Player player, @NotNull LivingEntity interactionTarget, @NotNull InteractionHand usedHand) {
         if (!(player.level() instanceof ServerLevel serverLevel)) {
             return super.interactLivingEntity(stack, player, interactionTarget, usedHand);
+        }
+        if (interactionTarget instanceof Mob mob && mob.isAlive() && !mob.isPassenger() && !mob.isVehicle()) {
+            for (DeferredHolder<Item, CaughtEntityItem> holder : NaturalistRegistry.CAUGHT_ENTITY_ITEMS) {
+                if (holder.get().type() == mob.getType()) {
+                    return CaughtEntityItem.giveCaught(player, usedHand, stack, mob, holder.get());
+                }
+            }
         }
         Optional<BugNetInteractionRecipe> allRecipes = serverLevel.recipeAccess().getRecipes()
                 .stream()

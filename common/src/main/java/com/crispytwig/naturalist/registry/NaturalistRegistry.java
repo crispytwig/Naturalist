@@ -23,8 +23,7 @@ import com.crispytwig.naturalist.world.item.DuckEggItem;
 import com.crispytwig.naturalist.world.item.KnapsackItem;
 import com.crispytwig.naturalist.world.item.WhistleItem;
 import com.crispytwig.naturalist.world.item.GlowGoopItem;
-import com.crispytwig.naturalist.world.item.CaughtMobItem;
-import com.crispytwig.naturalist.world.item.CaughtMobWithVariantsItem;
+import com.crispytwig.naturalist.world.item.CaughtEntityItem;
 import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import com.crispytwig.naturalist.world.item.SnailItem;
 import com.crispytwig.naturalist.world.entity.animal.starfish.Starfish;
@@ -39,6 +38,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.component.CustomData;
@@ -54,6 +54,8 @@ import net.minecraft.world.level.material.PushReaction;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -62,6 +64,7 @@ import java.util.function.Supplier;
 public class NaturalistRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, Naturalist.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, Naturalist.MOD_ID);
+    public static final List<DeferredHolder<Item, CaughtEntityItem>> CAUGHT_ENTITY_ITEMS = new ArrayList<>();
 
     public static final DeferredHolder<Item, Item> BUSHMEAT = registerItem("bushmeat", new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationModifier(0.3F).build()));
     public static final DeferredHolder<Item, Item> COOKED_BUSHMEAT = registerItem("cooked_bushmeat", new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.8F).build()));
@@ -110,7 +113,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> COOKED_CLAM_MEAT = registerItem("cooked_clam_meat", new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()));
     public static final DeferredHolder<Item, Item> CRAB_MEAT = registerItem("crab_meat", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
     public static final DeferredHolder<Item, Item> COOKED_CRAB_MEAT = registerItem("cooked_crab_meat", new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()));
-    public static final DeferredHolder<Item, CaughtMobWithVariantsItem> CRAB = registerItem("crab", props -> new CaughtMobWithVariantsItem(NaturalistEntityTypes.CRAB, () -> Fluids.EMPTY, NaturalistSoundEvents.CRAB_AMBIENT, "tooltip.naturalist.crab_", Crab.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> CRAB = registerItem("crab", props -> new CaughtEntityItem(NaturalistEntityTypes.CRAB, NaturalistSoundEvents.CRAB_AMBIENT, "tooltip.naturalist.crab_", Crab.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, BugNetItem> CAPTURE_NET = registerItem("capture_net", BugNetItem::new, new Item.Properties().durability(64));
     public static final DeferredHolder<Item, KnapsackItem> KNAPSACK = registerItem("knapsack", KnapsackItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, WhistleItem> WHISTLE = registerItem("whistle", WhistleItem::new, new Item.Properties().stacksTo(1));
@@ -120,18 +123,23 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> MUSIC_DISC_DEATH_BY_HOGS = registerItem("music_disc_death_by_hogs", new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(DEATH_BY_HOGS_SONG));
     public static final DeferredHolder<Block, ChrysalisBlock> CHRYSALIS_BLOCK = registerBlockOnly("chrysalis", ChrysalisBlock::new, () -> BlockBehaviour.Properties.of().randomTicks().strength(0.2F, 3.0F).sound(SoundType.GRASS).noOcclusion().noCollision().pushReaction(PushReaction.POPPED));
     public static final DeferredHolder<Item, BlockItem> CHRYSALIS = registerItem("chrysalis", props -> new BlockItem(CHRYSALIS_BLOCK.get(), props), new Item.Properties().stacksTo(1).useBlockDescriptionPrefix());
-    public static final DeferredHolder<Item, CaughtMobItem> CATERPILLAR = registerItem("caterpillar", props -> new CaughtMobItem(NaturalistEntityTypes.CATERPILLAR, () -> Fluids.EMPTY, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, CaughtMobWithVariantsItem> BUTTERFLY = registerItem("butterfly", props -> new CaughtMobWithVariantsItem(NaturalistEntityTypes.BUTTERFLY, () -> Fluids.EMPTY, NaturalistSoundEvents.BIRD_FLY, "tooltip.naturalist.", Butterfly.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, CaughtMobItem> ANT = registerItem("ant", props -> new CaughtMobItem(NaturalistEntityTypes.ANT, () -> Fluids.EMPTY, NaturalistSoundEvents.ANT_AMBIENT, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, CaughtMobWithVariantsItem> RAT = registerItem("rat", props -> new CaughtMobWithVariantsItem(NaturalistEntityTypes.RAT, () -> Fluids.EMPTY, NaturalistSoundEvents.RAT_AMBIENT, "tooltip.naturalist.rat_", Rat.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, CaughtMobItem> SCORPION = registerItem("scorpion", props -> new CaughtMobItem(NaturalistEntityTypes.DESERT_SCORPION, () -> Fluids.EMPTY, NaturalistSoundEvents.SCORPION_AMBIENT, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, HedgehogItem> HEDGEHOG = registerItem("hedgehog", props -> new HedgehogItem(NaturalistEntityTypes.HEDGEHOG, () -> Fluids.EMPTY, NaturalistSoundEvents.HEDGEHOG_AMBIENT, "tooltip.naturalist.hedgehog_", Hedgehog.VARIANT_NAMES, props), new Item.Properties().stacksTo(1).enchantable(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> CATERPILLAR = registerItem("caterpillar", props -> new CaughtEntityItem(NaturalistEntityTypes.CATERPILLAR, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> BUTTERFLY = registerItem("butterfly", props -> new CaughtEntityItem(NaturalistEntityTypes.BUTTERFLY, NaturalistSoundEvents.BIRD_FLY, "tooltip.naturalist.", Butterfly.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> ANT = registerItem("ant", props -> new CaughtEntityItem(NaturalistEntityTypes.ANT, NaturalistSoundEvents.ANT_AMBIENT, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> RAT = registerItem("rat", props -> new CaughtEntityItem(NaturalistEntityTypes.RAT, NaturalistSoundEvents.RAT_AMBIENT, "tooltip.naturalist.rat_", Rat.VARIANT_NAMES, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> SCORPION = registerItem("scorpion", props -> new CaughtEntityItem(NaturalistEntityTypes.DESERT_SCORPION, NaturalistSoundEvents.SCORPION_AMBIENT, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, HedgehogItem> HEDGEHOG = registerItem("hedgehog", props -> new HedgehogItem(NaturalistEntityTypes.HEDGEHOG, NaturalistSoundEvents.HEDGEHOG_AMBIENT, "tooltip.naturalist.hedgehog_", Hedgehog.VARIANT_NAMES, props), new Item.Properties().stacksTo(1).enchantable(1));
+    public static final DeferredHolder<Item, CaughtEntityItem> DRAGONFLY = registerCaughtEntity("dragonfly", NaturalistEntityTypes.DRAGONFLY);
+    public static final DeferredHolder<Item, CaughtEntityItem> FIREFLY = registerCaughtEntity("firefly", NaturalistEntityTypes.FIREFLY);
+    public static final DeferredHolder<Item, CaughtEntityItem> BEE = registerCaughtEntity("bee", () -> EntityTypes.BEE);
+    public static final DeferredHolder<Item, CaughtEntityItem> SILVERFISH = registerCaughtEntity("silverfish", () -> EntityTypes.SILVERFISH);
+    public static final DeferredHolder<Item, CaughtEntityItem> ENDERMITE = registerCaughtEntity("endermite", () -> EntityTypes.ENDERMITE);
     public static final DeferredHolder<Item, Item> SCORPION_POISON_GLAND = registerItem("scorpion_poison_gland", new Item.Properties());
     public static final DeferredHolder<Item, QueenAntItem> QUEEN_ANT = registerItem("queen_ant", QueenAntItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Block, AntHillBlock> ANT_HILL = registerBlock("ant_hill", AntHillBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F, 0.2F).sound(SoundType.ROOTED_DIRT).randomTicks());
     public static final DeferredHolder<Block, SnailShellBlock> SNAIL_SHELL_BLOCK = registerBlockOnly("snail_shell", SnailShellBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.CORAL_BLOCK).noOcclusion().pushReaction(PushReaction.POPPED));
     public static final DeferredHolder<Item, BlockItem> SNAIL_SHELL = registerItem("snail_shell", props -> new BlockItem(SNAIL_SHELL_BLOCK.get(), props), new Item.Properties().useBlockDescriptionPrefix().component(DataComponents.CUSTOM_DATA, SnailShellBlock.colorData(DyeColor.BROWN)));
-    public static final DeferredHolder<Item, SnailItem> SNAIL = registerItem("snail", props -> new SnailItem(NaturalistEntityTypes.SNAIL, () -> Fluids.EMPTY, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, SnailItem> SNAIL = registerItem("snail", props -> new SnailItem(NaturalistEntityTypes.SNAIL, NaturalistSoundEvents.SNAIL_FORWARD, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> STARFISH_BUCKET = registerItem("starfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.STARFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, false, "color.minecraft.", Starfish.VARIANT_NAMES), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> GIANT_ISOPOD_BUCKET = registerItem("giant_isopod_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.GIANT_ISOPOD.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, false, "tooltip.naturalist.giant_isopod_", GiantIsopod.VARIANT_NAMES), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> ANGLERFISH_BUCKET = registerItem("anglerfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.ANGLERFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "tooltip.naturalist.anglerfish_", Anglerfish.VARIANT_NAMES), new Item.Properties().stacksTo(1));
@@ -238,6 +246,12 @@ public class NaturalistRegistry {
 
     private static <T extends Item> DeferredHolder<Item, T> registerItem(String name, Function<Item.Properties, T> factory, Item.Properties properties) {
         return ITEMS.register(name, () -> factory.apply(properties.setId(itemKey(name))));
+    }
+
+    private static DeferredHolder<Item, CaughtEntityItem> registerCaughtEntity(String name, Supplier<? extends EntityType<?>> type) {
+        DeferredHolder<Item, CaughtEntityItem> holder = registerItem(name, props -> new CaughtEntityItem(type, () -> SoundEvents.BUNDLE_DROP_CONTENTS, props), new Item.Properties().stacksTo(1));
+        CAUGHT_ENTITY_ITEMS.add(holder);
+        return holder;
     }
 
     private static <T extends Mob> DeferredHolder<Item, SpawnEggItem> registerSpawnEgg(String name, Supplier<EntityType<T>> type) {

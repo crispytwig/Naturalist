@@ -1,2 +1,7 @@
 - Zebras can now be equipped with Saddles.
-- Zebras now run when mounted and not tamed, similar to Horses.
+  - Zebras now run when mounted and not tamed, similar to Horses.
+- NeoForge now runs. Ensure you're using `26.3.0.31-beta` or later.
+- Spawn Eggs now all have custom textures.
+- Mobs like Bees, Dragonflies, Endermites, Fireflies, and Silverfish can now be caught with Capture Nets.
+  - Caught mobs with variants no longer flicker to another variant before it's properly applied.
+- Fixed Butterfly UV.
