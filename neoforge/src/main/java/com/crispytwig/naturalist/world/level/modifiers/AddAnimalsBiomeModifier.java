@@ -5,6 +5,7 @@ import com.crispytwig.naturalist.NaturalistConfig;
 import com.crispytwig.naturalist.neoforge.registry.NaturalistBiomeModifiers;
 import com.crispytwig.naturalist.world.level.NaturalistSpawns;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AddAnimalsBiomeModifier implements BiomeModifier {
     @Override
-    public void modify(@NotNull Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.@NotNull Builder builder) {
+    public void modify(@NotNull RegistryAccess registries, @NotNull Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.@NotNull Builder builder) {
         if (phase.equals(Phase.ADD)) {
             NaturalistSpawns.forEachSpawn((hasTag, blacklistTag, category, entityType, weight, min, max) -> {
                 if (NaturalistConfig.isRemoved(entityType)) {

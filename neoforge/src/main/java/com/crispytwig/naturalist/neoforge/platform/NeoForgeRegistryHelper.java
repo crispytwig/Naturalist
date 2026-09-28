@@ -4,7 +4,7 @@ import com.crispytwig.naturalist.platform.services.IRegistryHelper;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.NewDatapackRegistryEvent;
 
 public class NeoForgeRegistryHelper implements IRegistryHelper {
     @Override
@@ -12,7 +12,7 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
         if (NeoForgeRegistrationProvider.EVENT_BUS == null) {
             throw new IllegalStateException("Naturalist ModEventBus was not set before datapack registry!");
         }
-        NeoForgeRegistrationProvider.EVENT_BUS.addListener((DataPackRegistryEvent.NewRegistry event) ->
-                event.dataPackRegistry(registryKey, codec, codec));
+        NeoForgeRegistrationProvider.EVENT_BUS.addListener((NewDatapackRegistryEvent event) ->
+                event.worldRegistry(registryKey, codec, codec));
     }
 }
