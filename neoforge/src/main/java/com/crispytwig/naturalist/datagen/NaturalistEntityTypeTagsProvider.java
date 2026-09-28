@@ -113,6 +113,9 @@ public class NaturalistEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(entityType("naturalist:giant_isopod"))
                 .add(entityType("naturalist:capybara"));
 
+        tag(entityTypeTag("minecraft:can_equip_saddle"))
+                .add(entityType("naturalist:zebra"));
+
         tag(entityTypeTag("minecraft:frog_food"))
                 .add(entityType("naturalist:firefly"))
                 .add(entityType("naturalist:dragonfly"));
