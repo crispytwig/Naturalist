@@ -25,7 +25,6 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -34,14 +33,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class HedgehogItem extends CaughtMobWithVariantsItem {
+public class HedgehogItem extends CaughtEntityItem {
     private static final float MAX_HEALTH = 18.0F;
     private static final Set<String> THROW_ENCHANTMENT_KEYS = Set.of(
             "enchantment.minecraft.unbreaking", "enchantment.minecraft.thorns", "enchantment.minecraft.punch",
             "enchantment.minecraft.flame", "enchantment.minecraft.looting", "enchantment.minecraft.loyalty");
 
-    public HedgehogItem(Supplier<? extends EntityType<?>> entitySupplier, Supplier<? extends Fluid> fluidSupplier, Supplier<? extends SoundEvent> soundSupplier, String tooltipPrefix, String[] variantNames, Properties properties) {
-        super(entitySupplier, fluidSupplier, soundSupplier, tooltipPrefix, variantNames, properties);
+    public HedgehogItem(Supplier<? extends EntityType<?>> entitySupplier, Supplier<? extends SoundEvent> soundSupplier, String tooltipPrefix, String[] variantNames, Properties properties) {
+        super(entitySupplier, soundSupplier, tooltipPrefix, variantNames, properties);
     }
 
     public static boolean isThrowEnchantment(Enchantment enchantment) {
@@ -82,13 +81,13 @@ public class HedgehogItem extends CaughtMobWithVariantsItem {
     @Override
     public void checkExtraContent(@Nullable Player player, @NotNull Level level, @NotNull ItemStack containerStack, @NotNull BlockPos pos) {
         if (level instanceof ServerLevel serverLevel) {
-            Entity entity = NaturalistEntityTypes.HEDGEHOG.get().spawn(serverLevel, containerStack, null, pos, MobSpawnType.BUCKET, true, false);
-            if (entity instanceof Hedgehog hedgehog) {
+            NaturalistEntityTypes.HEDGEHOG.get().spawn(serverLevel, EntityType.<Hedgehog>createDefaultStackConfig(serverLevel, containerStack, player).andThen(hedgehog -> {
                 hedgehog.loadFromHandTag(containerStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag());
                 hedgehog.setNoGravity(false);
                 hedgehog.setFromHand(true);
+                hedgehog.setPersistenceRequired();
                 hedgehog.setThrowEnchantments(containerStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY));
-            }
+            }), pos, MobSpawnType.BUCKET, true, false);
             level.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
         }
     }
@@ -112,6 +111,7 @@ public class HedgehogItem extends CaughtMobWithVariantsItem {
             }
             hedgehog.setNoGravity(false);
             hedgehog.setFromHand(true);
+            hedgehog.setPersistenceRequired();
             hedgehog.setThrowEnchantments(stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY));
             hedgehog.setThrower(player.getUUID());
             hedgehog.setRolling(true);

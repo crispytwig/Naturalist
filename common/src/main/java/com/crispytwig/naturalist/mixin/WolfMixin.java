@@ -34,9 +34,12 @@ public abstract class WolfMixin extends TamableAnimal implements WolfMoleDigging
         builder.define(naturalist$DIGGING_OUT_MOLE, false);
     }
 
-    @Inject(at = @At("TAIL"), method = "registerGoals")
+    @Inject(at = @At("TAIL"), method = "<init>")
     @SuppressWarnings("unused")
-    private void naturalist$registerGoals(CallbackInfo ci) {
+    private void naturalist$registerGoals(EntityType<? extends Wolf> entityType, Level level, CallbackInfo ci) {
+        if (level == null || level.isClientSide()) {
+            return;
+        }
         this.goalSelector.addGoal(3, new WolfDigOutMoleGoal((Wolf) (Object) this));
         this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Mole.class, false, null));
         this.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Deer.class, false, null));

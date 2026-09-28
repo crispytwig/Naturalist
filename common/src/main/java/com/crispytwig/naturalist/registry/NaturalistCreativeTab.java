@@ -2,6 +2,7 @@ package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.server.block.SnailShellBlock;
+import com.crispytwig.naturalist.server.entity.mob.Dragonfly;
 import com.crispytwig.naturalist.server.entity.mob.Snail;
 import net.minecraft.world.item.DyeColor;
 import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
@@ -34,6 +35,8 @@ public class NaturalistCreativeTab {
                             acceptSnailColors(output, item);
                         } else if (item == NaturalistRegistry.SNAIL_SHELL.get()) {
                             acceptShellColors(output);
+                        } else if (item == NaturalistRegistry.DRAGONFLY.get()) {
+                            acceptVariants(output, item, Dragonfly.VARIANT_NAMES);
                         } else if (item == NaturalistRegistry.STARFISH_BUCKET.get()) {
                             acceptVariants(output, item, STARFISH_TAB_ORDER);
                         } else if (item instanceof NaturalistBucketItem bucketItem && bucketItem.getLegacyVariantNames() != null) {

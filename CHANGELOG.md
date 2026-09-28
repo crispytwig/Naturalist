@@ -1,14 +1,7 @@
-- The following mobs can not move through Nether Portals on their own, and must be captured with a Capture Net or bucketed and brought through manually. `This is being done to prevent mass lag from smaller entities jumping in and out of portals. Despite some of these not moving much, I just went ahead and removed it from all smaller entities as a safety net.`
-
-  |            |              |                 |
-  |------------|--------------|-----------------|
-  | Anglerfish | Ant          | Bass            |
-  | Blobfish   | Butterfly    | Caterpillar     |
-  | Catfish    | Crab         | Desert Scorpion |
-  | Duck       | Giant Isopod | Hedgehog        |
-  | Jellyfish  | Piranha      | Rat             |
-  | Ray        | Snail        | Starfish        |
-
-- Untamed Wolves now attack Deer.
-- Fish and Meat tags are fixed - Ocelots, Cats, Wolves, and Piglins should now eat Naturalist food items. 
-- Whales, Great White Sharks, and Giant Isopods now spawn naturally.
+- Zebras can now be equipped with Saddles.
+  - Zebras now run when mounted and not tamed, similar to Horses.
+- The optional Custom Spawn Eggs resource pack now covers every Spawn Egg.
+- Mobs like Bees, Dragonflies, Endermites, Fireflies, and Silverfish can now be caught with Capture Nets.
+  - Caught mobs with variants no longer flicker to another variant before it's properly applied.
+- Fixed Butterfly UV.
+- Wolf mixins should no longer conflict with mods that make their own changes to Wolves - please let me know if you're still experiencing issues! `@crispytwig`

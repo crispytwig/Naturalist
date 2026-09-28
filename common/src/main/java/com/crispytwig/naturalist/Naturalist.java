@@ -6,7 +6,7 @@ import com.crispytwig.naturalist.platform.Services;
 import com.crispytwig.naturalist.registry.*;
 import com.crispytwig.naturalist.server.entity.base.NaturalistAnimal;
 import com.crispytwig.naturalist.server.entity.mob.*;
-import com.crispytwig.naturalist.server.item.CaughtMobItem;
+import com.crispytwig.naturalist.server.item.CaughtEntityItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -266,7 +266,7 @@ public final class Naturalist {
                 Direction direction = source.state().getValue(DispenserBlock.FACING);
                 BlockPos blockPos = source.pos().relative(direction);
                 Level level = source.level();
-                if (stack.getItem() instanceof CaughtMobItem caughtMobItem) {
+                if (stack.getItem() instanceof CaughtEntityItem caughtMobItem) {
                     caughtMobItem.checkExtraContent(null, level, stack, blockPos);
                     stack.shrink(1);
                 }

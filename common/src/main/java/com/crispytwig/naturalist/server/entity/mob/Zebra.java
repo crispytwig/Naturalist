@@ -22,6 +22,9 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -36,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.crispytwig.naturalist.server.entity.util.SmoothAnimationState;
 
+import java.util.EnumSet;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
@@ -142,7 +146,7 @@ public class Zebra extends AbstractChestedHorse implements DataDrivenVariantAnim
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
-        this.goalSelector.addGoal(1, new RunAroundLikeCrazyGoal(this, 1.6));
+        this.goalSelector.addGoal(1, new ZebraRunAroundGoal(this, 1.6));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0, AbstractHorse.class));
         this.goalSelector.addGoal(3, new ZebraTemptGoal(this, 1.25, FOOD_ITEMS, true));
         this.goalSelector.addGoal(4, new ZebraAvoidPlayersGoal(this, 16.0f, 1.6D, 1.6D));
@@ -150,6 +154,21 @@ public class Zebra extends AbstractChestedHorse implements DataDrivenVariantAnim
         this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.7));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0f));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        if (!this.isTamed() && this.getFirstPassenger() instanceof Player player && this.random.nextInt(50) == 0) {
+            if (this.random.nextInt(this.getMaxTemper()) < this.getTemper()) {
+                this.tameWithName(player);
+                return;
+            }
+            this.modifyTemper(5);
+            this.ejectPassengers();
+            this.makeMad();
+            this.level().broadcastEntityEvent(this, (byte) 6);
+        }
     }
 
     @Override
@@ -211,12 +230,66 @@ public class Zebra extends AbstractChestedHorse implements DataDrivenVariantAnim
 
         @Override
         public boolean canUse() {
-            return !this.zebra.isTamed() && super.canUse();
+            return !this.zebra.isTamed() && !this.zebra.isVehicle() && super.canUse();
         }
 
         @Override
         public boolean canContinueToUse() {
-            return !this.zebra.isTamed() && super.canContinueToUse();
+            return !this.zebra.isTamed() && !this.zebra.isVehicle() && super.canContinueToUse();
+        }
+    }
+
+    static class ZebraRunAroundGoal extends Goal {
+        private final Zebra zebra;
+        private final double speedModifier;
+        private Vec3 target = Vec3.ZERO;
+        private int runTime;
+
+        public ZebraRunAroundGoal(Zebra zebra, double speedModifier) {
+            this.zebra = zebra;
+            this.speedModifier = speedModifier;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            return !this.zebra.isTamed() && this.zebra.getFirstPassenger() instanceof Player;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.canUse() && this.runTime > 0 && this.zebra.distanceToSqr(this.target.x, this.zebra.getY(), this.target.z) > 1.0;
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public void start() {
+            Vec3 pos = DefaultRandomPos.getPos(this.zebra, 5, 4);
+            if (pos == null) {
+                float angle = this.zebra.getRandom().nextFloat() * Mth.TWO_PI;
+                double distance = 3.0 + this.zebra.getRandom().nextDouble() * 2.0;
+                pos = this.zebra.position().add(Mth.cos(angle) * distance, 0.0, Mth.sin(angle) * distance);
+            }
+            this.target = pos;
+            this.runTime = this.adjustedTickDelay(60);
+            this.zebra.getNavigation().moveTo(pos.x, pos.y, pos.z, this.speedModifier);
+        }
+
+        @Override
+        public void stop() {
+            this.zebra.getNavigation().stop();
+        }
+
+        @Override
+        public void tick() {
+            this.runTime--;
+            if (this.zebra.getNavigation().isDone()) {
+                this.zebra.getMoveControl().setWantedPosition(this.target.x, this.target.y, this.target.z, this.speedModifier);
+            }
         }
     }
 
@@ -226,6 +299,11 @@ public class Zebra extends AbstractChestedHorse implements DataDrivenVariantAnim
         public ZebraTemptGoal(Zebra zebra, double speedModifier, Ingredient items, boolean canScare) {
             super(zebra, speedModifier, items, canScare);
             this.zebra = zebra;
+        }
+
+        @Override
+        public boolean canUse() {
+            return !this.zebra.isVehicle() && super.canUse();
         }
 
         @Override

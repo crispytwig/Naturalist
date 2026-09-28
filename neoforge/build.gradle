@@ -59,6 +59,7 @@ dependencies {
     modLocalRuntime "maven.modrinth:field-guide:${project.field_guide_neoforge}"
 
     modLocalRuntime "maven.modrinth:immersive-overlays:${project.immersive_overlays}-neoforge"
+    modLocalRuntime "maven.modrinth:revampedwolf:${project.revampedwolf_neoforge}"
 
     localRuntime "maven.modrinth:not-enough-animations:${project.nea_neoforge}"
 
