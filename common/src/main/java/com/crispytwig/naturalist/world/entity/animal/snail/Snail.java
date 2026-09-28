@@ -233,6 +233,7 @@ public class Snail extends NaturalistAnimal implements Catchable, HidingAnimal, 
         CompoundTag compoundTag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         this.saveVariant(compoundTag);
         compoundTag.putInt("Color", this.getSnailColor().getId());
+        compoundTag.putInt("Age", this.getAge());
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(compoundTag));
     }
 
@@ -249,6 +250,8 @@ public class Snail extends NaturalistAnimal implements Catchable, HidingAnimal, 
         } else {
             this.setSnailColor(Snail.Color.BROWN);
         }
+        Optional<Integer> age = tag.getInt("Age");
+        age.ifPresent(this::setAge);
     }
 
     @Override
