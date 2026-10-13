@@ -454,4 +454,9 @@ public class Butterfly extends NaturalistAnimal implements Catchable, DataDriven
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

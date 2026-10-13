@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -102,6 +103,9 @@ public class NaturalistEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.CHICKEN)
                 .add(EntityType.SILVERFISH)
                 .add(NaturalistEntityTypes.SNAIL.get());
+
+        tag(EntityTypeTags.CAN_EQUIP_SADDLE)
+                .add(NaturalistEntityTypes.ZEBRA.get());
 
         tag(NaturalistEntityTypeTags.VULTURE_HOSTILES)
                 .add(EntityType.ZOMBIE)

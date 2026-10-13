@@ -39,6 +39,7 @@ dependencies {
     runtimeOnly "maven.modrinth:field-guide:${field_guide_neoforge}"
 
     runtimeOnly "maven.modrinth:immersive-overlays:${immersive_overlays}-neoforge"
+    runtimeOnly "maven.modrinth:revampedwolf:${revampedwolf_neoforge}"
 }
 
 publishMods {

@@ -281,7 +281,7 @@ public class Firefly extends NaturalistAnimal implements DataDrivenVariantAnimal
 
         @Override
         public boolean canUse() {
-            return firefly.isSunBurnTick() && super.canUse();
+            return !firefly.isPersistenceRequired() && firefly.isSunBurnTick() && super.canUse();
         }
 
         @Override

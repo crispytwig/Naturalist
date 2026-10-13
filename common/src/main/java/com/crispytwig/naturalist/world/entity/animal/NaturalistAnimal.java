@@ -35,7 +35,7 @@ public abstract class NaturalistAnimal extends Animal {
 
     @SuppressWarnings("unused")
     public static boolean checkNaturalistAnimalSpawnRules(EntityType<? extends Animal> entityType, LevelAccessor level, EntitySpawnReason spawnType, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(BlockTags.DIRT) && isBrightEnoughToSpawn(level, pos);
+        return level.getBlockState(pos.below()).is(BlockTags.SUBSTRATE_OVERWORLD) && isBrightEnoughToSpawn(level, pos);
     }
 
     public static boolean isVisiblyMoving(Entity entity) {

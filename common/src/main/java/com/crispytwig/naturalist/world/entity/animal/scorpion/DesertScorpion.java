@@ -158,4 +158,9 @@ public class DesertScorpion extends Scorpion implements Catchable, DataDrivenVar
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

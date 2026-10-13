@@ -275,4 +275,9 @@ public class Caterpillar extends ClimbingAnimal implements Catchable, DataDriven
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

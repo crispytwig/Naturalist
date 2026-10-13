@@ -52,6 +52,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.LevelAccessor;
@@ -215,6 +216,11 @@ public class Whale extends Animal implements MultipartMob, DataDrivenVariantAnim
         return level.getFluidState(pos).is(FluidTags.WATER)
                 && level.getFluidState(pos.above(1)).is(FluidTags.WATER)
                 && level.getFluidState(pos.above(2)).is(FluidTags.WATER);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(@NotNull LevelReader level) {
+        return level.isUnobstructed(this);
     }
 
     @Override

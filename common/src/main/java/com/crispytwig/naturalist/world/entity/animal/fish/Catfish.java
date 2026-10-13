@@ -232,4 +232,9 @@ public class Catfish extends AbstractFish implements HuntingAnimal, DataDrivenVa
         this.biteAnimationState.animateWhen(this.swinging, this.tickCount);
     }
     //endregion
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

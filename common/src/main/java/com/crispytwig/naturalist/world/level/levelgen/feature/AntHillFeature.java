@@ -48,7 +48,7 @@ public class AntHillFeature extends Feature<NoneFeatureConfiguration> {
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
         RandomSource random = context.random();
-        if (!level.getBlockState(origin.below()).is(BlockTags.DIRT)) {
+        if (!level.getBlockState(origin.below()).is(BlockTags.SUBSTRATE_OVERWORLD)) {
             return false;
         }
         BlockPos[] layout = this.big ? BIG_LAYOUT : SMALL_LAYOUT;

@@ -65,7 +65,7 @@ import com.crispytwig.naturalist.world.entity.animal.turkey.Turkey;
 import com.crispytwig.naturalist.world.entity.animal.vulture.Vulture;
 import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
 import com.crispytwig.naturalist.world.entity.animal.equine.Zebra;
-import com.crispytwig.naturalist.world.item.CaughtMobItem;
+import com.crispytwig.naturalist.world.item.CaughtEntityItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -324,7 +324,7 @@ public final class Naturalist {
                 Direction direction = source.state().getValue(DispenserBlock.FACING);
                 BlockPos blockPos = source.pos().relative(direction);
                 Level level = source.level();
-                if (stack.getItem() instanceof CaughtMobItem caughtMobItem) {
+                if (stack.getItem() instanceof CaughtEntityItem caughtMobItem) {
                     caughtMobItem.checkExtraContent(null, level, stack, blockPos);
                     stack.shrink(1);
                 }

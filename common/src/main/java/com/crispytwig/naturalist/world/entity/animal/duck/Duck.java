@@ -205,7 +205,7 @@ public class Duck extends TamableAnimal implements DyeableAnimal, FollowingPet, 
 
     //region Spawning
     public static boolean checkDuckSpawnRules(EntityType<Duck> type, @NotNull ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return (level.getBlockState(pos.below()).is(BlockTags.DIRT) || level.getBlockState(pos.below()).getFluidState().is(FluidTags.WATER)) && isBrightEnoughToSpawn(level, pos);
+        return (level.getBlockState(pos.below()).is(BlockTags.SUBSTRATE_OVERWORLD) || level.getBlockState(pos.below()).getFluidState().is(FluidTags.WATER)) && isBrightEnoughToSpawn(level, pos);
     }
 
     @Override
@@ -417,4 +417,8 @@ public class Duck extends TamableAnimal implements DyeableAnimal, FollowingPet, 
     }
     //endregion
 
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }

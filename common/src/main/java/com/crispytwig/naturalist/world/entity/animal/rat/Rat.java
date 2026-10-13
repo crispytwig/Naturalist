@@ -539,4 +539,9 @@ public class Rat extends TamableClimbingAnimal implements SleepingAnimal, Follow
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
+
+    @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
 }
