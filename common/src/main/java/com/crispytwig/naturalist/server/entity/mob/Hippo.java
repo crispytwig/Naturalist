@@ -52,6 +52,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.crispytwig.naturalist.server.entity.util.SmoothAnimationState;
@@ -320,6 +321,10 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
+            if (this.isInWater() && this.horizontalCollision && this.getNavigation().isInProgress()) {
+                Vec3 movement = this.getDeltaMovement();
+                this.setDeltaMovement(movement.x, Math.max(movement.y, 0.3D), movement.z);
+            }
             if (this.eatingTicks > 0) {
                 this.eatingTicks--;
             } else {

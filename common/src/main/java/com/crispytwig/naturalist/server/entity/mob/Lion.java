@@ -180,11 +180,12 @@ public class Lion extends TamableAnimal implements SleepingAnimal, FollowingPet,
         this.selectVariantForSpawn(level);
         super.finalizeSpawn(level, difficulty, reason, spawnData);
         AgeableMobGroupData ageableMobGroupData;
+        boolean prideSpawn = reason == MobSpawnType.NATURAL || reason == MobSpawnType.CHUNK_GENERATION;
         boolean prideLeader = spawnData == null;
         if (prideLeader) {
             spawnData = new AgeableMobGroupData(true);
         }
-        this.setHasMane(!prideLeader && this.getRandom().nextBoolean());
+        this.setHasMane(!(prideSpawn && prideLeader) && this.getRandom().nextBoolean());
         if ((ageableMobGroupData = (AgeableMobGroupData)spawnData).getGroupSize() > 2 && this.getRandom().nextFloat() < 0.7F) {
             this.setAge(-24000);
         }
@@ -528,7 +529,7 @@ public class Lion extends TamableAnimal implements SleepingAnimal, FollowingPet,
         boolean baby = this.isBaby();
         boolean sitting = baby && this.isInSittingPose();
         boolean sleeping = this.isSleeping() || (!baby && this.isInSittingPose());
-        boolean altSleep = this.usesAltSleepPose();
+        boolean altSleep = !baby && this.usesAltSleepPose();
         boolean posing = sitting || sleeping;
         boolean moving = NaturalistAnimal.isVisiblyMoving(this);
 
