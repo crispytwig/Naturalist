@@ -4,3 +4,5 @@
 - Fixed some Lion cubs standing upright with their eyes closed instead of using their sleeping pose.
 - Fixed tamed Lion cubs losing their head while fighting.
 - Lion Spawn Eggs can now spawn male Lions.
+- Fixed Hippos sinking and staying underwater, causing baby Hippos to drown.
+- Hippos can now climb out of water to chase you onto land.
