@@ -219,7 +219,7 @@ public class Firefly extends NaturalistAnimal implements DataDrivenVariantAnimal
                 this.entityData.set(GLOW_START_TICK, this.tickCount);
             }
         }
-        if (this.isSunBurnTick()) {
+        if (this.isInBrightSunlight()) {
             this.setSunTicks(this.getSunTicks() + 1);
             if (this.getSunTicks() > 600) {
                 BlockPos pos = this.blockPosition();
@@ -244,7 +244,7 @@ public class Firefly extends NaturalistAnimal implements DataDrivenVariantAnimal
         return false;
     }
 
-    protected boolean isSunBurnTick() {
+    protected boolean isInBrightSunlight() {
         if (this.level().isBrightOutside() && !this.hasCustomName() && !this.level().isClientSide()) {
             float f = (float) this.level().getMaxLocalRawBrightness(BlockPos.containing(this.getX(), this.getEyeY(), this.getZ())) / 15.0F;
             return Mth.lerp(this.level().dimensionType().ambientLight(), f / (4.0F - 3.0F * f), 1.0F) > 0.5F;
@@ -281,7 +281,7 @@ public class Firefly extends NaturalistAnimal implements DataDrivenVariantAnimal
 
         @Override
         public boolean canUse() {
-            return !firefly.isPersistenceRequired() && firefly.isSunBurnTick() && super.canUse();
+            return !firefly.isPersistenceRequired() && firefly.isInBrightSunlight() && super.canUse();
         }
 
         @Override

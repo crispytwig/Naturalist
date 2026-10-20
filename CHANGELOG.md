@@ -1,7 +1,7 @@
-- Zebras can now be equipped with Saddles.
-  - Zebras now run when mounted and not tamed, similar to Horses.
-- Spawn Eggs now all have custom textures.
-- Mobs like Bees, Dragonflies, Endermites, Fireflies, and Silverfish can now be caught with Capture Nets.
-  - Caught mobs with variants no longer flicker to another variant before it's properly applied.
-- Fixed Butterfly UV.
-- Wolf mixins should no longer conflict with mods that make their own changes to Wolves - please let me know if you're still experiencing issues! `@crispytwig`
+- Fixed log spam from Hippo spawning during world generation.
+- Fixed a startup crash from conflicts with other mod from Fireflies conflicting with `Mob.isSunBurnTick()`.
+- Fixed some Lion cubs standing upright with their eyes closed instead of using their sleeping pose.
+- Fixed tamed Lion cubs losing their head while fighting.
+- Lion Spawn Eggs can now spawn male Lions.
+- Fixed Hippos sinking and staying underwater, causing baby Hippos to drown.
+- Hippos can now climb out of water to chase you onto land.
