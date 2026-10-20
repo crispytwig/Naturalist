@@ -62,6 +62,11 @@ dependencies {
 }
 
 processResources {
+    from(project(":common").loom.accessWidenerPath)
+    from(project(":common").file("src/main/resources/resourcepacks")) {
+        into "resourcepacks"
+    }
+
     def expandProps = [
             "version"                : project.mod_version,
             "mod_id"                 : project.mod_id,

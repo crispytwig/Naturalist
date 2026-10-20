@@ -3,3 +3,5 @@
 - Lion Spawn Eggs can now spawn male Lions.
 - Fixed Hippos sinking and staying underwater, causing baby Hippos to drown.
 - Hippos can now climb out of water to chase you onto land.
+- Caught Dragonflies no longer render as the same color.
+- The optional Custom Spawn Eggs resource pack now registers properly on Fabric.

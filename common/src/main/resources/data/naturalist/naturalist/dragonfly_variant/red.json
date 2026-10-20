@@ -1,3 +1,4 @@
 {
-  "texture": "naturalist:entity/dragonfly/red_dragonfly"
+  "texture": "naturalist:entity/dragonfly/red_dragonfly",
+  "item_model": "naturalist:item/variant/dragonfly_red"
 }

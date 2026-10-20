@@ -1,5 +1,6 @@
 package com.crispytwig.naturalist.fabric.client;
 
+import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.NaturalistClient;
 import com.crispytwig.naturalist.NaturalistClientConfig;
 import com.crispytwig.naturalist.fabric.config.FabricNaturalistClientConfig;
@@ -17,10 +18,14 @@ import net.fabricmc.fabric.api.client.model.loading.v1.PreparableModelLoadingPlu
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -41,6 +46,7 @@ public class NaturalistFabricClient implements ClientModInitializer {
         NaturalistClient.registerMenuScreens(MenuScreens::register);
 
         registerVariantItemModels();
+        registerCustomSpawnEggsPack();
 
         ParticleFactoryRegistry.getInstance().register(NaturalistParticleTypes.CAPTURE_NET_SWING.get(), CaptureNetSwingParticle.Provider::new);
 
@@ -57,6 +63,12 @@ public class NaturalistFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(NaturalistRegistry.AZURE_FROGLASS_PANE.get(), RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(NaturalistRegistry.VERDANT_FROGLASS_PANE.get(), RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(NaturalistRegistry.CRIMSON_FROGLASS_PANE.get(), RenderType.translucent());
+    }
+
+    private static void registerCustomSpawnEggsPack() {
+        FabricLoader.getInstance().getModContainer(Naturalist.MOD_ID).ifPresent(container ->
+                ResourceManagerHelper.registerBuiltinResourcePack(Naturalist.location("custom_spawn_eggs"), container,
+                        Component.literal("Naturalist 1.21.5+ Spawn Eggs"), ResourcePackActivationType.NORMAL));
     }
 
     private static void registerVariantItemModels() {
