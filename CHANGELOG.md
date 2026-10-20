@@ -1,1 +1,3 @@
 - Updated to NeoForge `26.3.0.95` *(stable)*. Please make sure you're using `26.3.0.95` or later, or your mod may not load!
+- Fixed log spam from Hippo spawning during world generation.
+- Fixed a startup crash from conflicts with other mod from Fireflies conflicting with `Mob.isSunBurnTick()`.

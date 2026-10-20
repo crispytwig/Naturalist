@@ -148,12 +148,17 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
     //region Spawning
     public static boolean checkHippoSpawnRules(EntityType<? extends Animal> entityType, ServerLevelAccessor levelAccessor, EntitySpawnReason mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+        boolean sameChunkOnly = mobSpawnType == EntitySpawnReason.CHUNK_GENERATION;
+        int chunkX = SectionPos.blockToSectionCoord(blockPos.getX());
+        int chunkZ = SectionPos.blockToSectionCoord(blockPos.getZ());
         if (levelAccessor.getBlockState(blockPos.below()).is(BlockTags.SUBSTRATE_OVERWORLD) && Animal.isBrightEnoughToSpawn(levelAccessor, blockPos)) {
             for (int x = -16; x <= 16; x++) {
                 for (int y = -1; y <= 1; y++) {
                     for (int z = -16; z <= 16; z++) {
                         mutableBlockPos.setWithOffset(blockPos, x, y, z);
-                        if (!levelAccessor.hasChunk(SectionPos.blockToSectionCoord(mutableBlockPos.getX()), SectionPos.blockToSectionCoord(mutableBlockPos.getZ()))) {
+                        int checkChunkX = SectionPos.blockToSectionCoord(mutableBlockPos.getX());
+                        int checkChunkZ = SectionPos.blockToSectionCoord(mutableBlockPos.getZ());
+                        if (sameChunkOnly ? (checkChunkX != chunkX || checkChunkZ != chunkZ) : !levelAccessor.hasChunk(checkChunkX, checkChunkZ)) {
                             continue;
                         }
                         if (levelAccessor.getFluidState(mutableBlockPos).is(FluidTags.WATER)) {
