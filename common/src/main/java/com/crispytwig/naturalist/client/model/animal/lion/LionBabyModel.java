@@ -67,9 +67,8 @@ public class LionBabyModel extends NaturalistEntityModel<Lion> {
 	@Override
 	protected void setupAnimations(Lion entity, float limbSwing, float limbSwingAmount, float ageInTicks, float partialTick, float netHeadYaw, float headPitch) {
 
-		boolean angry = entity.isAggressive();
-		boolean sleeping = entity.isSleeping() && !angry;
-		this.awake.visible = !sleeping && !angry;
+		boolean sleeping = entity.isSleeping() && !entity.isAggressive();
+		this.awake.visible = !sleeping;
 		this.asleep.visible = sleeping;
 
 		this.animateSmooth(entity.sitAnimationState, LionBabyAnimation.LION_SIT_IDLE, ageInTicks, partialTick);

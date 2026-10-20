@@ -1,3 +1,6 @@
 - Updated to NeoForge `26.3.0.95` *(stable)*. Please make sure you're using `26.3.0.95` or later, or your mod may not load!
 - Fixed log spam from Hippo spawning during world generation.
 - Fixed a startup crash from conflicts with other mod from Fireflies conflicting with `Mob.isSunBurnTick()`.
+- Fixed some Lion cubs standing upright with their eyes closed instead of using their sleeping pose.
+- Fixed tamed Lion cubs losing their head while fighting.
+- Lion Spawn Eggs can now spawn male Lions.
