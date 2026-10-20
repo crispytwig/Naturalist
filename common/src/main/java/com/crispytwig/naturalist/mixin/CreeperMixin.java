@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.mob.Catfish;
-import com.crispytwig.naturalist.server.entity.mob.Lion;
+import com.crispytwig.naturalist.world.entity.animal.fish.Catfish;
+import com.crispytwig.naturalist.world.entity.animal.lion.Lion;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.monster.Creeper;

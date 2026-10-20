@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.model.item;
 
 import com.crispytwig.naturalist.registry.NaturalistMobVariants;
-import com.crispytwig.naturalist.server.entity.variant.MobVariantUtil;
-import com.crispytwig.naturalist.server.item.NaturalistBucketItem;
+import com.crispytwig.naturalist.world.entity.variant.MobVariantUtil;
+import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

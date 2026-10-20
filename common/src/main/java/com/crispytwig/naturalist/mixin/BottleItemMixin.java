@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.mob.Dragonfly;
+import com.crispytwig.naturalist.world.entity.animal.dragonfly.Dragonfly;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

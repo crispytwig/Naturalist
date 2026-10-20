@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.mixin;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.NaturalistConfig;
-import com.crispytwig.naturalist.server.entity.mob.Firefly;
+import com.crispytwig.naturalist.world.entity.animal.firefly.Firefly;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;

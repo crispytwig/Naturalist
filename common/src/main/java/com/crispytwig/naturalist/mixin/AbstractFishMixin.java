@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.mob.Blobfish;
+import com.crispytwig.naturalist.world.entity.animal.fish.Blobfish;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.WaterAnimal;

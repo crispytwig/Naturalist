@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.model;
 
-import com.crispytwig.naturalist.server.entity.base.MultipartMob;
-import com.crispytwig.naturalist.server.entity.util.SmoothAnimationState;
+import com.crispytwig.naturalist.world.entity.MultipartMob;
+import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraft.client.model.HierarchicalModel;

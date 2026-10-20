@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.recipe.BugNetInteractionRecipe;
+import com.crispytwig.naturalist.world.item.crafting.BugNetInteractionRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;

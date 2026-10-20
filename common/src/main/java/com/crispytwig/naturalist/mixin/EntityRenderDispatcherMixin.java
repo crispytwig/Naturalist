@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.base.IKMount;
-import com.crispytwig.naturalist.server.entity.base.MultipartMob;
-import com.crispytwig.naturalist.server.entity.util.MobPart;
+import com.crispytwig.naturalist.world.entity.IKMount;
+import com.crispytwig.naturalist.world.entity.MultipartMob;
+import com.crispytwig.naturalist.world.entity.MobPart;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.LevelRenderer;

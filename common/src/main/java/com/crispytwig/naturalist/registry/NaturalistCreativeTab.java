@@ -1,12 +1,12 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.block.SnailShellBlock;
-import com.crispytwig.naturalist.server.entity.mob.Dragonfly;
-import com.crispytwig.naturalist.server.entity.mob.Snail;
+import com.crispytwig.naturalist.world.level.block.SnailShellBlock;
+import com.crispytwig.naturalist.world.entity.animal.dragonfly.Dragonfly;
+import com.crispytwig.naturalist.world.entity.animal.snail.Snail;
 import net.minecraft.world.item.DyeColor;
-import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
-import com.crispytwig.naturalist.server.item.NaturalistBucketItem;
+import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;

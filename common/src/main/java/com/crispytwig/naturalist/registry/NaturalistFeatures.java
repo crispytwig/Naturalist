@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.level.feature.AntHillFeature;
+import com.crispytwig.naturalist.world.level.levelgen.feature.AntHillFeature;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;

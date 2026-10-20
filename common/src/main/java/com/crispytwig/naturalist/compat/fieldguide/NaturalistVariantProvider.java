@@ -1,8 +1,9 @@
 package com.crispytwig.naturalist.compat.fieldguide;
 
-import com.crispytwig.naturalist.server.entity.mob.*;
-import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
-import com.crispytwig.naturalist.server.entity.variant.MobVariant;
+import com.crispytwig.naturalist.world.entity.animal.greatwhiteshark.GreatWhiteShark;
+import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import com.evandev.fieldguide.api.variant.VariantDef;
 import com.evandev.fieldguide.api.variant.VariantProvider;
 import net.minecraft.core.Registry;

@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.neoforge.registry;
 
 import com.mojang.serialization.MapCodec;
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.level.modifiers.AddAnimalsBiomeModifier;
+import com.crispytwig.naturalist.world.level.modifiers.AddAnimalsBiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

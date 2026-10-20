@@ -7,7 +7,7 @@ import com.crispytwig.naturalist.client.model.item.VariantAwareItemModel;
 import com.crispytwig.naturalist.client.model.item.VariantItemModels;
 import com.crispytwig.naturalist.client.particle.CaptureNetSwingParticle;
 import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
-import com.crispytwig.naturalist.server.item.NaturalistBucketItem;
+import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;

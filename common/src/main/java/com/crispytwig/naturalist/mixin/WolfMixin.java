@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.ai.goal.WolfDigOutMoleGoal;
-import com.crispytwig.naturalist.server.entity.base.WolfMoleDigging;
-import com.crispytwig.naturalist.server.entity.mob.Deer;
-import com.crispytwig.naturalist.server.entity.mob.Mole;
+import com.crispytwig.naturalist.world.entity.ai.goal.WolfDigOutMoleGoal;
+import com.crispytwig.naturalist.world.entity.WolfMoleDigging;
+import com.crispytwig.naturalist.world.entity.animal.deer.Deer;
+import com.crispytwig.naturalist.world.entity.animal.mole.Mole;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;

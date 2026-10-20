@@ -9,7 +9,7 @@ import com.crispytwig.naturalist.client.particle.CaptureNetSwingParticle;
 import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import com.crispytwig.naturalist.server.item.NaturalistBucketItem;
+import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;

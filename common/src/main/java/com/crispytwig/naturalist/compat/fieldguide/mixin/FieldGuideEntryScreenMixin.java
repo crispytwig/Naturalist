@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.compat.fieldguide.mixin;
 
-import com.crispytwig.naturalist.server.entity.base.Catchable;
-import com.crispytwig.naturalist.server.entity.variant.DataDrivenVariantAnimal;
-import com.crispytwig.naturalist.server.entity.variant.MobVariant;
+import com.crispytwig.naturalist.world.entity.Catchable;
+import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import com.evandev.fieldguide.client.gui.screens.FieldGuideEntryScreen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

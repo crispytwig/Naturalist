@@ -3,8 +3,8 @@ package com.crispytwig.naturalist.fabric;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.NaturalistConfig;
 import com.crispytwig.naturalist.fabric.config.FabricNaturalistConfig;
-import com.crispytwig.naturalist.registry.NaturalistTags;
-import com.crispytwig.naturalist.server.level.NaturalistSpawns;
+import com.crispytwig.naturalist.tags.NaturalistBiomeTags;
+import com.crispytwig.naturalist.world.level.NaturalistSpawns;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
@@ -49,7 +49,7 @@ public class NaturalistFabric implements ModInitializer {
 
     private static void registerBiomeFeatures() {
         for (String name : List.of("ant_hill_small", "ant_hill_big")) {
-            BiomeModifications.addFeature(ctx -> ctx.hasTag(NaturalistTags.Biomes.HAS_ANT_HILL), GenerationStep.Decoration.SURFACE_STRUCTURES,
+            BiomeModifications.addFeature(ctx -> ctx.hasTag(NaturalistBiomeTags.HAS_ANT_HILL), GenerationStep.Decoration.SURFACE_STRUCTURES,
                     ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Naturalist.MOD_ID, name)));
         }
     }

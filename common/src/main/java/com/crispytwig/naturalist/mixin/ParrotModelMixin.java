@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.util.ParrotFlight;
+import com.crispytwig.naturalist.world.entity.ParrotFlight;
 import net.minecraft.client.model.ParrotModel;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;

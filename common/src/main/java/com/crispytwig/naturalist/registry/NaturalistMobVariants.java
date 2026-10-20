@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.platform.Services;
-import com.crispytwig.naturalist.server.entity.variant.MobVariant;
+import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

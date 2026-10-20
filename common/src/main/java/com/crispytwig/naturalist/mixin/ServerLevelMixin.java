@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.mixin;
 
-import com.crispytwig.naturalist.server.entity.util.MobPart;
-import com.crispytwig.naturalist.server.entity.util.MultipartLevel;
+import com.crispytwig.naturalist.world.entity.MobPart;
+import com.crispytwig.naturalist.world.level.MultipartLevel;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

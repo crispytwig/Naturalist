@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.registry;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.server.block.entity.AntHillBlockEntity;
-import com.crispytwig.naturalist.server.block.entity.SnailShellBlockEntity;
+import com.crispytwig.naturalist.world.level.block.entity.AntHillBlockEntity;
+import com.crispytwig.naturalist.world.level.block.entity.SnailShellBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
