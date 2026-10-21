@@ -1,6 +1,7 @@
 package com.crispytwig.naturalist.forge;
 
 import com.crispytwig.naturalist.Naturalist;
+import com.crispytwig.naturalist.datagen.NaturalistDataGenerators;
 import com.crispytwig.naturalist.forge.config.ForgeNaturalistConfig;
 import com.crispytwig.naturalist.forge.platform.ForgeRegistrationProvider;
 import com.crispytwig.naturalist.forge.registry.NaturalistBiomeModifiers;
@@ -52,6 +53,7 @@ public class NaturalistForge {
         modEventBus.addListener(this::createAttributes);
         modEventBus.addListener(this::registerSpawnPlacements);
         modEventBus.addListener(this::addPackFinders);
+        modEventBus.addListener(NaturalistDataGenerators::gatherData);
 
         MinecraftForge.EVENT_BUS.addListener(NaturalistForge::remapLegacyIds);
 

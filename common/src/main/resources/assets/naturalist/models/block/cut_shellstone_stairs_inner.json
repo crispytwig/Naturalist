@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "naturalist:block/cut_shellstone",
-    "side": "naturalist:block/cut_shellstone",
-    "top": "naturalist:block/cut_shellstone"
-  }
-}

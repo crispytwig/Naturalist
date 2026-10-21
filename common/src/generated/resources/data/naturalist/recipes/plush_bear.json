@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " F ",
+    "FWF",
+    " F "
+  ],
+  "result": {
+    "item": "naturalist:plush_bear"
+  }
+}

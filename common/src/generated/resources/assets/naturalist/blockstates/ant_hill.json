@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "naturalist:block/ant_hill"
+    },
+    "open=true": {
+      "model": "naturalist:block/ant_hill_open"
+    }
+  }
+}

@@ -33,6 +33,13 @@ legacyForge {
             server()
             gameDirectory = project.file('run/server')
         }
+        data {
+            data()
+            gameDirectory = project.file('run/data')
+            programArguments.addAll '--mod', mod_id, '--all',
+                    '--output', rootProject.file('common/src/generated/resources').absolutePath,
+                    '--existing', rootProject.file('common/src/main/resources').absolutePath
+        }
     }
     mods {
         "${mod_id}" {

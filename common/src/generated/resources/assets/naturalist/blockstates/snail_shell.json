@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "color=black": {
+      "model": "naturalist:block/snail_shell/black"
+    },
+    "color=blue": {
+      "model": "naturalist:block/snail_shell/blue"
+    },
+    "color=brown": {
+      "model": "naturalist:block/snail_shell/brown"
+    },
+    "color=cyan": {
+      "model": "naturalist:block/snail_shell/cyan"
+    },
+    "color=gray": {
+      "model": "naturalist:block/snail_shell/gray"
+    },
+    "color=green": {
+      "model": "naturalist:block/snail_shell/green"
+    },
+    "color=light_blue": {
+      "model": "naturalist:block/snail_shell/light_blue"
+    },
+    "color=light_gray": {
+      "model": "naturalist:block/snail_shell/light_gray"
+    },
+    "color=lime": {
+      "model": "naturalist:block/snail_shell/lime"
+    },
+    "color=magenta": {
+      "model": "naturalist:block/snail_shell/magenta"
+    },
+    "color=orange": {
+      "model": "naturalist:block/snail_shell/orange"
+    },
+    "color=pink": {
+      "model": "naturalist:block/snail_shell/pink"
+    },
+    "color=purple": {
+      "model": "naturalist:block/snail_shell/purple"
+    },
+    "color=red": {
+      "model": "naturalist:block/snail_shell/red"
+    },
+    "color=white": {
+      "model": "naturalist:block/snail_shell/white"
+    },
+    "color=yellow": {
+      "model": "naturalist:block/snail_shell/yellow"
+    }
+  }
+}

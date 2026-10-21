@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "naturalist:block/smooth_shellstone_slab"
+    },
+    "type=double": {
+      "model": "naturalist:block/smooth_shellstone"
+    },
+    "type=top": {
+      "model": "naturalist:block/smooth_shellstone_slab_top"
+    }
+  }
+}

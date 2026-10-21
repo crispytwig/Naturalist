@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "naturalist:ant_hill"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "naturalist:ant_hill",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "has_queen": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "naturalist:queen_ant"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "naturalist:blocks/ant_hill"
+}

@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "naturalist:item/knapsack_filled",
+      "predicate": {
+        "naturalist:filled": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "naturalist:item/empty_knapsack"
+  }
+}

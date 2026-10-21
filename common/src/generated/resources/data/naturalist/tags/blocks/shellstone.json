@@ -1,0 +1,20 @@
+{
+  "values": [
+    "naturalist:shellstone",
+    "naturalist:shellstone_stairs",
+    "naturalist:shellstone_slab",
+    "naturalist:shellstone_wall",
+    "naturalist:shellstone_bricks",
+    "naturalist:shellstone_brick_stairs",
+    "naturalist:shellstone_brick_slab",
+    "naturalist:shellstone_brick_wall",
+    "naturalist:cut_shellstone",
+    "naturalist:cut_shellstone_stairs",
+    "naturalist:cut_shellstone_slab",
+    "naturalist:cut_shellstone_wall",
+    "naturalist:smooth_shellstone",
+    "naturalist:smooth_shellstone_stairs",
+    "naturalist:smooth_shellstone_slab",
+    "naturalist:smooth_shellstone_wall"
+  ]
+}

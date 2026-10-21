@@ -29,6 +29,7 @@ tasks.named('compileJava', JavaCompile) {
 processResources {
     dependsOn(configurations.commonResources)
     from(configurations.commonResources)
+    exclude '.cache/**'
 }
 
 tasks.named('sourcesJar', Jar) {
@@ -36,4 +37,5 @@ tasks.named('sourcesJar', Jar) {
     from(configurations.commonJava)
     dependsOn(configurations.commonResources)
     from(configurations.commonResources)
+    exclude '.cache/**'
 }

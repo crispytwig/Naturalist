@@ -1,0 +1,46 @@
+{
+  "values": [
+    "#minecraft:is_savanna",
+    "#minecraft:is_jungle",
+    {
+      "id": "#minecraft:is_savanna",
+      "required": false
+    },
+    {
+      "id": "#c:savanna",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_jungle",
+      "required": false
+    },
+    {
+      "id": "#c:jungle",
+      "required": false
+    },
+    {
+      "id": "#atmospheric:is_rainforest",
+      "required": false
+    },
+    {
+      "id": "terralith:amethyst_rainforest",
+      "required": false
+    },
+    {
+      "id": "terralith:orchid_swamp",
+      "required": false
+    },
+    {
+      "id": "terralith:rocky_jungle",
+      "required": false
+    },
+    {
+      "id": "terralith:tropical_jungle",
+      "required": false
+    },
+    {
+      "id": "terralith:warm_river",
+      "required": false
+    }
+  ]
+}

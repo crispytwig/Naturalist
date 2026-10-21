@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "feed_bear": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "naturalist:bear",
+              "flags": {
+                "is_baby": false
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:honeycomb"
+          ]
+        }
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.feed_bear_honeycomb.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:honeycomb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.feed_bear_honeycomb.title"
+    }
+  },
+  "requirements": [
+    [
+      "feed_bear"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

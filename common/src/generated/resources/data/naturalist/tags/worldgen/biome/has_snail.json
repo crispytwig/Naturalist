@@ -1,0 +1,183 @@
+{
+  "values": [
+    "#minecraft:is_forest",
+    "#minecraft:is_savanna",
+    "#minecraft:is_river",
+    "#minecraft:is_hill",
+    "#minecraft:is_mountain",
+    "minecraft:plains",
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp",
+    "minecraft:lush_caves",
+    "minecraft:dripstone_caves",
+    "minecraft:mushroom_fields",
+    {
+      "id": "#minecraft:is_forest",
+      "required": false
+    },
+    {
+      "id": "#c:forest",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_savanna",
+      "required": false
+    },
+    {
+      "id": "#c:savanna",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_river",
+      "required": false
+    },
+    {
+      "id": "#c:river",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_hill",
+      "required": false
+    },
+    {
+      "id": "#c:extreme_hills",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_mountain",
+      "required": false
+    },
+    {
+      "id": "#forge:is_mountain",
+      "required": false
+    },
+    {
+      "id": "#c:mountain",
+      "required": false
+    },
+    {
+      "id": "#forge:is_plains",
+      "required": false
+    },
+    {
+      "id": "#c:plains",
+      "required": false
+    },
+    {
+      "id": "#forge:is_swamp",
+      "required": false
+    },
+    {
+      "id": "#c:swamp",
+      "required": false
+    },
+    {
+      "id": "#forge:is_underground",
+      "required": false
+    },
+    {
+      "id": "#c:underground",
+      "required": false
+    },
+    {
+      "id": "#forge:is_mushroom",
+      "required": false
+    },
+    {
+      "id": "#c:mushroom",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bayou",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bog",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:orchard",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:wetland",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:woodland",
+      "required": false
+    },
+    {
+      "id": "terralith:alpine_grove",
+      "required": false
+    },
+    {
+      "id": "terralith:blooming_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:brushland",
+      "required": false
+    },
+    {
+      "id": "terralith:cloud_forest",
+      "required": false
+    },
+    {
+      "id": "terralith:forested_highlands",
+      "required": false
+    },
+    {
+      "id": "terralith:ice_marsh",
+      "required": false
+    },
+    {
+      "id": "terralith:lavender_forest",
+      "required": false
+    },
+    {
+      "id": "terralith:lavender_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:moonlight_grove",
+      "required": false
+    },
+    {
+      "id": "terralith:moonlight_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:orchid_swamp",
+      "required": false
+    },
+    {
+      "id": "terralith:sakura_grove",
+      "required": false
+    },
+    {
+      "id": "terralith:sakura_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:shrubland",
+      "required": false
+    },
+    {
+      "id": "terralith:temperate_highlands",
+      "required": false
+    },
+    {
+      "id": "terralith:warm_river",
+      "required": false
+    },
+    {
+      "id": "terralith:wintry_forest",
+      "required": false
+    },
+    {
+      "id": "terralith:yellowstone",
+      "required": false
+    }
+  ]
+}
