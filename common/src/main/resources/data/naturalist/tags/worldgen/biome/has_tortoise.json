@@ -9,11 +9,11 @@
       "required": false
     },
     {
-      "id": "#forge:is_desert",
+      "id": "#c:swamp",
       "required": false
     },
     {
-      "id": "#c:swamp",
+      "id": "#forge:is_desert",
       "required": false
     },
     {
@@ -21,7 +21,51 @@
       "required": false
     },
     {
+      "id": "#minecraft:is_jungle",
+      "required": false
+    },
+    {
       "id": "#c:jungle",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:lush_desert",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:rainforest",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bayou",
+      "required": false
+    },
+    {
+      "id": "terralith:amethyst_rainforest",
+      "required": false
+    },
+    {
+      "id": "terralith:desert_oasis",
+      "required": false
+    },
+    {
+      "id": "terralith:lush_desert",
+      "required": false
+    },
+    {
+      "id": "terralith:orchid_swamp",
+      "required": false
+    },
+    {
+      "id": "terralith:red_oasis",
+      "required": false
+    },
+    {
+      "id": "terralith:rocky_jungle",
+      "required": false
+    },
+    {
+      "id": "terralith:tropical_jungle",
       "required": false
     }
   ]

@@ -1,35 +1,48 @@
-architectury {
-    common rootProject.enabled_platforms.split(',')
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev.legacyforge'
 }
 
-repositories {
-    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-        content {
-            includeGroupByRegex("software\\.bernie.*")
-            includeGroup("com.eliotlash.mclib")
-        }
+legacyForge {
+    mcpVersion = minecraft_version
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = [at.absolutePath]
     }
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://cursemaven.com" }
-    maven {
-        name = 'Terraformers'
-        url = 'https://maven.terraformersmc.com/'
-    }
-    maven {
-        url = "https://api.modrinth.com/maven"
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
     }
 }
 
 dependencies {
-    minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modImplementation ("software.bernie.geckolib:geckolib-fabric-1.20.1:${rootProject.geckolib_version}")
-    modImplementation ("maven.modrinth:midnightlib:${project.midnightlib_fabric_version}-fabric")
+    compileOnly 'org.spongepowered:mixin:0.8.5'
+    modCompileOnly "maven.modrinth:field-guide:${field_guide_forge}"
 
-    mappings loom.layered {
-        it.officialMojangMappings()
-        it.parchment("org.parchmentmc.data:parchment-1.20.1:${rootProject.parchment_version}")
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+legacyForge.addModdingDependenciesTo(sourceSets.test)
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
     }
 }
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    sourceSets.main.resources.srcDirs.each { commonResources it }
+}
+
+applyLoaderAttribute('common', ['apiElements', 'runtimeElements', 'sourcesElements'])

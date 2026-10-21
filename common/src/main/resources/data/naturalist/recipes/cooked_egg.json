@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:eggs"
+    "tag": "c:eggs"
   },
   "result": "naturalist:cooked_egg",
   "experience": 0.35,

@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/stellers_jay",
+  "biomes": "#naturalist:has_canary",
+  "weight": 1
+}

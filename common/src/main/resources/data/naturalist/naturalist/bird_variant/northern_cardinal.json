@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/northern_cardinal",
+  "biomes": "#naturalist:has_cardinal",
+  "weight": 3
+}

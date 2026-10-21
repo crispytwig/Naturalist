@@ -1,0 +1,6 @@
+{
+  "parent": "naturalist:item/template_custom_spawn_egg",
+  "textures": {
+    "layer0": "naturalist:item/great_white_shark_spawn_egg"
+  }
+}

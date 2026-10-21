@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/anglerfish/glow",
+  "weight": 0,
+  "item_model": "naturalist:item/variant/anglerfish_bucket/glow"
+}

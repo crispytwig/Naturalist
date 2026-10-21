@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/ray/mobula_ray",
+  "weight": 0,
+  "item_model": "naturalist:item/variant/ray_bucket/mobula_ray"
+}

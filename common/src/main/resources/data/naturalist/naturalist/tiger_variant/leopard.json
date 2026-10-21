@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/tiger/leopard",
+  "baby_texture": "naturalist:entity/tiger/leopard_baby",
+  "biomes": "#naturalist:variant/tiger/leopard"
+}

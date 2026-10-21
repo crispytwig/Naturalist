@@ -1,0 +1,7 @@
+{
+  "texture": "naturalist:entity/bass",
+  "weight": 10,
+  "tooltip": {
+    "translate": "tooltip.naturalist.bass_small"
+  }
+}

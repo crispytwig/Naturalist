@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "naturalist:cooked_bass",
-    "naturalist:cooked_catfish",
-    "naturalist:cooked_lizard_tail",
-    "naturalist:cooked_duck"
+    "#c:foods/cooked_meat"
   ]
 }

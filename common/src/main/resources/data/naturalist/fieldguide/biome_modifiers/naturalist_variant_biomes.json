@@ -1,0 +1,47 @@
+{
+  "replace": false,
+  "additions": [
+    {
+      "entry": "naturalist:tiger#black_panther",
+      "value": "#naturalist:variant/tiger/black_panther"
+    },
+    {
+      "entry": "naturalist:tiger#white_tiger",
+      "value": "#naturalist:variant/tiger/white_tiger"
+    },
+    {
+      "entry": "naturalist:tiger#leopard",
+      "value": "#naturalist:variant/tiger/leopard"
+    },
+    {
+      "entry": "naturalist:lizard#beardie",
+      "value": "#c:is_desert"
+    },
+    {
+      "entry": "naturalist:lizard#green",
+      "value": "#minecraft:is_jungle"
+    },
+    {
+      "entry": "naturalist:lizard#leopard_gecko",
+      "value": "#c:is_savanna"
+    },
+    {
+      "entry": "naturalist:snake#coral_snake",
+      "value": "#naturalist:has_coral_snake"
+    },
+    {
+      "entry": "naturalist:snake#rattlesnake",
+      "value": "#naturalist:has_rattlesnake"
+    },
+    {
+      "entry": "naturalist:tortoise#black",
+      "value": "#naturalist:variant/tortoise/black"
+    },
+    {
+      "entry": "naturalist:tortoise#green",
+      "values": [
+        "#c:is_swamp"
+      ]
+    }
+  ]
+}

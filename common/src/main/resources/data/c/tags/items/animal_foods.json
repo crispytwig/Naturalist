@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "#naturalist:alligator_food_items",
+    "#naturalist:bear_tempt_items",
+    "#naturalist:bird_food_items",
+    "#naturalist:boar_food_items",
+    "#naturalist:capybara_food_items",
+    "#naturalist:crab_food",
+    "#naturalist:duck_food_items",
+    "#naturalist:giant_isopod_food",
+    "#naturalist:giraffe_food_items",
+    "#naturalist:great_white_shark_food_items",
+    "#naturalist:hedgehog_food_items",
+    "#naturalist:komodo_dragon_food_items",
+    "#naturalist:lion_food_items",
+    "#naturalist:lizard_tempt_items",
+    "#naturalist:ostrich_food_items",
+    "#naturalist:rat_food",
+    "#naturalist:snake_tempt_items",
+    "#naturalist:tiger_food_items",
+    "#naturalist:tortoise_tempt_items",
+    "#naturalist:turkey_food_items"
+  ]
+}

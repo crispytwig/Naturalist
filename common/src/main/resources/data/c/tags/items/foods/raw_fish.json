@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "naturalist:anglerfish",
+    "naturalist:bass",
+    "naturalist:blobfish",
+    "naturalist:catfish",
+    "naturalist:piranha"
+  ]
+}

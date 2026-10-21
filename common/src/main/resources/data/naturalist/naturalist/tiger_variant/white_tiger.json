@@ -1,0 +1,6 @@
+{
+  "texture": "naturalist:entity/tiger/white_tiger",
+  "baby_texture": "naturalist:entity/tiger/white_tiger_baby",
+  "biomes": "#naturalist:variant/tiger/white_tiger",
+  "priority": 1
+}

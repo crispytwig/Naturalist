@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/ray/stingray",
+  "weight": 0,
+  "item_model": "naturalist:item/variant/ray_bucket/stingray"
+}

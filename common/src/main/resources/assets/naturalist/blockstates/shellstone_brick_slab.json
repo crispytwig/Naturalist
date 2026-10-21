@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "naturalist:block/shellstone/shellstone_brick_slab"
+      "model": "naturalist:block/shellstone_brick_slab"
     },
     "type=double": {
-      "model": "naturalist:block/shellstone/shellstone_bricks"
+      "model": "naturalist:block/shellstone_bricks"
     },
     "type=top": {
-      "model": "naturalist:block/shellstone/shellstone_brick_slab_top"
+      "model": "naturalist:block/shellstone_brick_slab_top"
     }
   }
 }

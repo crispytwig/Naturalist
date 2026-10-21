@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:cooked_cod",
-    "minecraft:cooked_salmon",
-    "naturalist:cooked_bass",
-    "naturalist:cooked_catfish"
+    "#c:foods/cooked_fish"
   ]
 }

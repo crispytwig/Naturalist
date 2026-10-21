@@ -1,13 +1,16 @@
 {
-    "replace": false,
-    "values": [
-        {
-            "id": "#c:hot",
-            "required": false
-          },
-        {
-            "id": "#atmospheric:is_rainforest",
-            "required": false
-          }
-    ]
+  "values": [
+    {
+      "id": "#forge:is_hot",
+      "required": false
+    },
+    {
+      "id": "#c:climate_hot",
+      "required": false
+    },
+    {
+      "id": "#atmospheric:is_rainforest",
+      "required": false
+    }
+  ]
 }

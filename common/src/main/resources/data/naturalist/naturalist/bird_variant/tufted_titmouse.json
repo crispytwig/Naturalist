@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/tufted_titmouse",
+  "biomes": "#naturalist:has_finch",
+  "weight": 1
+}

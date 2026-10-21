@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "naturalist:clam_meat"
+  },
+  "result": "naturalist:cooked_clam_meat",
+  "experience": 0.35,
+  "cookingtime": 100
+}

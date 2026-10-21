@@ -2,9 +2,23 @@
   "values": [
     "naturalist:deer",
     "naturalist:snake",
+    "naturalist:duck",
+    "naturalist:catfish",
     "minecraft:frog",
     {
       "id": "alexsmobs:shoebill",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:terrapin",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:mudskipper",
       "required": false
     }
   ]

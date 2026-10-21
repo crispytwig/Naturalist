@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#c:foods/raw_meat",
+    "#c:foods/cooked_meat",
+    "naturalist:venison",
+    "naturalist:cooked_venison",
+    "naturalist:bushmeat",
+    "naturalist:cooked_bushmeat",
+    "naturalist:duck",
+    "naturalist:cooked_duck"
+  ]
+}

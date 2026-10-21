@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#naturalist:has_ant_hill",
+  "features": [
+    "naturalist:ant_hill_small",
+    "naturalist:ant_hill_big"
+  ],
+  "step": "surface_structures"
+}

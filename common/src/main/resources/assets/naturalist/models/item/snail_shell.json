@@ -1,6 +1,104 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "naturalist:item/snail_shell/white",
+      "predicate": {
+        "minecraft:color": 0.0
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/orange",
+      "predicate": {
+        "minecraft:color": 0.06666667
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/magenta",
+      "predicate": {
+        "minecraft:color": 0.13333334
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/light_blue",
+      "predicate": {
+        "minecraft:color": 0.2
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/yellow",
+      "predicate": {
+        "minecraft:color": 0.26666668
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/lime",
+      "predicate": {
+        "minecraft:color": 0.33333334
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/pink",
+      "predicate": {
+        "minecraft:color": 0.4
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/gray",
+      "predicate": {
+        "minecraft:color": 0.46666667
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/light_gray",
+      "predicate": {
+        "minecraft:color": 0.53333336
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/cyan",
+      "predicate": {
+        "minecraft:color": 0.6
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/purple",
+      "predicate": {
+        "minecraft:color": 0.6666667
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/blue",
+      "predicate": {
+        "minecraft:color": 0.73333335
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/brown",
+      "predicate": {
+        "minecraft:color": 0.8
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/green",
+      "predicate": {
+        "minecraft:color": 0.8666667
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/red",
+      "predicate": {
+        "minecraft:color": 0.93333334
+      }
+    },
+    {
+      "model": "naturalist:item/snail_shell/black",
+      "predicate": {
+        "minecraft:color": 1.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "naturalist:item/snail_shell"
+    "layer0": "naturalist:item/snail_shell_brown"
   }
 }

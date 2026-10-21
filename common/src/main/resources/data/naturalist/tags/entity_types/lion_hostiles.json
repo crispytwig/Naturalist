@@ -3,6 +3,10 @@
     "naturalist:rhino",
     "naturalist:zebra",
     "naturalist:boar",
-    "minecraft:horse"
+    "minecraft:horse",
+    {
+      "id": "alexsmobs:gazelle",
+      "required": false
+    }
   ]
 }

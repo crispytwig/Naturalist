@@ -1,0 +1,35 @@
+{
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "naturalist:entity/snail/brown",
+		"particle": "naturalist:entity/snail/brown"
+	},
+	"elements": [
+		{
+			"name": "body4",
+			"from": [5.5, -0.5, 6.5],
+			"to": [10.5, 7.5, 14.5],
+			"faces": {
+				"north": {"uv": [1.75, 7.75, 2.75, 9.5], "texture": "#0"},
+				"east": {"uv": [0, 7.75, 1.75, 9.5], "texture": "#0"},
+				"south": {"uv": [4.5, 7.75, 5.5, 9.5], "texture": "#0"},
+				"west": {"uv": [2.75, 7.75, 4.5, 9.5], "texture": "#0"},
+				"up": {"uv": [2.75, 7.75, 1.75, 6], "texture": "#0"},
+				"down": {"uv": [3.75, 6, 2.75, 7.75], "texture": "#0"}
+			}
+		},
+		{
+			"name": "body3",
+			"from": [6, 0, 7],
+			"to": [10, 7, 14],
+			"faces": {
+				"north": {"uv": [1.75, 1.75, 2.75, 3.5], "texture": "#0"},
+				"east": {"uv": [0, 1.75, 1.75, 3.5], "texture": "#0"},
+				"south": {"uv": [4.5, 1.75, 5.5, 3.5], "texture": "#0"},
+				"west": {"uv": [2.75, 1.75, 4.5, 3.5], "texture": "#0"},
+				"up": {"uv": [2.75, 1.75, 1.75, 0], "texture": "#0"},
+				"down": {"uv": [3.75, 0, 2.75, 1.75], "texture": "#0"}
+			}
+		}
+	]
+}

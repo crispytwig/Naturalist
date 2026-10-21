@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "naturalist:item/butterfly_jade_green_swallowtail"
+  }
+}

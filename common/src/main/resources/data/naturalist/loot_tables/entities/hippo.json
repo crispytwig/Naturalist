@@ -1,23 +1,27 @@
 {
+  "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 1,
+      "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "item",
-          "name": "minecraft:melon_slice",
-          "weight": 1,
+          "type": "minecraft:item",
           "functions": [
             {
-              "function": "set_count",
+              "add": false,
               "count": {
-                "min": 1,
-                "max": 5
-              }
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
             }
-          ]
+          ],
+          "name": "minecraft:melon_slice"
         }
-      ]
+      ],
+      "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "naturalist:entities/hippo"
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "naturalist:mammoth_meat"
+  },
+  "result": "naturalist:cooked_mammoth_meat",
+  "experience": 0.35,
+  "cookingtime": 100
+}

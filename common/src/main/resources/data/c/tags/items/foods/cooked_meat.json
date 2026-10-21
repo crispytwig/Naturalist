@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "naturalist:cooked_bushmeat",
+    "naturalist:cooked_clam_meat",
+    "naturalist:cooked_crab_meat",
+    "naturalist:cooked_drumstick",
+    "naturalist:cooked_duck",
+    "naturalist:cooked_lizard_tail",
+    "naturalist:cooked_mammoth_meat",
+    "naturalist:cooked_venison"
+  ]
+}

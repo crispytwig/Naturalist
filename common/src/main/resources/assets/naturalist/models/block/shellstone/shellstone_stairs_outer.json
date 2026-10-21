@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "naturalist:block/shellstone",
-    "side": "naturalist:block/shellstone",
-    "top": "naturalist:block/shellstone"
-  }
-}

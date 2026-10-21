@@ -1,3 +1,4 @@
 {
-  "parent": "naturalist:block/verdant_froglass"
+  "parent": "naturalist:block/verdant_froglass",
+  "render_type": "minecraft:translucent"
 }

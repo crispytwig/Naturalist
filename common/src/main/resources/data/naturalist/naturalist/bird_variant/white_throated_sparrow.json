@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/white_throated_sparrow",
+  "biomes": "#naturalist:has_sparrow",
+  "weight": 1
+}

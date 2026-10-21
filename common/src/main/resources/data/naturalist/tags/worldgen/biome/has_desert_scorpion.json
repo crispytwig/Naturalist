@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:desert",
+    "#minecraft:is_badlands",
+    {
+      "id": "biomesoplenty:lush_desert",
+      "required": false
+    }
+  ]
+}

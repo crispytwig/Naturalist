@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "naturalist:block/plush_bear",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "naturalist:block/plush_bear"
+    },
+    "facing=south": {
+      "model": "naturalist:block/plush_bear",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "naturalist:block/plush_bear",
+      "y": 270
+    }
+  }
+}

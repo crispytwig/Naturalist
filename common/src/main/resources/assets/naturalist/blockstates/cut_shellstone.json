@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "naturalist:block/shellstone/cut_shellstone"
+      "model": "naturalist:block/cut_shellstone"
     }
   }
 }

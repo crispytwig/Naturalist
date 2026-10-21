@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/red_winged_blackbird",
+  "biomes": "#naturalist:has_cardinal",
+  "weight": 3
+}

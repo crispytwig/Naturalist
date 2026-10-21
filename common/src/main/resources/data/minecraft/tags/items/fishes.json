@@ -4,6 +4,12 @@
     "naturalist:bass",
     "naturalist:cooked_bass",
     "naturalist:catfish",
-    "naturalist:cooked_catfish"
+    "naturalist:cooked_catfish",
+    "naturalist:anglerfish",
+    "naturalist:cooked_anglerfish",
+    "naturalist:blobfish",
+    "naturalist:cooked_blobfish",
+    "naturalist:piranha",
+    "naturalist:cooked_piranha"
   ]
 }

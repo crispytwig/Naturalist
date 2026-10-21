@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/crab/orange_crab",
+  "baby_texture": "naturalist:entity/crab/orange_crab_baby",
+  "item_model": "naturalist:item/variant/crab_orange"
+}

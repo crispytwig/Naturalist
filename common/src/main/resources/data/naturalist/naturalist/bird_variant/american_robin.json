@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/bird/american_robin",
+  "biomes": "#naturalist:has_robin",
+  "weight": 3
+}

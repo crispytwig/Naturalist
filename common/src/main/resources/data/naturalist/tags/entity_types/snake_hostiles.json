@@ -3,6 +3,14 @@
     "minecraft:rabbit",
     "minecraft:chicken",
     "minecraft:silverfish",
-    "naturalist:snail"
+    "naturalist:snail",
+    {
+      "id": "alexsmobs:jerboa",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:rain_frog",
+      "required": false
+    }
   ]
 }

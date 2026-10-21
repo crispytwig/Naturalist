@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "naturalist:anglerfish_bucket",
+    "naturalist:bass_bucket",
+    "naturalist:blobfish_bucket",
+    "naturalist:catfish_bucket",
+    "naturalist:giant_isopod_bucket",
+    "naturalist:jellyfish_bucket",
+    "naturalist:piranha_bucket",
+    "naturalist:ray_bucket",
+    "naturalist:starfish_bucket"
+  ]
+}

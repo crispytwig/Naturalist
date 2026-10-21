@@ -1,0 +1,18 @@
+{
+  "type": "naturalist:crafting_shapeless_nbt",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "naturalist:snail_shell"
+    },
+    {
+      "item": "minecraft:light_blue_dye"
+    }
+  ],
+  "result": {
+    "item": "naturalist:snail_shell",
+    "nbt": {
+      "Color": 3
+    }
+  }
+}

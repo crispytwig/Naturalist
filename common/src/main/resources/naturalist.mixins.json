@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.crispytwig.naturalist.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ClientLevelMixin",
+    "ClientPacketListenerMixin",
+    "EntityRenderDispatcherMixin",
+    "LocalPlayerMixin",
+    "ParrotModelMixin",
+    "ParrotOnShoulderLayerMixin",
+    "PlayerModelMixin",
+    "WolfModelMixin"
+  ],
+  "mixins": [
+    "AbstractFishMixin",
+    "BottleItemMixin",
+    "CreeperMixin",
+    "CropBlockMixin",
+    "EnchantmentHelperMixin",
+    "EnchantmentMixin",
+    "EntityTypeMixin",
+    "FoxMixin",
+    "LevelMixin",
+    "LootingEnchantFunctionMixin",
+    "MapItemMixin",
+    "MobMixin",
+    "MonsterMixin",
+    "PlayerMixin",
+    "ServerAdvancementManagerMixin",
+    "ServerGamePacketListenerMixin",
+    "ServerLevelMixin",
+    "WolfMixin",
+    "ZombieMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

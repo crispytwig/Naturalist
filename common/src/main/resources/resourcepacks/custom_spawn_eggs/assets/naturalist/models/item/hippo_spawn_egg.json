@@ -1,0 +1,6 @@
+{
+  "parent": "naturalist:item/template_custom_spawn_egg",
+  "textures": {
+    "layer0": "naturalist:item/hippo_spawn_egg"
+  }
+}

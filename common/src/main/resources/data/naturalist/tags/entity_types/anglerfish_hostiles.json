@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:tropical_fish",
+    "minecraft:cod",
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "naturalist:bushmeat",
+    "naturalist:clam_meat",
+    "naturalist:crab_meat",
+    "naturalist:drumstick",
+    "naturalist:duck",
+    "naturalist:lizard_tail",
+    "naturalist:mammoth_meat",
+    "naturalist:morsel",
+    "naturalist:venison"
+  ]
+}

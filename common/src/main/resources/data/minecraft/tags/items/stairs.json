@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "naturalist:shellstone_stairs",
+    "naturalist:shellstone_brick_stairs",
+    "naturalist:cut_shellstone_stairs",
+    "naturalist:smooth_shellstone_stairs"
+  ]
+}

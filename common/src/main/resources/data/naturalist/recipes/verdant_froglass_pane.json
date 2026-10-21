@@ -11,8 +11,8 @@
     "###"
   ],
   "result": {
-    "count": 16,
-    "item": "naturalist:verdant_froglass_pane"
+    "item": "naturalist:verdant_froglass_pane",
+    "count": 16
   },
   "show_notification": true
 }

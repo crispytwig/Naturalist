@@ -1,34 +1,42 @@
 {
   "schemaVersion": 1,
-  "id": "naturalist",
+  "id": "${mod_id}",
   "version": "${version}",
-  "name": "Naturalist",
-  "description": "Enhances the overworld by adding new wildlife with unique behavior!",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
-    "Starfish Studios"
+    "${mod_authors}"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/naturalist",
-    "issues": "https://github.com/starfish-studios/Naturalist/issues"
+    "issues": "https://github.com/crispytwig/Naturalist/issues"
   },
-  "license": "MIT",
-  "icon": "icon.png",
+  "license": "${mod_license}",
+  "icon": "naturalist.png",
   "environment": "*",
+  "accessWidener": "naturalist.accesswidener",
   "entrypoints": {
     "main": [
-      "com.starfish_studios.naturalist.fabric.NaturalistFabric"
+      "com.crispytwig.naturalist.fabric.NaturalistFabric"
     ],
     "client": [
-      "com.starfish_studios.naturalist.fabric.NaturalistFabricClient"
+      "com.crispytwig.naturalist.fabric.client.NaturalistFabricClient"
+    ],
+    "lambdynlights:initializer": [
+      "com.crispytwig.naturalist.fabric.compat.LambDynamicLightsCompat"
     ]
   },
   "mixins": [
     "naturalist.mixins.json",
-    "naturalist-common.mixins.json"
+    "naturalist.fieldguide.mixins.json",
+    "naturalist.fabric.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.20.1",
-    "geckolib": ">=4.0.0"
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=17"
+  },
+  "suggests": {
+    "lambdynlights": "*"
   }
 }

@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "naturalist:shellstone"
   },
-  "result": "naturalist:shellstone_wall"
+  "result": "naturalist:shellstone_wall",
+  "count": 1
 }

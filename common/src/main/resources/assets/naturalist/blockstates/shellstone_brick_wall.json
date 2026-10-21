@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_post"
+        "model": "naturalist:block/shellstone_brick_wall_post"
       },
       "when": {
         "up": "true"
@@ -10,16 +10,7 @@
     },
     {
       "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side",
-        "uvlock": true
-      },
-      "when": {
-        "north": "low"
-      }
-    },
-    {
-      "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side",
+        "model": "naturalist:block/shellstone_brick_wall_side",
         "uvlock": true,
         "y": 90
       },
@@ -29,36 +20,7 @@
     },
     {
       "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side",
-        "uvlock": true,
-        "y": 180
-      },
-      "when": {
-        "south": "low"
-      }
-    },
-    {
-      "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side",
-        "uvlock": true,
-        "y": 270
-      },
-      "when": {
-        "west": "low"
-      }
-    },
-    {
-      "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side_tall",
-        "uvlock": true
-      },
-      "when": {
-        "north": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side_tall",
+        "model": "naturalist:block/shellstone_brick_wall_side_tall",
         "uvlock": true,
         "y": 90
       },
@@ -68,7 +30,35 @@
     },
     {
       "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side_tall",
+        "model": "naturalist:block/shellstone_brick_wall_side",
+        "uvlock": true
+      },
+      "when": {
+        "north": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "naturalist:block/shellstone_brick_wall_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "naturalist:block/shellstone_brick_wall_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "naturalist:block/shellstone_brick_wall_side_tall",
         "uvlock": true,
         "y": 180
       },
@@ -78,7 +68,17 @@
     },
     {
       "apply": {
-        "model": "naturalist:block/shellstone/shellstone_brick_wall_side_tall",
+        "model": "naturalist:block/shellstone_brick_wall_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "naturalist:block/shellstone_brick_wall_side_tall",
         "uvlock": true,
         "y": 270
       },

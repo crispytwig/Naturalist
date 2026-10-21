@@ -1,0 +1,6 @@
+{
+  "texture": "naturalist:entity/lizard/beardie",
+  "biomes": [
+    "minecraft:desert"
+  ]
+}

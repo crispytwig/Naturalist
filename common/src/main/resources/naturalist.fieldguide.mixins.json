@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.crispytwig.naturalist.compat.fieldguide.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "EntryRenderHelperMixin",
+    "FieldGuideEntryScreenMixin",
+    "IconCacheManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

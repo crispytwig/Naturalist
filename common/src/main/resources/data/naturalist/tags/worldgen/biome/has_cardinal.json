@@ -6,19 +6,7 @@
     "minecraft:mangrove_swamp",
     "minecraft:desert",
     {
-      "id": "#forge:is_forest",
-      "required": false
-    },
-    {
-      "id": "#forge:is_savanna",
-      "required": false
-    },
-    {
-      "id": "#forge:is_swamp",
-      "required": false
-    },
-    {
-      "id": "#forge:is_sandy",
+      "id": "#minecraft:is_forest",
       "required": false
     },
     {
@@ -26,7 +14,15 @@
       "required": false
     },
     {
+      "id": "#minecraft:is_savanna",
+      "required": false
+    },
+    {
       "id": "#c:savanna",
+      "required": false
+    },
+    {
+      "id": "#forge:is_swamp",
       "required": false
     },
     {
@@ -34,7 +30,107 @@
       "required": false
     },
     {
+      "id": "#forge:is_sandy",
+      "required": false
+    },
+    {
       "id": "#c:desert",
+      "required": false
+    },
+    {
+      "id": "#c:badlands",
+      "required": false
+    },
+    {
+      "id": "#forge:is_desert",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bayou",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bog",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:lavender_field",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:maple_woods",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:mystic_grove",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:orchard",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:overgrown_greens",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:wetland",
+      "required": false
+    },
+    {
+      "id": "terralith:blooming_plateau",
+      "required": false
+    },
+    {
+      "id": "terralith:blooming_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:brushland",
+      "required": false
+    },
+    {
+      "id": "terralith:desert_oasis",
+      "required": false
+    },
+    {
+      "id": "terralith:lavender_forest",
+      "required": false
+    },
+    {
+      "id": "terralith:lavender_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:lush_desert",
+      "required": false
+    },
+    {
+      "id": "terralith:moonlight_grove",
+      "required": false
+    },
+    {
+      "id": "terralith:moonlight_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:orchid_swamp",
+      "required": false
+    },
+    {
+      "id": "terralith:red_oasis",
+      "required": false
+    },
+    {
+      "id": "terralith:sakura_grove",
+      "required": false
+    },
+    {
+      "id": "terralith:sakura_valley",
+      "required": false
+    },
+    {
+      "id": "terralith:shrubland",
       "required": false
     }
   ]

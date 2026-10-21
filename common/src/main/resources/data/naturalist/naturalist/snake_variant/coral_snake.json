@@ -1,0 +1,4 @@
+{
+  "texture": "naturalist:entity/snake/coral_snake",
+  "biomes": "#naturalist:has_coral_snake"
+}

@@ -1,0 +1,8 @@
+{
+  "texture": "naturalist:entity/tortoise/green",
+  "baby_texture": "naturalist:entity/tortoise/green_baby",
+  "biomes": [
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp"
+  ]
+}

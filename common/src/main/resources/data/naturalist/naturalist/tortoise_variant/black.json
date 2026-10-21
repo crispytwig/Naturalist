@@ -1,0 +1,5 @@
+{
+  "texture": "naturalist:entity/tortoise/black",
+  "baby_texture": "naturalist:entity/tortoise/black_baby",
+  "biomes": "#naturalist:variant/tortoise/black"
+}
