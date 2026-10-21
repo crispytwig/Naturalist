@@ -54,6 +54,12 @@ dependencies {
     modCompileOnly "maven.modrinth:field-guide:${field_guide_forge}"
 }
 
+processResources {
+    filesMatching(["${mod_id}.mixins.json".toString(), "${mod_id}.fieldguide.mixins.json".toString()]) {
+        filter { String line -> line.replaceFirst(/^(\s*)"required"/, "\$1\"refmap\": \"${mod_id}.refmap.json\",\n\$1\"required\"".toString()) }
+    }
+}
+
 jar {
     manifest.attributes([
             'MixinConfigs': "${mod_id}.mixins.json,${mod_id}.fieldguide.mixins.json"
