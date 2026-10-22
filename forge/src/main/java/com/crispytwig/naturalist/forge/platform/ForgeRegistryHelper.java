@@ -27,11 +27,11 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec) {
+    public <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec, Codec<T> networkCodec) {
         if (ForgeRegistrationProvider.EVENT_BUS == null) {
             throw new IllegalStateException("Naturalist ModEventBus was not set before datapack registry!");
         }
         ForgeRegistrationProvider.EVENT_BUS.addListener((DataPackRegistryEvent.NewRegistry event) ->
-                event.dataPackRegistry(registryKey, codec, codec));
+                event.dataPackRegistry(registryKey, codec, networkCodec));
     }
 }

@@ -4,18 +4,14 @@ import com.crispytwig.naturalist.world.entity.Catchable;
 import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import com.evandev.fieldguide.client.gui.screens.FieldGuideEntryScreen;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biome;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Mixin(value = FieldGuideEntryScreen.class, remap = false)
@@ -72,9 +67,9 @@ public class FieldGuideEntryScreenMixin {
         var holder = animal.getVariantHolder();
         if (holder.isEmpty()) return;
 
-        var variantBiomes = holder.get().value().biomes();
+        var variantBiomes = holder.get().value().biomeIds();
         if (variantBiomes.isPresent()) {
-            List<ResourceLocation> biomes = naturalist$resolveBiomes(variantBiomes.get());
+            List<ResourceLocation> biomes = variantBiomes.get();
             if (!biomes.isEmpty()) {
                 this.spawnBiomes.clear();
                 this.spawnBiomes.addAll(biomes);
@@ -87,18 +82,8 @@ public class FieldGuideEntryScreenMixin {
 
         Set<ResourceLocation> claimed = new HashSet<>();
         for (MobVariant variant : registry.get()) {
-            variant.biomes().ifPresent(biomes -> claimed.addAll(naturalist$resolveBiomes(biomes)));
+            variant.biomeIds().ifPresent(claimed::addAll);
         }
         this.spawnBiomes.removeIf(claimed::contains);
-    }
-
-    @Unique
-    private static List<ResourceLocation> naturalist$resolveBiomes(HolderSet<Biome> biomes) {
-        return biomes.stream()
-                .map(Holder::unwrapKey)
-                .filter(Optional::isPresent)
-                .map(key -> key.get().location())
-                .distinct()
-                .toList();
     }
 }

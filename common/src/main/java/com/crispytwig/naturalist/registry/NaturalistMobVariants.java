@@ -42,7 +42,7 @@ public final class NaturalistMobVariants {
                 continue;
             }
             REGISTERED_MOBS.add(name);
-            Services.REGISTRY.registerSyncedDataPackRegistry(registryFor(name), MobVariant.DIRECT_CODEC);
+            Services.REGISTRY.registerSyncedDataPackRegistry(registryFor(name), MobVariant.DIRECT_CODEC, MobVariant.NETWORK_CODEC);
         }
     }
 

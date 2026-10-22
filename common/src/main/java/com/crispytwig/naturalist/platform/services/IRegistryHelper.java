@@ -17,5 +17,5 @@ public interface IRegistryHelper {
 
     RecordItem createRecordItem(int comparatorValue, Supplier<SoundEvent> sound, Item.Properties properties, int lengthInTicks);
 
-    <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec);
+    <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec, Codec<T> networkCodec);
 }

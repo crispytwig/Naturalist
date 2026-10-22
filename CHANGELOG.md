@@ -1,1 +1,1 @@
-- Fixed a crash on launch with Forge.
+- Fixed players being disconnected when joining servers.

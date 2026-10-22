@@ -26,7 +26,7 @@ public class FabricRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec) {
-        DynamicRegistries.registerSynced(registryKey, codec, DynamicRegistries.SyncOption.SKIP_WHEN_EMPTY);
+    public <T> void registerSyncedDataPackRegistry(ResourceKey<Registry<T>> registryKey, Codec<T> codec, Codec<T> networkCodec) {
+        DynamicRegistries.registerSynced(registryKey, codec, networkCodec, DynamicRegistries.SyncOption.SKIP_WHEN_EMPTY);
     }
 }
