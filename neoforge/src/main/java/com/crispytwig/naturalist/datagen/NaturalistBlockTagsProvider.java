@@ -39,6 +39,9 @@ public class NaturalistBlockTagsProvider extends BlockTagsProvider {
                 .add(block("naturalist:azure_froglass"))
                 .add(block("naturalist:verdant_froglass"));
 
+        tag(blockTag("minecraft:mineable/shovel"))
+                .add(block("naturalist:meerkat_warren"));
+
         tag(blockTag("minecraft:mineable/pickaxe"))
                 .addTag(blockTag("naturalist:shellstone"))
                 .add(block("naturalist:pearl_block"))

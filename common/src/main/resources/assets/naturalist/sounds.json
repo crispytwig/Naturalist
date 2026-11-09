@@ -69,6 +69,38 @@
     ],
     "subtitle": "naturalist.subtitles.entity.anglerfish.death"
   },
+  "entity.meerkat.ambient": {
+    "sounds": [
+      "naturalist:mob/meerkat/idle1",
+      "naturalist:mob/meerkat/idle2",
+      "naturalist:mob/meerkat/idle3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.meerkat.ambient"
+  },
+  "entity.meerkat.hurt": {
+    "sounds": [
+      "naturalist:mob/meerkat/hurt1",
+      "naturalist:mob/meerkat/hurt2",
+      "naturalist:mob/meerkat/hurt3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.meerkat.hurt"
+  },
+  "entity.meerkat.death": {
+    "sounds": [
+      "naturalist:mob/meerkat/death1",
+      "naturalist:mob/meerkat/death2",
+      "naturalist:mob/meerkat/death3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.meerkat.death"
+  },
+  "entity.meerkat.alert": {
+    "sounds": [
+      "naturalist:mob/meerkat/hostile_alert1",
+      "naturalist:mob/meerkat/hostile_alert2",
+      "naturalist:mob/meerkat/hostile_alert3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.meerkat.alert"
+  },
   "entity.manatee.ambient": {
     "sounds": [
       "naturalist:mob/manatee/idle1",

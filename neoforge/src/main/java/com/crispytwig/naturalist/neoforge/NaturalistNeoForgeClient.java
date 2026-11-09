@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
@@ -26,6 +27,11 @@ public class NaturalistNeoForgeClient {
         modEventBus.addListener(NaturalistNeoForgeClient::registerMenuScreens);
         modEventBus.addListener(NaturalistNeoForgeClient::registerConditionalItemModelProperties);
         modEventBus.addListener(NaturalistNeoForgeClient::registerParticleProviders);
+        modEventBus.addListener(NaturalistNeoForgeClient::registerBlockTints);
+    }
+
+    private static void registerBlockTints(RegisterColorHandlersEvent.BlockTintSources event) {
+        NaturalistClient.registerBlockTints(event::register);
     }
 
     private static void registerParticleProviders(RegisterParticleProvidersEvent event) {

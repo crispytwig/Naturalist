@@ -247,6 +247,13 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:mammoth_meat"))
                 .add(item("naturalist:drumstick"));
 
+        tag(NaturalistItemTags.MEERKAT_FOOD_ITEMS)
+                .add(item("minecraft:spider_eye"));
+
+        tag(NaturalistItemTags.MEERKAT_TEMPT_ITEMS)
+                .add(item("naturalist:grub"))
+                .add(item("minecraft:spider_eye"));
+
         tag(NaturalistItemTags.MANATEE_FOOD_ITEMS)
                 .add(item("minecraft:seagrass"));
 

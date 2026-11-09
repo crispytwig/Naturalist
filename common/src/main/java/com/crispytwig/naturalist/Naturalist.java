@@ -65,6 +65,7 @@ import com.crispytwig.naturalist.common.entity.turkey.Turkey;
 import com.crispytwig.naturalist.common.entity.vulture.Vulture;
 import com.crispytwig.naturalist.common.entity.whale.Whale;
 import com.crispytwig.naturalist.common.entity.manatee.Manatee;
+import com.crispytwig.naturalist.common.entity.meerkat.Meerkat;
 import com.crispytwig.naturalist.common.entity.seahorse.Seahorse;
 import com.crispytwig.naturalist.common.entity.equine.Zebra;
 import com.crispytwig.naturalist.common.item.CaughtEntityItem;
@@ -182,6 +183,7 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.WHALE.get(), Whale.createAttributes());
         r.register(NaturalistEntityTypes.MANATEE.get(), Manatee.createAttributes());
         r.register(NaturalistEntityTypes.SEAHORSE.get(), Seahorse.createAttributes());
+        r.register(NaturalistEntityTypes.MEERKAT.get(), Meerkat.createAttributes());
         r.register(NaturalistEntityTypes.ANT.get(), Ant.createAttributes());
         r.register(NaturalistEntityTypes.MOLE.get(), Mole.createAttributes());
         r.register(NaturalistEntityTypes.RAT.get(), Rat.createAttributes());
@@ -247,6 +249,7 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.OSTRICH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.DESERT_SCORPION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scorpion::checkScorpionSpawnRules);
         r.register(NaturalistEntityTypes.JUNGLE_SCORPION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scorpion::checkScorpionSpawnRules);
+        r.register(NaturalistEntityTypes.MEERKAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.MANATEE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Manatee::checkAquaticSpawnRules);
         r.register(NaturalistEntityTypes.SEAHORSE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Seahorse::checkAquaticSpawnRules);
         r.register(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GreatWhiteShark::checkGreatWhiteSharkSpawnRules);

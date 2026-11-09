@@ -7,10 +7,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
 import com.crispytwig.naturalist.common.level.levelgen.feature.AntHillFeature;
+import com.crispytwig.naturalist.common.level.levelgen.feature.MeerkatWarrenFeature;
 
 public class NaturalistFeatures {
     public static final DeferredRegister<MapCodec<? extends Feature>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE_TYPE, Naturalist.MOD_ID);
 
     public static final DeferredHolder<MapCodec<? extends Feature>, MapCodec<AntHillFeature>> ANT_HILL_SMALL = FEATURES.register("ant_hill_small", () -> AntHillFeature.SMALL_CODEC);
     public static final DeferredHolder<MapCodec<? extends Feature>, MapCodec<AntHillFeature>> ANT_HILL_BIG = FEATURES.register("ant_hill_big", () -> AntHillFeature.BIG_CODEC);
+    public static final DeferredHolder<MapCodec<? extends Feature>, MapCodec<MeerkatWarrenFeature>> MEERKAT_WARREN = FEATURES.register("meerkat_warren", () -> MeerkatWarrenFeature.CODEC);
 }

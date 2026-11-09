@@ -146,6 +146,10 @@ public class NaturalistSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_AMBIENT = register("entity.manatee.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_HURT = register("entity.manatee.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_DEATH = register("entity.manatee.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_AMBIENT = register("entity.meerkat.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_HURT = register("entity.meerkat.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_DEATH = register("entity.meerkat.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_ALERT = register("entity.meerkat.alert");
     public static final DeferredHolder<SoundEvent, SoundEvent> ANT_AMBIENT = register("entity.ant.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ANT_HURT = register("entity.ant.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ANT_DEATH = register("entity.ant.death");

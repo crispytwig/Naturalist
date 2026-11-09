@@ -15,6 +15,8 @@ public class NaturalistItemTags {
     public static final TagKey<Item> WHALE_FOOD_ITEMS = tag("whale_food_items");
     public static final TagKey<Item> MANATEE_FOOD_ITEMS = tag("manatee_food_items");
     public static final TagKey<Item> SEAHORSE_FOOD_ITEMS = tag("seahorse_food_items");
+    public static final TagKey<Item> MEERKAT_FOOD_ITEMS = tag("meerkat_food_items");
+    public static final TagKey<Item> MEERKAT_TEMPT_ITEMS = tag("meerkat_tempt_items");
     public static final TagKey<Item> GIANT_ISOPOD_FOOD = tag("giant_isopod_food");
     public static final TagKey<Item> MOOSE_FOOD = tag("moose_food");
     public static final TagKey<Item> CAPYBARA_FOOD = tag("capybara_food");

@@ -47,6 +47,7 @@ import com.crispytwig.naturalist.common.entity.turkey.Turkey;
 import com.crispytwig.naturalist.common.entity.vulture.Vulture;
 import com.crispytwig.naturalist.common.entity.whale.Whale;
 import com.crispytwig.naturalist.common.entity.manatee.Manatee;
+import com.crispytwig.naturalist.common.entity.meerkat.Meerkat;
 import com.crispytwig.naturalist.common.entity.seahorse.Seahorse;
 import com.crispytwig.naturalist.common.entity.equine.Zebra;
 import com.evandev.fieldguide.variant.FieldGuideVariantManager;
@@ -65,7 +66,7 @@ public class FieldGuidePlugin {
             JungleScorpion.class, KomodoDragon.class, Lion.class, Lizard.class, Mammoth.class,
             Mole.class, Ostrich.class, Piranha.class, Rat.class, Ray.class,
             Rhino.class, Snail.class, Snake.class, Starfish.class, Tiger.class,
-            Tortoise.class, Turkey.class, Vulture.class, Whale.class, Zebra.class, Manatee.class, Seahorse.class
+            Tortoise.class, Turkey.class, Vulture.class, Whale.class, Zebra.class, Manatee.class, Meerkat.class, Seahorse.class
     );
 
     @SuppressWarnings({"rawtypes", "unchecked"})

@@ -230,6 +230,10 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
                                 .apply(looting(1.0F))))
                 .withPool(drop(NaturalistRegistry.FAT.get(), 2, 5)));
 
+        add(NaturalistEntityTypes.MEERKAT.get(), LootTable.lootTable()
+                .withPool(meat(NaturalistRegistry.MORSEL.get(), 1, 1))
+                .withPool(pool().add(LootItem.lootTableItem(NaturalistRegistry.FUR.get()).apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 1))))));
+
         add(NaturalistEntityTypes.MANATEE.get(), LootTable.lootTable()
                 .withPool(drop(Items.KELP, 1, 2))
                 .withPool(drop(Items.SEAGRASS, 0, 2)));
@@ -354,6 +358,7 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
                 NaturalistEntityTypes.WHALE.get(),
                 NaturalistEntityTypes.ZEBRA.get(),
                 NaturalistEntityTypes.MANATEE.get(),
+                NaturalistEntityTypes.MEERKAT.get(),
                 NaturalistEntityTypes.SEAHORSE.get()
         );
     }

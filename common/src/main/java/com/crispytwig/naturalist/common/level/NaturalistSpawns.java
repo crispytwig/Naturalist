@@ -27,6 +27,7 @@ public final class NaturalistSpawns {
         c.accept(NaturalistBiomeTags.HAS_WHALE, NaturalistBiomeTags.BLACKLIST_WHALE, MobCategory.WATER_CREATURE, NaturalistEntityTypes.WHALE.get(), 5, 1, 2);
         c.accept(NaturalistBiomeTags.HAS_MANATEE, NaturalistBiomeTags.BLACKLIST_MANATEE, MobCategory.WATER_CREATURE, NaturalistEntityTypes.MANATEE.get(), 12, 1, 2);
         c.accept(NaturalistBiomeTags.HAS_SEAHORSE, NaturalistBiomeTags.BLACKLIST_SEAHORSE, MobCategory.WATER_AMBIENT, NaturalistEntityTypes.SEAHORSE.get(), 10, 1, 3);
+        c.accept(NaturalistBiomeTags.HAS_MEERKAT, NaturalistBiomeTags.BLACKLIST_MEERKAT, MobCategory.CREATURE, NaturalistEntityTypes.MEERKAT.get(), 10, 1, 6);
         c.accept(NaturalistBiomeTags.HAS_GREAT_WHITE_SHARK, NaturalistBiomeTags.BLACKLIST_GREAT_WHITE_SHARK, MobCategory.WATER_CREATURE, NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), 4, 1, 2);
         c.accept(NaturalistBiomeTags.HAS_PIRANHA, NaturalistBiomeTags.BLACKLIST_PIRANHA, MobCategory.WATER_AMBIENT, NaturalistEntityTypes.PIRANHA.get(), 8, 2, 4);
         c.accept(NaturalistBiomeTags.HAS_BASS, NaturalistBiomeTags.BLACKLIST_BASS, MobCategory.WATER_AMBIENT, NaturalistEntityTypes.BASS.get(), 10, 3, 6);

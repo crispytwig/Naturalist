@@ -17,7 +17,7 @@ public final class NaturalistConfig {
     public static final List<String> LAND_MOBS = List.of(
             "alligator", "bear", "bird", "blackBear", "boar", "capybara", "crab", "deer", "duck",
             "elephant", "forestFox", "forestRabbit", "giraffe", "hedgehog", "hippo", "komodoDragon",
-            "lion", "lizard", "mammoth", "mole", "ostrich", "rat", "rhino", "snake", "tiger",
+            "lion", "lizard", "mammoth", "meerkat", "mole", "ostrich", "rat", "rhino", "snake", "tiger",
             "tortoise", "turkey", "vulture", "zebra"
     );
 

@@ -50,6 +50,10 @@ public class NaturalistItemModelProvider extends ItemModelProvider {
 
         withExistingParent("catfish_bucket", mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/bucket_catfish"));
+        withExistingParent("grub", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/grub"));
+        withExistingParent("meerkat", mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/meerkat"));
         withExistingParent("manatee_bucket", mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/bucket_manatee"));
         withExistingParent("seahorse_bucket", mcLoc("item/generated"))

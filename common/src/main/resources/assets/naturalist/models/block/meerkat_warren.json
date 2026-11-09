@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/grass_block",
+  "textures": {
+    "top": "naturalist:block/suspicious_grass"
+  }
+}

@@ -7,6 +7,7 @@ import com.crispytwig.naturalist.client.particle.CaptureNetSwingParticle;
 import com.crispytwig.naturalist.common.registry.NaturalistParticleTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -23,6 +24,7 @@ public class NaturalistFabricClient implements ClientModInitializer {
                 ModelLayerRegistry.registerModelLayer(location, definition::get));
         NaturalistClient.registerRenderers(EntityRendererRegistry::register);
         NaturalistClient.registerBlockEntityRenderers(BlockEntityRenderers::register);
+        NaturalistClient.registerBlockTints(BlockColorRegistry::register);
 
         NaturalistClient.registerMenuScreens(MenuScreens::register);
 

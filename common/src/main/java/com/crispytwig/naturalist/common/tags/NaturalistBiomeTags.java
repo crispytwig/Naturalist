@@ -62,6 +62,8 @@ public class NaturalistBiomeTags {
     public static final TagKey<Biome> HAS_WHALE = tag("has_whale");
     public static final TagKey<Biome> HAS_MANATEE = tag("has_manatee");
     public static final TagKey<Biome> HAS_SEAHORSE = tag("has_seahorse");
+    public static final TagKey<Biome> HAS_MEERKAT = tag("has_meerkat");
+    public static final TagKey<Biome> HAS_MEERKAT_WARREN = tag("has_meerkat_warren");
     public static final TagKey<Biome> HAS_ANT_HILL = tag("has_ant_hill");
 
     public static final TagKey<Biome> BLACKLIST_ALLIGATOR = tag("blacklist/blacklist_alligator");
@@ -118,6 +120,7 @@ public class NaturalistBiomeTags {
     public static final TagKey<Biome> BLACKLIST_WHALE = tag("blacklist/blacklist_whale");
     public static final TagKey<Biome> BLACKLIST_MANATEE = tag("blacklist/blacklist_manatee");
     public static final TagKey<Biome> BLACKLIST_SEAHORSE = tag("blacklist/blacklist_seahorse");
+    public static final TagKey<Biome> BLACKLIST_MEERKAT = tag("blacklist/blacklist_meerkat");
     public static final TagKey<Biome> BLACKLIST_FOREST_FOXES = tag("blacklist/blacklist_forest_foxes");
     public static final TagKey<Biome> BLACKLIST_FOREST_RABBITS = tag("blacklist/blacklist_forest_rabbits");
 

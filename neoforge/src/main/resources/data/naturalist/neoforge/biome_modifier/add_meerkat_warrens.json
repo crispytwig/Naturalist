@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#naturalist:has_meerkat_warren",
+  "features": [
+    "naturalist:meerkat_warren"
+  ],
+  "step": "surface_structures"
+}

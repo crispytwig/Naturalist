@@ -25,6 +25,8 @@ import org.jspecify.annotations.NonNull;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.crispytwig.naturalist.common.level.block.AntHillBlock;
+import com.crispytwig.naturalist.common.level.block.MeerkatWarrenBlock;
+import net.minecraft.world.item.Items;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
@@ -83,6 +85,27 @@ public class NaturalistBlockLootProvider extends BlockLootSubProvider {
                         .when(MatchBlock.blockMatches(this.blocks, NaturalistRegistry.ANT_HILL.get(),
                                 StatePropertiesPredicate.Builder.properties().hasProperty(AntHillBlock.HAS_QUEEN, true)))
                         .add(LootItem.lootTableItem(NaturalistRegistry.QUEEN_ANT.get()))));
+
+        add(NaturalistRegistry.MEERKAT_WARREN.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .setBonusRolls(ContextFloatProviders.exactly(0.0F))
+                        .add(LootItem.lootTableItem(Items.DIRT)))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .setBonusRolls(ContextFloatProviders.exactly(0.0F))
+                        .when(MatchBlock.blockMatches(this.blocks, NaturalistRegistry.MEERKAT_WARREN.get(),
+                                StatePropertiesPredicate.Builder.properties().hasProperty(MeerkatWarrenBlock.MEERKATS, 0)))
+                        .add(LootItem.lootTableItem(NaturalistRegistry.GRUB.get()).setWeight(20))
+                        .add(LootItem.lootTableItem(Items.WHEAT_SEEDS).setWeight(16))
+                        .add(LootItem.lootTableItem(Items.BONE_MEAL).setWeight(14))
+                        .add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(12))
+                        .add(LootItem.lootTableItem(Items.CARROT).setWeight(8))
+                        .add(LootItem.lootTableItem(Items.POTATO).setWeight(8))
+                        .add(LootItem.lootTableItem(Items.BEETROOT_SEEDS).setWeight(8))
+                        .add(LootItem.lootTableItem(Items.STRING).setWeight(6))
+                        .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(4))
+                        .add(LootItem.lootTableItem(Items.EMERALD).setWeight(1))));
 
         add(NaturalistRegistry.CHRYSALIS_BLOCK.get(), LootTable.lootTable().withPool(
                 LootPool.lootPool()

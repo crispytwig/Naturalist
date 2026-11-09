@@ -51,6 +51,10 @@ public class SmoothAnimationState extends AnimationState {
         return this.accumulatedTime;
     }
 
+    public void seek(long millis) {
+        this.accumulatedTime = millis;
+    }
+
     @Override
     public void copyFrom(AnimationState state) {
         super.copyFrom(state);

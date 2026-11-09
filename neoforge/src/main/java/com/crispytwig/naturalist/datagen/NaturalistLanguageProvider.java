@@ -129,6 +129,18 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("item.naturalist.clam_seed", "Clam Seed");
         add("item.naturalist.great_white_shark_bucket", "Bucket of Baby Great White Shark");
         add("tag.item.naturalist.whale_food_items", "Whale Food");
+        add("entity.naturalist.meerkat", "Meerkat");
+        add("item.naturalist.meerkat", "Meerkat");
+        add("item.naturalist.grub", "Grub");
+        add("item.naturalist.meerkat_spawn_egg", "Meerkat Spawn Egg");
+        add("block.naturalist.meerkat_warren", "Meerkat Warren");
+        add("tag.item.naturalist.meerkat_food_items", "Meerkat Food");
+        add("tag.item.naturalist.meerkat_tempt_items", "Meerkat Tempt Items");
+        add("naturalist.configuration.meerkat_removed", "Remove Meerkat");
+        add("naturalist.subtitles.entity.meerkat.ambient", "Meerkat chirps");
+        add("naturalist.subtitles.entity.meerkat.hurt", "Meerkat hurts");
+        add("naturalist.subtitles.entity.meerkat.death", "Meerkat dies");
+        add("naturalist.subtitles.entity.meerkat.alert", "Meerkat calls an alarm");
         add("entity.naturalist.manatee", "Manatee");
         add("entity.naturalist.seahorse", "Seahorse");
         add("item.naturalist.manatee_bucket", "Bucket of Baby Manatee");

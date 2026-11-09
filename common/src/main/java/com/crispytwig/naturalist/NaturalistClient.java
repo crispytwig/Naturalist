@@ -75,6 +75,8 @@ import com.crispytwig.naturalist.client.model.whale.WhaleBabyModel;
 import com.crispytwig.naturalist.client.model.whale.WhaleModel;
 import com.crispytwig.naturalist.client.model.manatee.ManateeBabyModel;
 import com.crispytwig.naturalist.client.model.manatee.ManateeModel;
+import com.crispytwig.naturalist.client.model.meerkat.MeerkatBabyModel;
+import com.crispytwig.naturalist.client.model.meerkat.MeerkatModel;
 import com.crispytwig.naturalist.client.model.seahorse.SeahorseBabyModel;
 import com.crispytwig.naturalist.client.model.seahorse.SeahorseModel;
 import com.crispytwig.naturalist.client.model.equine.ZebraBabyModel;
@@ -131,6 +133,7 @@ import com.crispytwig.naturalist.client.renderer.entity.TurkeyRenderer;
 import com.crispytwig.naturalist.client.renderer.entity.VultureRenderer;
 import com.crispytwig.naturalist.client.renderer.entity.WhaleRenderer;
 import com.crispytwig.naturalist.client.renderer.entity.ManateeRenderer;
+import com.crispytwig.naturalist.client.renderer.entity.MeerkatRenderer;
 import com.crispytwig.naturalist.client.renderer.entity.SeahorseRenderer;
 import com.crispytwig.naturalist.client.renderer.entity.ZebraRenderer;
 import com.crispytwig.naturalist.common.registry.NaturalistBlockEntities;
@@ -156,6 +159,12 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import net.minecraft.client.color.block.BlockTintSource;
+import net.minecraft.client.color.block.BlockTintSources;
+import net.minecraft.world.level.block.Block;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
+
+import java.util.List;
 import java.util.function.Supplier;
 
 public final class NaturalistClient {
@@ -243,6 +252,8 @@ public final class NaturalistClient {
         r.register(WhaleModel.LAYER_LOCATION, WhaleModel::createBodyLayer);
         r.register(ManateeModel.LAYER_LOCATION, ManateeModel::createBodyLayer);
         r.register(ManateeBabyModel.LAYER_LOCATION, ManateeBabyModel::createBodyLayer);
+        r.register(MeerkatModel.LAYER_LOCATION, MeerkatModel::createBodyLayer);
+        r.register(MeerkatBabyModel.LAYER_LOCATION, MeerkatBabyModel::createBodyLayer);
         r.register(SeahorseModel.LAYER_LOCATION, SeahorseModel::createBodyLayer);
         r.register(SeahorseBabyModel.LAYER_LOCATION, SeahorseBabyModel::createBodyLayer);
         r.register(ZebraBabyModel.LAYER_LOCATION, ZebraBabyModel::createBodyLayer);
@@ -292,6 +303,7 @@ public final class NaturalistClient {
         r.register(NaturalistEntityTypes.PIRANHA.get(), PiranhaRenderer::new);
         r.register(NaturalistEntityTypes.WHALE.get(), WhaleRenderer::new);
         r.register(NaturalistEntityTypes.MANATEE.get(), ManateeRenderer::new);
+        r.register(NaturalistEntityTypes.MEERKAT.get(), MeerkatRenderer::new);
         r.register(NaturalistEntityTypes.SEAHORSE.get(), SeahorseRenderer::new);
         r.register(NaturalistEntityTypes.ANT.get(), AntRenderer::new);
         r.register(NaturalistEntityTypes.CARRIED_FOOD.get(), CarriedFoodRenderer::new);
@@ -322,6 +334,15 @@ public final class NaturalistClient {
     @FunctionalInterface
     public interface BlockEntityRendererRegistrar {
         <T extends BlockEntity, S extends BlockEntityRenderState> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T, S> provider);
+    }
+
+    @FunctionalInterface
+    public interface BlockTintRegistrar {
+        void register(List<BlockTintSource> sources, Block... blocks);
+    }
+
+    public static void registerBlockTints(BlockTintRegistrar r) {
+        r.register(List.of(BlockTintSources.grassBlock()), NaturalistRegistry.MEERKAT_WARREN.get());
     }
 
     public static void registerBlockEntityRenderers(BlockEntityRendererRegistrar r) {

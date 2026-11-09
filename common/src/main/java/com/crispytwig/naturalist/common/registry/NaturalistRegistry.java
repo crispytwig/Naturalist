@@ -3,6 +3,7 @@ package com.crispytwig.naturalist.common.registry;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.common.level.block.AlligatorEggBlock;
 import com.crispytwig.naturalist.common.level.block.AntHillBlock;
+import com.crispytwig.naturalist.common.level.block.MeerkatWarrenBlock;
 import com.crispytwig.naturalist.common.level.block.ChrysalisBlock;
 import com.crispytwig.naturalist.common.level.block.GlowGoopBlock;
 import com.crispytwig.naturalist.common.level.block.OstrichEggBlock;
@@ -143,6 +144,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, CaughtEntityItem> ENDERMITE = registerCaughtEntity("endermite", () -> EntityTypes.ENDERMITE);
     public static final DeferredHolder<Item, Item> SCORPION_POISON_GLAND = registerItem("scorpion_poison_gland", new Item.Properties());
     public static final DeferredHolder<Item, QueenAntItem> QUEEN_ANT = registerItem("queen_ant", QueenAntItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Block, MeerkatWarrenBlock> MEERKAT_WARREN = registerBlock("meerkat_warren", MeerkatWarrenBlock::new, () -> BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).strength(0.6F).sound(SoundType.GRASS));
     public static final DeferredHolder<Block, AntHillBlock> ANT_HILL = registerBlock("ant_hill", AntHillBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F, 0.2F).sound(SoundType.ROOTED_DIRT).randomTicks());
     public static final DeferredHolder<Block, SnailShellBlock> SNAIL_SHELL_BLOCK = registerBlockOnly("snail_shell", SnailShellBlock::new, () -> BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.CORAL_BLOCK).noOcclusion().pushReaction(PushReaction.POPPED));
     public static final DeferredHolder<Item, BlockItem> SNAIL_SHELL = registerItem("snail_shell", props -> new BlockItem(SNAIL_SHELL_BLOCK.get(), props), new Item.Properties().useBlockDescriptionPrefix().component(DataComponents.CUSTOM_DATA, SnailShellBlock.colorData(DyeColor.BROWN)));
@@ -160,6 +162,8 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, NaturalistBucketItem> GREAT_WHITE_SHARK_BUCKET = registerItem("great_white_shark_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, babyBucketData()));
     public static final DeferredHolder<Item, NaturalistBucketItem> MANATEE_BUCKET = registerItem("manatee_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.MANATEE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, babyBucketData()));
     public static final DeferredHolder<Item, NaturalistBucketItem> SEAHORSE_BUCKET = registerItem("seahorse_bucket", props -> new AgedBucketItem(NaturalistEntityTypes.SEAHORSE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "color.minecraft.", Seahorse.VARIANT_NAMES), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, Item> GRUB = registerItem("grub", new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.1F).build()));
+    public static final DeferredHolder<Item, CaughtEntityItem> MEERKAT = registerItem("meerkat", props -> new CaughtEntityItem(NaturalistEntityTypes.MEERKAT, NaturalistSoundEvents.MEERKAT_AMBIENT, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Block, StarfishBlock> RED_STARFISH = registerStarfishBlock("red_starfish");
     public static final DeferredHolder<Block, StarfishBlock> ORANGE_STARFISH = registerStarfishBlock("orange_starfish");
     public static final DeferredHolder<Block, StarfishBlock> BLUE_STARFISH = registerStarfishBlock("blue_starfish");
@@ -228,6 +232,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, SpawnEggItem> WHALE_SPAWN_EGG = registerSpawnEgg("whale_spawn_egg", NaturalistEntityTypes.WHALE);
     public static final DeferredHolder<Item, SpawnEggItem> MANATEE_SPAWN_EGG = registerSpawnEgg("manatee_spawn_egg", NaturalistEntityTypes.MANATEE);
     public static final DeferredHolder<Item, SpawnEggItem> SEAHORSE_SPAWN_EGG = registerSpawnEgg("seahorse_spawn_egg", NaturalistEntityTypes.SEAHORSE);
+    public static final DeferredHolder<Item, SpawnEggItem> MEERKAT_SPAWN_EGG = registerSpawnEgg("meerkat_spawn_egg", NaturalistEntityTypes.MEERKAT);
     public static final DeferredHolder<Item, SpawnEggItem> ANT_SPAWN_EGG = registerSpawnEgg("ant_spawn_egg", NaturalistEntityTypes.ANT);
     public static final DeferredHolder<Item, SpawnEggItem> MOLE_SPAWN_EGG = registerSpawnEgg("mole_spawn_egg", NaturalistEntityTypes.MOLE);
     public static final DeferredHolder<Item, SpawnEggItem> RAT_SPAWN_EGG = registerSpawnEgg("rat_spawn_egg", NaturalistEntityTypes.RAT);

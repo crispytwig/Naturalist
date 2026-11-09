@@ -41,6 +41,8 @@ public class NaturalistFabric implements ModInitializer {
     }
 
     private static void registerBiomeFeatures() {
+        BiomeModifications.addFeature(ctx -> ctx.hasTag(NaturalistBiomeTags.HAS_MEERKAT_WARREN), GenerationStep.Decoration.SURFACE_STRUCTURES,
+                ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Naturalist.MOD_ID, "meerkat_warren")));
         for (String name : List.of("ant_hill_small", "ant_hill_big")) {
             BiomeModifications.addFeature(ctx -> ctx.hasTag(NaturalistBiomeTags.HAS_ANT_HILL), GenerationStep.Decoration.SURFACE_STRUCTURES,
                     ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Naturalist.MOD_ID, name)));
