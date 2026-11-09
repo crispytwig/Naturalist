@@ -46,6 +46,8 @@ import com.crispytwig.naturalist.world.entity.animal.tortoise.Tortoise;
 import com.crispytwig.naturalist.world.entity.animal.turkey.Turkey;
 import com.crispytwig.naturalist.world.entity.animal.vulture.Vulture;
 import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.world.entity.animal.manatee.Manatee;
+import com.crispytwig.naturalist.world.entity.animal.seahorse.Seahorse;
 import com.crispytwig.naturalist.world.entity.animal.equine.Zebra;
 import com.evandev.fieldguide.variant.FieldGuideVariantManager;
 import net.minecraft.world.entity.Mob;
@@ -63,7 +65,7 @@ public class FieldGuidePlugin {
             JungleScorpion.class, KomodoDragon.class, Lion.class, Lizard.class, Mammoth.class,
             Mole.class, Ostrich.class, Piranha.class, Rat.class, Ray.class,
             Rhino.class, Snail.class, Snake.class, Starfish.class, Tiger.class,
-            Tortoise.class, Turkey.class, Vulture.class, Whale.class, Zebra.class
+            Tortoise.class, Turkey.class, Vulture.class, Whale.class, Zebra.class, Manatee.class, Seahorse.class
     );
 
     @SuppressWarnings({"rawtypes", "unchecked"})

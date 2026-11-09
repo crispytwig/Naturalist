@@ -69,6 +69,30 @@
     ],
     "subtitle": "naturalist.subtitles.entity.anglerfish.death"
   },
+  "entity.manatee.ambient": {
+    "sounds": [
+      "naturalist:mob/manatee/idle1",
+      "naturalist:mob/manatee/idle2",
+      "naturalist:mob/manatee/idle3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.manatee.ambient"
+  },
+  "entity.manatee.hurt": {
+    "sounds": [
+      "naturalist:mob/manatee/hurt1",
+      "naturalist:mob/manatee/hurt2",
+      "naturalist:mob/manatee/hurt3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.manatee.hurt"
+  },
+  "entity.manatee.death": {
+    "sounds": [
+      "naturalist:mob/manatee/death1",
+      "naturalist:mob/manatee/death2",
+      "naturalist:mob/manatee/death3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.manatee.death"
+  },
   "entity.whale.ambient": {
     "sounds": [
       "naturalist:mob/whale/idle2",

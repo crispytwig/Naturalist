@@ -29,6 +29,8 @@ import com.crispytwig.naturalist.world.item.SnailItem;
 import com.crispytwig.naturalist.world.entity.animal.starfish.Starfish;
 import com.crispytwig.naturalist.world.entity.animal.duck.Duck;
 import com.crispytwig.naturalist.world.entity.animal.giantisopod.GiantIsopod;
+import com.crispytwig.naturalist.world.entity.animal.seahorse.Seahorse;
+import com.crispytwig.naturalist.world.item.AgedBucketItem;
 import com.crispytwig.naturalist.world.entity.animal.jellyfish.Jellyfish;
 import com.crispytwig.naturalist.world.entity.animal.fish.Anglerfish;
 import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
@@ -103,7 +105,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> COOKED_LIZARD_TAIL = registerItem("cooked_lizard_tail", new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()));
     public static final DeferredHolder<Item, NaturalistBucketItem> CATFISH_BUCKET = registerItem("catfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.CATFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> BASS_BUCKET = registerItem("bass_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.BASS.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, null, Bass.VARIANT_NAMES), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, NaturalistBucketItem> DUCK_BUCKET = registerItem("duck_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.DUCK.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, props, true, null, Duck.VARIANT_NAMES), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, ducklingBucketData()));
+    public static final DeferredHolder<Item, NaturalistBucketItem> DUCK_BUCKET = registerItem("duck_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.DUCK.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, props, true, null, Duck.VARIANT_NAMES), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, babyBucketData()));
     public static final DeferredHolder<Item, Item> CATFISH = registerItem("catfish", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
     public static final DeferredHolder<Item, Item> COOKED_CATFISH = registerItem("cooked_catfish", new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build()));
     public static final DeferredHolder<Item, Item> BASS = registerItem("bass", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
@@ -155,7 +157,9 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, ClamSeedItem> CLAM_SEED = registerItem("clam_seed", ClamSeedItem::new, new Item.Properties().stacksTo(16));
     public static final DeferredHolder<Item, NaturalistBucketItem> BLOBFISH_BUCKET = registerItem("blobfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.BLOBFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> PIRANHA_BUCKET = registerItem("piranha_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.PIRANHA.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, NaturalistBucketItem> GREAT_WHITE_SHARK_BUCKET = registerItem("great_white_shark_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, ducklingBucketData()));
+    public static final DeferredHolder<Item, NaturalistBucketItem> GREAT_WHITE_SHARK_BUCKET = registerItem("great_white_shark_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, babyBucketData()));
+    public static final DeferredHolder<Item, NaturalistBucketItem> MANATEE_BUCKET = registerItem("manatee_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.MANATEE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, babyBucketData()));
+    public static final DeferredHolder<Item, NaturalistBucketItem> SEAHORSE_BUCKET = registerItem("seahorse_bucket", props -> new AgedBucketItem(NaturalistEntityTypes.SEAHORSE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "color.minecraft.", Seahorse.VARIANT_NAMES), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Block, StarfishBlock> RED_STARFISH = registerStarfishBlock("red_starfish");
     public static final DeferredHolder<Block, StarfishBlock> ORANGE_STARFISH = registerStarfishBlock("orange_starfish");
     public static final DeferredHolder<Block, StarfishBlock> BLUE_STARFISH = registerStarfishBlock("blue_starfish");
@@ -222,6 +226,8 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, SpawnEggItem> VULTURE_SPAWN_EGG = registerSpawnEgg("vulture_spawn_egg", NaturalistEntityTypes.VULTURE);
     public static final DeferredHolder<Item, SpawnEggItem> ZEBRA_SPAWN_EGG = registerSpawnEgg("zebra_spawn_egg", NaturalistEntityTypes.ZEBRA);
     public static final DeferredHolder<Item, SpawnEggItem> WHALE_SPAWN_EGG = registerSpawnEgg("whale_spawn_egg", NaturalistEntityTypes.WHALE);
+    public static final DeferredHolder<Item, SpawnEggItem> MANATEE_SPAWN_EGG = registerSpawnEgg("manatee_spawn_egg", NaturalistEntityTypes.MANATEE);
+    public static final DeferredHolder<Item, SpawnEggItem> SEAHORSE_SPAWN_EGG = registerSpawnEgg("seahorse_spawn_egg", NaturalistEntityTypes.SEAHORSE);
     public static final DeferredHolder<Item, SpawnEggItem> ANT_SPAWN_EGG = registerSpawnEgg("ant_spawn_egg", NaturalistEntityTypes.ANT);
     public static final DeferredHolder<Item, SpawnEggItem> MOLE_SPAWN_EGG = registerSpawnEgg("mole_spawn_egg", NaturalistEntityTypes.MOLE);
     public static final DeferredHolder<Item, SpawnEggItem> RAT_SPAWN_EGG = registerSpawnEgg("rat_spawn_egg", NaturalistEntityTypes.RAT);
@@ -237,7 +243,7 @@ public class NaturalistRegistry {
     public static void init() {
     }
 
-    private static CustomData ducklingBucketData() {
+    private static CustomData babyBucketData() {
         CompoundTag tag = new CompoundTag();
         tag.putInt("Age", -24000);
         return CustomData.of(tag);

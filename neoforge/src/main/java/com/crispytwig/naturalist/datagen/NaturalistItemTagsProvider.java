@@ -58,8 +58,10 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:giant_isopod_bucket"))
                 .add(item("naturalist:great_white_shark_bucket"))
                 .add(item("naturalist:jellyfish_bucket"))
+                .add(item("naturalist:manatee_bucket"))
                 .add(item("naturalist:piranha_bucket"))
                 .add(item("naturalist:ray_bucket"))
+                .add(item("naturalist:seahorse_bucket"))
                 .add(item("naturalist:starfish_bucket"));
 
         tag(itemTag("c:buckets"))
@@ -244,6 +246,12 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:bushmeat"))
                 .add(item("naturalist:mammoth_meat"))
                 .add(item("naturalist:drumstick"));
+
+        tag(NaturalistItemTags.MANATEE_FOOD_ITEMS)
+                .add(item("minecraft:seagrass"));
+
+        tag(NaturalistItemTags.SEAHORSE_FOOD_ITEMS)
+                .add(item("naturalist:crab_meat"));
 
         tag(NaturalistItemTags.WHALE_FOOD_ITEMS)
                 .addTag(itemTag("c:foods/cooked_fish"))

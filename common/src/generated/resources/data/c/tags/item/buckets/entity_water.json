@@ -8,8 +8,10 @@
     "naturalist:giant_isopod_bucket",
     "naturalist:great_white_shark_bucket",
     "naturalist:jellyfish_bucket",
+    "naturalist:manatee_bucket",
     "naturalist:piranha_bucket",
     "naturalist:ray_bucket",
+    "naturalist:seahorse_bucket",
     "naturalist:starfish_bucket"
   ]
 }

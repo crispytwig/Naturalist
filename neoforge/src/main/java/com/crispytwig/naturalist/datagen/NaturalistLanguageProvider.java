@@ -23,6 +23,8 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("tooltip.naturalist.duck_muscovy", "Muscovy");
         add("tooltip.naturalist.duck_whistling", "Whistling");
         add("tooltip.naturalist.duck_pekin", "Pekin");
+        add("tooltip.naturalist.adult", "Adult");
+        add("tooltip.naturalist.baby", "Baby");
         add("tooltip.naturalist.red_admiral", "Red Admiral");
 
         add("block.naturalist.alligator_egg", "Alligator Egg");
@@ -127,6 +129,19 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("item.naturalist.clam_seed", "Clam Seed");
         add("item.naturalist.great_white_shark_bucket", "Bucket of Baby Great White Shark");
         add("tag.item.naturalist.whale_food_items", "Whale Food");
+        add("entity.naturalist.manatee", "Manatee");
+        add("entity.naturalist.seahorse", "Seahorse");
+        add("item.naturalist.manatee_bucket", "Bucket of Baby Manatee");
+        add("item.naturalist.seahorse_bucket", "Bucket of Seahorse");
+        add("item.naturalist.manatee_spawn_egg", "Manatee Spawn Egg");
+        add("item.naturalist.seahorse_spawn_egg", "Seahorse Spawn Egg");
+        add("tag.item.naturalist.manatee_food_items", "Manatee Food");
+        add("tag.item.naturalist.seahorse_food_items", "Seahorse Food");
+        add("naturalist.configuration.manatee_removed", "Remove Manatee");
+        add("naturalist.configuration.seahorse_removed", "Remove Seahorse");
+        add("naturalist.subtitles.entity.manatee.ambient", "Manatee grunts");
+        add("naturalist.subtitles.entity.manatee.hurt", "Manatee hurts");
+        add("naturalist.subtitles.entity.manatee.death", "Manatee dies");
         add("item.naturalist.catfish_spawn_egg", "Catfish Spawn Egg");
         add("item.naturalist.cattail_fluff", "Cattail Fluff");
         add("item.naturalist.cooked_bass", "Cooked Bass");

@@ -64,6 +64,8 @@ import com.crispytwig.naturalist.world.entity.animal.tortoise.Tortoise;
 import com.crispytwig.naturalist.world.entity.animal.turkey.Turkey;
 import com.crispytwig.naturalist.world.entity.animal.vulture.Vulture;
 import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.world.entity.animal.manatee.Manatee;
+import com.crispytwig.naturalist.world.entity.animal.seahorse.Seahorse;
 import com.crispytwig.naturalist.world.entity.animal.equine.Zebra;
 import com.crispytwig.naturalist.world.item.CaughtEntityItem;
 import net.minecraft.core.BlockPos;
@@ -178,6 +180,8 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.GIANT_ISOPOD.get(), GiantIsopod.createAttributes());
         r.register(NaturalistEntityTypes.JELLYFISH.get(), Jellyfish.createAttributes());
         r.register(NaturalistEntityTypes.WHALE.get(), Whale.createAttributes());
+        r.register(NaturalistEntityTypes.MANATEE.get(), Manatee.createAttributes());
+        r.register(NaturalistEntityTypes.SEAHORSE.get(), Seahorse.createAttributes());
         r.register(NaturalistEntityTypes.ANT.get(), Ant.createAttributes());
         r.register(NaturalistEntityTypes.MOLE.get(), Mole.createAttributes());
         r.register(NaturalistEntityTypes.RAT.get(), Rat.createAttributes());
@@ -243,6 +247,8 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.OSTRICH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.DESERT_SCORPION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scorpion::checkScorpionSpawnRules);
         r.register(NaturalistEntityTypes.JUNGLE_SCORPION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scorpion::checkScorpionSpawnRules);
+        r.register(NaturalistEntityTypes.MANATEE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Manatee::checkAquaticSpawnRules);
+        r.register(NaturalistEntityTypes.SEAHORSE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Seahorse::checkAquaticSpawnRules);
         r.register(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GreatWhiteShark::checkGreatWhiteSharkSpawnRules);
         r.register(NaturalistEntityTypes.TURKEY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.CAPYBARA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
@@ -275,6 +281,8 @@ public final class Naturalist {
         DispenserBlock.registerBehavior(NaturalistRegistry.ANGLERFISH_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.RAY_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.CLAM_BUCKET.get(), bucketDispenseBehavior);
+        DispenserBlock.registerBehavior(NaturalistRegistry.MANATEE_BUCKET.get(), bucketDispenseBehavior);
+        DispenserBlock.registerBehavior(NaturalistRegistry.SEAHORSE_BUCKET.get(), bucketDispenseBehavior);
 
         DispenserBlock.registerBehavior(NaturalistRegistry.SNAIL.get(), new DefaultDispenseItemBehavior() {
             public @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {

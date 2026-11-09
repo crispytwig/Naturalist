@@ -2,6 +2,7 @@ package com.crispytwig.naturalist.compat.fieldguide;
 
 import com.crispytwig.naturalist.world.entity.animal.greatwhiteshark.GreatWhiteShark;
 import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.world.entity.animal.BucketableAquaticAnimal;
 import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import com.evandev.fieldguide.api.variant.VariantDef;
@@ -38,7 +39,7 @@ public class NaturalistVariantProvider<T extends Mob & DataDrivenVariantAnimal> 
 
     @Override
     public void apply(T entity, VariantDef def) {
-        if (entity instanceof WaterAnimal || entity instanceof Whale || entity instanceof GreatWhiteShark) {
+        if (entity instanceof WaterAnimal || entity instanceof Whale || entity instanceof GreatWhiteShark || entity instanceof BucketableAquaticAnimal) {
             entity.wasTouchingWater = true;
         }
 

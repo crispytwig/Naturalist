@@ -1,0 +1,156 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:orange\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/seahorse_bucket/orange"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:\"naturalist:magenta\"}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/seahorse_bucket/magenta"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Variant:\"naturalist:light_blue\"}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/variant/seahorse_bucket/light_blue"
+        },
+        "on_false": {
+          "type": "minecraft:condition",
+          "property": "minecraft:component",
+          "predicate": "minecraft:custom_data",
+          "value": "{Variant:\"naturalist:yellow\"}",
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "naturalist:item/variant/seahorse_bucket/yellow"
+          },
+          "on_false": {
+            "type": "minecraft:condition",
+            "property": "minecraft:component",
+            "predicate": "minecraft:custom_data",
+            "value": "{Variant:\"naturalist:lime\"}",
+            "on_true": {
+              "type": "minecraft:model",
+              "model": "naturalist:item/variant/seahorse_bucket/lime"
+            },
+            "on_false": {
+              "type": "minecraft:condition",
+              "property": "minecraft:component",
+              "predicate": "minecraft:custom_data",
+              "value": "{Variant:\"naturalist:pink\"}",
+              "on_true": {
+                "type": "minecraft:model",
+                "model": "naturalist:item/variant/seahorse_bucket/pink"
+              },
+              "on_false": {
+                "type": "minecraft:condition",
+                "property": "minecraft:component",
+                "predicate": "minecraft:custom_data",
+                "value": "{Variant:\"naturalist:gray\"}",
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "naturalist:item/variant/seahorse_bucket/gray"
+                },
+                "on_false": {
+                  "type": "minecraft:condition",
+                  "property": "minecraft:component",
+                  "predicate": "minecraft:custom_data",
+                  "value": "{Variant:\"naturalist:light_gray\"}",
+                  "on_true": {
+                    "type": "minecraft:model",
+                    "model": "naturalist:item/variant/seahorse_bucket/light_gray"
+                  },
+                  "on_false": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:component",
+                    "predicate": "minecraft:custom_data",
+                    "value": "{Variant:\"naturalist:cyan\"}",
+                    "on_true": {
+                      "type": "minecraft:model",
+                      "model": "naturalist:item/variant/seahorse_bucket/cyan"
+                    },
+                    "on_false": {
+                      "type": "minecraft:condition",
+                      "property": "minecraft:component",
+                      "predicate": "minecraft:custom_data",
+                      "value": "{Variant:\"naturalist:purple\"}",
+                      "on_true": {
+                        "type": "minecraft:model",
+                        "model": "naturalist:item/variant/seahorse_bucket/purple"
+                      },
+                      "on_false": {
+                        "type": "minecraft:condition",
+                        "property": "minecraft:component",
+                        "predicate": "minecraft:custom_data",
+                        "value": "{Variant:\"naturalist:blue\"}",
+                        "on_true": {
+                          "type": "minecraft:model",
+                          "model": "naturalist:item/variant/seahorse_bucket/blue"
+                        },
+                        "on_false": {
+                          "type": "minecraft:condition",
+                          "property": "minecraft:component",
+                          "predicate": "minecraft:custom_data",
+                          "value": "{Variant:\"naturalist:brown\"}",
+                          "on_true": {
+                            "type": "minecraft:model",
+                            "model": "naturalist:item/variant/seahorse_bucket/brown"
+                          },
+                          "on_false": {
+                            "type": "minecraft:condition",
+                            "property": "minecraft:component",
+                            "predicate": "minecraft:custom_data",
+                            "value": "{Variant:\"naturalist:green\"}",
+                            "on_true": {
+                              "type": "minecraft:model",
+                              "model": "naturalist:item/variant/seahorse_bucket/green"
+                            },
+                            "on_false": {
+                              "type": "minecraft:condition",
+                              "property": "minecraft:component",
+                              "predicate": "minecraft:custom_data",
+                              "value": "{Variant:\"naturalist:red\"}",
+                              "on_true": {
+                                "type": "minecraft:model",
+                                "model": "naturalist:item/variant/seahorse_bucket/red"
+                              },
+                              "on_false": {
+                                "type": "minecraft:condition",
+                                "property": "minecraft:component",
+                                "predicate": "minecraft:custom_data",
+                                "value": "{Variant:\"naturalist:black\"}",
+                                "on_true": {
+                                  "type": "minecraft:model",
+                                  "model": "naturalist:item/variant/seahorse_bucket/black"
+                                },
+                                "on_false": {
+                                  "type": "minecraft:model",
+                                  "model": "naturalist:item/seahorse_bucket"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

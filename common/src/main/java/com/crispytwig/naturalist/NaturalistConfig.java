@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public final class NaturalistConfig {
     public static final List<String> AQUATIC_MOBS = List.of(
             "anglerfish", "bass", "blobfish", "catfish", "clam", "giantIsopod", "greatWhiteShark",
-            "jellyfish", "piranha", "ray", "starfish", "whale"
+            "jellyfish", "manatee", "piranha", "ray", "seahorse", "starfish", "whale"
     );
 
     public static final List<String> LAND_MOBS = List.of(
