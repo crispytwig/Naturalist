@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.resources.sounds;
 
-import com.crispytwig.naturalist.world.entity.animal.dragonfly.Dragonfly;
-import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
+import com.crispytwig.naturalist.common.entity.dragonfly.Dragonfly;
+import com.crispytwig.naturalist.common.registry.NaturalistSoundEvents;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.SoundSource;

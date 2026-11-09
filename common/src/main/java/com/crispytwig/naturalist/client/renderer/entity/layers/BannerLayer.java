@@ -3,7 +3,7 @@ package com.crispytwig.naturalist.client.renderer.entity.layers;
 import org.jspecify.annotations.Nullable;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.elephant.Elephant;
+import com.crispytwig.naturalist.common.entity.elephant.Elephant;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.Model;

@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.komododragon.KomodoDragonModel;
-import com.crispytwig.naturalist.world.entity.animal.komododragon.KomodoDragon;
+import com.crispytwig.naturalist.client.model.komododragon.KomodoDragonModel;
+import com.crispytwig.naturalist.common.entity.komododragon.KomodoDragon;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

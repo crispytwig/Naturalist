@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
-import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.common.entity.variant.DataDrivenVariantAnimal;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

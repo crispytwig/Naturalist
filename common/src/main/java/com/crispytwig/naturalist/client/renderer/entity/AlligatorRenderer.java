@@ -3,9 +3,9 @@ package com.crispytwig.naturalist.client.renderer.entity;
 import net.minecraft.client.renderer.entity.layers.LivingEntityEmissiveLayer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.alligator.AlligatorBabyModel;
-import com.crispytwig.naturalist.client.model.animal.alligator.AlligatorModel;
-import com.crispytwig.naturalist.world.entity.animal.alligator.Alligator;
+import com.crispytwig.naturalist.client.model.alligator.AlligatorBabyModel;
+import com.crispytwig.naturalist.client.model.alligator.AlligatorModel;
+import com.crispytwig.naturalist.common.entity.alligator.Alligator;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 

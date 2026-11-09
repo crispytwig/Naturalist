@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.mole.MoleModel;
-import com.crispytwig.naturalist.world.entity.animal.mole.Mole;
+import com.crispytwig.naturalist.client.model.mole.MoleModel;
+import com.crispytwig.naturalist.common.entity.mole.Mole;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
 

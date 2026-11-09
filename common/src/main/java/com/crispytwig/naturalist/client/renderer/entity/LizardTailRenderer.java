@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.lizard.LizardTailModel;
-import com.crispytwig.naturalist.world.entity.animal.lizard.LizardTail;
+import com.crispytwig.naturalist.client.model.lizard.LizardTailModel;
+import com.crispytwig.naturalist.common.entity.lizard.LizardTail;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

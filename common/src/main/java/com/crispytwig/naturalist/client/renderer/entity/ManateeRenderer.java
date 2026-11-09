@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.manatee.ManateeBabyModel;
-import com.crispytwig.naturalist.client.model.animal.manatee.ManateeModel;
-import com.crispytwig.naturalist.world.entity.animal.manatee.Manatee;
+import com.crispytwig.naturalist.client.model.manatee.ManateeBabyModel;
+import com.crispytwig.naturalist.client.model.manatee.ManateeModel;
+import com.crispytwig.naturalist.common.entity.manatee.Manatee;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

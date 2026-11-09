@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.client.renderer.entity.layers;
 
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.ostrich.Ostrich;
+import com.crispytwig.naturalist.common.entity.ostrich.Ostrich;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;

@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.fish.BlobfishGrayModel;
-import com.crispytwig.naturalist.client.model.animal.fish.BlobfishPinkModel;
+import com.crispytwig.naturalist.client.model.fish.BlobfishGrayModel;
+import com.crispytwig.naturalist.client.model.fish.BlobfishPinkModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
-import com.crispytwig.naturalist.world.entity.animal.fish.Blobfish;
+import com.crispytwig.naturalist.common.entity.fish.Blobfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;

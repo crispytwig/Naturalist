@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.seahorse.SeahorseBabyModel;
-import com.crispytwig.naturalist.client.model.animal.seahorse.SeahorseModel;
-import com.crispytwig.naturalist.world.entity.animal.seahorse.Seahorse;
+import com.crispytwig.naturalist.client.model.seahorse.SeahorseBabyModel;
+import com.crispytwig.naturalist.client.model.seahorse.SeahorseModel;
+import com.crispytwig.naturalist.common.entity.seahorse.Seahorse;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

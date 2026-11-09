@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.clam.ClamBabyModel;
-import com.crispytwig.naturalist.client.model.animal.clam.ClamModel;
+import com.crispytwig.naturalist.client.model.clam.ClamBabyModel;
+import com.crispytwig.naturalist.client.model.clam.ClamModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.ClamItemLayer;
-import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
+import com.crispytwig.naturalist.common.entity.clam.Clam;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.item.ItemDisplayContext;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;

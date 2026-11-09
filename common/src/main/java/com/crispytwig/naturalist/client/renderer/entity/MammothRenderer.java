@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.elephant.MammothBabyModel;
-import com.crispytwig.naturalist.client.model.animal.elephant.MammothModel;
+import com.crispytwig.naturalist.client.model.elephant.MammothBabyModel;
+import com.crispytwig.naturalist.client.model.elephant.MammothModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.BannerLayer;
 import com.crispytwig.naturalist.client.renderer.entity.layers.SeatedRiderLayer;
-import com.crispytwig.naturalist.world.entity.animal.elephant.Elephant;
+import com.crispytwig.naturalist.common.entity.elephant.Elephant;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

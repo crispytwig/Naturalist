@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.datagen;
 
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.Holder;
@@ -38,8 +38,8 @@ import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import com.crispytwig.naturalist.registry.NaturalistPotions;
-import com.crispytwig.naturalist.world.item.crafting.BugNetInteractionRecipe;
+import com.crispytwig.naturalist.common.registry.NaturalistPotions;
+import com.crispytwig.naturalist.common.item.crafting.BugNetInteractionRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.BrewingRecipeBuilder;
 import net.minecraft.world.entity.EntityTypes;

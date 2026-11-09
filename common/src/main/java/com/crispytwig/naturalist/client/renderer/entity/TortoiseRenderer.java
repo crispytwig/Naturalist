@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.tortoise.TortoiseBabyModel;
-import com.crispytwig.naturalist.client.model.animal.tortoise.TortoiseModel;
+import com.crispytwig.naturalist.client.model.tortoise.TortoiseBabyModel;
+import com.crispytwig.naturalist.client.model.tortoise.TortoiseModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.TortoiseMaskLayer;
-import com.crispytwig.naturalist.world.entity.animal.tortoise.Tortoise;
+import com.crispytwig.naturalist.common.entity.tortoise.Tortoise;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

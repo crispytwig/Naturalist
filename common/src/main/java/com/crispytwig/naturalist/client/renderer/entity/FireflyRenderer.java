@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.firefly.FireflyBabyModel;
-import com.crispytwig.naturalist.client.model.animal.firefly.FireflyModel;
+import com.crispytwig.naturalist.client.model.firefly.FireflyBabyModel;
+import com.crispytwig.naturalist.client.model.firefly.FireflyModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.FireflyGlowLayer;
-import com.crispytwig.naturalist.world.entity.animal.firefly.Firefly;
+import com.crispytwig.naturalist.common.entity.firefly.Firefly;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import org.jetbrains.annotations.NotNull;
 

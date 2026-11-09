@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.butterfly.ButterflyModel;
-import com.crispytwig.naturalist.world.entity.animal.butterfly.Butterfly;
+import com.crispytwig.naturalist.client.model.butterfly.ButterflyModel;
+import com.crispytwig.naturalist.common.entity.butterfly.Butterfly;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

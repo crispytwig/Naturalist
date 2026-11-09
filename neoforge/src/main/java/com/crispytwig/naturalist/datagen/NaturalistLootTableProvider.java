@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
-import static com.crispytwig.naturalist.registry.NaturalistRegistry.BASS;
+import static com.crispytwig.naturalist.common.registry.NaturalistRegistry.BASS;
 import static net.minecraft.core.registries.Registries.LOOT_TABLE;
 
 import java.util.List;

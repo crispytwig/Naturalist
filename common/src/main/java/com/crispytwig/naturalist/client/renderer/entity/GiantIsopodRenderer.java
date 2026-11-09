@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.giantisopod.GiantIsopodModel;
-import com.crispytwig.naturalist.world.entity.animal.giantisopod.GiantIsopod;
+import com.crispytwig.naturalist.client.model.giantisopod.GiantIsopodModel;
+import com.crispytwig.naturalist.common.entity.giantisopod.GiantIsopod;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

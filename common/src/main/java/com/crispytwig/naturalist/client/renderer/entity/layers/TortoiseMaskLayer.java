@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.client.renderer.entity.layers;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.tortoise.Tortoise;
+import com.crispytwig.naturalist.common.entity.tortoise.Tortoise;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;

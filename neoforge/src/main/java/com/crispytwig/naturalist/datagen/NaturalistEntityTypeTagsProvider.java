@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.datagen;
 
-import com.crispytwig.naturalist.tags.NaturalistEntityTypeTags;
+import com.crispytwig.naturalist.common.tags.NaturalistEntityTypeTags;
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
+import com.crispytwig.naturalist.common.registry.NaturalistEntityTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;

@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.jellyfish.JellyfishModel;
-import com.crispytwig.naturalist.world.entity.animal.jellyfish.Jellyfish;
+import com.crispytwig.naturalist.client.model.jellyfish.JellyfishModel;
+import com.crispytwig.naturalist.common.entity.jellyfish.Jellyfish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

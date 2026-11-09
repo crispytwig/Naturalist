@@ -1,6 +1,6 @@
 package com.crispytwig.naturalist.datagen;
 
-import com.crispytwig.naturalist.tags.NaturalistBiomeTags;
+import com.crispytwig.naturalist.common.tags.NaturalistBiomeTags;
 import com.crispytwig.naturalist.Naturalist;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;

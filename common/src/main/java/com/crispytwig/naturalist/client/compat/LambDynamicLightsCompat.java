@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.compat;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
+import com.crispytwig.naturalist.common.registry.NaturalistEntityTypes;
 import dev.lambdaurora.lambdynlights.api.DynamicLightsContext;
 import dev.lambdaurora.lambdynlights.api.DynamicLightsInitializer;
 

@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.turkey.TurkeyModel;
-import com.crispytwig.naturalist.world.entity.animal.turkey.Turkey;
+import com.crispytwig.naturalist.client.model.turkey.TurkeyModel;
+import com.crispytwig.naturalist.common.entity.turkey.Turkey;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

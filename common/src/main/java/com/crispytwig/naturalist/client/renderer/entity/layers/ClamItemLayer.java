@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity.layers;
 
-import com.crispytwig.naturalist.client.model.animal.clam.ClamModel;
+import com.crispytwig.naturalist.client.model.clam.ClamModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
+import com.crispytwig.naturalist.common.entity.clam.Clam;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;

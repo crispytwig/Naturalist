@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.scorpion.DesertScorpionModel;
-import com.crispytwig.naturalist.world.entity.animal.scorpion.DesertScorpion;
+import com.crispytwig.naturalist.client.model.scorpion.DesertScorpionModel;
+import com.crispytwig.naturalist.common.entity.scorpion.DesertScorpion;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

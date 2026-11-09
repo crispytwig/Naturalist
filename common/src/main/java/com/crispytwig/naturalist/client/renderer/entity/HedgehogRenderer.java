@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.hedgehog.HedgehogModel;
+import com.crispytwig.naturalist.client.model.hedgehog.HedgehogModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.DyeLayer;
 import com.crispytwig.naturalist.client.renderer.entity.layers.HedgehogGlintLayer;
-import com.crispytwig.naturalist.world.entity.animal.hedgehog.Hedgehog;
+import com.crispytwig.naturalist.common.entity.hedgehog.Hedgehog;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.giraffe.GiraffeBabyModel;
-import com.crispytwig.naturalist.client.model.animal.giraffe.GiraffeModel;
+import com.crispytwig.naturalist.client.model.giraffe.GiraffeBabyModel;
+import com.crispytwig.naturalist.client.model.giraffe.GiraffeModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.SeatedRiderLayer;
-import com.crispytwig.naturalist.world.entity.animal.giraffe.Giraffe;
+import com.crispytwig.naturalist.common.entity.giraffe.Giraffe;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

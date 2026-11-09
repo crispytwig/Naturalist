@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.bear.BearBabyModel;
-import com.crispytwig.naturalist.client.model.animal.bear.BearModel;
+import com.crispytwig.naturalist.client.model.bear.BearBabyModel;
+import com.crispytwig.naturalist.client.model.bear.BearModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.DyeLayer;
-import com.crispytwig.naturalist.world.entity.animal.bear.Bear;
+import com.crispytwig.naturalist.common.entity.bear.Bear;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;

@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.client.renderer.entity.layers;
 
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.capybara.Capybara;
+import com.crispytwig.naturalist.common.entity.capybara.Capybara;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;

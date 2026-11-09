@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.datagen;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;

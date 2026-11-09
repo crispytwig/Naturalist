@@ -4,7 +4,7 @@ import com.crispytwig.naturalist.NaturalistClient;
 import com.crispytwig.naturalist.NaturalistClientConfig;
 import com.crispytwig.naturalist.fabric.config.FabricNaturalistClientConfig;
 import com.crispytwig.naturalist.client.particle.CaptureNetSwingParticle;
-import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
+import com.crispytwig.naturalist.common.registry.NaturalistParticleTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;

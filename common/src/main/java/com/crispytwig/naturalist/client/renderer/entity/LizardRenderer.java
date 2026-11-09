@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.lizard.LizardModel;
+import com.crispytwig.naturalist.client.model.lizard.LizardModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.DyeLayer;
-import com.crispytwig.naturalist.world.entity.animal.lizard.Lizard;
+import com.crispytwig.naturalist.common.entity.lizard.Lizard;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

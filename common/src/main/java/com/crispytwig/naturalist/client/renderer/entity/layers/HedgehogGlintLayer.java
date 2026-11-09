@@ -2,7 +2,7 @@ package com.crispytwig.naturalist.client.renderer.entity.layers;
 
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.hedgehog.Hedgehog;
+import com.crispytwig.naturalist.common.entity.hedgehog.Hedgehog;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

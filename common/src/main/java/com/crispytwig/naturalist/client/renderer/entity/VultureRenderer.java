@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
-import com.crispytwig.naturalist.client.model.animal.vulture.VultureBabyModel;
-import com.crispytwig.naturalist.client.model.animal.vulture.VultureModel;
-import com.crispytwig.naturalist.world.entity.animal.vulture.Vulture;
+import com.crispytwig.naturalist.client.model.vulture.VultureBabyModel;
+import com.crispytwig.naturalist.client.model.vulture.VultureModel;
+import com.crispytwig.naturalist.common.entity.vulture.Vulture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;

@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.gui.screens.inventory;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.world.entity.animal.elephant.Elephant;
-import com.crispytwig.naturalist.world.inventory.ElephantInventoryMenu;
+import com.crispytwig.naturalist.common.entity.elephant.Elephant;
+import com.crispytwig.naturalist.common.inventory.ElephantInventoryMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;

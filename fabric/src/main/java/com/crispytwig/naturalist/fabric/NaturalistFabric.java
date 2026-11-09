@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.fabric;
 
-import com.crispytwig.naturalist.tags.NaturalistBiomeTags;
+import com.crispytwig.naturalist.common.tags.NaturalistBiomeTags;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.NaturalistConfig;
 import com.crispytwig.naturalist.fabric.config.FabricNaturalistConfig;
-import com.crispytwig.naturalist.world.level.NaturalistSpawns;
+import com.crispytwig.naturalist.common.level.NaturalistSpawns;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;

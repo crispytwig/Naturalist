@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.client.NaturalistPortraitRenderState;
-import com.crispytwig.naturalist.client.model.animal.crab.CrabBabyModel;
-import com.crispytwig.naturalist.client.model.animal.crab.CrabModel;
+import com.crispytwig.naturalist.client.model.crab.CrabBabyModel;
+import com.crispytwig.naturalist.client.model.crab.CrabModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.CrabItemLayer;
-import com.crispytwig.naturalist.world.entity.animal.crab.Crab;
+import com.crispytwig.naturalist.common.entity.crab.Crab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;

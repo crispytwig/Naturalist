@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.equine.ZebraBabyModel;
-import com.crispytwig.naturalist.client.model.animal.equine.ZebraModel;
-import com.crispytwig.naturalist.world.entity.animal.equine.Zebra;
+import com.crispytwig.naturalist.client.model.equine.ZebraBabyModel;
+import com.crispytwig.naturalist.client.model.equine.ZebraModel;
+import com.crispytwig.naturalist.common.entity.equine.Zebra;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

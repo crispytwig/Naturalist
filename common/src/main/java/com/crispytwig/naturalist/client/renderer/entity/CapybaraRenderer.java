@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.capybara.CapybaraBabyModel;
-import com.crispytwig.naturalist.client.model.animal.capybara.CapybaraModel;
+import com.crispytwig.naturalist.client.model.capybara.CapybaraBabyModel;
+import com.crispytwig.naturalist.client.model.capybara.CapybaraModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.CapybaraDyeLayer;
-import com.crispytwig.naturalist.world.entity.animal.capybara.Capybara;
+import com.crispytwig.naturalist.common.entity.capybara.Capybara;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 

@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.datagen;
 
-import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.common.registry.NaturalistEntityTypes;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
 import net.minecraft.advancements.predicates.DamageSourcePredicate;
 import net.minecraft.advancements.predicates.NbtPredicate;
 import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;

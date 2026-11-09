@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.item.properties.conditional;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.world.item.KnapsackItem;
+import com.crispytwig.naturalist.common.item.KnapsackItem;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;

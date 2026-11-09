@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.greatwhiteshark.GreatWhiteSharkBabyModel;
-import com.crispytwig.naturalist.client.model.animal.greatwhiteshark.GreatWhiteSharkModel;
-import com.crispytwig.naturalist.world.entity.animal.greatwhiteshark.GreatWhiteShark;
+import com.crispytwig.naturalist.client.model.greatwhiteshark.GreatWhiteSharkBabyModel;
+import com.crispytwig.naturalist.client.model.greatwhiteshark.GreatWhiteSharkModel;
+import com.crispytwig.naturalist.common.entity.greatwhiteshark.GreatWhiteShark;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;

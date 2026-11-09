@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.deer.DeerBabyModel;
-import com.crispytwig.naturalist.client.model.animal.deer.DeerModel;
-import com.crispytwig.naturalist.world.entity.animal.deer.Deer;
+import com.crispytwig.naturalist.client.model.deer.DeerBabyModel;
+import com.crispytwig.naturalist.client.model.deer.DeerModel;
+import com.crispytwig.naturalist.common.entity.deer.Deer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

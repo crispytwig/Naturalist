@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.mole.DirtTrailModel;
-import com.crispytwig.naturalist.world.entity.animal.mole.DirtTrail;
+import com.crispytwig.naturalist.client.model.mole.DirtTrailModel;
+import com.crispytwig.naturalist.common.entity.mole.DirtTrail;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;

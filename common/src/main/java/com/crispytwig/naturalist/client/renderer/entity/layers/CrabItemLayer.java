@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity.layers;
 
-import com.crispytwig.naturalist.client.model.animal.crab.CrabModel;
+import com.crispytwig.naturalist.client.model.crab.CrabModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.animal.crab.Crab;
+import com.crispytwig.naturalist.common.entity.crab.Crab;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

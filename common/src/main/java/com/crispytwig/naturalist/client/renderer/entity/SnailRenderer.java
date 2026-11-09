@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.snail.SnailModel;
-import com.crispytwig.naturalist.world.entity.animal.snail.Snail;
+import com.crispytwig.naturalist.client.model.snail.SnailModel;
+import com.crispytwig.naturalist.common.entity.snail.Snail;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;

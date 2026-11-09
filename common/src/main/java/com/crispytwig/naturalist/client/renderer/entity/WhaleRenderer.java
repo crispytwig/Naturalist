@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.whale.WhaleBabyModel;
-import com.crispytwig.naturalist.client.model.animal.whale.WhaleModel;
-import com.crispytwig.naturalist.world.entity.animal.whale.Whale;
+import com.crispytwig.naturalist.client.model.whale.WhaleBabyModel;
+import com.crispytwig.naturalist.client.model.whale.WhaleModel;
+import com.crispytwig.naturalist.common.entity.whale.Whale;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;

@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.boar.BoarBabyModel;
-import com.crispytwig.naturalist.client.model.animal.boar.BoarModel;
-import com.crispytwig.naturalist.world.entity.animal.boar.Boar;
+import com.crispytwig.naturalist.client.model.boar.BoarBabyModel;
+import com.crispytwig.naturalist.client.model.boar.BoarModel;
+import com.crispytwig.naturalist.common.entity.boar.Boar;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

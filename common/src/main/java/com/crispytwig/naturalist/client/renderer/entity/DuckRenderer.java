@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.client.model.animal.duck.DuckBabyModel;
-import com.crispytwig.naturalist.client.model.animal.duck.DuckModel;
+import com.crispytwig.naturalist.client.model.duck.DuckBabyModel;
+import com.crispytwig.naturalist.client.model.duck.DuckModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.DyeLayer;
-import com.crispytwig.naturalist.world.entity.animal.duck.Duck;
+import com.crispytwig.naturalist.common.entity.duck.Duck;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
 

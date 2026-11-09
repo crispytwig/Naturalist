@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.snake.SnakeModel;
-import com.crispytwig.naturalist.world.entity.animal.snake.Snake;
+import com.crispytwig.naturalist.client.model.snake.SnakeModel;
+import com.crispytwig.naturalist.common.entity.snake.Snake;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 public class SnakeRenderer extends NaturalistMobRenderer<Snake> {

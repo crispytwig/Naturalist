@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.rat.RatModel;
-import com.crispytwig.naturalist.world.entity.animal.rat.Rat;
+import com.crispytwig.naturalist.client.model.rat.RatModel;
+import com.crispytwig.naturalist.common.entity.rat.Rat;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

@@ -4,7 +4,7 @@ import com.crispytwig.naturalist.NaturalistClient;
 import com.crispytwig.naturalist.NaturalistClientConfig;
 import com.crispytwig.naturalist.neoforge.config.NeoForgeNaturalistClientConfig;
 import com.crispytwig.naturalist.client.particle.CaptureNetSwingParticle;
-import com.crispytwig.naturalist.registry.NaturalistParticleTypes;
+import com.crispytwig.naturalist.common.registry.NaturalistParticleTypes;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;

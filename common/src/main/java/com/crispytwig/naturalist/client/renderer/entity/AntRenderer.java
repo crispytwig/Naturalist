@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.ant.AntModel;
-import com.crispytwig.naturalist.world.entity.animal.ant.Ant;
+import com.crispytwig.naturalist.client.model.ant.AntModel;
+import com.crispytwig.naturalist.common.entity.ant.Ant;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

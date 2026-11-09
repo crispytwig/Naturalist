@@ -1,7 +1,7 @@
 {
   "required": false,
   "minVersion": "0.8",
-  "package": "com.crispytwig.naturalist.compat.fieldguide.mixin",
+  "package": "com.crispytwig.naturalist.common.compat.fieldguide.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
     "EntryRenderHelperMixin",

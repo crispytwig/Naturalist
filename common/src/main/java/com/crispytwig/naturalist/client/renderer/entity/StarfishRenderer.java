@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.starfish.StarfishModel;
-import com.crispytwig.naturalist.world.entity.animal.starfish.Starfish;
+import com.crispytwig.naturalist.client.model.starfish.StarfishModel;
+import com.crispytwig.naturalist.common.entity.starfish.Starfish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

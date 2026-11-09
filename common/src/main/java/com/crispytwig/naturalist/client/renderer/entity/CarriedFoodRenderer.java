@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.world.entity.animal.ant.CarriedFoodEntity;
-import com.crispytwig.naturalist.world.entity.animal.ant.Ant;
+import com.crispytwig.naturalist.common.entity.ant.CarriedFoodEntity;
+import com.crispytwig.naturalist.common.entity.ant.Ant;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;

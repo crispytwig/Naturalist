@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.datagen;
 
 import com.crispytwig.naturalist.Naturalist;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.world.level.block.GlowGoopBlock;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.common.level.block.GlowGoopBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;

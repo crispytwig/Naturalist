@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 
 import java.util.Map;
 import java.util.HashMap;
-import com.crispytwig.naturalist.world.level.block.SnailShellBlock;
-import com.crispytwig.naturalist.world.level.block.entity.SnailShellBlockEntity;
+import com.crispytwig.naturalist.common.level.block.SnailShellBlock;
+import com.crispytwig.naturalist.common.level.block.entity.SnailShellBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;

@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.ostrich.OstrichBabyModel;
-import com.crispytwig.naturalist.client.model.animal.ostrich.OstrichModel;
+import com.crispytwig.naturalist.client.model.ostrich.OstrichBabyModel;
+import com.crispytwig.naturalist.client.model.ostrich.OstrichModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.OstrichDyeLayer;
 import com.crispytwig.naturalist.client.renderer.entity.layers.SeatedRiderLayer;
-import com.crispytwig.naturalist.world.entity.animal.ostrich.Ostrich;
+import com.crispytwig.naturalist.common.entity.ostrich.Ostrich;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 @SuppressWarnings("unused")

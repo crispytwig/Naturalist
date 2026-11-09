@@ -1,9 +1,9 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.hippo.HippoBabyModel;
-import com.crispytwig.naturalist.client.model.animal.hippo.HippoModel;
+import com.crispytwig.naturalist.client.model.hippo.HippoBabyModel;
+import com.crispytwig.naturalist.client.model.hippo.HippoModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
-import com.crispytwig.naturalist.world.entity.animal.hippo.Hippo;
+import com.crispytwig.naturalist.common.entity.hippo.Hippo;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelRenderState;

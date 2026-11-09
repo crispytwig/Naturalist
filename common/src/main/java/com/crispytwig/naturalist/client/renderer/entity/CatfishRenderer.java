@@ -1,7 +1,7 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.fish.CatfishModel;
-import com.crispytwig.naturalist.world.entity.animal.fish.Catfish;
+import com.crispytwig.naturalist.client.model.fish.CatfishModel;
+import com.crispytwig.naturalist.common.entity.fish.Catfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

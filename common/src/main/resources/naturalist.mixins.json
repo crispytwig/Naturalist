@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.crispytwig.naturalist.mixin",
+  "package": "com.crispytwig.naturalist.common.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
     "ClientLevelMixin",

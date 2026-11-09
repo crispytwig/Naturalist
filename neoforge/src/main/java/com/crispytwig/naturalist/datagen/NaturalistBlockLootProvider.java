@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.datagen;
 
-import com.crispytwig.naturalist.tags.NaturalistItemTags;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
-import com.crispytwig.naturalist.world.level.block.ChrysalisBlock;
+import com.crispytwig.naturalist.common.tags.NaturalistItemTags;
+import com.crispytwig.naturalist.common.registry.NaturalistRegistry;
+import com.crispytwig.naturalist.common.level.block.ChrysalisBlock;
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -24,7 +24,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import com.crispytwig.naturalist.world.level.block.AntHillBlock;
+import com.crispytwig.naturalist.common.level.block.AntHillBlock;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;

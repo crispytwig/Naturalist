@@ -1,10 +1,10 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
-import com.crispytwig.naturalist.client.model.animal.fish.BassModel;
-import com.crispytwig.naturalist.client.model.animal.fish.LargeBassModel;
-import com.crispytwig.naturalist.client.model.animal.fish.MediumBassModel;
+import com.crispytwig.naturalist.client.model.fish.BassModel;
+import com.crispytwig.naturalist.client.model.fish.LargeBassModel;
+import com.crispytwig.naturalist.client.model.fish.MediumBassModel;
 import com.crispytwig.naturalist.client.model.NaturalistEntityModel;
-import com.crispytwig.naturalist.world.entity.animal.fish.Bass;
+import com.crispytwig.naturalist.common.entity.fish.Bass;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;

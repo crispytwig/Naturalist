@@ -1,8 +1,8 @@
 package com.crispytwig.naturalist.client.model;
 
 import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderState;
-import com.crispytwig.naturalist.world.entity.MultipartMob;
-import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
+import com.crispytwig.naturalist.common.entity.MultipartMob;
+import com.crispytwig.naturalist.common.entity.SmoothAnimationState;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.KeyframeAnimation;
