@@ -3,7 +3,10 @@ package com.crispytwig.naturalist.world.entity.animal.greatwhiteshark;
 import com.crispytwig.naturalist.tags.NaturalistEntityTypeTags;
 import com.crispytwig.naturalist.tags.NaturalistItemTags;
 import com.crispytwig.naturalist.Naturalist;
+import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
+import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
+import com.crispytwig.naturalist.world.entity.VariantBucketable;
 import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
 import com.crispytwig.naturalist.world.entity.HuntingAnimal;
 import com.crispytwig.naturalist.world.entity.MultipartMob;
@@ -11,8 +14,9 @@ import com.crispytwig.naturalist.world.entity.BeachedMob;
 import com.crispytwig.naturalist.world.entity.BodyChain;
 import com.crispytwig.naturalist.world.entity.MobPart;
 import com.crispytwig.naturalist.world.level.MultipartLevel;
-import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -31,6 +35,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Bucketable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,6 +47,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -52,6 +58,7 @@ import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LevelAccessor;
@@ -68,15 +75,20 @@ import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import org.jspecify.annotations.NonNull;
 
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.function.Predicate;
 import net.minecraft.world.item.component.SwingAnimation;
 
-public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnimal, DataDrivenVariantAnimal {
+public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnimal, VariantBucketable {
     //region Data
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(GreatWhiteShark.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(GreatWhiteShark.class, EntityDataSerializers.BOOLEAN);
 
     private static final double[] PART_Z = {2.0D, -1.5D, -2.9D};
     private static final float[][] PART_SIZES = {{1.2F, 1.2F}, {1.0F, 1.0F}, {0.8F, 1.2F}};
+    private static final float BABY_PART_SCALE = 0.5F;
+    private static final double BABY_PART_SPREAD = 0.4D;
+    private static final float BABY_SPAWN_CHANCE = 0.1F;
 
     private static final float MAX_TILT = 40.0F;
     private static final float ATTACK_CONE_COS = Mth.cos(60.0F * Mth.DEG_TO_RAD);
@@ -144,7 +156,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
         return Animal.createAnimalAttributes()
                 .add(Attributes.MAX_HEALTH, 80.0D)
                 .add(Attributes.MOVEMENT_SPEED, 1.0D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
+                .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.75D);
     }
 
@@ -152,6 +164,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_VARIANT, this.getDefaultVariant().identifier().toString());
+        builder.define(FROM_BUCKET, false);
     }
 
     @Override
@@ -206,6 +219,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
         super.addAdditionalSaveData(output);
         this.saveVariant(output);
         this.saveHuntingCooldown(output);
+        output.putBoolean("FromBucket", this.fromBucket());
     }
 
     @Override
@@ -213,6 +227,46 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
         super.readAdditionalSaveData(input);
         this.loadVariant(input);
         this.loadHuntingCooldown(input);
+        this.setFromBucket(input.getBooleanOr("FromBucket", false));
+    }
+
+    @Override
+    public boolean fromBucket() {
+        return this.entityData.get(FROM_BUCKET);
+    }
+
+    @Override
+    public void setFromBucket(boolean fromBucket) {
+        this.entityData.set(FROM_BUCKET, fromBucket);
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return super.requiresCustomPersistence() || this.fromBucket();
+    }
+
+    @Override
+    public void saveToBucketTag(@NotNull ItemStack stack) {
+        VariantBucketable.super.saveToBucketTag(stack);
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> tag.putInt("Age", this.getAge()));
+    }
+
+    @Override
+    public void loadFromBucketTag(@NotNull CompoundTag tag) {
+        VariantBucketable.super.loadFromBucketTag(tag);
+        if (tag.contains("Age")) {
+            this.setAge(tag.getIntOr("Age", 0));
+        }
+    }
+
+    @Override
+    public @NotNull ItemStack getBucketItemStack() {
+        return new ItemStack(NaturalistRegistry.GREAT_WHITE_SHARK_BUCKET.get());
+    }
+
+    @Override
+    public @NotNull SoundEvent getPickupSound() {
+        return SoundEvents.BUCKET_FILL_FISH;
     }
 
     @Override
@@ -239,18 +293,30 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
 
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return false;
+        return FOOD_ITEMS.test(stack);
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob mob) {
-        return null;
+        GreatWhiteShark baby = NaturalistEntityTypes.GREAT_WHITE_SHARK.get().create(level, EntitySpawnReason.BREEDING);
+        if (baby != null) {
+            baby.setVariantString(this.getOffspringVariantId(mob, this.random));
+        }
+        return baby;
     }
 
     @Override
     public @NonNull SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        this.selectVariantForSpawn(level);
+        if (spawnType != EntitySpawnReason.BUCKET) {
+            this.selectVariantForSpawn(level);
+            if (this.random.nextFloat() < BABY_SPAWN_CHANCE) {
+                this.setAge(-24000);
+            }
+        }
+        if (spawnGroupData == null) {
+            spawnGroupData = new AgeableMobGroupData(false);
+        }
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
     //endregion
@@ -264,17 +330,21 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SharkAttackGoal(this));
-        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.25D));
+        this.goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1.0D, 10));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, false, false,
                 (entity, level) -> this.canHunt() && entity.is(NaturalistEntityTypeTags.GREAT_WHITE_SHARK_HOSTILES) && entity.isInWater()));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, 10, false, false,
-                (player, level) -> this.canHunt() && player.isInWater() && this.getLightLevelDependentMagicValue() < 0.5F));
+                (player, level) -> this.canHunt() && player.isInWater() && player.getHealth() <= 10.0F && this.getLightLevelDependentMagicValue() < 0.49F));
     }
 
     @Override
     public void setTarget(@Nullable LivingEntity target) {
         if (target instanceof Player && this.level().getDifficulty() == Difficulty.PEACEFUL) {
+            return;
+        }
+        if (target != null && this.isBaby()) {
             return;
         }
         super.setTarget(target);
@@ -291,6 +361,12 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
 
     @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
+        if (this.isBaby()) {
+            Optional<InteractionResult> bucketed = Bucketable.bucketMobPickup(player, hand, this);
+            if (bucketed.isPresent()) {
+                return bucketed.get();
+            }
+        }
         ItemStack stack = player.getItemInHand(hand);
         if (FOOD_ITEMS.test(stack) && this.getHealth() < this.getMaxHealth()) {
             this.heal(2.0F);
@@ -355,9 +431,13 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
         float cos = Mth.cos(yaw);
         float cosPitch = Mth.cos(pitch);
         float sinPitch = -Mth.sin(pitch);
+        boolean baby = this.isBaby();
+        float scale = baby ? BABY_PART_SCALE : 1.0F;
+        double spread = baby ? BABY_PART_SPREAD : 1.0D;
         for (int i = 0; i < this.parts.length; i++) {
             MobPart part = this.parts[i];
-            double z = PART_Z[i];
+            part.updateScale(scale);
+            double z = PART_Z[i] * spread;
             double px = this.getX() - sin * z * cosPitch;
             double pz = this.getZ() + cos * z * cosPitch;
             double py = this.getY() + (this.getBbHeight() - part.getBbHeight()) * 0.5D + sinPitch * z;

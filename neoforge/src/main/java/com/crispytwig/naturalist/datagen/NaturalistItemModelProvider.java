@@ -18,6 +18,7 @@ public class NaturalistItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(NaturalistRegistry.BUSHMEAT.get());
         basicItem(NaturalistRegistry.COOKED_BUSHMEAT.get());
+        basicItem(NaturalistRegistry.COOKED_MORSEL.get());
         basicItem(NaturalistRegistry.DUCK.get());
         basicItem(NaturalistRegistry.COOKED_DUCK.get());
         basicItem(NaturalistRegistry.VENISON.get());

@@ -4,6 +4,7 @@ import com.crispytwig.naturalist.tags.NaturalistItemTags;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.world.level.block.ChrysalisBlock;
 import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
@@ -49,6 +52,8 @@ public class NaturalistBlockLootProvider extends BlockLootSubProvider {
         dropSelf(NaturalistRegistry.SMOOTH_SHELLSTONE_STAIRS.get());
         dropSelf(NaturalistRegistry.SMOOTH_SHELLSTONE_SLAB.get());
         dropSelf(NaturalistRegistry.SMOOTH_SHELLSTONE_WALL.get());
+        dropSelf(NaturalistRegistry.PEARL_BLOCK.get());
+        dropSelf(NaturalistRegistry.PEARL_BRICKS.get());
 
         dropSelf(NaturalistRegistry.GLOW_GOOP_BLOCK.get());
         dropSelf(NaturalistRegistry.PLUSH_BEAR.get());
@@ -86,6 +91,7 @@ public class NaturalistBlockLootProvider extends BlockLootSubProvider {
                         .add(AlternativesEntry.alternatives(
                                 LootItem.lootTableItem(NaturalistRegistry.CHRYSALIS_BLOCK.get())
                                         .apply(CopyBlockState.copyState(NaturalistRegistry.CHRYSALIS_BLOCK.get()).copy(ChrysalisBlock.AGE))
+                                        .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY).include(DataComponents.CUSTOM_NAME))
                                         .when(new AnyOfCondition.Builder()
                                                 .or(hasSilkTouch())
                                                 .or(MatchTool.toolMatches(ItemPredicate.Builder.item().of(this.items, NaturalistItemTags.SHEARS))))

@@ -58,6 +58,7 @@ public class VultureBabyModel extends NaturalistEntityModel<Vulture> {
 
 		this.animateSmooth(entity.sitAnimationState, VultureBabyAnimation.VULTURE_SIT_IDLE, ageInTicks, partialTick);
 		this.animateSmooth(entity.flyAnimationState, VultureBabyAnimation.VULTURE_IDLE, ageInTicks, partialTick);
+		this.animateSmooth(entity.walkAnimationState, VultureBabyAnimation.VULTURE_WALK, ageInTicks, partialTick);
 
 		applyHeadLook(this.neck, netHeadYaw, headPitch);
 	}

@@ -1,0 +1,8 @@
+{
+  "texture": "naturalist:entity/duck/muscovy_duck",
+  "baby_texture": "naturalist:entity/duck/muscovy_duck_baby",
+  "biomes": "#naturalist:variant/duck/muscovy",
+  "tooltip": {
+    "translate": "tooltip.naturalist.duck_muscovy"
+  }
+}

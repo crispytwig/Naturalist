@@ -89,12 +89,14 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
 
         add(NaturalistEntityTypes.DESERT_SCORPION.get(), table(scorpionPool()));
 
-        add(NaturalistEntityTypes.DRAGONFLY.get(), table(pool()
-                .when(DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
-                        .source(EntityPredicate.Builder.entity().of(this.entityTypes, EntityTypes.FROG))))
-                .add(LootItem.lootTableItem(NaturalistRegistry.AZURE_FROGLASS.get()).when(variant("naturalist:blue")))
-                .add(LootItem.lootTableItem(NaturalistRegistry.VERDANT_FROGLASS.get()).when(variant("naturalist:green")))
-                .add(LootItem.lootTableItem(NaturalistRegistry.CRIMSON_FROGLASS.get()).when(variant("naturalist:red")))));
+        add(NaturalistEntityTypes.DRAGONFLY.get(), LootTable.lootTable()
+                .withPool(pool()
+                        .when(DamageSourceCondition.hasDamageSource(DamageSourcePredicate.Builder.damageType()
+                                .source(EntityPredicate.Builder.entity().of(this.entityTypes, EntityTypes.FROG))))
+                        .add(LootItem.lootTableItem(NaturalistRegistry.AZURE_FROGLASS.get()).when(variant("naturalist:blue")))
+                        .add(LootItem.lootTableItem(NaturalistRegistry.VERDANT_FROGLASS.get()).when(variant("naturalist:green")))
+                        .add(LootItem.lootTableItem(NaturalistRegistry.CRIMSON_FROGLASS.get()).when(variant("naturalist:red"))))
+                .withPool(drop(Items.BONE_MEAL, 0, 1)));
 
         add(NaturalistEntityTypes.DUCK.get(), LootTable.lootTable()
                 .withPool(drop(Items.FEATHER, 0, 2))
@@ -173,7 +175,13 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
                 .withPool(drop(NaturalistRegistry.FUR.get(), 0, 2))
                 .withPool(pool().add(LootItem.lootTableItem(NaturalistRegistry.MORSEL.get()).apply(looting(1.0F)))));
 
-        add(NaturalistEntityTypes.RAY.get(), table(meat(NaturalistRegistry.CRAB_MEAT.get(), 1, 2)));
+        add(NaturalistEntityTypes.RAY.get(), table(pool()
+                .add(LootItem.lootTableItem(NaturalistRegistry.CRAB_MEAT.get())
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2)))
+                        .apply(SmeltItemFunction.smelted().when(onFire()))
+                        .apply(looting(1.0F)))
+                .add(LootItem.lootTableItem(NaturalistRegistry.STINGRAY_STINGER.get())
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))));
 
         add(NaturalistEntityTypes.RHINO.get(), LootTable.lootTable()
                 .withPool(drop(NaturalistRegistry.HIDE.get(), 1, 3))
@@ -207,7 +215,7 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
         add(NaturalistEntityTypes.VULTURE.get(), LootTable.lootTable()
                 .withPool(drop(Items.FEATHER, 0, 2))
                 .withPool(drop(Items.ROTTEN_FLESH, 0, 2))
-                .withPool(drop(NaturalistRegistry.MORSEL.get(), 0, 1)));
+                .withPool(meat(NaturalistRegistry.MORSEL.get(), 0, 1)));
 
         add(NaturalistEntityTypes.WHALE.get(), LootTable.lootTable()
                 .withPool(pool()

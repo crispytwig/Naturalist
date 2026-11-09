@@ -10,7 +10,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +36,16 @@ public class BlackBear extends Bear {
     @Override
     public Identifier getFallbackVariantTexture() {
         return Naturalist.location("textures/entity/black_bear/black_bear.png");
+    }
+
+    @Override
+    public boolean isFood(@NotNull ItemStack stack) {
+        return stack.is(Items.SWEET_BERRIES);
+    }
+
+    @Override
+    public boolean isShearable(@Nullable Player player, @NotNull ItemStack item, @NotNull Level level, @NotNull BlockPos pos) {
+        return false;
     }
 
     @Nullable

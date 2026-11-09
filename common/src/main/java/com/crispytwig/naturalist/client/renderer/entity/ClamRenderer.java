@@ -1,5 +1,6 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
+import com.crispytwig.naturalist.client.model.animal.clam.ClamBabyModel;
 import com.crispytwig.naturalist.client.model.animal.clam.ClamModel;
 import com.crispytwig.naturalist.client.renderer.entity.layers.ClamItemLayer;
 import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
@@ -10,7 +11,7 @@ import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderSt
 @SuppressWarnings("unused")
 public class ClamRenderer extends NaturalistMobRenderer<Clam> {
     public ClamRenderer(EntityRendererProvider.Context context) {
-        super(context, new ClamModel(context.bakeLayer(ClamModel.LAYER_LOCATION)), 0.0F);
+        super(context, new ClamModel(context.bakeLayer(ClamModel.LAYER_LOCATION)), new ClamBabyModel(context.bakeLayer(ClamBabyModel.LAYER_LOCATION)), 0.0F);
         this.addLayer(new ClamItemLayer(this));
     }
 

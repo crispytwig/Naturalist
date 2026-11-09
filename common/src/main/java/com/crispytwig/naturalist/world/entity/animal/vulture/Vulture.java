@@ -5,8 +5,12 @@ import com.crispytwig.naturalist.tags.NaturalistEntityTypeTags;
 import net.minecraft.world.entity.animal.Animal;
 import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
 import com.crispytwig.naturalist.Naturalist;
+import com.crispytwig.naturalist.world.entity.FollowingPet;
+import com.crispytwig.naturalist.world.entity.HuntingAnimal;
 import com.crispytwig.naturalist.world.entity.ai.goal.FlyingWanderGoal;
+import com.crispytwig.naturalist.world.entity.ai.goal.PetFollowOwnerGoal;
 import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
 import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -25,6 +29,7 @@ import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -32,17 +37,20 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -66,24 +74,40 @@ import java.util.*;
 import net.minecraft.world.item.component.SwingAnimation;
 
 @SuppressWarnings("unused")
-public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
+public class Vulture extends TamableAnimal implements DataDrivenVariantAnimal, FollowingPet, HuntingAnimal {
     //region Data
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.ROTTEN_FLESH);
     private static final int PERCH_COOLDOWN_AFTER_HURT = 200;
+    private static final EntityDimensions BABY_DIMENSIONS = EntityDimensions.scalable(0.55F, 0.55F);
+    private static final Identifier BABY_SPEED_MODIFIER_ID = Naturalist.location("baby_walk_speed");
+    private static final AttributeModifier BABY_SPEED_MODIFIER = new AttributeModifier(BABY_SPEED_MODIFIER_ID, -0.6D, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(Vulture.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> PERCHED = SynchedEntityData.defineId(Vulture.class, EntityDataSerializers.BOOLEAN);
 
+    private final MoveControl flyingMoveControl;
+    private final MoveControl groundMoveControl;
+    private final PathNavigation flyingNavigation;
+    private final PathNavigation groundNavigation;
+    private PetFollowOwnerGoal followOwnerGoal;
+    private boolean followingOwner = true;
+    private int huntingCooldown;
     private int ticksSinceEaten;
     private int perchCooldown;
     @Nullable
     private BlockPos perchTarget;
 
     public final SmoothAnimationState flyAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState walkAnimationState = new SmoothAnimationState();
     public final SmoothAnimationState sitAnimationState = new SmoothAnimationState();
 
-    public Vulture(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public Vulture(EntityType<? extends TamableAnimal> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new FlyingMoveControl<>(this, 20, true);
+        this.flyingMoveControl = new FlyingMoveControl<>(this, 20, true);
+        this.groundMoveControl = new MoveControl<>(this);
+        this.moveControl = this.flyingMoveControl;
+        this.flyingNavigation = this.navigation;
+        this.groundNavigation = new GroundPathNavigation(this, level);
+        this.groundNavigation.setCanFloat(true);
         this.setCanPickUpLoot(true);
         this.setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, -1.0F);
         this.setPathfindingMalus(PathType.WATER, -1.0F);
@@ -95,7 +119,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     }
 
     public static Builder createAttributes() {
-        return Animal.createAnimalAttributes().add(Attributes.MAX_HEALTH, 14.0F).add(Attributes.FLYING_SPEED, 0.6F).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 4.0F);
+        return Animal.createAnimalAttributes().add(Attributes.MAX_HEALTH, 14.0F).add(Attributes.FLYING_SPEED, 0.6F).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 4.0F).add(Attributes.TEMPT_RANGE, 16.0F);
     }
 
     @Override
@@ -124,12 +148,36 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     public void addAdditionalSaveData(@NotNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         this.saveVariant(output);
+        FollowingPet.savePet(this, output);
+        this.saveHuntingCooldown(output);
     }
 
     @Override
     public void readAdditionalSaveData(@NotNull ValueInput input) {
         super.readAdditionalSaveData(input);
         this.loadVariant(input);
+        FollowingPet.loadPet(this, input);
+        this.loadHuntingCooldown(input);
+    }
+
+    @Override
+    public boolean isFollowingOwner() {
+        return this.followingOwner;
+    }
+
+    @Override
+    public void setFollowingOwner(boolean following) {
+        this.followingOwner = following;
+    }
+
+    @Override
+    public int getHuntingCooldown() {
+        return this.huntingCooldown;
+    }
+
+    @Override
+    public void setHuntingCooldown(int ticks) {
+        this.huntingCooldown = ticks;
     }
 
     @Nullable
@@ -150,7 +198,15 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     }
 
     public boolean canPerch() {
-        return this.perchCooldown <= 0;
+        return this.perchCooldown <= 0 && this.canFly() && !this.isInLove();
+    }
+
+    public boolean canFly() {
+        return !this.isBaby() && !this.isOrderedToSit();
+    }
+
+    public boolean canFleeFromPlayers() {
+        return !this.isTame() && !this.isBaby() && !this.isInLove();
     }
     //endregion
 
@@ -160,14 +216,69 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     }
 
     @Override
-    public boolean isBaby() {
-        return false;
+    public boolean isFood(@NotNull ItemStack stack) {
+        return FOOD_ITEMS.test(stack);
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob mob) {
+        Vulture baby = NaturalistEntityTypes.VULTURE.get().create(level, EntitySpawnReason.BREEDING);
+        if (baby != null) {
+            baby.setVariantString(this.getOffspringVariantId(mob, this.random));
+            baby.setPersistenceRequired();
+        }
+        return baby;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return !this.isTame() && !this.hasCustomName();
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        if (spawnGroupData == null) {
+            spawnGroupData = new AgeableMob.AgeableMobGroupData(0.05F);
+        }
         this.selectVariantForSpawn(level);
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+    }
+
+    @Override
+    protected void ageBoundaryReached() {
+        super.ageBoundaryReached();
+        this.updateMovementForAge();
+    }
+
+    private void updateMovementForAge() {
+        if (this.level().isClientSide()) {
+            return;
+        }
+        boolean baby = this.isBaby();
+        this.navigation.stop();
+        this.moveControl = baby ? this.groundMoveControl : this.flyingMoveControl;
+        this.navigation = baby ? this.groundNavigation : this.flyingNavigation;
+        if (baby) {
+            this.setNoGravity(false);
+        }
+        AttributeInstance speed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+        if (speed != null) {
+            speed.removeModifier(BABY_SPEED_MODIFIER_ID);
+            if (baby) {
+                speed.addTransientModifier(BABY_SPEED_MODIFIER);
+            }
+        }
+        if (this.followOwnerGoal != null) {
+            this.goalSelector.removeGoal(this.followOwnerGoal);
+            this.followOwnerGoal = new PetFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F);
+            this.goalSelector.addGoal(2, this.followOwnerGoal);
+        }
+    }
+
+    @Override
+    protected @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+        return this.isBaby() ? BABY_DIMENSIONS : super.getDefaultDimensions(pose);
     }
     //endregion
 
@@ -176,15 +287,75 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(1, new VultureFleePlayerGoal(this, 16.0F, 1.4D));
         this.goalSelector.addGoal(1, new VultureAttackGoal(this, 1.2F, true));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.followOwnerGoal = new PetFollowOwnerGoal(this, 1.2D, 10.0F, 2.0F);
+        this.goalSelector.addGoal(2, this.followOwnerGoal);
         this.goalSelector.addGoal(2, new VultureSearchForFoodGoal(this, 1.2F, FOOD_ITEMS, 12, 24));
         this.goalSelector.addGoal(2, new VulturePerchOnCactusGoal(this, 1.0D, 32, 32));
-        this.goalSelector.addGoal(3, new HighAltitudeFlyingWanderGoal(this));
-        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Monster.class, 10, false, false, (entity, level) -> entity.is(NaturalistEntityTypeTags.VULTURE_HOSTILES) && !FOOD_ITEMS.test(this.getMainHandItem())));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, false, false, (entity, level) -> entity.getHealth() <= 6 && !entity.getMainHandItem().isEmpty() && !FOOD_ITEMS.test(this.getMainHandItem())));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, FOOD_ITEMS::test, false));
+        this.goalSelector.addGoal(4, new HighAltitudeFlyingWanderGoal(this));
+        this.goalSelector.addGoal(4, new VultureBabyStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, false, false, (entity, level) -> entity.is(NaturalistEntityTypeTags.VULTURE_HOSTILES) && !FOOD_ITEMS.test(this.getMainHandItem()) && this.canHunt() && this.canFly() && level.canSeeSky(entity.blockPosition())));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, false, false, (entity, level) -> !this.isTame() && !this.isBaby() && entity.getHealth() <= 6 && !entity.getMainHandItem().isEmpty() && !FOOD_ITEMS.test(this.getMainHandItem())));
+    }
+
+    @Override
+    protected boolean canFlyToOwner() {
+        return !this.isBaby();
+    }
+
+    @Override
+    public boolean killedEntity(@NotNull ServerLevel level, @NotNull LivingEntity killed, @NotNull DamageSource source) {
+        boolean result = super.killedEntity(level, killed, source);
+        if (result && !(killed instanceof Player)) {
+            this.startHuntingCooldown();
+        }
+        return result;
+    }
+
+    @Override
+    public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
+        InteractionResult whistle = FollowingPet.tryWhistle(this, player, hand);
+        if (whistle != null) {
+            return whistle;
+        }
+        ItemStack stack = player.getItemInHand(hand);
+        if (this.isFood(stack)) {
+            if (this.isBaby() && !this.isTame()) {
+                if (!this.level().isClientSide()) {
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    this.tame(player);
+                    this.navigation.stop();
+                    this.setTarget(null);
+                    this.level().broadcastEntityEvent(this, (byte) 7);
+                }
+                return InteractionResult.SUCCESS;
+            }
+            if (this.getHealth() < this.getMaxHealth()) {
+                if (!this.level().isClientSide()) {
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    this.heal(2.0F);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else if (stack.isEmpty() && this.isTame() && this.isOwnedBy(player)) {
+            if (!this.level().isClientSide()) {
+                this.setOrderedToSit(!this.isOrderedToSit());
+                this.navigation.stop();
+                this.setTarget(null);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
     }
 
     @Override
@@ -218,6 +389,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     public boolean hurtServer(@NotNull ServerLevel level, @NotNull DamageSource source, float amount) {
         boolean hurt = super.hurtServer(level, source, amount);
         if (hurt) {
+            this.setOrderedToSit(false);
             this.startle(source.getSourcePosition());
         }
         return hurt;
@@ -323,9 +495,11 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
     }
 
     private void setupAnimationStates() {
-        boolean perched = this.isPerched();
-        this.sitAnimationState.animateWhen(perched, this.tickCount);
-        this.flyAnimationState.animateWhen(!perched, this.tickCount);
+        boolean sitting = this.isPerched() || this.isInSittingPose();
+        boolean walking = !sitting && this.isBaby() && NaturalistAnimal.isVisiblyMoving(this);
+        this.sitAnimationState.animateWhen(sitting, this.tickCount);
+        this.walkAnimationState.animateWhen(walking, this.tickCount);
+        this.flyAnimationState.animateWhen(!sitting && !walking, this.tickCount);
     }
 
     @Override
@@ -345,6 +519,10 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
             ++this.ticksSinceEaten;
             if (this.perchCooldown > 0) {
                 --this.perchCooldown;
+            }
+            this.tickHuntingCooldown();
+            if (this.isOrderedToSit() && this.isNoGravity()) {
+                this.setNoGravity(false);
             }
             ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
             if (stack.get(DataComponents.FOOD) != null) {
@@ -469,13 +647,13 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
             this.vulture = vulture;
             this.detectRange = detectRange;
             this.speedModifier = speedModifier;
-            this.fleeConditions = TargetingConditions.forNonCombat().range(detectRange).selector((entity, level) -> EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity));
+            this.fleeConditions = TargetingConditions.forNonCombat().range(detectRange).selector((entity, level) -> EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) && !entity.isHolding(Vulture.FOOD_ITEMS::test));
             this.setFlags(EnumSet.of(Flag.MOVE));
         }
 
         @Override
         public boolean canUse() {
-            if (this.vulture.getTarget() != null) {
+            if (this.vulture.getTarget() != null || !this.vulture.canFleeFromPlayers()) {
                 return false;
             }
             this.toAvoid = getServerLevel(this.vulture).getNearestPlayer(this.fleeConditions, this.vulture);
@@ -484,7 +662,8 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
 
         @Override
         public boolean canContinueToUse() {
-            return this.toAvoid != null && this.toAvoid.isAlive()
+            return this.toAvoid != null && this.toAvoid.isAlive() && this.vulture.canFleeFromPlayers()
+                    && !this.toAvoid.isHolding(Vulture.FOOD_ITEMS::test)
                     && this.vulture.distanceToSqr(this.toAvoid) < (double) (this.detectRange * this.detectRange);
         }
 
@@ -542,7 +721,7 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
 
         @Override
         public boolean canUse() {
-            if (!Vulture.FOOD_ITEMS.test(mob.getMainHandItem())) {
+            if (!mob.isOrderedToSit() && !Vulture.FOOD_ITEMS.test(mob.getMainHandItem())) {
                 List<ItemEntity> list = mob.level().getEntitiesOfClass(ItemEntity.class, mob.getBoundingBox().inflate(horizontalSearchRange, verticalSearchRange, horizontalSearchRange), itemEntity -> ingredient.test(itemEntity.getItem()));
                 return !list.isEmpty() && !Vulture.FOOD_ITEMS.test(mob.getMainHandItem());
             }
@@ -654,7 +833,22 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
         }
     }
 
+    static class VultureBabyStrollGoal extends WaterAvoidingRandomStrollGoal {
+        private final Vulture vulture;
+
+        public VultureBabyStrollGoal(Vulture vulture, double speedModifier) {
+            super(vulture, speedModifier);
+            this.vulture = vulture;
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.vulture.isBaby() && !this.vulture.isOrderedToSit() && super.canUse();
+        }
+    }
+
     static class HighAltitudeFlyingWanderGoal extends FlyingWanderGoal {
+        private final Vulture vulture;
         private int preferredAltitude = -1;
 
         private static final int MIN_ALTITUDE_ABOVE_GROUND = 8;
@@ -668,10 +862,19 @@ public class Vulture extends PathfinderMob implements DataDrivenVariantAnimal {
 
         public HighAltitudeFlyingWanderGoal(Vulture mob) {
             super(mob);
+            this.vulture = mob;
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.vulture.canFly() && super.canUse();
         }
 
         @Override
         public Vec3 findPos() {
+            if (this.vulture.isTame() && this.vulture.isFollowingOwner() && this.vulture.getOwner() != null) {
+                return super.findPos();
+            }
             Vec3 lookVec = mob.getViewVector(0.0F);
 
             if (preferredAltitude < 0 || wanderAttemptsUntilAltitudeChange <= 0) {

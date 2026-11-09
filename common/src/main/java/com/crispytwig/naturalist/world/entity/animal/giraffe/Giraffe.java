@@ -33,8 +33,10 @@ import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -55,12 +57,14 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
     private static final Predicate<ItemStack> FOOD_ITEMS = stack -> stack.is(NaturalistItemTags.GIRAFFE_FOOD_ITEMS);
 
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(Giraffe.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(Giraffe.class, EntityDataSerializers.BOOLEAN);
 
     public final TerrainLegSolver legSolver = new TerrainLegSolver(0.75F, 0.4F, 1.3F);
 
     public final SmoothAnimationState idleAnimationState = new SmoothAnimationState();
     public final SmoothAnimationState walkAnimationState = new SmoothAnimationState();
     public final SmoothAnimationState runAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState sitAnimationState = SmoothAnimationState.pose();
 
     public Giraffe(EntityType<? extends TamableAnimal> entityType, Level level) {
         super(entityType, level);
@@ -74,6 +78,7 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_VARIANT, this.getDefaultVariant().identifier().toString());
+        builder.define(SADDLED, false);
     }
 
     @Override
@@ -92,27 +97,39 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
     }
 
     @Override
+    public boolean isSaddled() {
+        return this.entityData.get(SADDLED);
+    }
+
+    public void setSaddled(boolean saddled) {
+        this.entityData.set(SADDLED, saddled);
+    }
+
+    @Override
     protected void addAdditionalSaveData(@NotNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         this.saveVariant(output);
+        output.putBoolean("Saddled", this.isSaddled());
     }
 
     @Override
     protected void readAdditionalSaveData(@NotNull ValueInput input) {
         super.readAdditionalSaveData(input);
         this.loadVariant(input);
+        this.setSaddled(input.getBooleanOr("Saddled", false));
     }
     //endregion
 
     //region Spawning
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return FOOD_ITEMS.test(stack);
+        return this.isBaby() ? FOOD_ITEMS.test(stack) : stack.is(Items.HAY_BLOCK);
     }
 
     @Override
     public boolean canMate(@NotNull Animal otherAnimal) {
-        return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && super.canMate(otherAnimal);
+        return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && !this.isOrderedToSit()
+                && otherAnimal instanceof Giraffe giraffe && !giraffe.isOrderedToSit() && super.canMate(otherAnimal);
     }
 
     @Nullable
@@ -136,6 +153,7 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(1, new BigPanicGoal(this, 1.4));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0, FOOD_ITEMS, false));
@@ -229,7 +247,28 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
             return super.mobInteract(player, hand);
         }
         if (this.isOwnedBy(player)) {
-            if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
+            if (!this.isBaby() && this.isSaddled() && stack.is(NaturalistItemTags.SHEARS)) {
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    this.setSaddled(false);
+                    this.spawnAtLocation(serverLevel, Items.SADDLE);
+                    stack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+                    this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+                    this.gameEvent(GameEvent.SHEAR, player);
+                }
+                return InteractionResult.SUCCESS;
+            }
+            if (!this.isBaby() && !this.isSaddled() && stack.is(Items.SADDLE)) {
+                if (!this.level().isClientSide()) {
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    this.setSaddled(true);
+                    this.playSound(SoundEvents.HORSE_SADDLE.value(), 0.5F, 1.0F);
+                    this.gameEvent(GameEvent.EQUIP, player);
+                }
+                return InteractionResult.SUCCESS;
+            }
+            if (FOOD_ITEMS.test(stack) && this.getHealth() < this.getMaxHealth()) {
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);
                 }
@@ -237,12 +276,29 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
                 this.playSound(SoundEvents.HORSE_EAT, 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
             }
-            if (!this.isBaby() && stack.isEmpty()) {
+            if (stack.isEmpty() && (this.isBaby() || player.isSecondaryUseActive())) {
+                if (!this.level().isClientSide()) {
+                    this.setOrderedToSit(!this.isOrderedToSit());
+                    this.jumping = false;
+                    this.navigation.stop();
+                    this.setTarget(null);
+                }
+                return InteractionResult.SUCCESS;
+            }
+            if (!this.isBaby() && stack.isEmpty() && !this.isOrderedToSit()) {
                 this.doPlayerRide(player);
                 return InteractionResult.SUCCESS;
             }
         }
         return super.mobInteract(player, hand);
+    }
+
+    @Override
+    protected void dropEquipment(@NotNull ServerLevel level) {
+        super.dropEquipment(level);
+        if (this.isSaddled()) {
+            this.spawnAtLocation(level, Items.SADDLE);
+        }
     }
 
     protected void doPlayerRide(@NotNull Player player) {
@@ -275,7 +331,7 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
     @Nullable
     public LivingEntity getControllingPassenger() {
         Entity entity = this.getFirstPassenger();
-        if (entity instanceof LivingEntity livingEntity) {
+        if (this.isSaddled() && entity instanceof LivingEntity livingEntity) {
             return livingEntity;
         }
         return null;
@@ -385,12 +441,14 @@ public class Giraffe extends TamableAnimal implements IKMount, DataDrivenVariant
 
     //region Animation
     private void setupAnimationStates() {
-        boolean moving = NaturalistAnimal.isVisiblyMoving(this);
+        boolean sitting = this.isBaby() && this.isInSittingPose();
+        boolean moving = !sitting && NaturalistAnimal.isVisiblyMoving(this);
         boolean running = moving && (this.isSprinting() || this.isVehicle());
 
+        this.sitAnimationState.animateWhen(sitting, this.tickCount);
         this.walkAnimationState.animateWhen(moving && !running, this.tickCount);
         this.runAnimationState.animateWhen(running, this.tickCount);
-        this.idleAnimationState.animateWhen(!moving, this.tickCount);
+        this.idleAnimationState.animateWhen(!sitting && !moving, this.tickCount);
     }
 
     @Override

@@ -382,7 +382,7 @@ public class Rat extends TamableClimbingAnimal implements SleepingAnimal, Follow
         if (whistle != null) {
             return whistle;
         }
-        if (this.isTame()) {
+        if (this.isTame() && this.isOwnedBy(player)) {
             Optional<InteractionResult> caught = Catchable.catchAnimal(player, hand, this, true);
             if (caught.isPresent()) {
                 return caught.get();

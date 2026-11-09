@@ -105,7 +105,7 @@ public class GiraffeModel extends IKEntityModel<Giraffe> implements SeatedModel 
 	@Override
 	protected void setupAnimations(Giraffe entity, float limbSwing, float limbSwingAmount, float ageInTicks, float partialTick, float netHeadYaw, float headPitch) {
 
-		this.saddle.visible = entity.isTame();
+		this.saddle.visible = entity.isSaddled();
 
 		this.animateIdleSmooth(entity.idleAnimationState, GiraffeAnimation.GIRAFFE_IDLE, ageInTicks, partialTick, limbSwingAmount);
 		this.animateSmooth(entity.walkAnimationState, GiraffeAnimation.GIRAFFE_WALK, ageInTicks, partialTick, movementAnimationSpeed(entity, limbSwingAmount, 1.3F));

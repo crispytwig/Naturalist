@@ -37,6 +37,20 @@
             }
           ],
           "name": "naturalist:crab_meat"
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2,
+                "min": 0
+              }
+            }
+          ],
+          "name": "naturalist:stingray_stinger"
         }
       ],
       "rolls": 1

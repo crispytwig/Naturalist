@@ -62,6 +62,8 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public class Duck extends TamableAnimal implements DyeableAnimal, FollowingPet, Bucketable, DataDrivenVariantAnimal {
     //region Data
+    public static final String[] VARIANT_NAMES = {"duck", "muscovy", "whistling", "pekin"};
+
     private static final Predicate<ItemStack> FOOD_ITEMS = stack -> stack.is(NaturalistItemTags.DUCK_FOOD_ITEMS);
 
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(Duck.class, EntityDataSerializers.STRING);

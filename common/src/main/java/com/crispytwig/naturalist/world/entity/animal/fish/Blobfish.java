@@ -189,10 +189,20 @@ public class Blobfish extends AbstractFish implements DataDrivenVariantAnimal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.5D, 2.0D));
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Axolotl.class, 6.0F, 1.5D, 2.0D));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.6D, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.6D, true) {
+            @Override
+            public boolean canUse() {
+                return Blobfish.this.isGray() && super.canUse();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return Blobfish.this.isGray() && super.canContinueToUse();
+            }
+        });
         this.goalSelector.addGoal(2, new BlobfishStayDeepGoal(this, 1.0D, 20));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                (entity, level) -> entity instanceof Crab || entity instanceof Snail));
+                (entity, level) -> this.isGray() && (entity instanceof Crab || entity instanceof Snail)));
     }
 
     @Override
@@ -210,6 +220,9 @@ public class Blobfish extends AbstractFish implements DataDrivenVariantAnimal {
         } else if (++this.conversionTime >= CONVERSION_DURATION) {
             this.setGray(wantGray);
             this.conversionTime = 0;
+            if (!wantGray) {
+                this.setTarget(null);
+            }
             this.onTransform();
         }
         this.entityData.set(DATA_CONVERTING, this.conversionTime > 0);

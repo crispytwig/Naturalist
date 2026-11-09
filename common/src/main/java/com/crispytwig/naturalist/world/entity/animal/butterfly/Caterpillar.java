@@ -5,6 +5,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.world.level.block.ChrysalisBlock;
+import com.crispytwig.naturalist.world.level.block.entity.ChrysalisBlockEntity;
 import com.crispytwig.naturalist.world.entity.Catchable;
 import com.crispytwig.naturalist.world.entity.animal.ClimbingAnimal;
 import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
@@ -38,6 +39,7 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -46,6 +48,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
+
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class Caterpillar extends ClimbingAnimal implements Catchable, DataDrivenVariantAnimal {
@@ -188,7 +192,19 @@ public class Caterpillar extends ClimbingAnimal implements Catchable, DataDriven
     }
 
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
-        return Catchable.catchAnimal(player, hand, this, true).orElse(super.mobInteract(player, hand));
+        Optional<InteractionResult> caught = Catchable.catchAnimal(player, hand, this, true);
+        if (caught.isPresent()) {
+            return caught.get();
+        }
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.is(BlockItemTags.FLOWERS.item()) && this.getHealth() < this.getMaxHealth()) {
+            if (!this.level().isClientSide()) {
+                this.heal(stack.is(Items.WITHER_ROSE) ? 2.0F : 1.0F);
+                this.usePlayerItem(player, hand, stack);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
     }
 
     private static class CocoonGoal extends MoveToBlockGoal {
@@ -240,6 +256,9 @@ public class Caterpillar extends ClimbingAnimal implements Catchable, DataDriven
                 }
                 caterpillar.discard();
                 level.setBlockAndUpdate(caterpillar.blockPosition(), NaturalistRegistry.CHRYSALIS_BLOCK.get().defaultBlockState().setValue(ChrysalisBlock.FACING, facing));
+                if (level.getBlockEntity(caterpillar.blockPosition()) instanceof ChrysalisBlockEntity chrysalis) {
+                    chrysalis.setCustomName(caterpillar.getCustomName());
+                }
                 level.playSound(null, caterpillar.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 0.7F, 0.9F + level.getRandom().nextFloat() * 0.2F);
             }
         }

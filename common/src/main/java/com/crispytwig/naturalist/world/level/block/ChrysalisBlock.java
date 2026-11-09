@@ -2,11 +2,13 @@ package com.crispytwig.naturalist.world.level.block;
 
 import com.crispytwig.naturalist.world.entity.animal.butterfly.Butterfly;
 import com.crispytwig.naturalist.world.entity.variant.MobVariantUtil;
+import com.crispytwig.naturalist.world.level.block.entity.ChrysalisBlockEntity;
 import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
 import com.crispytwig.naturalist.registry.NaturalistMobVariants;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,7 +21,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
-public class ChrysalisBlock extends HorizontalDirectionalBlock {
+public class ChrysalisBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     protected static final VoxelShape[] EAST_AABB = new VoxelShape[]{Block.box(11.0D, 7.0D, 6.0D, 15.0D, 12.0D, 10.0D), Block.box(9.0D, 5.0D, 5.0D, 15.0D, 12.0D, 11.0D), Block.box(7.0D, 3.0D, 4.0D, 15.0D, 12.0D, 12.0D), Block.box(7.0D, 3.0D, 4.0D, 15.0D, 12.0D, 12.0D)};
     protected static final VoxelShape[] WEST_AABB = new VoxelShape[]{Block.box(1.0D, 7.0D, 6.0D, 5.0D, 12.0D, 10.0D), Block.box(1.0D, 5.0D, 5.0D, 7.0D, 12.0D, 11.0D), Block.box(1.0D, 3.0D, 4.0D, 9.0D, 12.0D, 12.0D), Block.box(1.0D, 3.0D, 4.0D, 9.0D, 12.0D, 12.0D)};
@@ -40,6 +44,11 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
     public ChrysalisBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 0));
+    }
+
+    @Override
+    public @NotNull BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new ChrysalisBlockEntity(pos, state);
     }
 
     @Override
@@ -55,12 +64,14 @@ public class ChrysalisBlock extends HorizontalDirectionalBlock {
                 level.setBlock(pos, state.setValue(AGE, age + 1), 2);
             }
         } else {
+            Component customName = level.getBlockEntity(pos) instanceof ChrysalisBlockEntity chrysalis ? chrysalis.getCustomName() : null;
             level.removeBlock(pos, false);
             level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
             level.levelEvent(2001, pos, Block.getId(state));
             Butterfly butterfly = NaturalistEntityTypes.BUTTERFLY.get().create(level, EntitySpawnReason.TRIGGERED);
             if (butterfly != null) {
                 MobVariantUtil.selectVariantForSpawn(level, pos, NaturalistMobVariants.BUTTERFLY_VARIANT).ifPresent(butterfly::setVariant);
+                butterfly.setCustomName(customName);
                 butterfly.snapTo(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0F, 0.0F);
                 level.addFreshEntity(butterfly);
             }

@@ -1,4 +1,8 @@
 {
   "texture": "naturalist:entity/duck/duck",
-  "baby_texture": "naturalist:entity/duck/duck_baby"
+  "baby_texture": "naturalist:entity/duck/duck_baby",
+  "weight": 22,
+  "tooltip": {
+    "translate": "tooltip.naturalist.duck_mallard"
+  }
 }

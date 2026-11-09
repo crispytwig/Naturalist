@@ -1,6 +1,36 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "naturalist:item/duck_bucket"
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:muscovy\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/duck_bucket/muscovy"
+    },
+    "on_false": {
+      "type": "minecraft:condition",
+      "property": "minecraft:component",
+      "predicate": "minecraft:custom_data",
+      "value": "{Variant:\"naturalist:whistling\"}",
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "naturalist:item/variant/duck_bucket/whistling"
+      },
+      "on_false": {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:custom_data",
+        "value": "{Variant:\"naturalist:pekin\"}",
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/variant/duck_bucket/pekin"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "naturalist:item/duck_bucket"
+        }
+      }
+    }
   }
 }

@@ -19,6 +19,10 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("tooltip.naturalist.blue_morpho", "Blue Morpho");
         add("tooltip.naturalist.jade_green_swallowtail", "Jade Green Swallowtail");
         add("tooltip.naturalist.purple_emperor", "Purple Emperor");
+        add("tooltip.naturalist.duck_mallard", "Mallard");
+        add("tooltip.naturalist.duck_muscovy", "Muscovy");
+        add("tooltip.naturalist.duck_whistling", "Whistling");
+        add("tooltip.naturalist.duck_pekin", "Pekin");
         add("tooltip.naturalist.red_admiral", "Red Admiral");
 
         add("block.naturalist.alligator_egg", "Alligator Egg");
@@ -34,6 +38,8 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("block.naturalist.cut_shellstone_wall", "Cut Shellstone Wall");
         add("block.naturalist.duckweed", "Duckweed");
         add("block.naturalist.ostrich_egg", "Ostrich Egg");
+        add("block.naturalist.pearl_block", "Pearl Block");
+        add("block.naturalist.pearl_bricks", "Pearl Bricks");
         add("block.naturalist.shellstone", "Shellstone");
         add("block.naturalist.shellstone_bricks", "Shellstone Bricks");
         add("block.naturalist.shellstone_brick_slab", "Shellstone Brick Slab");
@@ -117,10 +123,15 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("item.naturalist.caterpillar_spawn_egg", "Caterpillar Spawn Egg");
         add("item.naturalist.catfish", "Raw Catfish");
         add("item.naturalist.catfish_bucket", "Bucket of Catfish");
+        add("item.naturalist.clam_bucket", "Bucket of Baby Clam");
+        add("item.naturalist.clam_seed", "Clam Seed");
+        add("item.naturalist.great_white_shark_bucket", "Bucket of Baby Great White Shark");
+        add("tag.item.naturalist.whale_food_items", "Whale Food");
         add("item.naturalist.catfish_spawn_egg", "Catfish Spawn Egg");
         add("item.naturalist.cattail_fluff", "Cattail Fluff");
         add("item.naturalist.cooked_bass", "Cooked Bass");
         add("item.naturalist.cooked_bushmeat", "Cooked Bushmeat");
+        add("item.naturalist.cooked_morsel", "Cooked Morsel");
         add("item.naturalist.cooked_catfish", "Cooked Catfish");
         add("item.naturalist.cooked_duck", "Cooked Duck");
         add("item.naturalist.cooked_egg", "Cooked Egg");
@@ -148,6 +159,7 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("item.naturalist.robin_spawn_egg", "Robin Spawn Egg");
         add("item.naturalist.snail", "Snail");
         add("item.naturalist.snail_shell", "Snail Shell");
+        add("item.naturalist.stingray_stinger", "Stingray Stinger");
         add("item.naturalist.snail_spawn_egg", "Snail Spawn Egg");
         add("item.naturalist.snake_spawn_egg", "Snake Spawn Egg");
         add("item.naturalist.sparrow_spawn_egg", "Sparrow Spawn Egg");

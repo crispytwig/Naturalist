@@ -375,7 +375,7 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
 
         @Override
         public boolean canUse() {
-            if (this.mob.isBaby()) {
+            if (this.mob.isBaby() || !this.mob.isInWater()) {
                 return false;
             }
             long gameTime = this.mob.level().getGameTime();
@@ -402,7 +402,7 @@ public class Hippo extends TamableAnimal implements FollowingPet, DataDrivenVari
 
         @Override
         public boolean canContinueToUse() {
-            if (this.target == null) {
+            if (this.target == null || !this.mob.isInWater()) {
                 return false;
             }
             if (this.target.isRemoved()) {

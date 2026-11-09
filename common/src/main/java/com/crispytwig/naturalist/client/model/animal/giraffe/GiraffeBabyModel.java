@@ -83,6 +83,7 @@ public class GiraffeBabyModel extends IKEntityModel<Giraffe> {
 	@Override
 	protected void setupAnimations(Giraffe entity, float limbSwing, float limbSwingAmount, float ageInTicks, float partialTick, float netHeadYaw, float headPitch) {
 
+		this.animateSmooth(entity.sitAnimationState, GiraffeBabyAnimation.GIRAFFE_SIT_IDLE, ageInTicks, partialTick);
 		this.animateIdleSmooth(entity.idleAnimationState, GiraffeBabyAnimation.GIRAFFE_IDLE, ageInTicks, partialTick, limbSwingAmount, IDLE_FADE_SCALE, 1.4F);
 		this.animateSmooth(entity.walkAnimationState, GiraffeBabyAnimation.GIRAFFE_WALK, ageInTicks, partialTick, movementAnimationSpeed(entity, limbSwingAmount, 1.56F));
 		this.animateSmooth(entity.runAnimationState, GiraffeBabyAnimation.GIRAFFE_RUN, ageInTicks, partialTick, movementAnimationSpeed(entity, limbSwingAmount, 1.56F));

@@ -43,6 +43,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -56,6 +57,8 @@ import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.NotNull;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class Butterfly extends NaturalistAnimal implements Catchable, DataDrivenVariantAnimal {
@@ -301,7 +304,19 @@ public class Butterfly extends NaturalistAnimal implements Catchable, DataDriven
     }
 
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
-        return Catchable.catchAnimal(player, hand, this, true).orElse(super.mobInteract(player, hand));
+        Optional<InteractionResult> caught = Catchable.catchAnimal(player, hand, this, true);
+        if (caught.isPresent()) {
+            return caught.get();
+        }
+        ItemStack stack = player.getItemInHand(hand);
+        if (this.isFood(stack) && !stack.is(Items.WITHER_ROSE) && this.getHealth() < this.getMaxHealth()) {
+            if (!this.level().isClientSide()) {
+                this.heal(2.0F);
+                this.usePlayerItem(player, hand, stack);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
     }
 
     @Override

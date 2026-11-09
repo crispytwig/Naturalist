@@ -356,7 +356,7 @@ public class Hedgehog extends TamableAnimal implements DyeableAnimal, FollowingP
         if (whistle != null) {
             return whistle;
         }
-        if (this.isTame()) {
+        if (this.isTame() && this.isOwnedBy(player)) {
             Optional<InteractionResult> caught = Catchable.catchAnimal(player, hand, this, true);
             if (caught.isPresent()) {
                 return caught.get();

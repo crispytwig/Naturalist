@@ -6,10 +6,11 @@ import com.crispytwig.naturalist.registry.NaturalistMobVariants;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
-import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
+import com.crispytwig.naturalist.world.entity.VariantBucketable;
 import com.crispytwig.naturalist.world.entity.variant.MobVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -19,6 +20,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
@@ -27,6 +29,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Bucketable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -37,6 +40,7 @@ import net.minecraft.world.entity.animal.fish.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -48,7 +52,7 @@ import java.util.List;
 import net.minecraft.util.Prediction;
 
 @SuppressWarnings("unused")
-public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
+public class Clam extends WaterAnimal implements VariantBucketable {
     //region Data
     public static final String[] VARIANT_NAMES = {"brown", "white"};
 
@@ -57,13 +61,26 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(Clam.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> DATA_OPEN = SynchedEntityData.defineId(Clam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_HAS_TREASURE = SynchedEntityData.defineId(Clam.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_BABY = SynchedEntityData.defineId(Clam.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_FROM_BUCKET = SynchedEntityData.defineId(Clam.class, EntityDataSerializers.BOOLEAN);
 
     private static final int OPEN_ANIM_TICKS = 25;
     private static final int CLOSE_ANIM_TICKS = 10;
+    private static final int BABY_START_AGE = -24000;
+    private static final int SEED_COOLDOWN_TICKS = 6000;
+    private static final int PEARL_GROWTH_MIN_TICKS = 12000;
+    private static final int PEARL_GROWTH_MAX_TICKS = 18000;
+    private static final int BITE_DELAY_TICKS = 8;
+    private static final float BITE_DAMAGE = 10.0F;
+    private static final double BITE_RANGE = 1.4D;
 
     private int stateTimer;
     private int snapCooldown;
     private int launchPushDelay;
+    private int age;
+    private int seedCooldown;
+    private int pearlGrowthTicks;
+    private int biteDelay;
 
     private boolean openStateInitialised;
     private boolean lastOpenClient;
@@ -77,7 +94,7 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
 
     public Clam(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
-        this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
+        this.setDropChance(EquipmentSlot.MAINHAND, 2.0F);
         this.stateTimer = 200 + this.random.nextInt(201);
     }
 
@@ -94,6 +111,8 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
         builder.define(DATA_VARIANT, DEFAULT_VARIANT.identifier().toString());
         builder.define(DATA_OPEN, false);
         builder.define(DATA_HAS_TREASURE, false);
+        builder.define(DATA_BABY, false);
+        builder.define(DATA_FROM_BUCKET, false);
     }
 
     @Override
@@ -138,11 +157,75 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     }
 
     @Override
+    public boolean isBaby() {
+        return this.entityData.get(DATA_BABY);
+    }
+
+    @Override
+    public void setBaby(boolean baby) {
+        this.setAge(baby ? BABY_START_AGE : 0);
+    }
+
+    private void setAge(int age) {
+        this.age = age;
+        this.entityData.set(DATA_BABY, age < 0);
+    }
+
+    @Override
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> accessor) {
+        if (DATA_BABY.equals(accessor)) {
+            this.refreshDimensions();
+        }
+        super.onSyncedDataUpdated(accessor);
+    }
+
+    @Override
+    public boolean fromBucket() {
+        return this.entityData.get(DATA_FROM_BUCKET);
+    }
+
+    @Override
+    public void setFromBucket(boolean fromBucket) {
+        this.entityData.set(DATA_FROM_BUCKET, fromBucket);
+    }
+
+    @Override
+    public void saveToBucketTag(@NotNull ItemStack stack) {
+        VariantBucketable.super.saveToBucketTag(stack);
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> tag.putInt("Age", this.age));
+    }
+
+    @Override
+    public void loadFromBucketTag(@NotNull CompoundTag tag) {
+        VariantBucketable.super.loadFromBucketTag(tag);
+        tag.getInt("Age").ifPresent(this::setAge);
+    }
+
+    @Override
+    public @NotNull ItemStack getBucketItemStack() {
+        return new ItemStack(NaturalistRegistry.CLAM_BUCKET.get());
+    }
+
+    @Override
+    public @NotNull SoundEvent getPickupSound() {
+        return SoundEvents.BUCKET_FILL_FISH;
+    }
+
+    @Override
+    public boolean canBePickedUpWithBucket(@NotNull ItemStack stack) {
+        return this.isBaby() && VariantBucketable.super.canBePickedUpWithBucket(stack);
+    }
+
+    @Override
     protected void addAdditionalSaveData(@NotNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         this.saveVariant(output);
         output.putBoolean("Open", this.isOpen());
         output.putBoolean("HasTreasure", this.hasTreasure());
+        output.putBoolean("FromBucket", this.fromBucket());
+        output.putInt("Age", this.age);
+        output.putInt("SeedCooldown", this.seedCooldown);
+        output.putInt("PearlGrowthTicks", this.pearlGrowthTicks);
     }
 
     @Override
@@ -151,16 +234,25 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
         this.loadVariant(input);
         this.setOpen(input.getBooleanOr("Open", false));
         this.setHasTreasure(input.getBooleanOr("HasTreasure", false));
+        this.setFromBucket(input.getBooleanOr("FromBucket", false));
+        this.setAge(input.getIntOr("Age", 0));
+        this.seedCooldown = input.getIntOr("SeedCooldown", 0);
+        this.pearlGrowthTicks = input.getIntOr("PearlGrowthTicks", 0);
+        this.setDropChance(EquipmentSlot.MAINHAND, 2.0F);
     }
 
     @Override
     public boolean requiresCustomPersistence() {
-        return super.requiresCustomPersistence() || this.hasTreasure();
+        return super.requiresCustomPersistence() || this.holdsKeptItem() || this.fromBucket();
     }
 
     @Override
     public boolean removeWhenFarAway(double distance) {
-        return distance > 16384.0D && !this.hasTreasure() && !this.hasCustomName();
+        return distance > 16384.0D && !this.holdsKeptItem() && !this.fromBucket() && !this.hasCustomName();
+    }
+
+    private boolean holdsKeptItem() {
+        return this.hasTreasure() && !this.getMainHandItem().is(NaturalistRegistry.PEARL_BLOCK.get().asItem());
     }
     //endregion
 
@@ -174,12 +266,41 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
-        this.selectVariantForSpawn(level);
-        if (this.random.nextFloat() < 0.05F) {
-            this.setHasTreasure(true);
-            this.setItemSlot(EquipmentSlot.MAINHAND, this.randomTreasure());
+        if (reason == EntitySpawnReason.BUCKET) {
+            this.setBaby(true);
+        } else {
+            this.selectVariantForSpawn(level);
+            this.rollContents();
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
+    }
+
+    public void becomeSeedling() {
+        this.setBaby(true);
+        this.setOpen(false);
+        this.setHasTreasure(false);
+        this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+        this.pearlGrowthTicks = 0;
+    }
+
+    private void rollContents() {
+        int roll = this.random.nextInt(100);
+        if (roll < 10) {
+            this.holdItem(new ItemStack(NaturalistRegistry.PEARL_BLOCK.get()));
+        } else if (roll < 15) {
+            this.holdItem(this.randomTreasure());
+        } else {
+            this.startPearlGrowth();
+        }
+    }
+
+    private void holdItem(ItemStack stack) {
+        this.setHasTreasure(true);
+        this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+    }
+
+    private void startPearlGrowth() {
+        this.pearlGrowthTicks = this.random.nextIntBetweenInclusive(PEARL_GROWTH_MIN_TICKS, PEARL_GROWTH_MAX_TICKS);
     }
 
     private ItemStack randomTreasure() {
@@ -204,6 +325,21 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     @Override
     protected void customServerAiStep(@NotNull ServerLevel level) {
         super.customServerAiStep(level);
+        if (this.isBaby()) {
+            this.setAge(this.age + 1);
+            if (!this.isBaby()) {
+                this.stateTimer = 200 + this.random.nextInt(201);
+                this.rollContents();
+            }
+            return;
+        }
+        if (this.seedCooldown > 0) {
+            this.seedCooldown--;
+        }
+        this.tickPearlGrowth();
+        if (this.biteDelay > 0 && --this.biteDelay == 0) {
+            this.bite(level);
+        }
         if (this.snapCooldown > 0) {
             this.snapCooldown--;
         }
@@ -230,6 +366,24 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
         }
     }
 
+    private void tickPearlGrowth() {
+        if (this.hasTreasure()) {
+            this.pearlGrowthTicks = 0;
+        } else if (this.pearlGrowthTicks <= 0) {
+            this.startPearlGrowth();
+        } else if (--this.pearlGrowthTicks == 0) {
+            this.holdItem(new ItemStack(NaturalistRegistry.PEARL_BLOCK.get()));
+        }
+    }
+
+    private void bite(ServerLevel level) {
+        List<Player> targets = level.getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(BITE_RANGE),
+                player -> !player.isCreative() && !player.isSpectator());
+        for (Player target : targets) {
+            target.hurtServer(level, this.damageSources().mobAttack(this), BITE_DAMAGE);
+        }
+    }
+
     private void openShell() {
         this.setOpen(true);
         this.stateTimer = 100 + this.random.nextInt(101);
@@ -238,11 +392,11 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     private void closeShell() {
         this.setOpen(false);
         this.stateTimer = 200 + this.random.nextInt(201);
+        this.biteDelay = BITE_DELAY_TICKS;
     }
 
     private void slamShut() {
-        this.setOpen(false);
-        this.stateTimer = 200 + this.random.nextInt(201);
+        this.closeShell();
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), NaturalistSoundEvents.CLAM_LAUNCH.get(), this.getSoundSource(), 1.0F, 1.0F);
     }
 
@@ -274,6 +428,7 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
     @Override
     public boolean hurtServer(@NotNull ServerLevel level, @NotNull DamageSource source, float amount) {
         if (!this.isOpen()
+                && !this.isBaby()
                 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)
                 && !source.is(DamageTypes.DROWN)
                 && !source.is(DamageTypes.IN_WALL)
@@ -293,6 +448,9 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
             }
             return InteractionResult.SUCCESS;
         }
+        if (this.isBaby()) {
+            return Bucketable.bucketMobPickup(player, hand, this).orElse(super.mobInteract(player, hand));
+        }
         if (this.isOpen() && this.hasTreasure() && !this.getMainHandItem().isEmpty()) {
             if (!this.level().isClientSide()) {
                 ItemStack treasure = this.getMainHandItem().copy();
@@ -306,6 +464,20 @@ public class Clam extends WaterAnimal implements DataDrivenVariantAnimal {
             return InteractionResult.SUCCESS;
         }
         ItemStack inHand = player.getItemInHand(hand);
+        if (this.isOpen() && !this.hasTreasure() && inHand.is(Items.MOSS_BLOCK)) {
+            if (this.seedCooldown > 0) {
+                return super.mobInteract(player, hand);
+            }
+            if (this.level() instanceof ServerLevel server) {
+                this.seedCooldown = SEED_COOLDOWN_TICKS;
+                this.spawnAtLocation(server, new ItemStack(NaturalistRegistry.CLAM_SEED.get()));
+                this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, 1.0F);
+                if (!player.getAbilities().instabuild) {
+                    inHand.shrink(1);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
         if (this.isOpen() && !this.hasTreasure() && !inHand.isEmpty()) {
             if (!this.level().isClientSide()) {
                 this.setItemSlot(EquipmentSlot.MAINHAND, inHand.copyWithCount(1));

@@ -1,5 +1,7 @@
 {
   "values": [
-    "#naturalist:shellstone"
+    "#naturalist:shellstone",
+    "naturalist:pearl_block",
+    "naturalist:pearl_bricks"
   ]
 }

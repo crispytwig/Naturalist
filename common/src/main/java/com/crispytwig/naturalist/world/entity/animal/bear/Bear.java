@@ -90,6 +90,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
     //region Data
     private static final Predicate<ItemStack> FOOD_ITEMS = stack -> stack.is(NaturalistItemTags.BEAR_TEMPT_ITEMS);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
+    private static final int FUR_REGROW_TICKS = 12000;
 
     private static final EntityDataAccessor<String> DATA_VARIANT = SynchedEntityData.defineId(Bear.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> SLEEPING = SynchedEntityData.defineId(Bear.class, EntityDataSerializers.BOOLEAN);
@@ -103,6 +104,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
     private boolean followingOwner = true;
     private int huntingCooldown;
     private int wakeTicks;
+    private int furRegrowTicks;
     @Nullable
     private EntityReference<LivingEntity> persistentAngerTarget;
     public final SmoothAnimationState idleAnimationState = new SmoothAnimationState();
@@ -272,6 +274,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
         this.saveVariant(output);
         this.addPersistentAngerSaveData(output);
         output.putBoolean("Sheared", this.isSheared());
+        output.putInt("FurRegrowTicks", this.furRegrowTicks);
         DyeableAnimal.saveDye(this, output);
         FollowingPet.savePet(this, output);
         this.saveHuntingCooldown(output);
@@ -283,6 +286,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
         this.loadVariant(input);
         this.readPersistentAngerSaveData(this.level(), input);
         this.setSheared(input.getBooleanOr("Sheared", this.isSheared()));
+        this.furRegrowTicks = input.getIntOr("FurRegrowTicks", FUR_REGROW_TICKS);
         DyeableAnimal.loadDye(this, input);
         FollowingPet.loadPet(this, input);
         this.loadHuntingCooldown(input);
@@ -304,7 +308,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
 
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return FOOD_ITEMS.test(stack);
+        return stack.is(Items.HONEYCOMB);
     }
 
     @Nullable
@@ -329,7 +333,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
         this.goalSelector.addGoal(2, new BearMeleeAttackGoal(this, 1.25D, true));
         this.goalSelector.addGoal(5, new PetFollowOwnerGoal(this, 1.25D, 10.0F, 6.0F));
         this.goalSelector.addGoal(3, new BearSleepGoal(this));
-        this.goalSelector.addGoal(4, new BearTemptGoal(this, 1.0D, FOOD_ITEMS, false));
+        this.goalSelector.addGoal(4, new BearTemptGoal(this, 1.0D, this::isFood, false));
         this.goalSelector.addGoal(4, new BabyPanicGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new DistancedFollowParentGoal(this, 1.25D, 48.0D, 8.0D, 12.0D));
         this.goalSelector.addGoal(5, new SearchForItemsGoal(this, 1.2F, FOOD_ITEMS, 8, 2));
@@ -454,14 +458,15 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
             }
             return InteractionResult.SUCCESS;
         }
-        if (this.isTame() && this.isOwnedBy(player)) {
-            if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-                this.heal(4.0F);
-                return InteractionResult.SUCCESS;
+        float healAmount = itemStack.is(Items.COOKED_SALMON) ? 4.0F : itemStack.is(Items.SALMON) ? 2.0F : 0.0F;
+        if (healAmount > 0.0F && this.getHealth() < this.getMaxHealth()) {
+            if (!player.getAbilities().instabuild) {
+                itemStack.shrink(1);
             }
+            this.heal(healAmount);
+            return InteractionResult.SUCCESS;
+        }
+        if (this.isTame() && this.isOwnedBy(player)) {
             if (itemStack.isEmpty() && player.isSecondaryUseActive()) {
                 this.setOrderedToSit(!this.isOrderedToSit());
                 this.jumping = false;
@@ -500,6 +505,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
     public @NotNull List<ItemStack> onSheared(@Nullable Player player, @NotNull ItemStack item, @NotNull Level level, @NotNull BlockPos pos) {
         this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, player != null ? SoundSource.PLAYERS : SoundSource.BLOCKS, 1.0f, 1.0f);
         this.setSheared(true);
+        this.furRegrowTicks = FUR_REGROW_TICKS;
         int amount = 1 + this.random.nextInt(2);
         List<ItemStack> drops = new ArrayList<>();
         for (int j = 0; j < amount; ++j) {
@@ -524,6 +530,9 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
             this.updatePersistentAnger(serverLevel, true);
             if (this.wakeTicks > 0) {
                 this.wakeTicks--;
+            }
+            if (this.isSheared() && --this.furRegrowTicks <= 0) {
+                this.setSheared(false);
             }
         }
         if (this.isSleeping() || this.isImmobile()) {
@@ -570,7 +579,7 @@ public class Bear extends TamableAnimal implements NeutralMob, SleepingAnimal, D
             }
             if (this.isEating()) {
                 if (this.getEatCounter() > 40) {
-                    if (this.isFood(this.getItemBySlot(EquipmentSlot.MAINHAND))) {
+                    if (FOOD_ITEMS.test(this.getItemBySlot(EquipmentSlot.MAINHAND))) {
                         boolean wasSalmon = this.getItemBySlot(EquipmentSlot.MAINHAND).is(Items.SALMON);
                         this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                         this.gameEvent(GameEvent.EAT);

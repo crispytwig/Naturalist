@@ -50,6 +50,15 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
                 .addOptional(bop("rainforest"))
                 .addOptional(terralith("cloud_forest"));
 
+        tag(biomeTag("naturalist:variant/duck/muscovy"))
+                .addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_SAVANNA)
+                .add(Biomes.MANGROVE_SWAMP).add(Biomes.SWAMP)
+                .addTag(BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS);
+
+        tag(biomeTag("naturalist:variant/duck/whistling"))
+                .addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_HILL).addTag(BiomeTags.IS_MOUNTAIN)
+                .addTag(BiomeTags.SPAWNS_COLD_VARIANT_FARM_ANIMALS);
+
         tag(biomeTag("naturalist:variant/tiger/white_tiger"))
                 .add(Biomes.BAMBOO_JUNGLE).add(Biomes.CHERRY_GROVE)
                 .add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE)

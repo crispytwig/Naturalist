@@ -133,10 +133,16 @@ public class Piranha extends AbstractSchoolingFish implements DataDrivenVariantA
         this.goalSelector.addGoal(2, new FollowFlockLeaderGoal(this));
         this.goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1.0D, 10));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (entity, level) -> entity.isInWater()) {
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (entity, level) -> isHuntablePlayer(entity)) {
             @Override
             public boolean canUse() {
                 return !Piranha.this.isFollower() && super.canUse();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                LivingEntity target = Piranha.this.getTarget();
+                return super.canContinueToUse() && target != null && isHuntablePlayer(target);
             }
         });
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, WaterAnimal.class, 10, true, false, (entity, level) -> entity.is(NaturalistEntityTypeTags.PIRANHA_HOSTILES)) {
@@ -145,6 +151,10 @@ public class Piranha extends AbstractSchoolingFish implements DataDrivenVariantA
                 return !Piranha.this.isFollower() && super.canUse();
             }
         });
+    }
+
+    private static boolean isHuntablePlayer(LivingEntity player) {
+        return player.isInWater() && player.getHealth() > 10.0F;
     }
 
     @Override

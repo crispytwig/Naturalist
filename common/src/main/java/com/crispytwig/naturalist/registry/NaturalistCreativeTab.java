@@ -73,9 +73,9 @@ public class NaturalistCreativeTab {
 
     private static void acceptWithTag(CreativeModeTab.Output output, Item item, CompoundTag tag) {
         ItemStack stack = new ItemStack(item);
-        CustomData data = CustomData.of(tag);
-        stack.set(DataComponents.CUSTOM_DATA, data);
-        stack.set(DataComponents.BUCKET_ENTITY_DATA, data);
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        CompoundTag bucketData = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag().merge(tag);
+        stack.set(DataComponents.BUCKET_ENTITY_DATA, CustomData.of(bucketData));
         output.accept(stack);
     }
 }

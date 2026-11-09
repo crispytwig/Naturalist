@@ -50,10 +50,12 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.parrot.ShoulderRidingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -286,6 +288,14 @@ public class Bird extends ShoulderRidingEntity implements DyeableAnimal, Followi
         }
         if (dyeResult.isPresent()) {
             return dyeResult.get();
+        }
+        if (stack.is(Items.COOKIE)) {
+            this.usePlayerItem(player, hand, stack);
+            this.addEffect(new MobEffectInstance(MobEffects.POISON, 900));
+            if (player.isCreative() || !this.isInvulnerable()) {
+                this.hurt(this.damageSources().playerAttack(player), Float.MAX_VALUE);
+            }
+            return InteractionResult.SUCCESS;
         }
         if (this.isTame() && this.isOwnedBy(player)) {
             if (TAME_FOOD.test(stack) && this.getHealth() < this.getMaxHealth()) {

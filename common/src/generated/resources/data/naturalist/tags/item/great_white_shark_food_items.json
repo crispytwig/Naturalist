@@ -8,6 +8,21 @@
     "naturalist:catfish",
     "naturalist:cooked_catfish",
     "naturalist:bass",
-    "naturalist:cooked_bass"
+    "naturalist:cooked_bass",
+    "naturalist:blobfish",
+    "naturalist:cooked_blobfish",
+    "naturalist:piranha",
+    "naturalist:cooked_piranha",
+    "naturalist:anglerfish",
+    "naturalist:cooked_anglerfish",
+    "minecraft:beef",
+    "minecraft:porkchop",
+    "minecraft:chicken",
+    "minecraft:mutton",
+    "minecraft:rabbit",
+    "naturalist:venison",
+    "naturalist:bushmeat",
+    "naturalist:mammoth_meat",
+    "naturalist:drumstick"
   ]
 }

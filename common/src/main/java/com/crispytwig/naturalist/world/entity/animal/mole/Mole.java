@@ -338,7 +338,7 @@ public class Mole extends NaturalistAnimal implements HidingAnimal, DataDrivenVa
             }
             return;
         }
-        boolean forcedOut = this.isOnFire() || this.isInWater() || this.isLeashed() || this.isPassenger();
+        boolean forcedOut = this.isBaby() || this.isOnFire() || this.isInWater() || this.isLeashed() || this.isPassenger();
         if (forcedOut && state != STATE_UNROLLING) {
             this.setState(STATE_UNROLLING);
             return;
@@ -396,7 +396,7 @@ public class Mole extends NaturalistAnimal implements HidingAnimal, DataDrivenVa
     }
 
     private void tryRollUp() {
-        if (this.digLockoutTicks > 0 || this.getState() != STATE_UNROLLED || !this.onGround() || this.isOnFire() || this.isFreezing()
+        if (this.isBaby() || this.digLockoutTicks > 0 || this.getState() != STATE_UNROLLED || !this.onGround() || this.isOnFire() || this.isFreezing()
                 || this.isInWater() || this.isLeashed() || this.isPassenger()) {
             return;
         }

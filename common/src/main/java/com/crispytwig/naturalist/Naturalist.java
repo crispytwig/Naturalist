@@ -274,6 +274,7 @@ public final class Naturalist {
         DispenserBlock.registerBehavior(NaturalistRegistry.JELLYFISH_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.ANGLERFISH_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.RAY_BUCKET.get(), bucketDispenseBehavior);
+        DispenserBlock.registerBehavior(NaturalistRegistry.CLAM_BUCKET.get(), bucketDispenseBehavior);
 
         DispenserBlock.registerBehavior(NaturalistRegistry.SNAIL.get(), new DefaultDispenseItemBehavior() {
             public @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {

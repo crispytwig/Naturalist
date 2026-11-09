@@ -1,3 +1,4 @@
 {
-  "texture": "naturalist:entity/great_white_shark"
+  "texture": "naturalist:entity/great_white_shark",
+  "baby_texture": "naturalist:entity/great_white_shark_baby"
 }

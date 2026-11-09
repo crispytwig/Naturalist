@@ -1,3 +1,4 @@
 {
-  "texture": "naturalist:entity/clam/white_clam"
+  "texture": "naturalist:entity/clam/white_clam",
+  "baby_texture": "naturalist:entity/clam/white_clam_baby"
 }

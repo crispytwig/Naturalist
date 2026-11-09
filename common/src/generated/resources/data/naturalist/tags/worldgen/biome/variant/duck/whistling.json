@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#minecraft:is_taiga",
+    "#minecraft:is_hill",
+    "#minecraft:is_mountain",
+    "#minecraft:spawns_cold_variant_farm_animals"
+  ]
+}

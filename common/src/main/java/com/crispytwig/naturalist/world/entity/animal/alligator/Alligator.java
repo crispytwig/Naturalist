@@ -8,6 +8,7 @@ import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.world.entity.EggLayingAnimal;
 import com.crispytwig.naturalist.world.entity.HuntingAnimal;
 import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
+import com.crispytwig.naturalist.world.entity.animal.capybara.Capybara;
 import com.crispytwig.naturalist.world.entity.ai.goal.BabyHurtByTargetGoal;
 import com.crispytwig.naturalist.world.entity.ai.goal.BabyPanicGoal;
 import com.crispytwig.naturalist.world.entity.ai.goal.BabySniffFlowersGoal;
@@ -22,6 +23,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -318,6 +321,53 @@ public class Alligator extends NaturalistAnimal implements EggLayingAnimal, Hunt
     }
 
     @Override
+    public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
+            this.heal(2.0F);
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return null;
+    }
+
+    @Override
+    protected void positionRider(@NotNull Entity passenger, Entity.@NotNull MoveFunction callback) {
+        super.positionRider(passenger, callback);
+        if (passenger instanceof LivingEntity livingEntity) {
+            livingEntity.yBodyRot = this.yBodyRot;
+        }
+    }
+
+    @Override
+    protected @NotNull Vec3 getPassengerAttachmentPoint(@NotNull Entity entity, @NotNull EntityDimensions dimensions, float scale) {
+        return new Vec3(0.0D, 0.7D, -0.3D).scale(scale).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+    }
+
+    private void pullInCapybaras() {
+        if (this.isBaby() || this.isVehicle()) {
+            return;
+        }
+        for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(0.2D, -0.01D, 0.2D), this::canCarry)) {
+            if (entity.startRiding(this)) {
+                return;
+            }
+        }
+    }
+
+    private boolean canCarry(Entity entity) {
+        return entity instanceof Capybara capybara && !capybara.isPassenger() && !capybara.isOrderedToSit() && !capybara.isSleeping();
+    }
+
+    @Override
     public boolean killedEntity(@NotNull ServerLevel level, @NotNull LivingEntity killed, @NotNull DamageSource source) {
         boolean result = super.killedEntity(level, killed, source);
         if (result) {
@@ -332,6 +382,9 @@ public class Alligator extends NaturalistAnimal implements EggLayingAnimal, Hunt
         if (!this.level().isClientSide()) {
             this.tickHuntingCooldown();
             NaturalistAnimal.leaveWater(this);
+            if (this.tickCount % 10 == 0) {
+                this.pullInCapybaras();
+            }
         }
 
         BlockPos pos = this.blockPosition();

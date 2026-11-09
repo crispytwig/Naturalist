@@ -10,6 +10,9 @@ import com.crispytwig.naturalist.world.entity.ai.goal.SleepGoal;
 import com.crispytwig.naturalist.world.entity.DyeableAnimal;
 import com.crispytwig.naturalist.world.entity.FollowingPet;
 import com.crispytwig.naturalist.world.entity.animal.NaturalistAnimal;
+import com.crispytwig.naturalist.world.entity.animal.bird.Bird;
+import com.crispytwig.naturalist.world.entity.animal.butterfly.Caterpillar;
+import com.crispytwig.naturalist.world.entity.animal.duck.Duck;
 import com.crispytwig.naturalist.world.entity.SleepingAnimal;
 import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import com.crispytwig.naturalist.world.entity.variant.DataDrivenVariantAnimal;
@@ -20,6 +23,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,6 +41,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -291,6 +296,41 @@ public class Capybara extends TamableAnimal implements DyeableAnimal, FollowingP
         }
     }
 
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return null;
+    }
+
+    @Override
+    protected void positionRider(@NotNull Entity passenger, Entity.@NotNull MoveFunction callback) {
+        super.positionRider(passenger, callback);
+        if (passenger instanceof LivingEntity livingEntity) {
+            livingEntity.yBodyRot = this.yBodyRot;
+        }
+    }
+
+    @Override
+    protected @NotNull Vec3 getPassengerAttachmentPoint(@NotNull Entity entity, @NotNull EntityDimensions dimensions, float scale) {
+        return new Vec3(0.0D, 1.025D, 0.0D).scale(scale).yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+    }
+
+    private void pullInPassengers() {
+        if (this.isBaby() || this.isVehicle() || this.isInSittingPose()) {
+            return;
+        }
+        for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(0.2D, -0.01D, 0.2D), this::canCarry)) {
+            if (entity.startRiding(this)) {
+                return;
+            }
+        }
+    }
+
+    private boolean canCarry(Entity entity) {
+        boolean carriable = entity instanceof Capybara || entity instanceof Caterpillar || entity instanceof Duck || entity instanceof Bird bird && !bird.isFlying();
+        return carriable && !entity.isPassenger() && !(entity instanceof TamableAnimal tamable && tamable.isOrderedToSit()) && !(entity instanceof LivingEntity living && living.isSleeping());
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
@@ -298,6 +338,9 @@ public class Capybara extends TamableAnimal implements DyeableAnimal, FollowingP
             this.jumping = false;
             this.xxa = 0.0F;
             this.zza = 0.0F;
+        }
+        if (!this.level().isClientSide() && this.tickCount % 10 == 0) {
+            this.pullInPassengers();
         }
     }
 

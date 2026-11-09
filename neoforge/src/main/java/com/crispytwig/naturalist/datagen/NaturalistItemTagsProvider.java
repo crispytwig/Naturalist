@@ -54,7 +54,9 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:bass_bucket"))
                 .add(item("naturalist:blobfish_bucket"))
                 .add(item("naturalist:catfish_bucket"))
+                .add(item("naturalist:clam_bucket"))
                 .add(item("naturalist:giant_isopod_bucket"))
+                .add(item("naturalist:great_white_shark_bucket"))
                 .add(item("naturalist:jellyfish_bucket"))
                 .add(item("naturalist:piranha_bucket"))
                 .add(item("naturalist:ray_bucket"))
@@ -77,6 +79,7 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:cooked_piranha"));
 
         tag(itemTag("c:foods/cooked_meat"))
+                .add(item("naturalist:cooked_morsel"))
                 .add(item("naturalist:cooked_bushmeat"))
                 .add(item("naturalist:cooked_clam_meat"))
                 .add(item("naturalist:cooked_crab_meat"))
@@ -154,6 +157,7 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:cooked_piranha"));
 
         tag(itemTag("minecraft:meat"))
+                .add(item("naturalist:cooked_morsel"))
                 .add(item("naturalist:bushmeat"))
                 .add(item("naturalist:cooked_bushmeat"))
                 .add(item("naturalist:venison"))
@@ -224,7 +228,35 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:catfish"))
                 .add(item("naturalist:cooked_catfish"))
                 .add(item("naturalist:bass"))
-                .add(item("naturalist:cooked_bass"));
+                .add(item("naturalist:cooked_bass"))
+                .add(item("naturalist:blobfish"))
+                .add(item("naturalist:cooked_blobfish"))
+                .add(item("naturalist:piranha"))
+                .add(item("naturalist:cooked_piranha"))
+                .add(item("naturalist:anglerfish"))
+                .add(item("naturalist:cooked_anglerfish"))
+                .add(item("minecraft:beef"))
+                .add(item("minecraft:porkchop"))
+                .add(item("minecraft:chicken"))
+                .add(item("minecraft:mutton"))
+                .add(item("minecraft:rabbit"))
+                .add(item("naturalist:venison"))
+                .add(item("naturalist:bushmeat"))
+                .add(item("naturalist:mammoth_meat"))
+                .add(item("naturalist:drumstick"));
+
+        tag(NaturalistItemTags.WHALE_FOOD_ITEMS)
+                .addTag(itemTag("c:foods/cooked_fish"))
+                .add(item("minecraft:cod"))
+                .add(item("minecraft:salmon"))
+                .add(item("minecraft:tropical_fish"))
+                .add(item("naturalist:bass"))
+                .add(item("naturalist:catfish"))
+                .add(item("naturalist:blobfish"))
+                .add(item("naturalist:piranha"))
+                .add(item("naturalist:anglerfish"))
+                .add(item("naturalist:crab_meat"))
+                .add(item("naturalist:cooked_crab_meat"));
 
         tag(NaturalistItemTags.HEDGEHOG_FOOD_ITEMS)
                 .add(item("minecraft:sweet_berries"))
@@ -339,7 +371,7 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(Items.CHICKEN.builtInRegistryHolder().key(), Items.RABBIT.builtInRegistryHolder().key(), Items.RABBIT_FOOT.builtInRegistryHolder().key(), Items.EGG.builtInRegistryHolder().key());
 
         tag(NaturalistItemTags.TORTOISE_TEMPT_ITEMS)
-                .add(Items.BAMBOO.builtInRegistryHolder().key(), Items.DANDELION.builtInRegistryHolder().key(), Items.BROWN_MUSHROOM.builtInRegistryHolder().key(), Items.CACTUS.builtInRegistryHolder().key());
+                .add(Items.SUGAR_CANE.builtInRegistryHolder().key());
     }
 
     private static ResourceKey<Item> item(String id) {

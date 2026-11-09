@@ -27,10 +27,13 @@ import com.crispytwig.naturalist.world.item.CaughtEntityItem;
 import com.crispytwig.naturalist.world.item.NaturalistBucketItem;
 import com.crispytwig.naturalist.world.item.SnailItem;
 import com.crispytwig.naturalist.world.entity.animal.starfish.Starfish;
+import com.crispytwig.naturalist.world.entity.animal.duck.Duck;
 import com.crispytwig.naturalist.world.entity.animal.giantisopod.GiantIsopod;
 import com.crispytwig.naturalist.world.entity.animal.jellyfish.Jellyfish;
 import com.crispytwig.naturalist.world.entity.animal.fish.Anglerfish;
+import com.crispytwig.naturalist.world.entity.animal.clam.Clam;
 import com.crispytwig.naturalist.world.entity.animal.fish.Ray;
+import com.crispytwig.naturalist.world.item.ClamSeedItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -50,6 +53,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import com.crispytwig.naturalist.platform.registry.DeferredHolder;
 import com.crispytwig.naturalist.platform.registry.DeferredRegister;
@@ -73,6 +77,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> FAT = registerItem("fat", new Item.Properties());
     public static final DeferredHolder<Item, Item> HIDE = registerItem("hide", new Item.Properties());
     public static final DeferredHolder<Item, Item> MORSEL = registerItem("morsel", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build()));
+    public static final DeferredHolder<Item, Item> COOKED_MORSEL = registerItem("cooked_morsel", new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()));
 
     public static final DeferredHolder<Block, AlligatorEggBlock> ALLIGATOR_EGG = registerBlock("alligator_egg", AlligatorEggBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TURTLE_EGG));
     public static final DeferredHolder<Item, DuckEggItem> DUCK_EGG = registerItem("duck_egg", DuckEggItem::new, new Item.Properties());
@@ -98,7 +103,7 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, Item> COOKED_LIZARD_TAIL = registerItem("cooked_lizard_tail", new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()));
     public static final DeferredHolder<Item, NaturalistBucketItem> CATFISH_BUCKET = registerItem("catfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.CATFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> BASS_BUCKET = registerItem("bass_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.BASS.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, null, Bass.VARIANT_NAMES), new Item.Properties().stacksTo(1));
-    public static final DeferredHolder<Item, NaturalistBucketItem> DUCK_BUCKET = registerItem("duck_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.DUCK.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, ducklingBucketData()));
+    public static final DeferredHolder<Item, NaturalistBucketItem> DUCK_BUCKET = registerItem("duck_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.DUCK.get(), Fluids.EMPTY, SoundEvents.BUCKET_EMPTY, props, true, null, Duck.VARIANT_NAMES), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, ducklingBucketData()));
     public static final DeferredHolder<Item, Item> CATFISH = registerItem("catfish", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
     public static final DeferredHolder<Item, Item> COOKED_CATFISH = registerItem("cooked_catfish", new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build()));
     public static final DeferredHolder<Item, Item> BASS = registerItem("bass", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
@@ -145,8 +150,12 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Item, NaturalistBucketItem> ANGLERFISH_BUCKET = registerItem("anglerfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.ANGLERFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "tooltip.naturalist.anglerfish_", Anglerfish.VARIANT_NAMES), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> JELLYFISH_BUCKET = registerItem("jellyfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.JELLYFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "color.minecraft.", Jellyfish.VARIANT_NAMES), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> RAY_BUCKET = registerItem("ray_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.RAY.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, true, "tooltip.naturalist.ray_", Ray.VARIANT_NAMES), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, Item> STINGRAY_STINGER = registerItem("stingray_stinger", new Item.Properties());
+    public static final DeferredHolder<Item, NaturalistBucketItem> CLAM_BUCKET = registerItem("clam_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.CLAM.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props, false, "color.minecraft.", Clam.VARIANT_NAMES), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, ClamSeedItem> CLAM_SEED = registerItem("clam_seed", ClamSeedItem::new, new Item.Properties().stacksTo(16));
     public static final DeferredHolder<Item, NaturalistBucketItem> BLOBFISH_BUCKET = registerItem("blobfish_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.BLOBFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
     public static final DeferredHolder<Item, NaturalistBucketItem> PIRANHA_BUCKET = registerItem("piranha_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.PIRANHA.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1));
+    public static final DeferredHolder<Item, NaturalistBucketItem> GREAT_WHITE_SHARK_BUCKET = registerItem("great_white_shark_bucket", props -> new NaturalistBucketItem(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props), new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, ducklingBucketData()));
     public static final DeferredHolder<Block, StarfishBlock> RED_STARFISH = registerStarfishBlock("red_starfish");
     public static final DeferredHolder<Block, StarfishBlock> ORANGE_STARFISH = registerStarfishBlock("orange_starfish");
     public static final DeferredHolder<Block, StarfishBlock> BLUE_STARFISH = registerStarfishBlock("blue_starfish");
@@ -174,6 +183,8 @@ public class NaturalistRegistry {
     public static final DeferredHolder<Block, StairBlock> SMOOTH_SHELLSTONE_STAIRS = registerBlock("smooth_shellstone_stairs", props -> new StairBlock(SMOOTH_SHELLSTONE.get().defaultBlockState(), props), () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE));
     public static final DeferredHolder<Block, SlabBlock> SMOOTH_SHELLSTONE_SLAB = registerBlock("smooth_shellstone_slab", SlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE));
     public static final DeferredHolder<Block, WallBlock> SMOOTH_SHELLSTONE_WALL = registerBlock("smooth_shellstone_wall", WallBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE));
+    public static final DeferredHolder<Block, Block> PEARL_BLOCK = registerBlock("pearl_block", Block::new, () -> BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).strength(2.0F).requiresCorrectToolForDrops().sound(SoundType.CALCITE));
+    public static final DeferredHolder<Block, Block> PEARL_BRICKS = registerBlock("pearl_bricks", Block::new, () -> BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).strength(2.0F).requiresCorrectToolForDrops().sound(SoundType.CALCITE));
 
     public static final DeferredHolder<Item, SpawnEggItem> ALLIGATOR_SPAWN_EGG = registerSpawnEgg("alligator_spawn_egg", NaturalistEntityTypes.ALLIGATOR);
     public static final DeferredHolder<Item, SpawnEggItem> ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", NaturalistEntityTypes.ANGLERFISH);

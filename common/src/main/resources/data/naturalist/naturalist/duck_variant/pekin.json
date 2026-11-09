@@ -1,0 +1,8 @@
+{
+  "texture": "naturalist:entity/duck/pekin_duck",
+  "baby_texture": "naturalist:entity/duck/pekin_duck_baby",
+  "weight": 2,
+  "tooltip": {
+    "translate": "tooltip.naturalist.duck_pekin"
+  }
+}

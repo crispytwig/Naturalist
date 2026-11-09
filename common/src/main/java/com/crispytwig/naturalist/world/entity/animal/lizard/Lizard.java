@@ -186,6 +186,12 @@ public class Lizard extends TamableAnimal implements DyeableAnimal, FollowingPet
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D) {
+            @Override
+            protected boolean shouldPanic() {
+                return !Lizard.this.isOrderedToSit() && super.shouldPanic();
+            }
+        });
         this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(3, new LizardTemptGoal(this, 0.6, TEMPT_INGREDIENT, true));
         this.goalSelector.addGoal(6, new PetFollowOwnerGoal(this, 1.0, 10.0f, 2.0f));

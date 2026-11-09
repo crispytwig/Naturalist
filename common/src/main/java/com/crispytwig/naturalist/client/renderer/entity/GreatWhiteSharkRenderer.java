@@ -1,5 +1,6 @@
 package com.crispytwig.naturalist.client.renderer.entity;
 
+import com.crispytwig.naturalist.client.model.animal.greatwhiteshark.GreatWhiteSharkBabyModel;
 import com.crispytwig.naturalist.client.model.animal.greatwhiteshark.GreatWhiteSharkModel;
 import com.crispytwig.naturalist.world.entity.animal.greatwhiteshark.GreatWhiteShark;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -9,7 +10,7 @@ import com.crispytwig.naturalist.client.renderer.entity.state.NaturalistRenderSt
 @SuppressWarnings("unused")
 public class GreatWhiteSharkRenderer extends NaturalistMobRenderer<GreatWhiteShark> {
     public GreatWhiteSharkRenderer(EntityRendererProvider.Context context) {
-        super(context, new GreatWhiteSharkModel(context.bakeLayer(GreatWhiteSharkModel.LAYER_LOCATION)), 0.0F);
+        super(context, new GreatWhiteSharkModel(context.bakeLayer(GreatWhiteSharkModel.LAYER_LOCATION)), new GreatWhiteSharkBabyModel(context.bakeLayer(GreatWhiteSharkBabyModel.LAYER_LOCATION)), 0.0F, 0.0F);
     }
 
     @Override

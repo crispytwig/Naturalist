@@ -107,6 +107,7 @@ public class NaturalistRecipeProvider extends RecipeProvider {
                 new Cook(NaturalistRegistry.BASS.get(), NaturalistRegistry.COOKED_BASS.get(), "cooked_bass", 100, 600),
                 new Cook(NaturalistRegistry.BLOBFISH.get(), NaturalistRegistry.COOKED_BLOBFISH.get(), "cooked_blobfish", 100, 600),
                 new Cook(NaturalistRegistry.BUSHMEAT.get(), NaturalistRegistry.COOKED_BUSHMEAT.get(), "cooked_bushmeat", 100, 600),
+                new Cook(NaturalistRegistry.MORSEL.get(), NaturalistRegistry.COOKED_MORSEL.get(), "cooked_morsel", 100, 600),
                 new Cook(NaturalistRegistry.CATFISH.get(), NaturalistRegistry.COOKED_CATFISH.get(), "cooked_catfish", 100, 600),
                 new Cook(NaturalistRegistry.CLAM_MEAT.get(), NaturalistRegistry.COOKED_CLAM_MEAT.get(), "cooked_clam_meat", 100, 600),
                 new Cook(NaturalistRegistry.CRAB_MEAT.get(), NaturalistRegistry.COOKED_CRAB_MEAT.get(), "cooked_crab_meat", 100, 600),
@@ -162,6 +163,12 @@ public class NaturalistRecipeProvider extends RecipeProvider {
                 .define('#', NaturalistRegistry.SHELLSTONE.get())
                 .unlockedBy("has_ingredient", has(NaturalistRegistry.SHELLSTONE.get()))
                 .save(this.recipes, id("shellstone_bricks"));
+
+        shaped(RecipeCategory.MISC, NaturalistRegistry.PEARL_BRICKS.get(), 4)
+                .pattern("##").pattern("##")
+                .define('#', NaturalistRegistry.PEARL_BLOCK.get())
+                .unlockedBy("has_ingredient", has(NaturalistRegistry.PEARL_BLOCK.get()))
+                .save(this.recipes, id("pearl_bricks"));
 
         shaped(RecipeCategory.MISC, NaturalistRegistry.CUT_SHELLSTONE.get())
                 .pattern("#").pattern("#")
@@ -313,6 +320,7 @@ public class NaturalistRecipeProvider extends RecipeProvider {
         brewMix(potion(NaturalistPotions.FOREST_DASHER), Items.REDSTONE, potion(NaturalistPotions.LONG_FOREST_DASHER), "forest_dasher_redstone");
         brewMix(potion(NaturalistPotions.FOREST_DASHER), Items.GLOWSTONE_DUST, potion(NaturalistPotions.STRONG_FOREST_DASHER), "forest_dasher_glowstone_dust");
         brewMix(Potions.AWKWARD, NaturalistRegistry.SCORPION_POISON_GLAND.get(), potion(NaturalistPotions.ANTIVENOM), "awkward_scorpion_poison_gland");
+        brewMix(Potions.AWKWARD, NaturalistRegistry.STINGRAY_STINGER.get(), Potions.POISON, "awkward_stingray_stinger");
     }
 
     private void brewMix(Holder<Potion> input, Item reagent, Holder<Potion> result, String name) {

@@ -20,13 +20,22 @@
                   }
                 ]
               },
-              "modifier": {
-                "type": "minecraft:copy_state",
-                "block": "naturalist:chrysalis",
-                "properties": [
-                  "age"
-                ]
-              },
+              "modifier": [
+                {
+                  "type": "minecraft:copy_state",
+                  "block": "naturalist:chrysalis",
+                  "properties": [
+                    "age"
+                  ]
+                },
+                {
+                  "type": "minecraft:copy_components",
+                  "include": [
+                    "minecraft:custom_name"
+                  ],
+                  "source": "block_entity"
+                }
+              ],
               "name": "naturalist:chrysalis"
             }
           ]

@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{Variant:\"naturalist:white\"}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/variant/clam_bucket/white"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "naturalist:item/clam_bucket"
+    }
+  }
+}

@@ -2,8 +2,8 @@ package com.crispytwig.naturalist.world.entity.animal.whale;
 
 import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistEntityTypes;
-import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.crispytwig.naturalist.registry.NaturalistSoundEvents;
+import com.crispytwig.naturalist.tags.NaturalistItemTags;
 import com.crispytwig.naturalist.world.entity.ai.goal.WhaleDiveGoal;
 import com.crispytwig.naturalist.world.entity.ai.goal.WhaleSeekDeeperWaterGoal;
 import com.crispytwig.naturalist.world.entity.ai.goal.WhaleSurfaceGoal;
@@ -42,6 +42,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -50,7 +51,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.fish.Pufferfish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.storage.ValueInput;
@@ -239,9 +239,7 @@ public class Whale extends Animal implements MultipartMob, DataDrivenVariantAnim
 
     @Override
     public boolean isFood(@NotNull ItemStack stack) {
-        return stack.is(Items.COD) || stack.is(Items.COOKED_COD)
-                || stack.is(Items.SALMON) || stack.is(Items.COOKED_SALMON)
-                || stack.is(NaturalistRegistry.CRAB_MEAT.get()) || stack.is(NaturalistRegistry.COOKED_CRAB_MEAT.get());
+        return stack.is(NaturalistItemTags.WHALE_FOOD_ITEMS);
     }
 
     @Override
@@ -265,6 +263,7 @@ public class Whale extends Animal implements MultipartMob, DataDrivenVariantAnim
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(1, new WhaleSeekDeeperWaterGoal(this));
+        this.goalSelector.addGoal(1, new WhaleBreedGoal(this));
         this.goalSelector.addGoal(2, new WhaleSurfaceGoal(this));
         this.goalSelector.addGoal(3, new WhaleDiveGoal(this));
         this.goalSelector.addGoal(4, new WhaleSwimGoal(this, 1.0D, 2));
@@ -479,6 +478,29 @@ public class Whale extends Animal implements MultipartMob, DataDrivenVariantAnim
 
     public float getSegmentPitchOffset(int index, float partialTick) {
         return this.chain.getSegmentPitchOffset(index, partialTick, this.getXBodyRot(partialTick));
+    }
+
+    static class WhaleBreedGoal extends BreedGoal {
+        private static final double BREED_DISTANCE_SQR = 64.0D;
+        private int breedTicks;
+
+        WhaleBreedGoal(Whale whale) {
+            super(whale, 1.0D);
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.breedTicks = 0;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            if (++this.breedTicks >= this.adjustedTickDelay(60) && this.animal.isInLove() && this.animal.distanceToSqr(this.partner) < BREED_DISTANCE_SQR) {
+                this.breed();
+            }
+        }
     }
 
     static class WhaleMoveControl extends MoveControl {

@@ -215,7 +215,7 @@ public class KomodoDragon extends Animal implements SleepingAnimal, DataDrivenVa
     public boolean doHurtTarget(@NotNull ServerLevel level, @NotNull Entity entity) {
         boolean result = super.doHurtTarget(level, entity);
         if (result && entity instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
+            living.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1), this);
         }
         return result;
     }

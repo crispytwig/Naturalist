@@ -61,6 +61,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -77,6 +78,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,6 +86,7 @@ import com.crispytwig.naturalist.world.entity.SmoothAnimationState;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -401,6 +404,7 @@ public class Ostrich extends TamableAnimal implements EggLayingAnimal, HidingAni
         this.goalSelector.addGoal(5, new HideGoal<>(this));
         this.goalSelector.addGoal(6, new PetFollowOwnerGoal(this, 1.2D, 10.0F, 3.0F));
         this.goalSelector.addGoal(7, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(7, new OstrichStayNearEggGoal(this));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
@@ -722,6 +726,81 @@ public class Ostrich extends TamableAnimal implements EggLayingAnimal, HidingAni
         @Override
         public boolean canUse() {
             return !this.ostrich.isTame() && super.canUse();
+        }
+    }
+
+    static class OstrichStayNearEggGoal extends Goal {
+        private static final int EGG_SEARCH_RADIUS = 6;
+        private static final int EGG_SEARCH_HEIGHT = 2;
+        private static final double STAY_DISTANCE_SQR = 16.0D;
+        private static final double GIVE_UP_DISTANCE_SQR = 256.0D;
+
+        private final Ostrich ostrich;
+        @Nullable
+        private BlockPos egg;
+        @Nullable
+        private Path path;
+
+        public OstrichStayNearEggGoal(Ostrich ostrich) {
+            this.ostrich = ostrich;
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        private boolean canTendEgg() {
+            return !this.ostrich.isBaby() && !this.ostrich.isVehicle() && !this.ostrich.isPassenger()
+                    && !this.ostrich.isLeashed() && !this.ostrich.isLayingEgg()
+                    && !(this.ostrich.isTame() && (this.ostrich.isFollowingOwner() || this.ostrich.isOrderedToSit()));
+        }
+
+        private boolean isEggValid(BlockPos pos) {
+            return this.ostrich.isEggAt(pos) && this.ostrich.distanceToSqr(Vec3.atCenterOf(pos)) <= GIVE_UP_DISTANCE_SQR;
+        }
+
+        @Nullable
+        private BlockPos findNearestEgg() {
+            BlockPos origin = this.ostrich.blockPosition();
+            BlockPos nearest = null;
+            double nearestDistance = EGG_SEARCH_RADIUS * EGG_SEARCH_RADIUS;
+            for (BlockPos pos : BlockPos.betweenClosed(
+                    origin.getX() - EGG_SEARCH_RADIUS, origin.getY() - EGG_SEARCH_HEIGHT, origin.getZ() - EGG_SEARCH_RADIUS,
+                    origin.getX() + EGG_SEARCH_RADIUS, origin.getY() + EGG_SEARCH_HEIGHT, origin.getZ() + EGG_SEARCH_RADIUS)) {
+                double distance = pos.distSqr(origin);
+                if (distance <= nearestDistance && this.ostrich.isEggAt(pos)) {
+                    nearest = pos.immutable();
+                    nearestDistance = distance;
+                }
+            }
+            return nearest;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (this.ostrich.getRandom().nextInt(reducedTickDelay(20)) != 0 || !this.canTendEgg()) {
+                return false;
+            }
+            if (this.egg == null || !this.isEggValid(this.egg)) {
+                this.egg = this.findNearestEgg();
+            }
+            if (this.egg == null || this.ostrich.distanceToSqr(Vec3.atCenterOf(this.egg)) <= STAY_DISTANCE_SQR) {
+                return false;
+            }
+            this.path = this.ostrich.getNavigation().createPath(this.egg.getX() + 0.5D, this.egg.getY(), this.egg.getZ() + 0.5D, 2);
+            return this.path != null;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.canTendEgg() && this.egg != null && this.isEggValid(this.egg) && !this.ostrich.getNavigation().isDone();
+        }
+
+        @Override
+        public void start() {
+            this.ostrich.getNavigation().moveTo(this.path, 1.0D);
+        }
+
+        @Override
+        public void stop() {
+            this.path = null;
         }
     }
 

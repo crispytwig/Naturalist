@@ -1,0 +1,8 @@
+{
+  "texture": "naturalist:entity/duck/whistling_duck",
+  "baby_texture": "naturalist:entity/duck/whistling_duck_baby",
+  "biomes": "#naturalist:variant/duck/whistling",
+  "tooltip": {
+    "translate": "tooltip.naturalist.duck_whistling"
+  }
+}
