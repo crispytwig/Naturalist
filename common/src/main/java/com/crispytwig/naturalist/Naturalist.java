@@ -65,6 +65,7 @@ import com.crispytwig.naturalist.common.entity.turkey.Turkey;
 import com.crispytwig.naturalist.common.entity.vulture.Vulture;
 import com.crispytwig.naturalist.common.entity.whale.Whale;
 import com.crispytwig.naturalist.common.entity.manatee.Manatee;
+import com.crispytwig.naturalist.common.entity.whaleshark.WhaleShark;
 import com.crispytwig.naturalist.common.entity.meerkat.Meerkat;
 import com.crispytwig.naturalist.common.entity.seahorse.Seahorse;
 import com.crispytwig.naturalist.common.entity.equine.Zebra;
@@ -182,6 +183,7 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.JELLYFISH.get(), Jellyfish.createAttributes());
         r.register(NaturalistEntityTypes.WHALE.get(), Whale.createAttributes());
         r.register(NaturalistEntityTypes.MANATEE.get(), Manatee.createAttributes());
+        r.register(NaturalistEntityTypes.WHALE_SHARK.get(), WhaleShark.createAttributes());
         r.register(NaturalistEntityTypes.SEAHORSE.get(), Seahorse.createAttributes());
         r.register(NaturalistEntityTypes.MEERKAT.get(), Meerkat.createAttributes());
         r.register(NaturalistEntityTypes.ANT.get(), Ant.createAttributes());
@@ -251,6 +253,7 @@ public final class Naturalist {
         r.register(NaturalistEntityTypes.JUNGLE_SCORPION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scorpion::checkScorpionSpawnRules);
         r.register(NaturalistEntityTypes.MEERKAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
         r.register(NaturalistEntityTypes.MANATEE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Manatee::checkAquaticSpawnRules);
+        r.register(NaturalistEntityTypes.WHALE_SHARK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WhaleShark::checkAquaticSpawnRules);
         r.register(NaturalistEntityTypes.SEAHORSE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Seahorse::checkAquaticSpawnRules);
         r.register(NaturalistEntityTypes.GREAT_WHITE_SHARK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GreatWhiteShark::checkGreatWhiteSharkSpawnRules);
         r.register(NaturalistEntityTypes.TURKEY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NaturalistAnimal::checkNaturalistAnimalSpawnRules);
@@ -285,6 +288,7 @@ public final class Naturalist {
         DispenserBlock.registerBehavior(NaturalistRegistry.RAY_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.CLAM_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.MANATEE_BUCKET.get(), bucketDispenseBehavior);
+        DispenserBlock.registerBehavior(NaturalistRegistry.WHALE_SHARK_BUCKET.get(), bucketDispenseBehavior);
         DispenserBlock.registerBehavior(NaturalistRegistry.SEAHORSE_BUCKET.get(), bucketDispenseBehavior);
 
         DispenserBlock.registerBehavior(NaturalistRegistry.SNAIL.get(), new DefaultDispenseItemBehavior() {

@@ -59,6 +59,7 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
                 .add(item("naturalist:great_white_shark_bucket"))
                 .add(item("naturalist:jellyfish_bucket"))
                 .add(item("naturalist:manatee_bucket"))
+                .add(item("naturalist:whale_shark_bucket"))
                 .add(item("naturalist:piranha_bucket"))
                 .add(item("naturalist:ray_bucket"))
                 .add(item("naturalist:seahorse_bucket"))
@@ -253,6 +254,25 @@ public class NaturalistItemTagsProvider extends ItemTagsProvider {
         tag(NaturalistItemTags.MEERKAT_TEMPT_ITEMS)
                 .add(item("naturalist:grub"))
                 .add(item("minecraft:spider_eye"));
+
+        tag(NaturalistItemTags.WHALE_SHARK_FOOD_ITEMS)
+                .add(item("minecraft:cod"))
+                .add(item("minecraft:cooked_cod"))
+                .add(item("minecraft:salmon"))
+                .add(item("minecraft:cooked_salmon"))
+                .add(item("minecraft:tropical_fish"))
+                .add(item("naturalist:bass"))
+                .add(item("naturalist:cooked_bass"))
+                .add(item("naturalist:catfish"))
+                .add(item("naturalist:cooked_catfish"))
+                .add(item("naturalist:blobfish"))
+                .add(item("naturalist:cooked_blobfish"))
+                .add(item("naturalist:piranha"))
+                .add(item("naturalist:cooked_piranha"))
+                .add(item("naturalist:anglerfish"))
+                .add(item("naturalist:cooked_anglerfish"))
+                .add(item("naturalist:crab_meat"))
+                .add(item("minecraft:kelp"));
 
         tag(NaturalistItemTags.MANATEE_FOOD_ITEMS)
                 .add(item("minecraft:seagrass"));

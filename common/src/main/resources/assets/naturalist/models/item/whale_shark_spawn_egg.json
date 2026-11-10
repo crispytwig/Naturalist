@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "naturalist:item/whale_shark_spawn_egg"
+  }
+}

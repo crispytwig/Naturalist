@@ -378,6 +378,11 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         tag(NaturalistBiomeTags.HAS_MANATEE)
                 .add(Biomes.MANGROVE_SWAMP);
 
+        tag(NaturalistBiomeTags.HAS_WHALE_SHARK)
+                .add(Biomes.WARM_OCEAN)
+                .add(Biomes.LUKEWARM_OCEAN)
+                .add(Biomes.DEEP_LUKEWARM_OCEAN);
+
         tag(NaturalistBiomeTags.HAS_WHALE)
                 .addOptionalTag(BiomeTags.IS_OCEAN)
                 .addOptionalTag(Tags.Biomes.IS_OCEAN);
@@ -749,6 +754,7 @@ public class NaturalistBiomeTagsProvider extends TagsProvider<Biome> {
         coldBlacklist(NaturalistBiomeTags.BLACKLIST_ZEBRA);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_MEERKAT);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_MANATEE);
+        emptyBlacklist(NaturalistBiomeTags.BLACKLIST_WHALE_SHARK);
         emptyBlacklist(NaturalistBiomeTags.BLACKLIST_SEAHORSE);
         tag(NaturalistBiomeTags.BLACKLIST_WHALE).add(Biomes.FROZEN_OCEAN, Biomes.DEEP_FROZEN_OCEAN);
     }

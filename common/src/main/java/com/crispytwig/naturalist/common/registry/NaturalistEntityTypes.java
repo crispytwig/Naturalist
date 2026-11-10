@@ -36,6 +36,7 @@ import com.crispytwig.naturalist.common.entity.lizard.LizardTail;
 import com.crispytwig.naturalist.common.entity.elephant.Mammoth;
 import com.crispytwig.naturalist.common.entity.mole.Mole;
 import com.crispytwig.naturalist.common.entity.manatee.Manatee;
+import com.crispytwig.naturalist.common.entity.whaleshark.WhaleShark;
 import com.crispytwig.naturalist.common.entity.meerkat.Meerkat;
 import com.crispytwig.naturalist.common.entity.seahorse.Seahorse;
 import com.crispytwig.naturalist.common.entity.ostrich.Ostrich;
@@ -122,6 +123,7 @@ public class NaturalistEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Meerkat>> MEERKAT = register("meerkat", EntityType.Builder.of(Meerkat::new, MobCategory.CREATURE).sized(0.5F, 0.6F).clientTrackingRange(8));
     public static final DeferredHolder<EntityType<?>, EntityType<Manatee>> MANATEE = register("manatee", EntityType.Builder.of(Manatee::new, MobCategory.WATER_CREATURE).sized(1.5F, 1.0F).clientTrackingRange(10));
+    public static final DeferredHolder<EntityType<?>, EntityType<WhaleShark>> WHALE_SHARK = register("whale_shark", EntityType.Builder.of(WhaleShark::new, MobCategory.WATER_CREATURE).sized(2.5F, 2.0F).clientTrackingRange(10));
     public static final DeferredHolder<EntityType<?>, EntityType<Seahorse>> SEAHORSE = register("seahorse", EntityType.Builder.of(Seahorse::new, MobCategory.WATER_AMBIENT).sized(0.4F, 0.6F).clientTrackingRange(4));
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String id, EntityType.Builder<T> builder) {

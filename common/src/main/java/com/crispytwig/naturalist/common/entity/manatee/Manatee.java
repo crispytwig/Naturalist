@@ -7,9 +7,9 @@ import com.crispytwig.naturalist.common.tags.NaturalistItemTags;
 import com.crispytwig.naturalist.common.entity.AquaticBodyTilt;
 import com.crispytwig.naturalist.common.entity.SmoothAnimationState;
 import com.crispytwig.naturalist.common.entity.ai.goal.FollowNearestGoal;
+import com.crispytwig.naturalist.common.entity.ai.goal.GoToWaterGoal;
 import com.crispytwig.naturalist.common.entity.ai.goal.RangedSwimGoal;
 import com.crispytwig.naturalist.common.entity.BucketableAquaticAnimal;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -94,7 +94,7 @@ public class Manatee extends BucketableAquaticAnimal {
     }
 
     @Override
-    protected float getFoodHealAmount() {
+    protected float getFoodHealAmount(@NotNull ItemStack stack) {
         return 2.0F;
     }
 
@@ -250,43 +250,6 @@ public class Manatee extends BucketableAquaticAnimal {
         @Override
         public void start() {
             this.manatee.getNavigation().stop();
-        }
-    }
-
-    static class GoToWaterGoal extends Goal {
-        private final Manatee manatee;
-        private int cooldown;
-        private BlockPos water;
-
-        GoToWaterGoal(Manatee manatee) {
-            this.manatee = manatee;
-            this.setFlags(EnumSet.of(Flag.MOVE));
-        }
-
-        @Override
-        public boolean canUse() {
-            if (this.manatee.isInWater() || --this.cooldown > 0) {
-                return false;
-            }
-            this.cooldown = this.adjustedTickDelay(40);
-            for (BlockPos pos : BlockPos.withinClippedManhattan(this.manatee.blockPosition(), 32, 8, 32)) {
-                if (this.manatee.level().getFluidState(pos).is(FluidTags.WATER)) {
-                    this.water = pos.immutable();
-                    return true;
-                }
-            }
-            this.cooldown = this.adjustedTickDelay(400);
-            return false;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return !this.manatee.isInWater() && !this.manatee.getNavigation().isDone();
-        }
-
-        @Override
-        public void start() {
-            this.manatee.getNavigation().moveTo(this.water.getX() + 0.5D, this.water.getY(), this.water.getZ() + 0.5D, 1.0D);
         }
     }
     //endregion

@@ -238,6 +238,12 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
                 .withPool(drop(Items.KELP, 1, 2))
                 .withPool(drop(Items.SEAGRASS, 0, 2)));
 
+        CompoundTag mouthInked = new CompoundTag();
+        mouthInked.putBoolean("MouthInked", true);
+        add(NaturalistEntityTypes.WHALE_SHARK.get(), LootTable.lootTable()
+                .withPool(meat(NaturalistRegistry.CRAB_MEAT.get(), 1, 1))
+                .withPool(drop(Items.GLOW_INK_SAC, 1, 1).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NbtPredicate(mouthInked))))));
+
         add(NaturalistEntityTypes.SEAHORSE.get(), table(pool().add(LootItem.lootTableItem(Items.TROPICAL_FISH))));
 
         add(NaturalistEntityTypes.ZEBRA.get(), LootTable.lootTable()
@@ -358,6 +364,7 @@ public class NaturalistEntityLootProvider extends EntityLootSubProvider {
                 NaturalistEntityTypes.WHALE.get(),
                 NaturalistEntityTypes.ZEBRA.get(),
                 NaturalistEntityTypes.MANATEE.get(),
+                NaturalistEntityTypes.WHALE_SHARK.get(),
                 NaturalistEntityTypes.MEERKAT.get(),
                 NaturalistEntityTypes.SEAHORSE.get()
         );

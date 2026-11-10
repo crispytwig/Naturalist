@@ -118,7 +118,7 @@ public class Seahorse extends BucketableAquaticAnimal {
     }
 
     @Override
-    protected float getFoodHealAmount() {
+    protected float getFoodHealAmount(@NotNull ItemStack stack) {
         return 1.0F;
     }
 

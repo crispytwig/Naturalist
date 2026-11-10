@@ -126,12 +126,16 @@ public abstract class NaturalistEntityModel<E extends Entity> extends EntityMode
     }
 
     protected void animateSmooth(SmoothAnimationState state, AnimationDefinition definition, float ageInTicks, float partialTick, float speed) {
+        this.animateSmooth(state, definition, ageInTicks, partialTick, speed, 1.0F);
+    }
+
+    protected void animateSmooth(SmoothAnimationState state, AnimationDefinition definition, float ageInTicks, float partialTick, float speed, float amplitude) {
         float factor = state.factor(partialTick);
         if (factor <= SmoothAnimationState.ACTIVE_THRESHOLD) {
             return;
         }
         state.updateTime(ageInTicks, speed);
-        this.bakedAnimation(definition).apply(state.getAccumulatedTime(), factor);
+        this.bakedAnimation(definition).apply(state.getAccumulatedTime(), factor * amplitude);
     }
 
     protected void animateUnblended(SmoothAnimationState state, AnimationDefinition definition, float ageInTicks) {

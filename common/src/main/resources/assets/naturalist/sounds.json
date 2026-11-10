@@ -125,6 +125,44 @@
     ],
     "subtitle": "naturalist.subtitles.entity.manatee.death"
   },
+  "entity.whale_shark.ambient": {
+    "sounds": [
+      "naturalist:mob/whale_shark/idle1",
+      "naturalist:mob/whale_shark/idle2",
+      "naturalist:mob/whale_shark/idle3",
+      "naturalist:mob/whale_shark/idle4"
+    ],
+    "subtitle": "naturalist.subtitles.entity.whale_shark.ambient"
+  },
+  "entity.whale_shark.hurt": {
+    "sounds": [
+      "naturalist:mob/whale_shark/hurt1",
+      "naturalist:mob/whale_shark/hurt2",
+      "naturalist:mob/whale_shark/hurt3"
+    ],
+    "subtitle": "naturalist.subtitles.entity.whale_shark.hurt"
+  },
+  "entity.whale_shark.death": {
+    "sounds": [
+      "naturalist:mob/whale_shark/death1",
+      "naturalist:mob/whale_shark/death2"
+    ],
+    "subtitle": "naturalist.subtitles.entity.whale_shark.death"
+  },
+  "entity.whale_shark.mouth": {
+    "sounds": [
+      "naturalist:mob/whale_shark/open_mouth1",
+      "naturalist:mob/whale_shark/open_mouth2",
+      "naturalist:mob/whale_shark/open_mouth3"
+    ]
+  },
+  "entity.whale_shark.collect_ink": {
+    "sounds": [
+      "naturalist:mob/whale_shark/ink1",
+      "naturalist:mob/whale_shark/ink2"
+    ],
+    "subtitle": "naturalist.subtitles.entity.whale_shark.collect_ink"
+  },
   "entity.whale.ambient": {
     "sounds": [
       "naturalist:mob/whale/idle2",

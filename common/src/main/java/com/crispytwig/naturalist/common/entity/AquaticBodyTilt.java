@@ -45,6 +45,7 @@ public class AquaticBodyTilt {
     }
 
     public final Channel animSpeed = new Channel();
+    public final Channel turnYaw = new Channel();
     public final Channel pitch = new Channel();
     public final Channel roll = new Channel();
     public final Channel tailPitch = new Channel();
@@ -86,6 +87,7 @@ public class AquaticBodyTilt {
         Turning turning = this.settings.turning();
         float yawLead = Mth.wrapDegrees(yaw - this.yawSmooth);
         this.yawSmooth += yawLead * blend(turning.yawRate());
+        this.turnYaw.set(Mth.wrapDegrees(this.yawSmooth - yaw));
         this.roll.approach(wet * Mth.clamp(yawLead * turning.rollGain(), -turning.maxRoll(), turning.maxRoll()), blend(turning.rollRate()));
 
         this.approachYaw(this.headYaw, yawLead, this.settings.head());

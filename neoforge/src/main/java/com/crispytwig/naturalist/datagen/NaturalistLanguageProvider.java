@@ -151,6 +151,15 @@ public class NaturalistLanguageProvider extends LanguageProvider {
         add("tag.item.naturalist.seahorse_food_items", "Seahorse Food");
         add("naturalist.configuration.manatee_removed", "Remove Manatee");
         add("naturalist.configuration.seahorse_removed", "Remove Seahorse");
+        add("entity.naturalist.whale_shark", "Whale Shark");
+        add("item.naturalist.whale_shark_bucket", "Bucket of Baby Whale Shark");
+        add("item.naturalist.whale_shark_spawn_egg", "Whale Shark Spawn Egg");
+        add("tag.item.naturalist.whale_shark_food_items", "Whale Shark Food");
+        add("naturalist.configuration.whale_shark_removed", "Remove Whale Shark");
+        add("naturalist.subtitles.entity.whale_shark.ambient", "Whale Shark groans");
+        add("naturalist.subtitles.entity.whale_shark.hurt", "Whale Shark hurts");
+        add("naturalist.subtitles.entity.whale_shark.death", "Whale Shark dies");
+        add("naturalist.subtitles.entity.whale_shark.collect_ink", "Glow Ink squirts");
         add("naturalist.subtitles.entity.manatee.ambient", "Manatee grunts");
         add("naturalist.subtitles.entity.manatee.hurt", "Manatee hurts");
         add("naturalist.subtitles.entity.manatee.death", "Manatee dies");

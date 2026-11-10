@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:cod",
+    "minecraft:cooked_cod",
+    "minecraft:salmon",
+    "minecraft:cooked_salmon",
+    "minecraft:tropical_fish",
+    "naturalist:bass",
+    "naturalist:cooked_bass",
+    "naturalist:catfish",
+    "naturalist:cooked_catfish",
+    "naturalist:blobfish",
+    "naturalist:cooked_blobfish",
+    "naturalist:piranha",
+    "naturalist:cooked_piranha",
+    "naturalist:anglerfish",
+    "naturalist:cooked_anglerfish",
+    "naturalist:crab_meat",
+    "minecraft:kelp"
+  ]
+}

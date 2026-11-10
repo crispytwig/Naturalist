@@ -144,8 +144,13 @@ public class NaturalistSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_DEATH = register("entity.whale.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_BLOWHOLE = register("entity.whale.blowhole");
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_AMBIENT = register("entity.manatee.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_SHARK_AMBIENT = register("entity.whale_shark.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_HURT = register("entity.manatee.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_SHARK_HURT = register("entity.whale_shark.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> MANATEE_DEATH = register("entity.manatee.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_SHARK_DEATH = register("entity.whale_shark.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_SHARK_MOUTH = register("entity.whale_shark.mouth");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WHALE_SHARK_COLLECT_INK = register("entity.whale_shark.collect_ink");
     public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_AMBIENT = register("entity.meerkat.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_HURT = register("entity.meerkat.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> MEERKAT_DEATH = register("entity.meerkat.death");

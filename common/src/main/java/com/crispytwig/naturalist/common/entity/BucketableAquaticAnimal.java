@@ -53,7 +53,7 @@ public abstract class BucketableAquaticAnimal extends Animal implements VariantB
 
     protected abstract float getBabySpawnChance();
 
-    protected abstract float getFoodHealAmount();
+    protected abstract float getFoodHealAmount(ItemStack stack);
 
     protected boolean canBeBucketed() {
         return true;
@@ -220,7 +220,7 @@ public abstract class BucketableAquaticAnimal extends Animal implements VariantB
                     this.setInLove(player);
                 }
                 this.usePlayerItem(player, hand, stack);
-                this.heal(this.getFoodHealAmount());
+                this.heal(this.getFoodHealAmount(stack));
                 this.playSound(NaturalistAnimal.eatingSound(stack), 1.0F, 1.0F);
             }
             return InteractionResult.SUCCESS;
