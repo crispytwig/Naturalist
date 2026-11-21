@@ -309,7 +309,7 @@ public class GreatWhiteShark extends Animal implements MultipartMob, HuntingAnim
     @Override
     public void tick() {
         super.tick();
-        if (!this.partsRegistered && this.level() instanceof MultipartLevel multipart) {
+        if (!this.partsRegistered && !this.isRemoved() && this.level() instanceof MultipartLevel multipart) {
             MobPart.registerAll(multipart, this.parts);
             this.partsRegistered = true;
         }
