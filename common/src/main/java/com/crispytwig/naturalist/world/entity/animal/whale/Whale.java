@@ -314,7 +314,7 @@ public class Whale extends Animal implements MultipartMob, DataDrivenVariantAnim
     @Override
     public void tick() {
         super.tick();
-        if (!this.partsRegistered && this.level() instanceof MultipartLevel multipart) {
+        if (!this.partsRegistered && !this.isRemoved() && this.level() instanceof MultipartLevel multipart) {
             MobPart.registerAll(multipart, this.parts);
             this.partsRegistered = true;
         }
